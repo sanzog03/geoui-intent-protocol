@@ -48,10 +48,7 @@ class TestContract:
 
     @pytest.mark.parametrize("name", sorted(GEOUI_TOOL_NAMES))
     async def test_input_schema_matches_akd(self, tools_by_name, name):
-        ours, golden = tools_by_name[name].inputSchema, GOLDEN[name]["inputSchema"]
-        assert list(ours["properties"]) == list(golden["properties"])
-        assert ours.get("required") == golden.get("required")
-        assert ours.get("additionalProperties") == golden.get("additionalProperties")
+        assert tools_by_name[name].inputSchema == GOLDEN[name]["inputSchema"]
 
     @pytest.mark.parametrize("name", sorted(GEOUI_TOOL_NAMES))
     async def test_description_matches_akd(self, tools_by_name, name):
@@ -59,8 +56,9 @@ class TestContract:
 
     @pytest.mark.parametrize("name", sorted(GEOUI_TOOL_NAMES))
     async def test_output_schema_drops_only_the_response_key(self, tools_by_name, name):
-        golden_props = [p for p in GOLDEN[name]["outputSchema"]["properties"] if p != "_response"]
-        assert list(tools_by_name[name].outputSchema["properties"]) == golden_props
+        ours, golden = tools_by_name[name].outputSchema, GOLDEN[name]["outputSchema"]
+        assert ours["properties"] == {k: v for k, v in golden["properties"].items() if k != "_response"}
+        assert ours.get("required") == [k for k in golden.get("required", []) if k != "_response"]
 
     def test_describe_reproduces_akd_format(self):
         assert (

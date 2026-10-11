@@ -47,7 +47,7 @@ about the *output* mechanism, not the input format.
 
 ## How to run
 
-1. `./ieso_w_geoui/start.sh` or `./ieso_w_vlm/start.sh` — open
+1. `./demo/start.sh` or `AGENT=vlm ./demo/start.sh` — open
    the notebook.
 2. Click **Reset conversation memory** so the new session gets a
    fresh `log_session_id`.

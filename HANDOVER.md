@@ -52,7 +52,7 @@ two reference agents, a marimo chat demo, and the head-to-head benchmark.
 | `demo/start.sh` | Launches a long-lived Chromium with remote debugging, warms MCPs, opens the marimo notebook. `AGENT=geoui` (default) or `vlm`. | uv, npx |
 | `demo/{geoui,vlm}_chat.py` | marimo multi-turn chat apps. Carry `run_context` across turns; attach Playwright per turn via CDP. | marimo |
 | `benchmarks/prompts.md`, `benchmarks/workflows.md` | Prompt suite (Core 6 + Optional 4) and 5-turn scenario scripts (A: CA wildfire smoke; B: Saharan dust; C: Lake Erie bloom). | — |
-| `benchmarks/results/poster-2026-05/` | Frozen `runs.jsonl` (51 rows) and `errors.jsonl` (22 rows) behind the poster. Absolute worktree paths in tracebacks were replaced with `<worktree>`. | — |
+| `benchmarks/results/poster-2026-05/` | Frozen `runs.jsonl` (51 rows) and `errors.jsonl` (22 rows) behind the poster. Absolute paths in tracebacks were replaced (`<worktree>` for the source checkout, `<python>` for the interpreter install). | — |
 | `scripts/dump_mcp_contract.py` | Dump any server's tool contract as JSON. | fastmcp |
 | `tests/` | `test_core.py`; `adapters/worldview/` (permalink, assembly, round trip); `mcp/test_server.py` (contract vs golden, calls, stdio smoke); `agents/test_akd_tools.py` (parity, skips without akd). | — |
 
