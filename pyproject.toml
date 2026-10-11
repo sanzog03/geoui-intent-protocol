@@ -1,0 +1,85 @@
+[project]
+name = "geoui-protocol"
+version = "0.1.0"
+description = "GeoUI Intent Protocol: app-agnostic geospatial-UI intent schema, NASA Worldview adapter, and MCP server"
+readme = "README.md"
+license = "Apache-2.0"
+authors = [{ name = "Sanjog Thapa", email = "st0128@uah.edu" }]
+keywords = ["geospatial", "agents", "mcp", "worldview", "intent-protocol"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Science/Research",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+]
+requires-python = ">=3.12"
+dependencies = [
+    "pydantic>=2.7",
+    "python-dateutil>=2.8",
+]
+
+[project.optional-dependencies]
+mcp = ["fastmcp>=3.0,<3.2.4"]
+# fastmcp is repeated instead of using a self-referential "geoui-protocol[mcp]" entry:
+# `uv run --extra agents` drops packages that come only via the self-reference.
+agents = [
+    "fastmcp>=3.0,<3.2.4",
+    "akd-ext @ git+https://github.com/NASA-IMPACT/akd-ext.git@2ca52da191f756b62378c828a2f9eb66494cb707",
+    # akd-ext at the pinned commit imports pydantic_ai.messages.BuiltinToolCallEvent, removed in pydantic-ai 2.x
+    "pydantic-ai>=1.81.0,<2",
+    "httpx>=0.27",
+    "python-dotenv>=1.0",
+    "marimo>=0.23.1",
+]
+
+[project.scripts]
+geoui-mcp = "geoui.mcp.server:main"
+
+[project.urls]
+Repository = "https://github.com/NASA-IMPACT/geoui-intent-protocol"
+
+[dependency-groups]
+dev = [
+    "fastmcp>=3.0,<3.2.4",
+    "pytest>=9.0",
+    "pytest-asyncio>=1.3",
+    "pytest-cov>=7.0",
+    "ruff>=0.14",
+    "pre-commit>=4.2",
+]
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["geoui*"]
+exclude = ["tests*", "demo*", "benchmarks*", "docs*", "scripts*"]
+
+[tool.setuptools.package-data]
+geoui = ["py.typed"]
+
+[tool.uv]
+override-dependencies = ["wrapt>=1.14", "mistralai<2"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = ["-ra", "--strict-markers", "--strict-config"]
+markers = [
+    "agents: needs the agents extra (akd-ext installed)",
+    "integration: spawns a subprocess or touches the network",
+]
+
+[tool.ruff]
+target-version = "py312"
+line-length = 120
+
+[tool.ruff.format]
+line-ending = "lf"
+quote-style = "double"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["F841"]
+# marimo notebooks: bare expressions render cell output; silent excepts guard UI teardown
+"demo/*.py" = ["B018", "S110"]

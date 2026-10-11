@@ -1,0 +1,372 @@
+{
+  "geo_ui_render_intent_tool": {
+    "name": "geo_ui_render_intent_tool",
+    "description": "Render a GeoIntent as a NASA Worldview permalink URL.\n\nUse this tool to materialise the agent's intended application state\n(expressed as a GeoIntent) into a URL the user can open. The agent\nreasons in GeoIntent terms, not Worldview-specific URL params.\n\nINPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the desired application state. Core fields: viewport (bbox + crs), time (instant), layers (id + visible + opacity). Use extensions by adding their URI to `geoui_extensions` and including the corresponding namespaced fields: geoui:compare/v1.0.0 → compare:layers, compare:time, compare:mode, compare:value, compare:active_side; geoui:chart/v1.0.0 → chart:layer, chart:area, chart:time, chart:autoload; geoui:raster-styling/v1.0.0 → on each LayerRef: raster-styling:palettes, raster-styling:min, raster-styling:max, raster-styling:squash, raster-styling:style.\n- **embed_mode**: If True, opens Worldview in embed mode (em=true): minimal chrome intended for iframes, with most UI controls hidden. Default False opens the full interactive Worldview app.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **url**: Worldview permalink URL that opens the map at the requested state.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "intent": {
+          "additionalProperties": true,
+          "description": "The GeoUI Protocol root.\n\nCarries the minimal cross-application contract: viewport, time,\nlayers. Extension fields are namespaced (e.g. `\"compare:layers\"`)\nand live as extra keys; their semantics are defined by the schemas\npointed to by `geoui_extensions`.",
+          "properties": {
+            "geoui_version": {
+              "default": "1.0.0",
+              "type": "string"
+            },
+            "geoui_extensions": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "viewport": {
+              "description": "Spatial viewport.\n\n`bbox` is interpreted in `crs`. For the geographic default\n(`EPSG:4326`), `bbox` is `[west, south, east, north]` in degrees.\nFor projected CRSs, the values are projected coordinates.\n`bbox=None` means \"app default extent.\"",
+              "properties": {
+                "bbox": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "type": "number"
+                      },
+                      "maxItems": 4,
+                      "minItems": 4,
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null
+                },
+                "crs": {
+                  "default": "EPSG:4326",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "time": {
+              "anyOf": [
+                {
+                  "description": "Time selection.\n\nEither a single `instant` OR a closed range `{start, end}` — the two\nare mutually exclusive. All fields `None` is allowed and means\n\"app default time.\"",
+                  "properties": {
+                    "instant": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    },
+                    "start": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    },
+                    "end": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    }
+                  },
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "layers": {
+              "items": {
+                "additionalProperties": true,
+                "description": "A reference to a renderable layer.\n\n`id` is application-defined — the conforming app must be able to\nresolve it to a layer in its own catalogue. Per-layer rendering hints\nbeyond the universal set (`visible`, `opacity`) belong in extensions\nand are expressed as namespaced extra keys\n(e.g. `\"raster-styling:palettes\": [...]`).",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "visible": {
+                    "default": true,
+                    "type": "boolean"
+                  },
+                  "opacity": {
+                    "anyOf": [
+                      {
+                        "maximum": 1.0,
+                        "minimum": 0.0,
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "embed_mode": {
+          "default": false,
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "intent"
+      ],
+      "type": "object"
+    },
+    "outputSchema": {
+      "description": "Output for ``GeoUIRenderIntentTool``.",
+      "properties": {
+        "url": {
+          "description": "Worldview permalink URL that opens the map at the requested state.",
+          "type": "string"
+        },
+        "_response": {
+          "description": "Private response field that points to the actual output text as per agent usage.\n\nSubclasses can specify which field to use by setting the __response_field__ class attribute.\nExample:\n    class MyOutputSchema(OutputSchema):\n        __response_field__ = \"output\"\n        output: str = Field(...)",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "required": [
+        "url",
+        "_response"
+      ],
+      "type": "object"
+    },
+    "akd_description": "Render a GeoIntent as a NASA Worldview permalink URL.\n\nUse this tool to materialise the agent's intended application state\n(expressed as a GeoIntent) into a URL the user can open. The agent\nreasons in GeoIntent terms, not Worldview-specific URL params.\n\nINPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the desired application state. Core fields: viewport (bbox + crs), time (instant), layers (id + visible + opacity). Use extensions by adding their URI to `geoui_extensions` and including the corresponding namespaced fields: geoui:compare/v1.0.0 → compare:layers, compare:time, compare:mode, compare:value, compare:active_side; geoui:chart/v1.0.0 → chart:layer, chart:area, chart:time, chart:autoload; geoui:raster-styling/v1.0.0 → on each LayerRef: raster-styling:palettes, raster-styling:min, raster-styling:max, raster-styling:squash, raster-styling:style.\n- **embed_mode**: If True, opens Worldview in embed mode (em=true): minimal chrome intended for iframes, with most UI controls hidden. Default False opens the full interactive Worldview app.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **url**: Worldview permalink URL that opens the map at the requested state.",
+    "akd_params": [
+      "intent",
+      "embed_mode"
+    ]
+  },
+  "geo_ui_get_state_tool": {
+    "name": "geo_ui_get_state_tool",
+    "description": "Read the current Worldview application state as a GeoIntent.\n\nUse this to observe the state implied by a Worldview URL — typically\nwhen continuing an iterative analysis: read current state, decide\nwhat to change, emit a new GeoIntent via ``geoui_render_intent``.\n\nAuto-injected base reflectance and reference overlay layers are\npreserved in the output for fidelity; ignore them when computing\nrefinements.\n\nINPUT FIELD DESCRIPTIONS:\n- **url**: Worldview permalink URL to parse.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the application state encoded in the URL.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "url": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "url"
+      ],
+      "type": "object"
+    },
+    "outputSchema": {
+      "description": "Output for ``GeoUIGetStateTool``.",
+      "properties": {
+        "intent": {
+          "additionalProperties": true,
+          "description": "GeoIntent describing the application state encoded in the URL.",
+          "properties": {
+            "geoui_version": {
+              "default": "1.0.0",
+              "type": "string"
+            },
+            "geoui_extensions": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "viewport": {
+              "description": "Spatial viewport.\n\n`bbox` is interpreted in `crs`. For the geographic default\n(`EPSG:4326`), `bbox` is `[west, south, east, north]` in degrees.\nFor projected CRSs, the values are projected coordinates.\n`bbox=None` means \"app default extent.\"",
+              "properties": {
+                "bbox": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "type": "number"
+                      },
+                      "maxItems": 4,
+                      "minItems": 4,
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null
+                },
+                "crs": {
+                  "default": "EPSG:4326",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "time": {
+              "anyOf": [
+                {
+                  "description": "Time selection.\n\nEither a single `instant` OR a closed range `{start, end}` — the two\nare mutually exclusive. All fields `None` is allowed and means\n\"app default time.\"",
+                  "properties": {
+                    "instant": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    },
+                    "start": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    },
+                    "end": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    }
+                  },
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "layers": {
+              "items": {
+                "additionalProperties": true,
+                "description": "A reference to a renderable layer.\n\n`id` is application-defined — the conforming app must be able to\nresolve it to a layer in its own catalogue. Per-layer rendering hints\nbeyond the universal set (`visible`, `opacity`) belong in extensions\nand are expressed as namespaced extra keys\n(e.g. `\"raster-styling:palettes\": [...]`).",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "visible": {
+                    "default": true,
+                    "type": "boolean"
+                  },
+                  "opacity": {
+                    "anyOf": [
+                      {
+                        "maximum": 1.0,
+                        "minimum": 0.0,
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "_response": {
+          "description": "Private response field that points to the actual output text as per agent usage.\n\nSubclasses can specify which field to use by setting the __response_field__ class attribute.\nExample:\n    class MyOutputSchema(OutputSchema):\n        __response_field__ = \"output\"\n        output: str = Field(...)",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "required": [
+        "intent",
+        "_response"
+      ],
+      "type": "object"
+    },
+    "akd_description": "Read the current Worldview application state as a GeoIntent.\n\nUse this to observe the state implied by a Worldview URL — typically\nwhen continuing an iterative analysis: read current state, decide\nwhat to change, emit a new GeoIntent via ``geoui_render_intent``.\n\nAuto-injected base reflectance and reference overlay layers are\npreserved in the output for fidelity; ignore them when computing\nrefinements.\n\nINPUT FIELD DESCRIPTIONS:\n- **url**: Worldview permalink URL to parse.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the application state encoded in the URL.",
+    "akd_params": [
+      "url"
+    ]
+  }
+}
