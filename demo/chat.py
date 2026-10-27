@@ -1,27 +1,30 @@
-"""Multi-turn chat with IESOWorldviewVLMAgent.
+"""Multi-turn chat with an IESO Worldview agent.
 
-The Vision-Language Model baseline: the agent observes NASA
-Worldview via screenshots + an accessibility-tree snapshot of the
-DOM, and acts by clicking, typing, and dragging against the live
-page — the way a developer without the GeoUI Protocol would build
-this. Companion to ``demo/geoui_chat.py``, which speaks
-the protocol directly. Same Chromium-on-CDP plumbing, same live
-tool-call trace, same session/reset controls; the agent itself is
-where the divergence lives.
+One notebook, two agents, selected by the ``AGENT`` environment variable:
 
-Run from the worktree root:
+- ``geoui`` (default): ``IESOWorldviewGeoUIAgent`` speaks **GeoIntent**
+  through the GeoUI Protocol; visualisations come back as Worldview
+  permalink URLs.
+- ``vlm``: ``IESOWorldviewVLMAgent``, the Vision-Language-Model baseline.
+  It observes NASA Worldview via screenshots + an accessibility-tree
+  snapshot and acts by clicking, typing and dragging against the live
+  page, the way a developer without the protocol would build this.
 
-    marimo edit demo/vlm_chat.py     # interactive editor
-    marimo run  demo/vlm_chat.py     # read-only app
+Same Chromium-on-CDP plumbing, same live tool-call trace, same
+session/reset controls and benchmark logging; the agent is where the
+divergence lives. Each turn carries forward the agent's prior
+``run_context``, so the conversation has memory.
+
+Run from the repo root (``demo/start.sh`` does all of this):
+
+    ./demo/start.sh                                  # GeoUI treatment
+    AGENT=vlm ./demo/start.sh                        # VLM baseline
+    AGENT=vlm uv run --extra agents marimo edit demo/chat.py   # editor
 
 Requires `.env` with at minimum OPENAI_API_KEY and VECTOR_DB_TOOL_KEY
-(see `.env.example`). The notebook auto-loads `.env` by walking up
-from the cwd via python-dotenv.
-
-The Chromium launched by ``demo/start.sh`` is agent-agnostic
-— both notebooks attach to the same CDP endpoint on port 9222. Run
-one or the other (or both, on separate marimo ports) against the
-same browser.
+(see `.env.example`). The notebook auto-loads `.env` by walking up from
+the cwd via python-dotenv. The Chromium launched by ``demo/start.sh`` is
+agent-agnostic; both agents attach to the same CDP endpoint on port 9222.
 """
 
 import marimo
@@ -38,80 +41,164 @@ def _setup_marimo():
 
 
 @app.cell
-def _intro(mo):
-    mo.md(
-        """
-        # IESO Worldview VLM Agent — Multi-turn Chat
+def _variant():
+    """Pick the agent from ``AGENT`` (``geoui`` or ``vlm``; default ``geoui``).
 
-        Multi-turn chat with `IESOWorldviewVLMAgent`, the
-        **Vision-Language-Model baseline** for the poster's
-        token-efficiency comparison against the GeoUI Protocol.
+    Everything that differs between the two demo flavours lives in this
+    one dict: the classes, the benchmark-log label, the intro text and the
+    example prompts. The rest of the notebook is variant-agnostic.
+    """
+    import os as _os  # private: ``os`` is also imported by the env cell
 
-        Instead of speaking a structured `GeoIntent` schema, this
-        agent treats NASA Worldview the way a developer without a
-        protocol would: it **looks at the page** (PNG screenshot
-        + accessibility-tree snapshot) and **manipulates it like a
-        human** (click, type, press-key, drag). Each refining turn
-        re-observes from pixels and DOM rather than parsing a
-        permalink URL — which is exactly why it's expected to cost
-        roughly an order of magnitude more tokens per turn.
+    from geoui.agents import geoui_agent, vlm_agent
 
-        **Tools the agent can use:**
+    AGENT = _os.environ.get("AGENT", "geoui").strip().lower()
+    if AGENT not in ("geoui", "vlm"):
+        raise ValueError(f"AGENT must be 'geoui' or 'vlm' (got {AGENT!r})")
 
-        - *Observe*: `browser_snapshot` (accessibility tree with
-          element refs), `browser_take_screenshot` (PNG of the
-          rendered page when the snapshot alone isn't enough).
-        - *Act*: `browser_click`, `browser_type`,
-          `browser_press_key`, `browser_hover`, `browser_drag`,
-          `browser_select_option`, `browser_wait_for`.
-        - *Navigate*: `browser_navigate` (once per session, to
-          open `worldview.earthdata.nasa.gov`).
-        - *URL read-back*: a single end-of-turn
-          `browser_evaluate("() => window.location.href")` to
-          capture the final URL for the structured output.
+    # Intro markdown per variant (kept verbatim from the two original notebooks).
+    geoui_intro = r"""
+    # IESO Worldview GeoUI Agent — Multi-turn Chat
 
-        The CMR / Earthdata / vector-DB discovery tools are
-        identical to the GeoUI variant — the comparison holds
-        discovery cost equal on purpose.
+    Multi-turn chat with `IESOWorldviewGeoUIAgent`. The agent speaks
+    **GeoIntent** through the GeoUI Protocol; visualisations come back
+    as Worldview permalink URLs. Each turn carries forward the agent's
+    prior `run_context`, so the conversation has memory.
 
-        ### One-time setup
+    ### One-time setup
 
-        Same as the GeoUI notebook. Launch Chromium with remote
-        debugging **before** opening this notebook (the launcher in
-        `demo/start.sh` is agent-agnostic — both notebooks
-        attach to it):
+    Launch Chromium with remote debugging **before** opening this
+    notebook, and point `PLAYWRIGHT_CDP_ENDPOINT` at it:
 
-        ```bash
-        # In one terminal — leave running:
-        ./demo/start.sh
-        ```
+    ```bash
+    # In one terminal — leave running:
+    /Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome \\
+        --remote-debugging-port=9222 \\
+        --user-data-dir=/tmp/worldview-chromium
 
-        That script handles `PLAYWRIGHT_CDP_ENDPOINT` and the
-        Chromium lifetime. If you'd rather run only this notebook,
-        you can launch a Chromium with `--remote-debugging-port=9222`
-        and `export PLAYWRIGHT_CDP_ENDPOINT=http://localhost:9222`
-        manually.
+    # In the notebook's .env (or shell that launches marimo):
+    export PLAYWRIGHT_CDP_ENDPOINT=http://localhost:9222
+    ```
 
-        ### Using it
+    Each agent turn attaches a fresh Playwright MCP to this
+    already-running Chromium via CDP, so the map's URL / pan / zoom
+    survives across turns even though the MCP itself doesn't.
 
-        - Type a query (e.g. *"Show MODIS Aqua Aerosol on 2025-09-15"*).
-        - The agent may answer directly, ask a clarifying question,
-          or start driving the UI. On the first turn you'll see it
-          navigate to Worldview, take a snapshot, then click
-          *+ Add Layers* and type the layer name.
-        - Refining turns (*"zoom to Huntsville"*, *"compare with
-          the following day"*) start with a fresh snapshot, then
-          click / type / drag.
-        - The final URL is read from `window.location.href` once
-          the UI changes are applied — that's what populates
-          `WORLDVIEW_URL` in the structured output.
-        - Watch the **Tool calls** collapsible mid-turn: this agent
-          is meant to be chatty, but the once-per-turn observation
-          budget in the system prompt should still keep it from
-          looping. If it does loop, hit stop and the cleanup will
-          cancel the background task.
-        """
-    )
+    ### Using it
+
+    - Type a query (e.g. *"Show Saharan dust over the Atlantic on 2023-06-15"*).
+    - The agent may answer directly, ask a clarifying question, or
+      render a URL via `geoui_render_intent` once it has enough info.
+    - After rendering, the agent calls `browser_navigate` to open the
+      URL in your Chromium window. Pan, zoom, or scrub directly in
+      the map — on the next turn the agent reads the live URL back
+      via `browser_evaluate` and refines from there.
+    """
+
+    vlm_intro = r"""
+    # IESO Worldview VLM Agent — Multi-turn Chat
+
+    Multi-turn chat with `IESOWorldviewVLMAgent`, the
+    **Vision-Language-Model baseline** for the poster's
+    token-efficiency comparison against the GeoUI Protocol.
+
+    Instead of speaking a structured `GeoIntent` schema, this
+    agent treats NASA Worldview the way a developer without a
+    protocol would: it **looks at the page** (PNG screenshot
+    + accessibility-tree snapshot) and **manipulates it like a
+    human** (click, type, press-key, drag). Each refining turn
+    re-observes from pixels and DOM rather than parsing a
+    permalink URL — which is exactly why it's expected to cost
+    roughly an order of magnitude more tokens per turn.
+
+    **Tools the agent can use:**
+
+    - *Observe*: `browser_snapshot` (accessibility tree with
+      element refs), `browser_take_screenshot` (PNG of the
+      rendered page when the snapshot alone isn't enough).
+    - *Act*: `browser_click`, `browser_type`,
+      `browser_press_key`, `browser_hover`, `browser_drag`,
+      `browser_select_option`, `browser_wait_for`.
+    - *Navigate*: `browser_navigate` (once per session, to
+      open `worldview.earthdata.nasa.gov`).
+    - *URL read-back*: a single end-of-turn
+      `browser_evaluate("() => window.location.href")` to
+      capture the final URL for the structured output.
+
+    The CMR / Earthdata / vector-DB discovery tools are
+    identical to the GeoUI variant — the comparison holds
+    discovery cost equal on purpose.
+
+    ### One-time setup
+
+    Same as the GeoUI notebook. Launch Chromium with remote
+    debugging **before** opening this notebook (the launcher in
+    `demo/start.sh` is agent-agnostic — both notebooks
+    attach to it):
+
+    ```bash
+    # In one terminal — leave running:
+    ./demo/start.sh
+    ```
+
+    That script handles `PLAYWRIGHT_CDP_ENDPOINT` and the
+    Chromium lifetime. If you'd rather run only this notebook,
+    you can launch a Chromium with `--remote-debugging-port=9222`
+    and `export PLAYWRIGHT_CDP_ENDPOINT=http://localhost:9222`
+    manually.
+
+    ### Using it
+
+    - Type a query (e.g. *"Show MODIS Aqua Aerosol on 2025-09-15"*).
+    - The agent may answer directly, ask a clarifying question,
+      or start driving the UI. On the first turn you'll see it
+      navigate to Worldview, take a snapshot, then click
+      *+ Add Layers* and type the layer name.
+    - Refining turns (*"zoom to Huntsville"*, *"compare with
+      the following day"*) start with a fresh snapshot, then
+      click / type / drag.
+    - The final URL is read from `window.location.href` once
+      the UI changes are applied — that's what populates
+      `WORLDVIEW_URL` in the structured output.
+    - Watch the **Tool calls** collapsible mid-turn: this agent
+      is meant to be chatty, but the once-per-turn observation
+      budget in the system prompt should still keep it from
+      looping. If it does loop, hit stop and the cleanup will
+      cancel the background task.
+    """
+
+    VARIANT = {
+        "geoui": {
+            "agent_cls": geoui_agent.IESOWorldviewGeoUIAgent,
+            "config_cls": geoui_agent.IESOWorldviewGeoUIAgentConfig,
+            "input_cls": geoui_agent.IESOWorldviewGeoUIAgentInputSchema,
+            "playwright_capability": geoui_agent.playwright_capability,
+            "intro_md": geoui_intro,
+            "example_prompts": [
+                "I'd like to look at Saharan dust transport over the Atlantic on June 15, 2023.",
+                "Show aerosol optical depth over California on September 15, 2025.",
+                "What datasets do you have for sea-surface temperature?",
+            ],
+        },
+        "vlm": {
+            "agent_cls": vlm_agent.IESOWorldviewVLMAgent,
+            "config_cls": vlm_agent.IESOWorldviewVLMAgentConfig,
+            "input_cls": vlm_agent.IESOWorldviewVLMAgentInputSchema,
+            "playwright_capability": vlm_agent.playwright_capability,
+            "intro_md": vlm_intro,
+            "example_prompts": [
+                "Show MODIS Aqua Aerosol on 2025-09-15.",
+                "Now zoom to Huntsville, Alabama.",
+                "Compare with the following day.",
+            ],
+        },
+    }[AGENT]
+    return AGENT, VARIANT
+
+
+@app.cell
+def _intro(VARIANT, mo):
+    mo.md(VARIANT["intro_md"])
 
 
 @app.cell
@@ -134,7 +221,7 @@ def _env(mo):
         env_status = mo.callout(
             mo.md(
                 f"**Missing env vars:** `{', '.join(missing_keys)}`. "
-                f"Create `.env` from `.env.example` in the worktree root and re-run."
+                f"Create `.env` from `.env.example` in the repo root and re-run."
             ),
             kind="danger",
         )
@@ -143,9 +230,11 @@ def _env(mo):
             mo.md(
                 "**`PLAYWRIGHT_CDP_ENDPOINT` not set.** The agent will boot a "
                 "fresh Chromium per turn and your map state will not survive "
-                "between turns — heavily defeats the point of the iterative "
-                "comparison. Run `./demo/start.sh` (or launch Chrome "
-                "with `--remote-debugging-port=9222` manually) and re-run."
+                "between turns, which defeats the iterative comparison. Run "
+                "`./demo/start.sh` (or launch Chrome with "
+                "`--remote-debugging-port=9222` and export "
+                "`PLAYWRIGHT_CDP_ENDPOINT=http://localhost:9222` manually) "
+                "and re-run."
             ),
             kind="warn",
         )
@@ -175,10 +264,13 @@ def _warm_button(mo):
 
 @app.cell
 async def _warm_handler(mo, warm_btn):
-    """React to the warm button. Reuses the GeoUI variant's warm
-    helper because the remote MCP URLs are identical between the
-    two agents (the comparison holds discovery cost equal on
-    purpose).
+    """React to the warm button. Idle until ``warm_btn.value`` flips
+    to True on click, then call ``warm()`` and render one line per
+    endpoint with its HTTP status (or transport-error class).
+
+    Marimo cell bodies are top-level code (mid-cell ``return`` is a
+    syntax error), so we compute ``out`` in an if/else chain and
+    display it once at the end.
     """
     if not warm_btn.value:
         out = mo.md("")
@@ -200,28 +292,22 @@ async def _warm_handler(mo, warm_btn):
 
 
 @app.cell
-def _agent(cdp_endpoint, missing_keys):
-    """Instantiate the VLM-baseline agent. Per-turn MCP lifecycle;
-    Chromium is held *outside* the notebook via CDP (see
-    ``PLAYWRIGHT_CDP_ENDPOINT`` in the env cell). Each
-    ``agent.arun`` spawns a fresh Playwright MCP that attaches to
-    the running Chromium and tears down cleanly when the arun
-    completes.
+def _agent(VARIANT, cdp_endpoint, missing_keys):
+    """Instantiate the selected agent. Per-turn MCP lifecycle; Chromium is held
+    *outside* the notebook via CDP (see ``PLAYWRIGHT_CDP_ENDPOINT`` in
+    the env cell). Each ``agent.arun`` spawns a fresh Playwright MCP
+    that attaches to the running Chromium and tears down cleanly when
+    the arun completes — anyio's same-task enter/exit rule stays
+    satisfied because the MCP's scope is fully contained in the arun
+    task.
     """
     from akd._base import TextOutput
     from pydantic_ai.capabilities.hooks import Hooks
 
-    from geoui.agents import (
-        IESOWorldviewVLMAgent,
-        IESOWorldviewVLMAgentConfig,
-        IESOWorldviewVLMAgentInputSchema,
-    )
+    from geoui.agents._common import get_default_ieso_worldview_capabilities, make_playwright_mcp
     from geoui.agents.benchmark import new_session_id
-    from geoui.agents.vlm_agent import (
-        get_default_ieso_worldview_vlm_capabilities,
-        make_playwright_mcp,
-        playwright_capability,
-    )
+
+    AgentInputSchema = VARIANT["input_cls"]
 
     # Session dict has to exist before the trace hook so the hook's
     # closure can append to ``current_turn_tools``.
@@ -258,27 +344,29 @@ def _agent(cdp_endpoint, missing_keys):
         agent = None
     else:
         playwright = make_playwright_mcp(cdp_endpoint=cdp_endpoint)
-        agent = IESOWorldviewVLMAgent(
-            IESOWorldviewVLMAgentConfig(
+        agent = VARIANT["agent_cls"](
+            VARIANT["config_cls"](
                 capabilities=[
-                    *get_default_ieso_worldview_vlm_capabilities(),
-                    playwright_capability(playwright),
+                    *get_default_ieso_worldview_capabilities(),
+                    VARIANT["playwright_capability"](playwright),
                     trace_hook,
                 ],
             ),
         )
 
-    return IESOWorldviewVLMAgentInputSchema, TextOutput, agent, session
+    return AgentInputSchema, TextOutput, agent, session
 
 
 @app.cell
-def _chat(IESOWorldviewVLMAgentInputSchema, TextOutput, agent, mo, session):
+def _chat(AGENT, AgentInputSchema, TextOutput, VARIANT, agent, mo, session):
     """The chat itself.
 
-    Async handler. All MCPs (Playwright + CMR + IESO) are spun up
-    and torn down per ``arun``. Chromium state is preserved by
-    attaching the Playwright MCP to an externally-owned Chromium
-    via CDP.
+    Async handler, shared by both agents. All MCPs (Playwright + CMR +
+    IESO) are spun up and torn down per ``arun``. Chromium state is preserved by attaching the
+    Playwright MCP to an externally-owned Chromium via CDP, so the
+    cheap thing (subprocess spawn + JSON-RPC handshake) happens each
+    turn while the expensive thing (Chromium launch + page render) is
+    one-shot at the start of the session.
     """
 
     def _flatten_exceptions(exc: BaseException) -> list[BaseException]:
@@ -452,7 +540,7 @@ def _chat(IESOWorldviewVLMAgentInputSchema, TextOutput, agent, mo, session):
 
             arun_task = asyncio.create_task(
                 agent.arun(
-                    IESOWorldviewVLMAgentInputSchema(query=latest),
+                    AgentInputSchema(query=latest),
                     run_context=session["ctx"],
                     # Reset per-turn usage. AKD's _wire_usage_limits caps
                     # request_limit at max_tool_iterations (≤50); the
@@ -465,10 +553,8 @@ def _chat(IESOWorldviewVLMAgentInputSchema, TextOutput, agent, mo, session):
                     # Bump OpenAI HTTP timeout from the SDK default
                     # (10 min) to 15 min so large VLM payloads
                     # (multi-snapshot turns) have headroom before httpx
-                    # surfaces a ``Connection error.``. Does not fix
-                    # peer-reset disconnects caused by Playwright MCP
-                    # attaching a fresh snapshot to every action tool's
-                    # return — that needs the snapshot-mode flag fix.
+                    # surfaces a ``Connection error.``; harmless when
+                    # responses arrive fast.
                     model_settings={"timeout": 900},
                 )
             )
@@ -552,7 +638,7 @@ def _chat(IESOWorldviewVLMAgentInputSchema, TextOutput, agent, mo, session):
                 try:
                     append_turn_record(
                         TurnRecord(
-                            agent="vlm",
+                            agent=AGENT,
                             session_id=session["log_session_id"],
                             run_id=str(getattr(ctx, "run_id", None)) if ctx else None,
                             turn_index=session["attempts"],
@@ -582,7 +668,7 @@ def _chat(IESOWorldviewVLMAgentInputSchema, TextOutput, agent, mo, session):
                         _cause = _underlying_cause_summary(turn_error)
                         append_error_record(
                             ErrorRecord(
-                                agent="vlm",
+                                agent=AGENT,
                                 session_id=session["log_session_id"],
                                 turn_index=session["attempts"],
                                 retry_attempt=retry_attempt,
@@ -663,14 +749,7 @@ def _chat(IESOWorldviewVLMAgentInputSchema, TextOutput, agent, mo, session):
                     except BaseException:  # noqa: BLE001 — swallow cancel propagation
                         pass
 
-    chat = mo.ui.chat(
-        _handler,
-        prompts=[
-            "Show MODIS Aqua Aerosol on 2025-09-15.",
-            "Now zoom to Huntsville, Alabama.",
-            "Compare with the following day.",
-        ],
-    )
+    chat = mo.ui.chat(_handler, prompts=VARIANT["example_prompts"])
     chat
     return (chat,)
 

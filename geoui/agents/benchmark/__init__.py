@@ -1,7 +1,7 @@
 """Lightweight per-turn logging for the GeoUI vs VLM-baseline comparison.
 
-Both demo chat notebooks (``demo/geoui_chat.py``, ``demo/vlm_chat.py``)
-call :func:`append_turn_record` after each completed (or errored)
+The demo chat notebook (``demo/chat.py``, either agent)
+calls :func:`append_turn_record` after each completed (or errored)
 agent turn; records are appended as JSON Lines to
 ``benchmarks/runs.jsonl`` under the current working directory (the repo
 root when launched via ``demo/start.sh``). A separate analysis

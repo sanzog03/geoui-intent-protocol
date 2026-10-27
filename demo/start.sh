@@ -24,8 +24,8 @@
 #   CDP_PORT                    remote-debugging port (default 9222)
 #   WORLDVIEW_CHROMIUM_PROFILE  user-data-dir (default /tmp/worldview-chromium)
 #   MARIMO_MODE                 "run" (default) or "edit"
-#   AGENT                       "geoui" (default) or "vlm" — which demo
-#                               notebook to launch (treatment vs baseline)
+#   AGENT                       "geoui" (default) or "vlm" — which agent
+#                               demo/chat.py runs (treatment vs baseline)
 #
 # Platform support:
 #   - Bash + POSIX userspace (curl, ls, npx, uv). Does NOT run natively
@@ -157,6 +157,7 @@ echo
 cd "$SCRIPT_DIR/.."
 AGENT="${AGENT:-geoui}"
 case "$AGENT" in geoui|vlm) ;; *) echo "AGENT must be 'geoui' or 'vlm' (got '$AGENT')" >&2; exit 2 ;; esac
+export AGENT   # demo/chat.py reads it to pick the agent
 
 # Pre-warm remote MCP endpoints (auto-discovered from the agent's
 # capability list) so the first chat turn doesn't pay cold-start
@@ -165,4 +166,4 @@ case "$AGENT" in geoui|vlm) ;; *) echo "AGENT must be 'geoui' or 'vlm' (got '$AG
 uv run --extra agents python -m geoui.agents.warm_mcps || true
 echo
 
-exec uv run --extra agents marimo "$MARIMO_MODE" "demo/${AGENT}_chat.py"
+exec uv run --extra agents marimo "$MARIMO_MODE" demo/chat.py
