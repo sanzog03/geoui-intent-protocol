@@ -29,7 +29,8 @@ agents = [
     "pydantic-ai>=1.81.0,<2",
     "httpx>=0.27",
     "python-dotenv>=1.0",
-    "marimo>=0.23.1",
+    # marimo 0.25.x frontend rejects its own chat requests (messages[0].metadata); 0.23 is what the poster runs used
+    "marimo>=0.23.1,<0.24",
 ]
 
 [project.scripts]
