@@ -13,6 +13,7 @@ Requires the ``agents`` extra (akd-ext installed).
 from __future__ import annotations
 
 from akd._base import InputSchema, OutputSchema
+from akd._base.errors import SchemaValidationError
 from akd.tools import BaseTool
 from pydantic import Field
 
@@ -59,7 +60,14 @@ class GeoUIRenderIntentTool(BaseTool[GeoUIRenderIntentInputSchema, GeoUIRenderIn
     output_schema = GeoUIRenderIntentOutputSchema
 
     async def _arun(self, params: GeoUIRenderIntentInputSchema) -> GeoUIRenderIntentOutputSchema:
-        return GeoUIRenderIntentOutputSchema(url=intent_to_url(params.intent, embed_mode=params.embed_mode))
+        try:
+            url = intent_to_url(params.intent, embed_mode=params.embed_mode)
+        except ValueError as e:
+            # Protocol violations (undeclared extension, unsupported CRS, instant vs
+            # range, ...) must reach the model as a retry prompt so it can fix the
+            # intent; akd-ext maps SchemaValidationError to pydantic_ai.ModelRetry.
+            raise SchemaValidationError(str(e)) from e
+        return GeoUIRenderIntentOutputSchema(url=url)
 
 
 # -----------------------------------------------------------------------------
@@ -96,4 +104,8 @@ class GeoUIGetStateTool(BaseTool[GeoUIGetStateInputSchema, GeoUIGetStateOutputSc
     output_schema = GeoUIGetStateOutputSchema
 
     async def _arun(self, params: GeoUIGetStateInputSchema) -> GeoUIGetStateOutputSchema:
-        return GeoUIGetStateOutputSchema(intent=url_to_intent(params.url))
+        try:
+            intent = url_to_intent(params.url)
+        except ValueError as e:
+            raise SchemaValidationError(str(e)) from e  # see GeoUIRenderIntentTool._arun
+        return GeoUIGetStateOutputSchema(intent=intent)

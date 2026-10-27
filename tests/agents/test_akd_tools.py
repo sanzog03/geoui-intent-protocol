@@ -60,3 +60,37 @@ async def test_round_trip_through_akd_tools():
     rendered = await GeoUIRenderIntentTool().arun(GeoUIRenderIntentInputSchema(intent=intent))
     parsed = await GeoUIGetStateTool().arun(GeoUIGetStateInputSchema(url=rendered.url))
     assert str(parsed.intent.time.instant) == "2025-09-15"
+
+
+async def test_protocol_errors_are_retryable_by_the_model():
+    """A GeoIntent that uses ``compare:*`` without declaring the extension must
+    reach the model as a retry prompt (akd-ext maps SchemaValidationError to
+    pydantic_ai.ModelRetry), not escape and abort the whole turn. This was
+    the top logged agent error in the poster runs."""
+    from akd._base.errors import SchemaValidationError
+    from akd_ext.agents._base.pydantic_ai._utils import akd_to_pai_tool
+    from pydantic_ai import ModelRetry
+
+    undeclared = GeoIntent.model_validate(
+        {
+            "viewport": {"bbox": [-125, 32, -114, 42]},
+            "time": {"instant": "2025-09-15"},
+            "layers": [{"id": "MODIS_Aqua_Aerosol_Optical_Depth_3km"}],
+            "compare:layers": [{"id": "MODIS_Aqua_Aerosol_Optical_Depth_3km"}],
+            "compare:time": {"instant": "2025-09-14"},
+            "compare:mode": "swipe",
+        }
+    )
+    with pytest.raises(SchemaValidationError, match="does not declare"):
+        await GeoUIRenderIntentTool().arun(GeoUIRenderIntentInputSchema(intent=undeclared))
+
+    pai_tool = akd_to_pai_tool(GeoUIRenderIntentTool())
+    with pytest.raises(ModelRetry, match="geoui_extensions"):
+        await pai_tool.function(intent=undeclared)
+
+
+async def test_bad_url_is_retryable_by_the_model():
+    from akd._base.errors import SchemaValidationError
+
+    with pytest.raises(SchemaValidationError):
+        await GeoUIGetStateTool().arun(GeoUIGetStateInputSchema(url="https://worldview.earthdata.nasa.gov/?p=mars&l=X"))
