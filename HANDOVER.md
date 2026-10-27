@@ -200,9 +200,22 @@ uv run --extra agents python -m geoui.agents.geoui_agent  # one-LLM-call wiring 
 - **`IESO_Validation_MCP_Server` auth.** The agent flags a possible
   authorization issue. Confirm `VECTOR_DB_TOOL_KEY`; it is sent as
   `Bearer {key}` (prefix required by FastMCP servers).
-- **Extension declare/use mismatch** is the top logged agent error. If you
-  touch the system prompt's extension instructions, re-run Workflow A turns
-  2/4/5.
+- **Extension declare/use mismatch** is the top logged agent error. Since
+  October 2026 the akd tool wrappers raise it as `SchemaValidationError`,
+  which akd-ext turns into a pydantic-ai `ModelRetry`, so the model gets to
+  add the URI and call the tool again instead of the whole turn failing
+  (verified live: turn 2 of the demo shows two `geo_ui_render_intent_tool`
+  calls, then success). If you touch the system prompt's extension
+  instructions, re-run Workflow A turns 2/4/5.
+- **marimo is pinned `<0.24`.** 0.25.x's frontend rejects its own chat
+  requests (`messages[0].metadata` missing) before the handler runs.
+- **Usage token counts read 0** in `runs.jsonl` rows produced with
+  pydantic-ai 1.81 + gpt-5.2 (`reasoning_tokens` and `requests` are
+  populated). `extract_usage` in `benchmark/log.py` needs revisiting before
+  the next benchmark round; the poster numbers came from an older stack.
+- **The open-ended smoke query is expensive.** "What can you help with?"
+  drove 46 tool calls before the agent asked a clarifying question. The
+  fully specified fast path (exact layer id + bbox + date) takes 3.
 - **CMR MCP trailing slash is load-bearing**: without it the server 307s and
   pydantic-ai's streamable-HTTP client raises instead of following.
 - **Chart `time` must be a range**; root/compare `time` must be an instant.
