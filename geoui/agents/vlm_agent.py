@@ -15,6 +15,10 @@ type into inputs. The expected consequence — and the empirical
 claim of the comparison — is that each turn costs roughly an order
 of magnitude more tokens than the GeoUI variant.
 
+Shared plumbing (remote MCPs, discovery tools, Playwright-over-CDP
+wiring, input schema, output check) lives in :mod:`geoui.agents._common`;
+this module keeps only what the model can see.
+
 Public API:
     IESOWorldviewVLMAgent,
     IESOWorldviewVLMAgentInputSchema,
@@ -24,25 +28,25 @@ Public API:
 
 from __future__ import annotations
 
-import os
 from typing import Any, Literal
 
-from akd._base import InputSchema, OutputSchema, TextOutput
+from akd._base import OutputSchema, TextOutput
 from akd.tools import BaseTool
-from akd_ext.agents._base import PydanticAIBaseAgent, PydanticAIBaseAgentConfig
-from akd_ext.tools.sde_search import SDESearchTool
-from akd_ext.tools.worldview import EarthdataSearchLandingPageTool, UMMVisLookupTool
+from akd_ext.agents._base import PydanticAIBaseAgentConfig
 from pydantic import Field
 from pydantic_ai.capabilities import MCP
-from pydantic_ai.mcp import MCPServerStdio, MCPServerStreamableHTTP
+from pydantic_ai.mcp import MCPServerStdio
 
-# Init timeout for remote streamable-HTTP MCPs (CMR, IESO Validation).
-# The default ``MCPServerStreamableHTTP.timeout`` is 5 s, which is too
-# tight for FastMCP-hosted instances that hibernate when idle; their
-# wake-up can take 10–25 s. We've seen ``mcp.py:748`` fire its
-# ``anyio.fail_after`` on the first ``arun`` after a quiet period.
-# 30 s leaves comfortable headroom without masking real hangs.
-_REMOTE_MCP_INIT_TIMEOUT_S = 30.0
+from geoui.agents import _common
+from geoui.agents._common import (
+    IESOWorldviewAgentBase,
+    IESOWorldviewAgentInputSchema,
+    get_default_ieso_worldview_capabilities,
+    make_playwright_mcp,
+)
+
+# Kept under its historical name; both agents share the same remote MCPs.
+get_default_ieso_worldview_vlm_capabilities = get_default_ieso_worldview_capabilities
 
 
 # -----------------------------------------------------------------------------
@@ -474,191 +478,40 @@ IESO_WORLDVIEW_VLM_AGENT_SYSTEM_PROMPT = """
   * When in doubt, run the tool.
 """
 
-# -----------------------------------------------------------------------------
-# MCP capabilities — same as GeoUI variant (CMR + IESO validation)
-# -----------------------------------------------------------------------------
-
-
-def get_default_ieso_worldview_vlm_capabilities() -> list[Any]:
-    """Default MCP server capabilities for the VLM-baseline agent.
-
-    Identical to ``geoui.agents.geoui_agent.get_default_ieso_worldview_geoui_capabilities``:
-    same CMR + IESO-validation servers, same disabled-MCP comments
-    documenting which ones were replaced by local AKD tools. The
-    discovery surface is held equal between the two agents on purpose
-    — the comparison the poster is making is about observation /
-    action cost, not metadata-lookup cost.
-
-    Auth tokens are read from env at construction time:
-      - VECTOR_DB_TOOL_KEY:  IESO validation / layer vector-DB server
-
-    Why each ``MCP(...)`` wraps a pre-built ``MCPServerStreamableHTTP``:
-        Passing ``timeout=...`` straight to ``MCP(url=...)`` is not
-        supported — the ``MCP`` capability hardcodes the default
-        ``MCPServerStreamableHTTP`` timeout (5 s). Building the server
-        explicitly and handing it to ``local=`` lets us set
-        ``_REMOTE_MCP_INIT_TIMEOUT_S`` so FastMCP cold-starts don't
-        fire ``mcp.py:748``'s ``anyio.fail_after`` on the first turn.
-        ``builtin=False`` forces pydantic_ai to use our local server
-        rather than negotiating an in-model builtin MCP path.
-    """
-    # CMR MCP — AWS Lambda-hosted, generally fast but the streamable
-    # HTTP client doesn't follow the trailing-slash 307 redirect, so
-    # the slash is load-bearing.
-    cmr_server = MCPServerStreamableHTTP(
-        "https://w4hu71445m.execute-api.us-east-1.amazonaws.com/mcp/cmr/mcp/",
-        timeout=_REMOTE_MCP_INIT_TIMEOUT_S,
-    )
-
-    # IESO Validation MCP — FastMCP free instance that hibernates;
-    # this is the one whose 5 s timeout was actually firing.
-    vector_db_token = os.environ.get("VECTOR_DB_TOOL_KEY")
-    ieso_validation_server = MCPServerStreamableHTTP(
-        "https://ieso-benchmark-mcp-tools.fastmcp.app/mcp",
-        headers={"Authorization": f"Bearer {vector_db_token}"} if vector_db_token else None,
-        timeout=_REMOTE_MCP_INIT_TIMEOUT_S,
-    )
-
-    return [
-        MCP(
-            url="https://w4hu71445m.execute-api.us-east-1.amazonaws.com/mcp/cmr/mcp/",
-            local=cmr_server,
-            builtin=False,
-            id="CMR_MCP_Server",
-            allowed_tools=[
-                "search_collections",
-                "get_granules",
-                "get_collection_metadata",
-            ],
-            description="CMR MCP server to fetch metadata information including links to download datasets",
-        ),
-        MCP(
-            url="https://ieso-benchmark-mcp-tools.fastmcp.app/mcp",
-            local=ieso_validation_server,
-            builtin=False,
-            id="IESO_Validation_MCP_Server",
-            authorization_token=f"Bearer {vector_db_token}" if vector_db_token else None,
-            allowed_tools=[
-                "search_worldview_layers",
-                "validate_temporal_coverage",
-            ],
-        ),
-    ]
-
 
 # -----------------------------------------------------------------------------
-# Playwright MCP wiring — VLM-baseline (UI driving)
+# Tools and Playwright surface
 # -----------------------------------------------------------------------------
-#
-# Same CDP-attach pattern as the GeoUI variant (see
-# ``geoui/agents/geoui_agent.py`` for the full rationale on why we don't
-# pre-enter the MCP across cells, and why Chromium is launched
-# externally via ``start.sh``). The only material difference is the
-# ``allowed_tools`` list: the VLM-baseline needs the full
-# observe-and-manipulate surface — screenshot, snapshot, click, type,
-# drag — rather than the two-tool restriction the GeoUI agent gets by
-# with.
-
-
-def make_playwright_mcp(cdp_endpoint: str | None = None) -> MCPServerStdio:
-    """Return an unstarted Playwright MCP stdio server.
-
-    Args:
-        cdp_endpoint: If set, the MCP attaches to an already-running
-            Chromium via Chrome DevTools Protocol (e.g.
-            ``"http://localhost:9222"``). Required for Worldview's
-            state to survive across turns. If ``None``, the MCP
-            boots its own Chromium on each arun.
-
-    Used by:
-        ``demo/vlm_chat.py`` ``_agent`` cell. The same
-        Chromium launched by ``demo/start.sh`` is reused —
-        the launcher is agent-agnostic, both notebooks attach to
-        the same CDP endpoint.
-
-    Why ``cdp_endpoint`` is optional:
-        Mirrors the GeoUI variant's helper. Demo / notebook path
-        sets it; headless tests can leave it ``None`` to get a
-        fresh browser per arun.
-
-    Why ``timeout=30``:
-        ``MCPServerStdio``'s default initialisation timeout is 5
-        seconds, which is too tight for ``npx @playwright/mcp@latest``
-        on a cold node_modules cache or a freshly-started
-        Chromium-CDP socket. We've seen
-        ``anyio.fail_after`` fire at ``pydantic_ai/mcp.py:748`` on
-        the first turn of a session. 30 s leaves comfortable
-        headroom for npx + handshake without masking real hangs.
-    """
-    args = ["@playwright/mcp@latest"]
-    if cdp_endpoint:
-        args += ["--cdp-endpoint", cdp_endpoint]
-    return MCPServerStdio(command="npx", args=args, timeout=30)
 
 
 def playwright_capability(server: MCPServerStdio) -> MCP:
-    """Wrap an externally-owned ``MCPServerStdio`` as a pydantic_ai capability.
+    """Playwright capability with the full observe-and-manipulate surface.
 
-    Used by:
-        ``demo/vlm_chat.py`` ``_agent`` cell.
-
-    Why ``allowed_tools`` is broader than the GeoUI variant:
-        The VLM-baseline drives Worldview through its actual UI
-        rather than emitting permalink URLs, so it needs the full
-        observe + manipulate surface — ``browser_snapshot`` and
-        ``browser_take_screenshot`` for observation,
-        ``browser_click`` / ``browser_type`` / ``browser_press_key``
-        / ``browser_hover`` / ``browser_drag`` /
-        ``browser_select_option`` / ``browser_wait_for`` for
-        action. ``browser_navigate`` is for the one-time landing
-        on worldview.earthdata.nasa.gov; ``browser_evaluate`` is
-        permitted only for the end-of-turn URL read-back into the
-        output schema. The system prompt enforces the once-per-turn
-        observation budget and the end-of-turn evaluate.
-
-    Why ``builtin=False, local=server``:
-        Same as the GeoUI variant: caller owns the
-        ``MCPServerStdio`` lifetime; pydantic_ai reuses it inside
-        a single ``agent.arun`` rather than booting a new one.
-        See ``geoui/agents/geoui_agent.py`` for the full anyio-cancel-scope
-        rationale.
+    The VLM baseline drives Worldview through its actual UI rather than
+    emitting permalink URLs, so it needs ``browser_snapshot`` and
+    ``browser_take_screenshot`` for observation and click / type /
+    press-key / hover / drag / select-option / wait-for for action.
+    ``browser_navigate`` is for the one-time landing on
+    worldview.earthdata.nasa.gov; ``browser_evaluate`` is permitted only
+    for the end-of-turn URL read-back into the output schema. The system
+    prompt enforces the once-per-turn observation budget. See
+    :func:`geoui.agents._common.playwright_capability`.
     """
-    return MCP(
-        url="stdio://playwright-mcp",
-        builtin=False,
-        local=server,
-        id="playwright_mcp",
-        allowed_tools=[
-            "browser_navigate",
-            "browser_snapshot",
-            "browser_take_screenshot",
-            "browser_click",
-            "browser_type",
-            "browser_press_key",
-            "browser_hover",
-            "browser_drag",
-            "browser_select_option",
-            "browser_wait_for",
-            "browser_evaluate",
-        ],
-        description="Headed Chromium for driving Worldview's UI directly via screenshot / snapshot / click / type.",
+    return _common.playwright_capability(
+        server,
+        allowed_tools=_common.VLM_BROWSER_TOOLS,
+        description=_common.VLM_BROWSER_DESCRIPTION,
     )
 
 
 def get_default_vlm_tools() -> list[BaseTool]:
     """Default local AKD tools wired into the VLM-baseline agent.
 
-    Same three tools the GeoUI variant uses locally (replacing
-    FastMCP-hosted servers with cold-start latency). The two GeoUI
-    Protocol tools (``GeoUIRenderIntentTool`` / ``GeoUIGetStateTool``)
-    are deliberately excluded — their absence is the point of this
-    baseline.
+    The three discovery tools shared with the GeoUI variant. The two GeoUI
+    Protocol tools are deliberately excluded — their absence is the point
+    of this baseline.
     """
-    return [
-        UMMVisLookupTool(),
-        EarthdataSearchLandingPageTool(),
-        SDESearchTool(),
-    ]
+    return _common.discovery_tools()
 
 
 # -----------------------------------------------------------------------------
@@ -685,7 +538,7 @@ class IESOWorldviewVLMAgentConfig(PydanticAIBaseAgentConfig):
     system_prompt: str = Field(default=IESO_WORLDVIEW_VLM_AGENT_SYSTEM_PROMPT)
     model_name: str = Field(default="openai:gpt-5.2")
     reasoning_effort: Literal["low", "medium", "high"] | None = Field(default="medium")
-    capabilities: list[Any] = Field(default_factory=get_default_ieso_worldview_vlm_capabilities)
+    capabilities: list[Any] = Field(default_factory=get_default_ieso_worldview_capabilities)
     tools: list[BaseTool] = Field(default_factory=get_default_vlm_tools)
 
 
@@ -693,11 +546,7 @@ class IESOWorldviewVLMAgentConfig(PydanticAIBaseAgentConfig):
 # Input/Output schemas
 # -----------------------------------------------------------------------------
 
-
-class IESOWorldviewVLMAgentInputSchema(InputSchema):
-    """Input schema for the VLM-baseline IESO Worldview agent."""
-
-    query: str = Field(..., description="Earth science query to interact with worldview visualization")
+IESOWorldviewVLMAgentInputSchema = IESOWorldviewAgentInputSchema
 
 
 class IESOWorldviewVLMAgentOutputSchema(OutputSchema):
@@ -733,7 +582,9 @@ class IESOWorldviewVLMAgentOutputSchema(OutputSchema):
 # -----------------------------------------------------------------------------
 
 
-class IESOWorldviewVLMAgent(PydanticAIBaseAgent[IESOWorldviewVLMAgentInputSchema, IESOWorldviewVLMAgentOutputSchema]):
+class IESOWorldviewVLMAgent(
+    IESOWorldviewAgentBase[IESOWorldviewVLMAgentInputSchema, IESOWorldviewVLMAgentOutputSchema]
+):
     """VLM-baseline variant of the IESO Worldview agent.
 
     Resolves an Earth science query by driving NASA Worldview's live
@@ -747,57 +598,24 @@ class IESOWorldviewVLMAgent(PydanticAIBaseAgent[IESOWorldviewVLMAgentInputSchema
     output_schema = IESOWorldviewVLMAgentOutputSchema | TextOutput
     config_schema = IESOWorldviewVLMAgentConfig
 
-    def check_output(self, output) -> str | None:
-        if isinstance(output, IESOWorldviewVLMAgentOutputSchema):
-            if not output.result.strip():
-                return "Result is empty. Provide the structured Worldview-discovery response."
-            if not output.url.strip():
-                return "URL is empty. Provide a valid url"
-        return super().check_output(output)
 
+__all__ = [
+    "IESO_WORLDVIEW_VLM_AGENT_SYSTEM_PROMPT",
+    "IESOWorldviewVLMAgent",
+    "IESOWorldviewVLMAgentConfig",
+    "IESOWorldviewVLMAgentInputSchema",
+    "IESOWorldviewVLMAgentOutputSchema",
+    "get_default_ieso_worldview_vlm_capabilities",
+    "get_default_vlm_tools",
+    "make_playwright_mcp",
+    "playwright_capability",
+]
 
-# -----------------------------------------------------------------------------
-# Wiring smoke test
-# -----------------------------------------------------------------------------
-#
-# Requires:
-#   - .env with at minimum OPENAI_API_KEY and VECTOR_DB_TOOL_KEY.
-#   - Cost: one LLM round-trip. Likely produces a clarifying TextOutput
-#     (no browser is attached in this smoke test, so the agent can't
-#     actually drive Worldview).
-#
-# Run from the worktree root:
-#   .venv/bin/python -m geoui.agents.vlm_agent
-
-
+# Wiring smoke test (one LLM round-trip; needs OPENAI_API_KEY and VECTOR_DB_TOOL_KEY).
+# No browser is attached here, so the agent most likely answers with a clarifying TextOutput:
+#   uv run --extra agents python -m geoui.agents.vlm_agent
 if __name__ == "__main__":
-    import asyncio
-
-    from dotenv import load_dotenv
-
-    load_dotenv()
-
-    required = ["OPENAI_API_KEY", "VECTOR_DB_TOOL_KEY"]
-    missing = [k for k in required if not os.getenv(k)]
-    if missing:
-        print(f"Missing env vars: {missing}")
-        print("Create a .env from .env.example and populate the required keys.")
-        raise SystemExit(1)
-
-    async def _smoke() -> None:
-        agent = IESOWorldviewVLMAgent(IESOWorldviewVLMAgentConfig())
-        params = IESOWorldviewVLMAgentInputSchema(
-            query="I'd like to look at Saharan dust transport over the Atlantic. What can you help with?"
-        )
-        print("Running agent (wiring smoke test) ...\n")
-        output = await agent.arun(params)
-        print(f"Output type: {type(output).__name__}\n")
-        if hasattr(output, "model_dump_json"):
-            print(output.model_dump_json(indent=2, exclude_none=True))
-        else:
-            print(output)
-        ctx = agent.last_run_context
-        if ctx and ctx.usage is not None:
-            print(f"\nUsage: {ctx.usage}")
-
-    asyncio.run(_smoke())
+    _common.run_smoke(
+        IESOWorldviewVLMAgent,
+        query="I'd like to look at Saharan dust transport over the Atlantic. What can you help with?",
+    )

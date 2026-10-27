@@ -19,7 +19,7 @@ from dataclasses import dataclass
 import httpx
 from pydantic_ai.capabilities import MCP
 
-from geoui.agents.geoui_agent import get_default_ieso_worldview_geoui_capabilities
+from geoui.agents._common import get_default_ieso_worldview_capabilities
 
 _WARM_TIMEOUT_S = 15.0
 
@@ -50,7 +50,7 @@ def _remote_mcp_urls() -> list[str]:
     """
     return [
         cap.url
-        for cap in get_default_ieso_worldview_geoui_capabilities()
+        for cap in get_default_ieso_worldview_capabilities()
         if isinstance(cap, MCP) and cap.url.startswith(("http://", "https://"))
     ]
 
