@@ -32,6 +32,12 @@ Markers: `integration` (spawns a subprocess or touches the network), `agents`
    public contract shared by the MCP server, the akd wrappers and the
    benchmark logs. Change them only deliberately, and update
    `tests/mcp/fixtures/akd_contract.json` in the same commit.
+5. In `geoui.agents`, model-visible text (system prompts, config
+   `description`, output-schema names, docstrings and field descriptions,
+   agent class names) lives in `geoui_agent.py` / `vlm_agent.py`; shared
+   plumbing lives in `_common.py`. `tests/agents/test_agent_surface.py`
+   proves a refactor is prose-neutral; regenerate its fixture with
+   `scripts/capture_agent_surface.py` only for intentional changes.
 
 ## Adding an adapter
 

@@ -24,7 +24,7 @@ for Earth Observation (NASA MSFC, May 2026).
 | `geoui/tools.py` | The two protocol operations as plain async functions plus request/response models | pydantic |
 | `geoui/mcp/` | FastMCP server exposing `geo_ui_render_intent_tool` and `geo_ui_get_state_tool` | extra `mcp` |
 | `geoui/agents/` | IESO Worldview reference agents (GeoUI treatment, VLM baseline), MCP warm-up, benchmark logger | extra `agents` (akd-ext) |
-| `demo/` | marimo chat notebooks and `start.sh` (Chromium over CDP + notebook) | extra `agents` |
+| `demo/` | `chat.py`, one marimo chat notebook for both agents (`AGENT=geoui\|vlm`), and `start.sh` (Chromium over CDP + notebook) | extra `agents` |
 | `benchmarks/` | Prompt suite, workflow scripts, frozen poster run logs | — |
 | `docs/spec.md` | GeoUI Protocol v1.0.0 specification | — |
 | `docs/poster/` | Poster narrative, abstract, interaction diagrams, results chart | — |

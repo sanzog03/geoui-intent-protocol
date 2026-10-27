@@ -45,16 +45,17 @@ two reference agents, a marimo chat demo, and the head-to-head benchmark.
 | `geoui/mcp/_describe.py` | Rebuilds akd's `INPUT/OUTPUT FIELD DESCRIPTIONS` description suffix so the MCP contract matches the original deployment. | — |
 | `geoui/mcp/server.py` | `FastMCP("geoui")` with the two tools; `main()` is the `geoui-mcp` CLI. | fastmcp (extra `mcp`) |
 | `geoui/agents/_akd_tools.py` | akd `BaseTool` subclasses the agents pass to `PydanticAIBaseAgentConfig.tools`. Same names and descriptions as the MCP server. | akd (extra `agents`) |
-| `geoui/agents/geoui_agent.py` | `IESOWorldviewGeoUIAgent`: system prompt, MCP capability list, local-tool list, Playwright/CDP helpers. The heart of the runtime. | akd-ext, pydantic-ai |
-| `geoui/agents/vlm_agent.py` | `IESOWorldviewVLMAgent`: the baseline. About 90% identical plumbing; differs in the observe/act steps of the prompt and the Playwright tool allow-list. | akd-ext, pydantic-ai |
+| `geoui/agents/_common.py` | Plumbing shared by both agents: the two remote MCPs (`get_default_ieso_worldview_capabilities`), the three discovery tools, `make_playwright_mcp` / `playwright_capability` with the two browser allow-lists, the input schema, the structured-output check (`IESOWorldviewAgentBase`) and the `run_smoke` runner. The Playwright/CDP design note lives here. | akd-ext, pydantic-ai |
+| `geoui/agents/geoui_agent.py` | `IESOWorldviewGeoUIAgent` (treatment): only what the model sees. Its system prompt, config `description`, output schema, agent class, the GeoUI tool list and the two-tool browser allow-list. | `_common` |
+| `geoui/agents/vlm_agent.py` | `IESOWorldviewVLMAgent` (baseline): same shape. Differs in the observe/act steps of the prompt, the tool list (no GeoUI tools) and the eleven-tool browser allow-list. | `_common` |
 | `geoui/agents/warm_mcps.py` | Pings each remote MCP once at launch to absorb FastMCP cold starts. | httpx |
 | `geoui/agents/benchmark/log.py` | Per-turn JSONL logging (`TurnRecord`, `ErrorRecord`, `append_*`, `load_runs`). | pydantic |
 | `demo/start.sh` | Launches a long-lived Chromium with remote debugging, warms MCPs, opens the marimo notebook. `AGENT=geoui` (default) or `vlm`. | uv, npx |
-| `demo/{geoui,vlm}_chat.py` | marimo multi-turn chat apps. Carry `run_context` across turns; attach Playwright per turn via CDP. | marimo |
+| `demo/chat.py` | One marimo multi-turn chat app for both agents; `AGENT=geoui` (default) or `vlm` picks the agent, intro text, example prompts and benchmark-log label. Carries `run_context` across turns; attaches Playwright per turn via CDP. | marimo |
 | `benchmarks/prompts.md`, `benchmarks/workflows.md` | Prompt suite (Core 6 + Optional 4) and 5-turn scenario scripts (A: CA wildfire smoke; B: Saharan dust; C: Lake Erie bloom). | — |
 | `benchmarks/results/poster-2026-05/` | Frozen `runs.jsonl` (51 rows) and `errors.jsonl` (22 rows) behind the poster. Absolute paths in tracebacks were replaced (`<worktree>` for the source checkout, `<python>` for the interpreter install). | — |
 | `scripts/dump_mcp_contract.py` | Dump any server's tool contract as JSON. | fastmcp |
-| `tests/` | `test_core.py`; `adapters/worldview/` (permalink, assembly, round trip); `mcp/test_server.py` (contract vs golden, calls, stdio smoke); `agents/test_akd_tools.py` (parity, skips without akd). | — |
+| `tests/` | `test_core.py`; `adapters/worldview/` (permalink, assembly, round trip); `mcp/test_server.py` (contract vs golden, calls, stdio smoke); `agents/test_akd_tools.py` (parity) and `agents/test_agent_surface.py` (model-visible surface golden); both skip without akd. | — |
 
 **Layering rule:** `geoui.core`, `geoui.extensions`, `geoui.adapters`, `geoui.tools`
 import nothing from akd or fastmcp. `geoui.mcp` adds fastmcp. `geoui.agents`
@@ -143,13 +144,24 @@ Playwright MCP added by the notebook and narrowed to `browser_navigate` +
 
 **Playwright/CDP design, the subtle part.** Chromium is launched externally
 by `demo/start.sh` with `--remote-debugging-port=9222`; a fresh Playwright
-MCP attaches per turn over CDP. Holding one MCP across marimo cells hit
+MCP attaches per turn over CDP (`geoui/agents/_common.py`). Holding one MCP across marimo cells hit
 `RuntimeError: Attempted to exit cancel scope in a different task than it was
 entered in` (anyio binds the task group to the entering task; marimo's
 per-cell tasks die on return). Map state lives outside Python, in Chromium;
 the MCP lives one `arun` at a time. The long docstrings in
 `make_playwright_mcp` / `playwright_capability` explain this. Do not simplify
 them.
+
+**What the model sees is pinned.** `tests/agents/fixtures/agent_surface.json`
+is a golden of each agent's system prompt, bound config description, tool
+and capability lists, browser allow-list and output-schema names, docstrings
+and field descriptions. `test_agent_surface.py` fails on any drift. Change
+prompts or schemas deliberately, then regenerate with
+`uv run --extra agents python scripts/capture_agent_surface.py` and review
+the fixture diff. Output-schema and agent class names are part of that
+surface: pydantic-ai names the output tool `final_result_<ClassName>` and
+`agent.name` is the snake_case class name, both of which appear in the
+frozen logs.
 
 **Benchmark.** Same agent skeleton, same discovery tools, same prompts; only
 the observe/act mechanism varies. Prompts are fully specified (exact layer
