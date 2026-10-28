@@ -44,7 +44,9 @@ REASONING_EFFORT = "medium"
 #: is handed back to the model as a retry prompt before the run fails.
 DEFAULT_RETRIES = 1
 #: The UI-driving baseline gets more: Playwright clicks on Worldview time out
-#: now and then (overlays, tile loads) and each timeout is one retry.
+#: now and then (overlays, tile loads) and each timeout is one retry. Applied
+#: both as the agent's ``retries`` and as the Playwright server's
+#: ``max_retries`` (MCP tools carry their own budget in pydantic-ai).
 VLM_RETRIES = 3
 #: Playwright MCP action timeout for the baseline (default 5000 ms is too
 #: tight for Worldview's first-visit tour overlay and panel animations).
@@ -117,6 +119,7 @@ def make_playwright_mcp(
     cdp_endpoint: str | None = None,
     *,
     extra_args: Sequence[str] = (),
+    max_retries: int = DEFAULT_RETRIES,
 ) -> MCPServerStdio:
     """A fresh, unstarted Playwright MCP from the plugin config.
 
@@ -124,7 +127,7 @@ def make_playwright_mcp(
     already-running Chromium so map state survives across turns; ``None``
     boots a private Chromium per run (first boot downloads ~150 MB).
     """
-    return playwright_server(servers, cdp_endpoint, extra_args=extra_args)
+    return playwright_server(servers, cdp_endpoint, extra_args=extra_args, max_retries=max_retries)
 
 
 def playwright_capability(server: MCPServerStdio, *, allowed_tools: list[str], description: str) -> MCP:
@@ -202,13 +205,14 @@ def standard_capabilities(
     browser_tools: list[str],
     browser_description: str,
     playwright_args: Sequence[str] = (),
+    playwright_max_retries: int = DEFAULT_RETRIES,
     extra: Sequence[AbstractCapability] = (),
 ) -> list[AbstractCapability]:
     """Remote discovery MCPs + narrowed Playwright + reasoning effort + extras."""
     return [
         *remote_capabilities(servers),
         playwright_capability(
-            make_playwright_mcp(servers, cdp_endpoint, extra_args=playwright_args),
+            make_playwright_mcp(servers, cdp_endpoint, extra_args=playwright_args, max_retries=playwright_max_retries),
             allowed_tools=browser_tools,
             description=browser_description,
         ),

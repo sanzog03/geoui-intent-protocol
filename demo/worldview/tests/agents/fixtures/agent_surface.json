@@ -567,6 +567,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://w4hu71445m.execute-api.us-east-1.amazonaws.com/mcp/cmr/mcp/",
           "header_names": null
         }
@@ -584,6 +585,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://ieso-benchmark-mcp-tools.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -603,6 +605,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://sudden-gold-carp-features-tool-cmr-uat.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -622,6 +625,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://sudden-gold-carp-features-tools-earthdata-search-da3be0.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -641,6 +645,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://sudden-gold-carp-feature-pdf-parser-mcp.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -660,6 +665,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://brainy-lime-pheasant.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -679,6 +685,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://eonet-tool.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -705,6 +712,7 @@
             "http://localhost:9222"
           ],
           "timeout": 30.0,
+          "max_retries": 1,
           "url": null,
           "header_names": null
         }
@@ -1128,6 +1136,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://w4hu71445m.execute-api.us-east-1.amazonaws.com/mcp/cmr/mcp/",
           "header_names": null
         }
@@ -1145,6 +1154,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://ieso-benchmark-mcp-tools.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -1164,6 +1174,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://sudden-gold-carp-features-tool-cmr-uat.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -1183,6 +1194,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://sudden-gold-carp-features-tools-earthdata-search-da3be0.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -1202,6 +1214,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://sudden-gold-carp-feature-pdf-parser-mcp.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -1221,6 +1234,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://brainy-lime-pheasant.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -1240,6 +1254,7 @@
           "command": null,
           "args": null,
           "timeout": 30.0,
+          "max_retries": 1,
           "url": "https://eonet-tool.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -1277,6 +1292,7 @@
             "15000"
           ],
           "timeout": 30.0,
+          "max_retries": 3,
           "url": null,
           "header_names": null
         }

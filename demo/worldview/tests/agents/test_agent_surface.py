@@ -75,6 +75,7 @@ def test_variants_differ_only_where_intended():
     assert pw(geoui)["local"]["args"][-2:] == ["--cdp-endpoint", CDP_ENDPOINT]
     assert pw(vlm)["local"]["args"][-4:] == ["--cdp-endpoint", CDP_ENDPOINT, "--timeout-action", "15000"]
     assert geoui["retries"] == 1 and vlm["retries"] == 3  # the UI-driving baseline needs slack for click timeouts
+    assert pw(geoui)["local"]["max_retries"] == 1 and pw(vlm)["local"]["max_retries"] == 3
 
     assert len(geoui["system_prompts"]) == 1 and geoui["system_prompts"][0].startswith("# ROLE")
     assert len(vlm["system_prompts"]) == 2 and vlm["system_prompts"][1].startswith("# BROWSER INTERACTION")

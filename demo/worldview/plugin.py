@@ -274,12 +274,15 @@ def playwright_server(
     cdp_endpoint: str | None,
     *,
     extra_args: Sequence[str] = (),
+    max_retries: int = 1,
     timeout: float = REMOTE_MCP_INIT_TIMEOUT_S,
 ) -> MCPServerStdio:
     """The plugin's Playwright MCP, attached to an already-running Chromium when
     ``cdp_endpoint`` is given (see the CDP design note in ``agents._common``).
     ``extra_args`` are appended to the MCP's command line (for example
-    ``--timeout-action 15000`` for UI-driving agents). A fresh instance is
+    ``--timeout-action 15000`` for UI-driving agents). ``max_retries`` is the
+    per-tool retry budget pydantic-ai applies to *this server's* tools; the
+    agent-level ``retries`` does not reach MCP tools. A fresh instance is
     returned every call; one Playwright MCP must not be shared across runs."""
     base = servers.get("playwright")
     if not isinstance(base, MCPServerStdio):
@@ -288,7 +291,7 @@ def playwright_server(
     if cdp_endpoint:
         args += ["--cdp-endpoint", cdp_endpoint]
     args += list(extra_args)
-    return MCPServerStdio(base.command, args, env=base.env, id="playwright", timeout=timeout)
+    return MCPServerStdio(base.command, args, env=base.env, id="playwright", timeout=timeout, max_retries=max_retries)
 
 
 __all__ = [

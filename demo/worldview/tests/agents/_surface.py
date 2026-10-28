@@ -40,6 +40,7 @@ def _capability(cap: Any) -> dict[str, Any]:
             "command": getattr(local, "command", None),
             "args": list(getattr(local, "args", None) or []) or None,
             "timeout": getattr(local, "timeout", None),
+            "max_retries": getattr(local, "max_retries", None),
             "url": getattr(local, "url", None),
             "header_names": sorted((getattr(local, "headers", None) or {}).keys()) or None,
         }

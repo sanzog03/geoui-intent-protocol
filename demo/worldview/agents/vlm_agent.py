@@ -182,6 +182,7 @@ def vlm_spec(
             browser_tools=VLM_BROWSER_TOOLS,
             browser_description=VLM_BROWSER_DESCRIPTION,
             playwright_args=VLM_PLAYWRIGHT_ARGS,
+            playwright_max_retries=VLM_RETRIES,
             extra=extra_capabilities,
         ),
         output_cls=VLMAgentOutput,
