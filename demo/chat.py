@@ -1,19 +1,20 @@
-"""Multi-turn chat with an IESO Worldview agent.
+"""Multi-turn chat with a Worldview agent.
 
 One notebook, two agents, selected by the ``AGENT`` environment variable:
 
-- ``geoui`` (default): ``IESOWorldviewGeoUIAgent`` speaks **GeoIntent**
-  through the GeoUI Protocol; visualisations come back as Worldview
-  permalink URLs.
-- ``vlm``: ``IESOWorldviewVLMAgent``, the Vision-Language-Model baseline.
-  It observes NASA Worldview via screenshots + an accessibility-tree
-  snapshot and acts by clicking, typing and dragging against the live
-  page, the way a developer without the protocol would build this.
+- ``geoui`` (default): the ``worldview-assistant`` Claude Code skill on a
+  bare pydantic-ai agent. It speaks **GeoIntent** through the GeoUI
+  protocol tools; the browser is only used to open the rendered URL and
+  read the live URL back.
+- ``vlm``: the non-GeoUI ``mio-worldviewagent-v2`` skill plus full
+  Playwright browser control, the baseline. It observes NASA Worldview via
+  screenshots + an accessibility-tree snapshot and acts by clicking,
+  typing and dragging against the live page.
 
 Same Chromium-on-CDP plumbing, same live tool-call trace, same
 session/reset controls and benchmark logging; the agent is where the
-divergence lives. Each turn carries forward the agent's prior
-``run_context``, so the conversation has memory.
+divergence lives. Each turn passes the previous turns' messages back as
+``message_history``, so the conversation has memory.
 
 Run from the repo root (``demo/start.sh`` does all of this):
 
@@ -45,8 +46,8 @@ def _variant():
     """Pick the agent from ``AGENT`` (``geoui`` or ``vlm``; default ``geoui``).
 
     Everything that differs between the two demo flavours lives in this
-    one dict: the classes, the benchmark-log label, the intro text and the
-    example prompts. The rest of the notebook is variant-agnostic.
+    one dict: the agent factory, the intro text and the example prompts.
+    The rest of the notebook is variant-agnostic.
     """
     import os as _os  # private: ``os`` is also imported by the env cell
 
@@ -56,28 +57,29 @@ def _variant():
     if AGENT not in ("geoui", "vlm"):
         raise ValueError(f"AGENT must be 'geoui' or 'vlm' (got {AGENT!r})")
 
-    # Intro markdown per variant (kept verbatim from the two original notebooks).
     geoui_intro = r"""
-    # IESO Worldview GeoUI Agent — Multi-turn Chat
+    # Worldview GeoUI Agent — Multi-turn Chat
 
-    Multi-turn chat with `IESOWorldviewGeoUIAgent`. The agent speaks
-    **GeoIntent** through the GeoUI Protocol; visualisations come back
-    as Worldview permalink URLs. Each turn carries forward the agent's
-    prior `run_context`, so the conversation has memory.
+    The `worldview-assistant` Claude Code skill (vendored under
+    `demo/vendor/akd-plugins`) running on a bare pydantic-ai agent. The
+    agent speaks **GeoIntent** through the GeoUI Protocol tools
+    (`geo_ui_render_intent_tool`, `geo_ui_get_state_tool`, served
+    in-process from this repo) and gets Worldview permalink URLs back.
+    Discovery tools are the plugin's remote MCP servers; the skill's
+    `references/` documents are reachable through `read_reference`.
+
+    **Browser scope:** `browser_navigate` to open the rendered URL and
+    `browser_evaluate` to read `window.location.href` back. No
+    screenshots, no clicks.
 
     ### One-time setup
 
     Launch Chromium with remote debugging **before** opening this
-    notebook, and point `PLAYWRIGHT_CDP_ENDPOINT` at it:
+    notebook, and point `PLAYWRIGHT_CDP_ENDPOINT` at it (`demo/start.sh`
+    does both):
 
     ```bash
-    # In one terminal — leave running:
-    /Applications/Google\\ Chrome.app/Contents/MacOS/Google\\ Chrome \\
-        --remote-debugging-port=9222 \\
-        --user-data-dir=/tmp/worldview-chromium
-
-    # In the notebook's .env (or shell that launches marimo):
-    export PLAYWRIGHT_CDP_ENDPOINT=http://localhost:9222
+    ./demo/start.sh
     ```
 
     Each agent turn attaches a fresh Playwright MCP to this
@@ -88,7 +90,7 @@ def _variant():
 
     - Type a query (e.g. *"Show Saharan dust over the Atlantic on 2023-06-15"*).
     - The agent may answer directly, ask a clarifying question, or
-      render a URL via `geoui_render_intent` once it has enough info.
+      render a URL via `geo_ui_render_intent_tool` once it has enough info.
     - After rendering, the agent calls `browser_navigate` to open the
       URL in your Chromium window. Pan, zoom, or scrub directly in
       the map — on the next turn the agent reads the live URL back
@@ -96,83 +98,48 @@ def _variant():
     """
 
     vlm_intro = r"""
-    # IESO Worldview VLM Agent — Multi-turn Chat
+    # Worldview VLM Agent — Multi-turn Chat
 
-    Multi-turn chat with `IESOWorldviewVLMAgent`, the
-    **Vision-Language-Model baseline** for the poster's
-    token-efficiency comparison against the GeoUI Protocol.
+    The **baseline** for the token-efficiency comparison against the
+    GeoUI Protocol: the non-GeoUI `mio-worldviewagent-v2` skill (vendored
+    under `demo/skills/`) plus a browser addendum, on a bare pydantic-ai
+    agent. Instead of a structured `GeoIntent`, this agent treats NASA
+    Worldview the way a person would: it **looks at the page** (PNG
+    screenshot + accessibility-tree snapshot) and **manipulates it**
+    (click, type, press-key, drag). Each refining turn re-observes from
+    pixels and DOM rather than parsing a permalink URL.
 
-    Instead of speaking a structured `GeoIntent` schema, this
-    agent treats NASA Worldview the way a developer without a
-    protocol would: it **looks at the page** (PNG screenshot
-    + accessibility-tree snapshot) and **manipulates it like a
-    human** (click, type, press-key, drag). Each refining turn
-    re-observes from pixels and DOM rather than parsing a
-    permalink URL — which is exactly why it's expected to cost
-    roughly an order of magnitude more tokens per turn.
+    **Browser scope (eleven tools):** `browser_snapshot`,
+    `browser_take_screenshot`, `browser_click`, `browser_type`,
+    `browser_press_key`, `browser_hover`, `browser_drag`,
+    `browser_select_option`, `browser_wait_for`, `browser_navigate` (once,
+    to open `worldview.earthdata.nasa.gov`) and a single end-of-turn
+    `browser_evaluate("() => window.location.href")`.
 
-    **Tools the agent can use:**
-
-    - *Observe*: `browser_snapshot` (accessibility tree with
-      element refs), `browser_take_screenshot` (PNG of the
-      rendered page when the snapshot alone isn't enough).
-    - *Act*: `browser_click`, `browser_type`,
-      `browser_press_key`, `browser_hover`, `browser_drag`,
-      `browser_select_option`, `browser_wait_for`.
-    - *Navigate*: `browser_navigate` (once per session, to
-      open `worldview.earthdata.nasa.gov`).
-    - *URL read-back*: a single end-of-turn
-      `browser_evaluate("() => window.location.href")` to
-      capture the final URL for the structured output.
-
-    The CMR / Earthdata / vector-DB discovery tools are
-    identical to the GeoUI variant — the comparison holds
-    discovery cost equal on purpose.
+    The discovery MCPs are identical to the GeoUI variant — the comparison
+    holds discovery cost equal on purpose.
 
     ### One-time setup
 
-    Same as the GeoUI notebook. Launch Chromium with remote
-    debugging **before** opening this notebook (the launcher in
-    `demo/start.sh` is agent-agnostic — both notebooks
-    attach to it):
-
-    ```bash
-    # In one terminal — leave running:
-    ./demo/start.sh
-    ```
-
-    That script handles `PLAYWRIGHT_CDP_ENDPOINT` and the
-    Chromium lifetime. If you'd rather run only this notebook,
-    you can launch a Chromium with `--remote-debugging-port=9222`
-    and `export PLAYWRIGHT_CDP_ENDPOINT=http://localhost:9222`
-    manually.
+    Same as the GeoUI variant: `./demo/start.sh` launches Chromium with
+    remote debugging and sets `PLAYWRIGHT_CDP_ENDPOINT`.
 
     ### Using it
 
     - Type a query (e.g. *"Show MODIS Aqua Aerosol on 2025-09-15"*).
-    - The agent may answer directly, ask a clarifying question,
-      or start driving the UI. On the first turn you'll see it
-      navigate to Worldview, take a snapshot, then click
-      *+ Add Layers* and type the layer name.
-    - Refining turns (*"zoom to Huntsville"*, *"compare with
-      the following day"*) start with a fresh snapshot, then
-      click / type / drag.
-    - The final URL is read from `window.location.href` once
-      the UI changes are applied — that's what populates
-      `WORLDVIEW_URL` in the structured output.
-    - Watch the **Tool calls** collapsible mid-turn: this agent
-      is meant to be chatty, but the once-per-turn observation
-      budget in the system prompt should still keep it from
-      looping. If it does loop, hit stop and the cleanup will
-      cancel the background task.
+    - On the first turn you'll see it navigate to Worldview, take a
+      snapshot, then click *+ Add Layers* and type the layer name.
+    - Refining turns (*"zoom to Huntsville"*, *"compare with the
+      following day"*) start with a fresh snapshot, then click / type / drag.
+    - Watch the **Tool calls** collapsible mid-turn: this agent is meant
+      to be chatty, but the once-per-turn observation budget in its
+      prompt should keep it from looping. If it does loop, hit stop and
+      the cleanup will cancel the background task.
     """
 
     VARIANT = {
         "geoui": {
-            "agent_cls": geoui_agent.IESOWorldviewGeoUIAgent,
-            "config_cls": geoui_agent.IESOWorldviewGeoUIAgentConfig,
-            "input_cls": geoui_agent.IESOWorldviewGeoUIAgentInputSchema,
-            "playwright_capability": geoui_agent.playwright_capability,
+            "build": geoui_agent.build_geoui_agent,
             "intro_md": geoui_intro,
             "example_prompts": [
                 "I'd like to look at Saharan dust transport over the Atlantic on June 15, 2023.",
@@ -181,10 +148,7 @@ def _variant():
             ],
         },
         "vlm": {
-            "agent_cls": vlm_agent.IESOWorldviewVLMAgent,
-            "config_cls": vlm_agent.IESOWorldviewVLMAgentConfig,
-            "input_cls": vlm_agent.IESOWorldviewVLMAgentInputSchema,
-            "playwright_capability": vlm_agent.playwright_capability,
+            "build": vlm_agent.build_vlm_agent,
             "intro_md": vlm_intro,
             "example_prompts": [
                 "Show MODIS Aqua Aerosol on 2025-09-15.",
@@ -212,8 +176,15 @@ def _env(mo):
 
     load_dotenv()  # walks up from cwd; no-op if .env is missing
 
-    required_keys = ["OPENAI_API_KEY", "VECTOR_DB_TOOL_KEY"]
+    from worldview.plugin import env_var_for, plugin_dir, user_config_from_env
+
+    required_keys = ["OPENAI_API_KEY"]
     missing_keys = [k for k in required_keys if not os.getenv(k)]
+
+    # Optional: each unlocks a group of the plugin's MCP servers. Missing
+    # ones are skipped by ``worldview.plugin.load_mcp_config`` with a warning.
+    _root = plugin_dir()
+    unset_mcp_keys = [env_var_for(k) for k, v in user_config_from_env(_root).items() if v is None]
 
     cdp_endpoint = os.getenv("PLAYWRIGHT_CDP_ENDPOINT")
 
@@ -239,9 +210,14 @@ def _env(mo):
             kind="warn",
         )
     else:
+        _note = (
+            f" MCP servers needing `{', '.join(unset_mcp_keys)}` are disabled until you add those keys to `.env`."
+            if unset_mcp_keys
+            else ""
+        )
         env_status = mo.callout(
-            mo.md(f"Env OK — required keys present and `PLAYWRIGHT_CDP_ENDPOINT={cdp_endpoint}` will be used."),
-            kind="success",
+            mo.md(f"Env OK — `PLAYWRIGHT_CDP_ENDPOINT={cdp_endpoint}` will be used.{_note}"),
+            kind="success" if not unset_mcp_keys else "info",
         )
     env_status
     return missing_keys, cdp_endpoint
@@ -293,45 +269,43 @@ async def _warm_handler(mo, warm_btn):
 
 @app.cell
 def _agent(VARIANT, cdp_endpoint, missing_keys):
-    """Instantiate the selected agent. Per-turn MCP lifecycle; Chromium is held
+    """Build the selected agent. Per-turn MCP lifecycle; Chromium is held
     *outside* the notebook via CDP (see ``PLAYWRIGHT_CDP_ENDPOINT`` in
-    the env cell). Each ``agent.arun`` spawns a fresh Playwright MCP
+    the env cell). Each ``agent.run`` spawns a fresh Playwright MCP
     that attaches to the running Chromium and tears down cleanly when
-    the arun completes — anyio's same-task enter/exit rule stays
-    satisfied because the MCP's scope is fully contained in the arun
+    the run completes — anyio's same-task enter/exit rule stays
+    satisfied because the MCP's scope is fully contained in the run
     task.
     """
-    from akd._base import TextOutput
-    from pydantic_ai.capabilities.hooks import Hooks
-    from worldview.agents._common import get_default_ieso_worldview_capabilities, make_playwright_mcp
+    from pydantic_ai.capabilities import Hooks
+    from worldview.agents import TextOutput
     from worldview.agents.benchmark import new_session_id
-
-    AgentInputSchema = VARIANT["input_cls"]
 
     # Session dict has to exist before the trace hook so the hook's
     # closure can append to ``current_turn_tools``.
-    # ``cum_usage`` is our own running tally: we pass ``usage=None`` per
-    # turn (so pydantic_ai's request_limit doesn't trip on cumulative
-    # counts — AKD's base config caps request_limit at 50), then add the
-    # turn's usage here for display.
+    # ``history`` is the pydantic-ai message history passed back on every
+    # run (conversation memory); ``usage`` is the running RunUsage tally
+    # across turns, ``last_usage`` the most recent turn's.
     # ``log_session_id`` groups all log rows from this marimo session;
     # ``attempts`` increments on every ``_handler`` call (success +
     # error), so error turns get their own ``turn_index`` rather than
     # being silently skipped.
     session = {
-        "ctx": None,
+        "history": [],
         "turns": 0,
         "attempts": 0,
         "log_session_id": new_session_id(),
         "last_output": None,
-        "cum_usage": None,
+        "last_run_id": None,
+        "last_usage": None,
+        "usage": None,
         "cdp_endpoint": cdp_endpoint,
         "current_turn_tools": [],
     }
 
     # before_tool_execute fires once per model-issued tool call. We
     # record the names in order so the chat can render a collapsible
-    # trace. The handler clears this list before each ``arun``.
+    # trace. The handler clears this list before each run.
     trace_hook = Hooks()
 
     @trace_hook.on.before_tool_execute
@@ -342,26 +316,17 @@ def _agent(VARIANT, cdp_endpoint, missing_keys):
     if missing_keys:
         agent = None
     else:
-        playwright = make_playwright_mcp(cdp_endpoint=cdp_endpoint)
-        agent = VARIANT["agent_cls"](
-            VARIANT["config_cls"](
-                capabilities=[
-                    *get_default_ieso_worldview_capabilities(),
-                    VARIANT["playwright_capability"](playwright),
-                    trace_hook,
-                ],
-            ),
-        )
+        agent = VARIANT["build"](cdp_endpoint=cdp_endpoint, extra_capabilities=[trace_hook])
 
-    return AgentInputSchema, TextOutput, agent, session
+    return TextOutput, agent, session
 
 
 @app.cell
-def _chat(AGENT, AgentInputSchema, TextOutput, VARIANT, agent, mo, session):
+def _chat(AGENT, TextOutput, VARIANT, agent, mo, session):
     """The chat itself.
 
-    Async handler, shared by both agents. All MCPs (Playwright + CMR +
-    IESO) are spun up and torn down per ``arun``. Chromium state is preserved by attaching the
+    Async handler, shared by both agents. All MCPs (Playwright + the
+    plugin's remote servers) are spun up and torn down per run. Chromium state is preserved by attaching the
     Playwright MCP to an externally-owned Chromium via CDP, so the
     cheap thing (subprocess spawn + JSON-RPC handshake) happens each
     turn while the expensive thing (Chromium launch + page render) is
@@ -414,8 +379,11 @@ def _chat(AGENT, AgentInputSchema, TextOutput, VARIANT, agent, mo, session):
 
     import asyncio
     import time
+    import uuid
 
     from pydantic_ai.exceptions import ModelAPIError
+    from pydantic_ai.usage import RunUsage, UsageLimits
+    from worldview.agents import REQUEST_LIMIT
     from worldview.agents.benchmark import (
         ErrorRecord,
         TurnRecord,
@@ -505,10 +473,10 @@ def _chat(AGENT, AgentInputSchema, TextOutput, VARIANT, agent, mo, session):
           chunking. We mitigate by polling slowly (0.5s) and batching
           every new tool fired since the last poll into a single yield,
           which keeps the chunk count to ~one per second.
-        - ``asyncio.create_task`` detaches ``arun`` from this generator's
-          task. If the user hits stop, marimo closes the generator and
-          we'd leak a background task that keeps firing tools. The
-          ``finally`` block below cancels ``arun_task`` on any exit
+        - ``asyncio.create_task`` detaches ``agent.run`` from this
+          generator's task. If the user hits stop, marimo closes the
+          generator and we'd leak a background task that keeps firing
+          tools. The ``finally`` block below cancels ``run_task`` on any exit
           (normal, error, or ``GeneratorExit``).
         """
         if agent is None:
@@ -531,23 +499,20 @@ def _chat(AGENT, AgentInputSchema, TextOutput, VARIANT, agent, mo, session):
             session["current_turn_tools"] = []
 
             # Bump attempt counter immediately so error turns get a
-            # unique turn_index in the log even if the arun fails before
+            # unique turn_index in the log even if the run fails before
             # ``session["turns"]`` (successful turns) advances.
             session["attempts"] += 1
             t_start = time.monotonic()
+            run_id = str(uuid.uuid4())
 
-            arun_task = asyncio.create_task(
-                agent.arun(
-                    AgentInputSchema(query=latest),
-                    run_context=session["ctx"],
-                    # Reset per-turn usage. AKD's _wire_usage_limits caps
-                    # request_limit at max_tool_iterations (≤50); the
-                    # default arun threads cumulative usage from run_context
-                    # — together they fire UsageLimitExceeded after ~5–10
-                    # tool-heavy turns. Per-turn reset restores
-                    # request_limit's intended runaway-protection role;
-                    # cumulative usage is tracked manually below.
-                    usage=None,
+            run_task = asyncio.create_task(
+                agent.run(
+                    latest,
+                    message_history=list(session["history"]),
+                    # Per-turn request cap (runaway protection). Usage is
+                    # per run, so the cap never trips on cumulative counts;
+                    # the cross-turn tally is kept in ``session["usage"]``.
+                    usage_limits=UsageLimits(request_limit=REQUEST_LIMIT),
                     # Bump OpenAI HTTP timeout from the SDK default
                     # (10 min) to 15 min so large VLM payloads
                     # (multi-snapshot turns) have headroom before httpx
@@ -583,13 +548,13 @@ def _chat(AGENT, AgentInputSchema, TextOutput, VARIANT, agent, mo, session):
                 return chunk
 
             try:
-                # Poll the trace list while arun runs. 0.5s timeout
+                # Poll the trace list while the run runs. 0.5s timeout
                 # keeps this cooperative without flooding the marimo
                 # wire protocol. asyncio.wait doesn't cancel the task
                 # on timeout — it just bounds how long we wait before
                 # checking again.
-                while not arun_task.done():
-                    await asyncio.wait({arun_task}, timeout=0.5)
+                while not run_task.done():
+                    await asyncio.wait({run_task}, timeout=0.5)
                     chunk = _flush_new_tools()
                     if chunk:
                         yield chunk
@@ -602,21 +567,21 @@ def _chat(AGENT, AgentInputSchema, TextOutput, VARIANT, agent, mo, session):
                 closer = "\n</details>\n" if details_opened else ""
                 sep = "\n---\n\n" if details_opened else ""
 
+                result = None
                 output = None
                 turn_error: BaseException | None = None
                 try:
-                    output = arun_task.result()
+                    result = run_task.result()
+                    output = result.output
                 except BaseException as exc:  # noqa: BLE001 — surface ExceptionGroup too
                     turn_error = exc
 
                 wall_clock = time.monotonic() - t_start
+                turn_usage = result.usage() if result is not None else None
 
                 # Build + write benchmark log row. We log success and
                 # error turns uniformly; the distinguishing field is
-                # ``output_kind``. On error we set ``ctx=None`` so we
-                # don't misattribute the previous turn's ``run_id`` /
-                # ``usage`` to this errored attempt.
-                ctx = agent.last_run_context if turn_error is None else None
+                # ``output_kind``.
                 if turn_error is not None:
                     output_kind = "error"
                     final_url = None
@@ -638,13 +603,13 @@ def _chat(AGENT, AgentInputSchema, TextOutput, VARIANT, agent, mo, session):
                         TurnRecord(
                             agent=AGENT,
                             session_id=session["log_session_id"],
-                            run_id=str(getattr(ctx, "run_id", None)) if ctx else None,
+                            run_id=run_id,
                             turn_index=session["attempts"],
                             user_prompt=latest,
                             tool_calls=list(session["current_turn_tools"]),
                             tool_call_count=len(session["current_turn_tools"]),
                             wall_clock_s=round(wall_clock, 3),
-                            usage=extract_usage(getattr(ctx, "usage", None)) if ctx else None,
+                            usage=extract_usage(turn_usage),
                             output_kind=output_kind,
                             final_url=final_url,
                             error_type=error_type,
@@ -705,22 +670,13 @@ def _chat(AGENT, AgentInputSchema, TextOutput, VARIANT, agent, mo, session):
                     yield closer + sep + _format_error(turn_error)
                     return
 
-                # Persist context for the next turn.
-                session["ctx"] = agent.last_run_context
+                # Persist the conversation for the next turn.
+                session["history"] = result.all_messages()
                 session["turns"] += 1
                 session["last_output"] = output
-                # AKDRunUsage has no __add__; sum field-wise.
-                turn_usage = getattr(agent.last_run_context, "usage", None)
-                if turn_usage is not None:
-                    cum = session.get("cum_usage")
-                    if cum is None:
-                        session["cum_usage"] = turn_usage
-                    else:
-                        session["cum_usage"] = type(turn_usage)(
-                            input_tokens=(cum.input_tokens or 0) + (turn_usage.input_tokens or 0),
-                            output_tokens=(cum.output_tokens or 0) + (turn_usage.output_tokens or 0),
-                            requests=(cum.requests or 0) + (turn_usage.requests or 0),
-                        )
+                session["last_run_id"] = run_id
+                session["last_usage"] = turn_usage
+                session["usage"] = (session.get("usage") or RunUsage()) + turn_usage
 
                 if isinstance(output, TextOutput):
                     body = output.content
@@ -736,14 +692,14 @@ def _chat(AGENT, AgentInputSchema, TextOutput, VARIANT, agent, mo, session):
                 yield closer + sep + body
                 return
             finally:
-                # Cancel the detached arun_task on any exit path
+                # Cancel the detached run_task on any exit path
                 # (normal, exception, or generator close from a "stop"
                 # click). Without this, hitting stop leaves the agent
                 # firing tools in the background.
-                if not arun_task.done():
-                    arun_task.cancel()
+                if not run_task.done():
+                    run_task.cancel()
                     try:
-                        await arun_task
+                        await run_task
                     except BaseException:  # noqa: BLE001 — swallow cancel propagation
                         pass
 
@@ -761,7 +717,6 @@ def _session_view(chat, mo, session):
 
     turns = session.get("turns", 0)
     last = session.get("last_output")
-    ctx = session.get("ctx")
 
     def _format_last(obj):
         if obj is None:
@@ -777,14 +732,9 @@ def _session_view(chat, mo, session):
                 pass
         return f"`{cls_name}`: {obj}"
 
-    last_usage_str = "n/a"
-    run_id_str = "n/a"
-    if ctx is not None:
-        last_usage_str = str(ctx.usage) if ctx.usage is not None else "n/a"
-        run_id_str = ctx.run_id or "n/a"
-
-    cum_usage = session.get("cum_usage")
-    cum_usage_str = str(cum_usage) if cum_usage is not None else "n/a"
+    last_usage_str = str(session.get("last_usage") or "n/a")
+    run_id_str = session.get("last_run_id") or "n/a"
+    cum_usage_str = str(session.get("usage") or "n/a")
 
     from worldview.agents.benchmark import DEFAULT_LOG_PATH
 
@@ -827,12 +777,14 @@ def _reset_handler(mo, reset, session):
         # initial session-id assignment).
         from worldview.agents.benchmark import new_session_id as _new_session_id
 
-        session["ctx"] = None
+        session["history"] = []
         session["turns"] = 0
         session["attempts"] = 0
         session["log_session_id"] = _new_session_id()
         session["last_output"] = None
-        session["cum_usage"] = None
+        session["last_run_id"] = None
+        session["last_usage"] = None
+        session["usage"] = None
         mo.md("_Session memory cleared. Next message starts a fresh conversation._")
     else:
         mo.md("")

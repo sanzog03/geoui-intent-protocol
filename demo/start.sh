@@ -155,6 +155,10 @@ echo
 # benchmark logger writes to <repo>/benchmarks/ and `uv run` picks up the
 # project environment.
 cd "$SCRIPT_DIR/.."
+if [[ -z "${WORLDVIEW_PLUGIN_DIR:-}" && ! -f demo/vendor/akd-plugins/plugins/worldview-assistant/.mcp.json ]]; then
+    echo "Error: the worldview-assistant plugin is missing. Run: git submodule update --init" >&2
+    exit 2
+fi
 AGENT="${AGENT:-geoui}"
 case "$AGENT" in geoui|vlm) ;; *) echo "AGENT must be 'geoui' or 'vlm' (got '$AGENT')" >&2; exit 2 ;; esac
 export AGENT   # demo/chat.py reads it to pick the agent
