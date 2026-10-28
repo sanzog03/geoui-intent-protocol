@@ -7,8 +7,9 @@ Two entry points share one implementation:
 - Python: ``from worldview.agents.warm_mcps import warm``
           (used by the marimo "Warm MCPs" button)
 
-URLs are derived from the agent's own capability list so this stays
-in sync as MCPs are added or removed.
+URLs are the remote servers of the plugin's ``.mcp.json`` that are enabled
+by the keys in the environment (``worldview.plugin.load_mcp_config``), so
+this stays in sync as servers are added, removed or unlocked.
 """
 
 from __future__ import annotations
@@ -17,9 +18,11 @@ import asyncio
 from dataclasses import dataclass
 
 import httpx
-from pydantic_ai.capabilities import MCP
+from dotenv import load_dotenv
+from pydantic_ai.mcp import MCPServerSSE, MCPServerStreamableHTTP
 
-from worldview.agents._common import get_default_ieso_worldview_capabilities
+from worldview.agents._common import load_servers
+from worldview.plugin import LOCAL_SERVER_NAMES
 
 _WARM_TIMEOUT_S = 15.0
 
@@ -43,15 +46,12 @@ class WarmResult:
 
 
 def _remote_mcp_urls() -> list[str]:
-    """Collect every HTTP(S) MCP URL from the agent's default capabilities.
-
-    The ``startswith`` filter excludes stdio capabilities whose ``url``
-    field is a placeholder (e.g. ``stdio://playwright-mcp``).
-    """
+    """Every HTTP(S) MCP URL the agents will connect to (local and stdio
+    servers excluded)."""
     return [
-        cap.url
-        for cap in get_default_ieso_worldview_capabilities()
-        if isinstance(cap, MCP) and cap.url.startswith(("http://", "https://"))
+        server.url
+        for name, server in load_servers().items()
+        if name not in LOCAL_SERVER_NAMES and isinstance(server, MCPServerStreamableHTTP | MCPServerSSE)
     ]
 
 
@@ -66,8 +66,7 @@ async def _warm_one(client: httpx.AsyncClient, url: str) -> WarmResult:
 async def warm() -> list[WarmResult]:
     """Warm every remote MCP in the agent's default capability list.
 
-    Returns one result per URL, in the order they appear in
-    ``get_default_ieso_worldview_geoui_capabilities``. The marimo
+    Returns one result per URL, in ``.mcp.json`` order. The marimo
     "Warm MCPs" cell consumes this directly; the CLI entry point
     formats it for console output.
     """
@@ -91,4 +90,5 @@ def _print_results(results: list[WarmResult]) -> None:
 
 
 if __name__ == "__main__":
+    load_dotenv()  # the keys decide which servers are enabled
     _print_results(asyncio.run(warm()))

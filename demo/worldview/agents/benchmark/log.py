@@ -140,25 +140,32 @@ class ErrorRecord(BaseModel):
 
 
 def extract_usage(usage_obj: Any) -> TurnUsage | None:
-    """Pull the relevant fields out of an ``AKDRunUsage`` (or compatible) object.
+    """Pull the relevant fields out of a ``pydantic_ai.usage.RunUsage`` (or
+    compatible) object.
 
-    ``AKDRunUsage`` exposes ``input_tokens``, ``output_tokens``,
-    ``requests``, ``total_tokens``, and a ``details`` dict that may
-    carry ``cache_read_tokens``, ``reasoning_tokens``, and
-    ``tool_calls``. Robust to missing fields — every value is
-    ``Optional[int]``.
+    ``RunUsage`` exposes ``input_tokens``, ``output_tokens``, ``requests``,
+    ``tool_calls``, ``cache_read_tokens`` and ``total_tokens`` as attributes
+    and provider extras such as ``reasoning_tokens`` in ``details``. Older
+    log producers kept ``cache_read_tokens`` / ``tool_calls`` in ``details``;
+    both layouts are read. Every value is ``Optional[int]``.
     """
     if usage_obj is None:
         return None
     details = getattr(usage_obj, "details", None) or {}
+
+    def attr_or_detail(name: str) -> int | None:
+        value = getattr(usage_obj, name, None)
+        return value if value is not None else details.get(name)
+
+    total = getattr(usage_obj, "total_tokens", None)
     return TurnUsage(
         input_tokens=getattr(usage_obj, "input_tokens", None),
         output_tokens=getattr(usage_obj, "output_tokens", None),
-        total_tokens=getattr(usage_obj, "total_tokens", None),
+        total_tokens=total() if callable(total) else total,
         requests=getattr(usage_obj, "requests", None),
-        cache_read_tokens=details.get("cache_read_tokens"),
+        cache_read_tokens=attr_or_detail("cache_read_tokens"),
         reasoning_tokens=details.get("reasoning_tokens"),
-        tool_calls=details.get("tool_calls"),
+        tool_calls=attr_or_detail("tool_calls"),
     )
 
 

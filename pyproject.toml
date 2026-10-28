@@ -49,15 +49,12 @@ exclude = ["tests*", "demo*", "benchmarks*", "docs*", "scripts*", "worldview*"]
 [tool.setuptools.package-data]
 geoui = ["py.typed"]
 
-[tool.uv]
-override-dependencies = ["wrapt>=1.14", "mistralai<2"]
-
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests", "demo/worldview/tests"]
 addopts = ["-ra", "--strict-markers", "--strict-config"]
 markers = [
-    "agents: needs akd-ext (installed with the geoui-worldview-demo project)",
+    "agents: needs the geoui-worldview-demo project (pydantic-ai, vendored plugin)",
     "integration: spawns a subprocess or touches the network",
 ]
 

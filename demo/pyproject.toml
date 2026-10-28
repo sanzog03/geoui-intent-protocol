@@ -7,8 +7,7 @@ dependencies = [
     "geoui-protocol",
     "python-dateutil>=2.8",
     "fastmcp>=3.0,<3.2.4",
-    "akd-ext @ git+https://github.com/NASA-IMPACT/akd-ext.git@2ca52da191f756b62378c828a2f9eb66494cb707",
-    # akd-ext at the pinned commit imports pydantic_ai.messages.BuiltinToolCallEvent, removed in pydantic-ai 2.x
+    # 1.81 is the first release with the capabilities API (MCP, Hooks, Thinking) the agents use
     "pydantic-ai>=1.81.0,<2",
     "httpx>=0.27",
     "python-dotenv>=1.0",

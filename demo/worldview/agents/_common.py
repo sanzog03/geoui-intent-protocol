@@ -1,174 +1,57 @@
-"""Plumbing shared by the IESO Worldview agents (GeoUI treatment, VLM baseline).
+"""Plumbing shared by the two Worldview agents (GeoUI treatment, VLM baseline).
 
-The two agents differ only in how they *observe and act* on Worldview:
-the GeoUI variant emits ``GeoIntent`` through two protocol tools and opens
-the resulting URL; the VLM baseline drives Worldview's UI through
-Playwright screenshots, snapshots and clicks. Everything else is held
-equal on purpose, because the benchmark compares the interaction
-mechanism, not the discovery loop:
+Both agents are bare :class:`pydantic_ai.Agent` instances assembled from an
+:class:`AgentSpec`. They differ only in how they *observe and act* on
+Worldview; everything else is held equal on purpose, because the benchmark
+compares the interaction mechanism, not the discovery loop:
 
-- the two remote MCPs (CMR, IESO validation) — :func:`get_default_ieso_worldview_capabilities`
-- the three local discovery tools — :func:`discovery_tools`
-- the Playwright-over-CDP wiring — :func:`make_playwright_mcp`, :func:`playwright_capability`
-- the input schema, the structured-output check and the smoke runner
+- the system prompt is a Claude Code skill (``worldview.plugin.load_skill``);
+- discovery tools are the remote MCP servers from the plugin's ``.mcp.json``;
+- the browser is the plugin's Playwright MCP attached to an external Chromium
+  over CDP, narrowed per agent (``GEOUI_BROWSER_TOOLS`` / ``VLM_BROWSER_TOOLS``);
+- the structured output (``result`` + ``url``) or a :class:`TextOutput`.
 
-What stays in each agent module is everything the model can see or that
-the benchmark logs record: the system prompt, the config ``description``,
-the output-schema class (its name becomes the pydantic-ai output tool
-name) and the agent class (its name becomes ``agent.name``). See
-``demo/worldview/tests/agents/test_agent_surface.py``.
+What the model sees (prompts, tool names and descriptions, output tool names,
+capability ids) is pinned by ``demo/worldview/tests/agents/test_agent_surface.py``.
 """
 
 from __future__ import annotations
 
 import asyncio
 import os
+from collections.abc import Callable, Mapping, Sequence
+from dataclasses import dataclass, field
 from typing import Any
 
-from akd._base import InputSchema, OutputSchema, TextOutput
-from akd.tools import BaseTool
-from akd_ext.agents._base import PydanticAIBaseAgent
-from akd_ext.tools.sde_search import SDESearchTool
-from akd_ext.tools.worldview import EarthdataSearchLandingPageTool, UMMVisLookupTool
-from pydantic import Field
-from pydantic_ai.capabilities import MCP
-from pydantic_ai.mcp import MCPServerStdio, MCPServerStreamableHTTP
+from pydantic import BaseModel
+from pydantic_ai import Agent, ModelRetry
+from pydantic_ai.capabilities import MCP, AbstractCapability, Thinking
+from pydantic_ai.mcp import MCPServerStdio
+from pydantic_ai.toolsets import AbstractToolset
 
-# Init timeout for remote streamable-HTTP MCPs (CMR, IESO Validation).
-# The default ``MCPServerStreamableHTTP.timeout`` is 5 s, which is too
-# tight for FastMCP-hosted instances that hibernate when idle; their
-# wake-up can take 10–25 s. We've seen ``mcp.py:748`` fire its
-# ``anyio.fail_after`` on the first ``arun`` after a quiet period.
-# 30 s leaves comfortable headroom without masking real hangs.
-_REMOTE_MCP_INIT_TIMEOUT_S = 30.0
+from worldview.plugin import (
+    MCPServer,
+    load_mcp_config,
+    playwright_server,
+    plugin_dir,
+    remote_capabilities,
+    user_config_from_env,
+)
 
+MODEL_NAME = "openai:gpt-5.2"
+REASONING_EFFORT = "medium"
+#: pydantic-ai ``retries``: how many times a tool / output validation failure
+#: is handed back to the model as a retry prompt before the run fails.
+DEFAULT_RETRIES = 1
+#: ``UsageLimits.request_limit`` the notebook passes to every run. This is
+#: also pydantic-ai's default; it is stated explicitly so the cap is visible.
+REQUEST_LIMIT = 50
 
-# -----------------------------------------------------------------------------
-# Remote MCP capabilities (identical for both agents)
-# -----------------------------------------------------------------------------
-
-
-def get_default_ieso_worldview_capabilities() -> list[Any]:
-    """Default remote MCP capabilities, shared by both agents.
-
-    Same as :func:`akd_ext.agents.ieso_worldview.get_default_ieso_worldview_capabilities`
-    minus the ``worldview_permalink_tool`` MCP (the GeoUI variant replaces
-    it with the local ``geoui_render_intent`` tool; the VLM baseline drives
-    the UI instead) and minus the three IESO/SDE MCPs whose tools we now run
-    locally to sidestep FastMCP Cloud cold-start DNS hiccups:
-
-      - ``umm_vis_lookup_tool``               → ``UMMVisLookupTool`` (local)
-      - ``earthdata_search_landing_page_tool``→ ``EarthdataSearchLandingPageTool`` (local)
-      - ``sde_search_tool``                   → ``SDESearchTool`` (local)
-
-    The two MCPs that remain have no local equivalent in this codebase:
-
-      - ``CMR_MCP_Server`` (AWS-hosted; no cold-start risk).
-      - ``IESO_Validation_MCP_Server`` (FastMCP-hosted; may cold-start —
-        we accept that until a local version exists).
-
-    The discovery surface is held equal between the two agents on
-    purpose — the comparison the poster makes is about observation /
-    action cost, not metadata-lookup cost.
-
-    Auth tokens are read from env at construction time:
-      - VECTOR_DB_TOOL_KEY:  IESO validation / layer vector-DB server
-      - IESO_MCP_KEY, SDE_MCP_KEY: currently unused; were for the disabled MCPs
-
-    Why each ``MCP(...)`` wraps a pre-built ``MCPServerStreamableHTTP``:
-        Passing ``timeout=...`` straight to ``MCP(url=...)`` is not
-        supported — the ``MCP`` capability hardcodes the default
-        ``MCPServerStreamableHTTP`` timeout (5 s). Building the server
-        explicitly and handing it to ``local=`` lets us set
-        ``_REMOTE_MCP_INIT_TIMEOUT_S`` so FastMCP cold-starts don't
-        fire ``mcp.py:748``'s ``anyio.fail_after`` on the first turn.
-        ``builtin=False`` forces pydantic_ai to use our local server
-        rather than negotiating an in-model builtin MCP path.
-    """
-    # CMR MCP — AWS Lambda-hosted; trailing slash is load-bearing
-    # (server returns 307 redirect without it, and pydantic_ai's
-    # streamable-HTTP client raises on raise_for_status rather than
-    # following the redirect).
-    cmr_server = MCPServerStreamableHTTP(
-        "https://w4hu71445m.execute-api.us-east-1.amazonaws.com/mcp/cmr/mcp/",
-        timeout=_REMOTE_MCP_INIT_TIMEOUT_S,
-    )
-
-    # IESO Validation MCP — FastMCP free instance that hibernates;
-    # this is the cold-start culprit. Auth header is built here so we
-    # can also pass it to the underlying server (the ``MCP`` capability
-    # only forwards ``authorization_token`` to its builtin path, not to
-    # our pre-built ``local=`` server).
-    vector_db_token = os.environ.get("VECTOR_DB_TOOL_KEY")
-    ieso_validation_server = MCPServerStreamableHTTP(
-        "https://ieso-benchmark-mcp-tools.fastmcp.app/mcp",
-        headers={"Authorization": f"Bearer {vector_db_token}"} if vector_db_token else None,
-        timeout=_REMOTE_MCP_INIT_TIMEOUT_S,
-    )
-
-    return [
-        # ── DISABLED: replaced by local UMMVisLookupTool ──────────────────
-        # MCP(
-        #     url="https://sudden-gold-carp-features-tool-cmr-uat.fastmcp.app/mcp",
-        #     id="ieso-worldview-tool-umm_vis_lookup_tool",
-        #     allowed_tools=["umm_vis_lookup_tool"],
-        #     authorization_token=f"Bearer {os.environ.get('IESO_MCP_KEY')}",
-        #     description="Layerid Visualization lookup for CMR Concept id",
-        # ),
-        # ── DISABLED: replaced by local EarthdataSearchLandingPageTool ────
-        # MCP(
-        #     url="https://sudden-gold-carp-features-tools-earthdata-search-da3be0.fastmcp.app/mcp",
-        #     id="ieso-worldview-tool-earthdata_search_landing_page_tool",
-        #     allowed_tools=["earthdata_search_landing_page_tool"],
-        #     authorization_token=f"Bearer {os.environ.get('IESO_MCP_KEY')}",
-        #     description="Earthdata search landing page for concept id",
-        # ),
-        MCP(
-            url="https://w4hu71445m.execute-api.us-east-1.amazonaws.com/mcp/cmr/mcp/",
-            local=cmr_server,
-            builtin=False,  # Force local streamable-HTTP client (respects trailing slash)
-            id="CMR_MCP_Server",
-            allowed_tools=[
-                "search_collections",
-                "get_granules",
-                "get_collection_metadata",
-            ],
-            description="CMR MCP server to fetch metadata information including links to download datasets",
-        ),
-        # ── Currently authorization issue ────
-        MCP(
-            url="https://ieso-benchmark-mcp-tools.fastmcp.app/mcp",
-            local=ieso_validation_server,
-            builtin=False,
-            id="IESO_Validation_MCP_Server",
-            authorization_token=f"Bearer {vector_db_token}" if vector_db_token else None,
-            allowed_tools=[
-                "search_worldview_layers",
-                "validate_temporal_coverage",
-            ],
-        ),
-        # ── DISABLED: replaced by local SDESearchTool ─────────────────────
-        # MCP(
-        #     url="https://brainy-lime-pheasant.fastmcp.app/mcp",
-        #     id="sde_mcp_tool",
-        #     allowed_tools=["sde_search_tool"],
-        #     authorization_token=f"Bearer {os.environ.get('SDE_MCP_KEY')}",
-        # ),
-    ]
-
-
-def discovery_tools() -> list[BaseTool]:
-    """The three local discovery tools both agents share.
-
-    They previously ran behind FastMCP-hosted servers; the local versions
-    are functionally equivalent and avoid the cold-start DNS issue (see
-    :func:`get_default_ieso_worldview_capabilities`).
-    """
-    return [
-        UMMVisLookupTool(),
-        EarthdataSearchLandingPageTool(),
-        SDESearchTool(),
-    ]
+RESULT_DESCRIPTION = (
+    "Full sectioned response: INTENT, DATASET_OPTIONS, SELECTED_DATASET, WORLDVIEW_URL, "
+    "PARAMETERS_USED, PROVENANCE, UNCERTAINTY, LIMITATIONS, MISSING_FIELDS, USER NARRATIVE, "
+    "OPTIONAL ACTIONS, and the REQUIRED DISCLAIMER. Format is defined by the system prompt."
+)
 
 
 # -----------------------------------------------------------------------------
@@ -176,10 +59,10 @@ def discovery_tools() -> list[BaseTool]:
 # -----------------------------------------------------------------------------
 #
 # The browser sits behind an MCP server speaking stdio. We need Chromium
-# state (URL, pan/zoom, layer toggles) to survive across ``agent.arun``
+# state (URL, pan/zoom, layer toggles) to survive across ``agent.run``
 # calls so the user can interact with the map between turns. Earlier we
 # tried pre-entering the stdio server in an async marimo cell so the
-# subprocess would span every arun — pydantic_ai's reference-counted
+# subprocess would span every run — pydantic_ai's reference-counted
 # ``MCPServer.__aenter__`` made that plausible on paper, but it doesn't
 # survive marimo's task model: ``MCPServerStdio`` enters an ``anyio``
 # task group internally, anyio insists the cancel scope exits on the
@@ -190,32 +73,12 @@ def discovery_tools() -> list[BaseTool]:
 # marimo function registry.
 #
 # Fix: don't try to persist the MCP at all. Keep Chromium alive
-# *externally* (the user launches it with ``--remote-debugging-port``),
-# create the Playwright MCP fresh per arun, and have it attach via
-# ``--cdp-endpoint``. The MCP's anyio scope is then fully contained in
-# one arun task; Chromium state lives outside Python entirely.
-#
-# Usage from the notebook (``demo/chat.py``):
-#
-#     pw = make_playwright_mcp(cdp_endpoint="http://localhost:9222")
-#     agent = IESOWorldviewGeoUIAgent(
-#         IESOWorldviewGeoUIAgentConfig(
-#             capabilities=[
-#                 *get_default_ieso_worldview_capabilities(),
-#                 geoui_agent.playwright_capability(pw),
-#             ],
-#         ),
-#     )
-#
-# Before opening the notebook the user launches Chromium with remote
-# debugging enabled (``demo/start.sh`` does this), for example:
-#
-#     /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome \
-#         --remote-debugging-port=9222 \
-#         --user-data-dir=/tmp/worldview-chromium
-#
-# Leaving ``cdp_endpoint=None`` falls back to vanilla per-turn
-# Chromium boot (no state persistence) — useful for headless tests but
+# *externally* (``demo/start.sh`` launches it with
+# ``--remote-debugging-port``), create the Playwright MCP fresh per agent
+# build, and have it attach via ``--cdp-endpoint``. The MCP's anyio scope
+# is then fully contained in one run task; Chromium state lives outside
+# Python entirely. Leaving ``cdp_endpoint=None`` falls back to vanilla
+# per-run Chromium boot (no state persistence) — fine for headless tests,
 # not the demo path.
 
 # Playwright allow-lists. The GeoUI agent only ever opens a URL and reads
@@ -243,70 +106,26 @@ VLM_BROWSER_DESCRIPTION = (
 )
 
 
-def make_playwright_mcp(cdp_endpoint: str | None = None) -> MCPServerStdio:
-    """Return an unstarted Playwright MCP stdio server.
+def make_playwright_mcp(servers: Mapping[str, MCPServer], cdp_endpoint: str | None = None) -> MCPServerStdio:
+    """A fresh, unstarted Playwright MCP from the plugin config.
 
-    Args:
-        cdp_endpoint: If set, the MCP attaches to an already-running
-            Chromium via Chrome DevTools Protocol (e.g.
-            ``"http://localhost:9222"``). Required for state to survive
-            across turns. If ``None``, the MCP boots its own Chromium
-            on each arun (first such boot downloads ~150 MB).
-
-    Used by:
-        ``demo/chat.py`` ``_agent`` cell, which reads
-        ``PLAYWRIGHT_CDP_ENDPOINT`` from the env and passes it through
-        so the long-lived Chromium launched by ``demo/start.sh``
-        persists across chat turns. The launcher is agent-agnostic;
-        both agents attach to the same CDP endpoint.
-
-    Why ``cdp_endpoint`` is optional:
-        The same helper serves two flows. The demo / notebook path
-        sets ``cdp_endpoint`` so Chromium state (URL, pan/zoom, layer
-        toggles) lives outside Python and survives across the
-        per-arun MCP lifecycle. The fresh-browser-per-arun path
-        (``cdp_endpoint=None``) is useful for headless tests where
-        state persistence doesn't matter.
-
-    Why ``timeout=30``:
-        ``MCPServerStdio``'s default init timeout is 5 s, which is
-        too tight for ``npx @playwright/mcp@latest`` on a cold
-        node_modules cache plus a fresh Chromium-CDP handshake.
-        We've seen ``anyio.fail_after`` fire at
-        ``pydantic_ai/mcp.py:748`` on the first turn of a session.
-        30 s leaves headroom without masking real hangs.
+    ``cdp_endpoint`` (e.g. ``"http://localhost:9222"``) attaches it to the
+    already-running Chromium so map state survives across turns; ``None``
+    boots a private Chromium per run (first boot downloads ~150 MB).
     """
-    args = ["@playwright/mcp@latest"]
-    if cdp_endpoint:
-        args += ["--cdp-endpoint", cdp_endpoint]
-    return MCPServerStdio(command="npx", args=args, timeout=30)
+    return playwright_server(servers, cdp_endpoint)
 
 
 def playwright_capability(server: MCPServerStdio, *, allowed_tools: list[str], description: str) -> MCP:
-    """Wrap an externally-owned ``MCPServerStdio`` as a pydantic_ai capability.
+    """Wrap a caller-owned Playwright ``MCPServerStdio`` as a capability.
 
-    ``builtin=False`` forces the local toolset path; ``local=server`` reuses
-    the caller's already-instantiated MCP server instead of building a
-    fresh one. ``allowed_tools`` restricts the ~20-tool Playwright surface
-    to what the agent should reach for; each agent module passes its own
-    list (``GEOUI_BROWSER_TOOLS`` / ``VLM_BROWSER_TOOLS``) so the model
-    doesn't wander into flows its system prompt doesn't authorize.
-
-    Why ``builtin=False, local=server``:
-        The caller owns the ``MCPServerStdio`` lifetime, and each
-        ``agent.arun`` enters and exits the MCP inside one anyio
-        task. An earlier attempt that pre-entered the MCP in a marimo
-        cell and held it across turns raised
-        ``RuntimeError: Attempted to exit cancel scope in a different
-        task than it was entered in`` — anyio binds the MCP's internal
-        task group to the entering task and marimo's per-cell tasks
-        die on return. The current design avoids that by launching
-        Chromium externally (see ``demo/start.sh``) and
-        letting the MCP live one arun at a time; this capability
-        wrapper is the API that supports that pattern.
+    ``builtin=False, local=server`` makes pydantic-ai use this exact server
+    object, entered and exited inside each run (see the design note above).
+    ``allowed_tools`` narrows the ~20-tool Playwright surface to what the
+    agent's skill authorises.
     """
     return MCP(
-        url="stdio://playwright-mcp",  # placeholder; only used for the cap's id slug
+        url="stdio://playwright-mcp",  # placeholder; only used for the capability id slug
         builtin=False,
         local=server,
         id="playwright_mcp",
@@ -316,34 +135,89 @@ def playwright_capability(server: MCPServerStdio, *, allowed_tools: list[str], d
 
 
 # -----------------------------------------------------------------------------
-# Shared schema and agent base
+# Outputs
 # -----------------------------------------------------------------------------
 
 
-class IESOWorldviewAgentInputSchema(InputSchema):
-    """Input schema shared by both IESO Worldview agents."""
+class TextOutput(BaseModel):
+    """Free-form text output. Used for conversational responses, clarifying
+    questions, summaries, or any unstructured content."""
 
-    query: str = Field(..., description="Earth science query to interact with worldview visualization")
+    content: str
 
 
-class IESOWorldviewAgentBase[InputT: InputSchema, OutputT: OutputSchema](PydanticAIBaseAgent[InputT, OutputT]):
-    """Base for the two IESO Worldview agents.
+def validate_structured_output(output: Any) -> Any:
+    """Output validator: a structured answer must carry a result and a URL."""
+    if isinstance(output, TextOutput):
+        return output
+    if not str(getattr(output, "result", "")).strip():
+        raise ModelRetry("Result is empty. Provide the structured Worldview-discovery response.")
+    if not str(getattr(output, "url", "")).strip():
+        raise ModelRetry("URL is empty. Provide a valid url")
+    return output
 
-    Subclasses set ``input_schema``, ``output_schema`` (their structured
-    schema ``| TextOutput``) and ``config_schema``. The class *name* of the
-    subclass is model-visible (``agent.name`` and the pydantic-ai output
-    tool name derive from it), so keep the concrete classes in their own
-    modules.
-    """
 
-    def check_output(self, output) -> str | None:
-        # Structured outputs (``result`` + ``url``); ``TextOutput`` passes through.
-        if isinstance(output, OutputSchema) and not isinstance(output, TextOutput):
-            if not output.result.strip():
-                return "Result is empty. Provide the structured Worldview-discovery response."
-            if not output.url.strip():
-                return "URL is empty. Provide a valid url"
-        return super().check_output(output)
+# -----------------------------------------------------------------------------
+# Agent assembly
+# -----------------------------------------------------------------------------
+
+
+@dataclass
+class AgentSpec:
+    """Everything that goes into one agent, kept inspectable for the surface
+    golden and for the notebook (which adds a tracing hook)."""
+
+    name: str
+    system_prompts: list[str]
+    toolsets: list[AbstractToolset]
+    capabilities: list[AbstractCapability]
+    output_cls: type[BaseModel]
+    #: Remote MCP servers by config name, after secret substitution.
+    servers: dict[str, MCPServer] = field(default_factory=dict)
+
+
+def load_servers(environ: Mapping[str, str] | None = None) -> dict[str, MCPServer]:
+    """The plugin's MCP servers with ``${user_config.*}`` filled from ``environ``."""
+    root = plugin_dir()
+    return load_mcp_config(root, user_config=user_config_from_env(root, environ))
+
+
+def standard_capabilities(
+    servers: Mapping[str, MCPServer],
+    *,
+    cdp_endpoint: str | None,
+    browser_tools: list[str],
+    browser_description: str,
+    extra: Sequence[AbstractCapability] = (),
+) -> list[AbstractCapability]:
+    """Remote discovery MCPs + narrowed Playwright + reasoning effort + extras."""
+    return [
+        *remote_capabilities(servers),
+        playwright_capability(
+            make_playwright_mcp(servers, cdp_endpoint),
+            allowed_tools=browser_tools,
+            description=browser_description,
+        ),
+        Thinking(effort=REASONING_EFFORT),
+        *extra,
+    ]
+
+
+def build_agent(spec: AgentSpec) -> Agent:
+    """A bare pydantic-ai ``Agent`` from a spec. The output type is the
+    structured class or :class:`TextOutput`, so the output tools are named
+    ``final_result_<ClassName>`` and ``final_result_TextOutput``."""
+    agent: Agent = Agent(
+        MODEL_NAME,
+        name=spec.name,
+        system_prompt=tuple(spec.system_prompts),
+        output_type=[spec.output_cls, TextOutput],
+        toolsets=list(spec.toolsets),
+        capabilities=list(spec.capabilities),
+        retries=DEFAULT_RETRIES,
+    )
+    agent.output_validator(validate_structured_output)
+    return agent
 
 
 # -----------------------------------------------------------------------------
@@ -351,52 +225,49 @@ class IESOWorldviewAgentBase[InputT: InputSchema, OutputT: OutputSchema](Pydanti
 # -----------------------------------------------------------------------------
 
 
-def run_smoke(agent_cls: type[PydanticAIBaseAgent], *, query: str) -> None:
+def run_smoke(build: Callable[..., Agent], *, query: str) -> None:
     """One LLM round-trip to prove the agent wiring works.
 
-    Requires ``OPENAI_API_KEY`` and ``VECTOR_DB_TOOL_KEY`` (from ``.env`` or
-    the shell). The query is intentionally light; the agent may respond with
-    a clarifying ``TextOutput`` rather than a rendered URL — that's a
-    successful wiring test either way.
+    Requires ``OPENAI_API_KEY`` (from ``.env`` or the shell); MCP servers whose
+    key is missing are skipped. The query is intentionally light; a clarifying
+    ``TextOutput`` is a successful wiring test too.
     """
     from dotenv import load_dotenv
 
     load_dotenv()
-
-    required = ["OPENAI_API_KEY", "VECTOR_DB_TOOL_KEY"]
-    missing = [k for k in required if not os.getenv(k)]
-    if missing:
-        print(f"Missing env vars: {missing}")
-        print("Create a .env from .env.example and populate the required keys.")
+    if not os.getenv("OPENAI_API_KEY"):
+        print("Missing OPENAI_API_KEY. Create a .env from .env.example and populate it.")
         raise SystemExit(1)
 
     async def _smoke() -> None:
-        agent = agent_cls()
-        params = agent.input_schema(query=query)
+        agent = build(cdp_endpoint=os.getenv("PLAYWRIGHT_CDP_ENDPOINT"))
         print("Running agent (wiring smoke test) ...\n")
-        output = await agent.arun(params)
+        result = await agent.run(query)
+        output = result.output
         print(f"Output type: {type(output).__name__}\n")
-        if hasattr(output, "model_dump_json"):
-            print(output.model_dump_json(indent=2, exclude_none=True))
-        else:
-            print(output)
-        ctx = agent.last_run_context
-        if ctx and ctx.usage is not None:
-            print(f"\nUsage: {ctx.usage}")
+        print(output.model_dump_json(indent=2, exclude_none=True) if isinstance(output, BaseModel) else output)
+        print(f"\nUsage: {result.usage()}")
 
     asyncio.run(_smoke())
 
 
 __all__ = [
+    "DEFAULT_RETRIES",
     "GEOUI_BROWSER_DESCRIPTION",
     "GEOUI_BROWSER_TOOLS",
+    "MODEL_NAME",
+    "REASONING_EFFORT",
+    "REQUEST_LIMIT",
+    "RESULT_DESCRIPTION",
     "VLM_BROWSER_DESCRIPTION",
     "VLM_BROWSER_TOOLS",
-    "IESOWorldviewAgentBase",
-    "IESOWorldviewAgentInputSchema",
-    "discovery_tools",
-    "get_default_ieso_worldview_capabilities",
+    "AgentSpec",
+    "TextOutput",
+    "build_agent",
+    "load_servers",
     "make_playwright_mcp",
     "playwright_capability",
     "run_smoke",
+    "standard_capabilities",
+    "validate_structured_output",
 ]
