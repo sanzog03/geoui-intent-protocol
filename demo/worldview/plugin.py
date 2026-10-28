@@ -258,14 +258,14 @@ def remote_capabilities(
     exclude: Iterable[str] = LOCAL_SERVER_NAMES,
 ) -> list[MCP]:
     """One ``MCP`` capability per remote server, skipping the ones the demo
-    provides itself. ``builtin=False`` forces pydantic-ai's local client, which
+    provides itself. ``native=False`` forces pydantic-ai's local client, which
     respects the CMR URL's load-bearing trailing slash."""
     skip = set(exclude)
     caps: list[MCP] = []
     for name, server in servers.items():
         if name in skip or not isinstance(server, MCPServerStreamableHTTP | MCPServerSSE):
             continue
-        caps.append(MCP(url=server.url, local=server, builtin=False, id=name))
+        caps.append(MCP(url=server.url, local=server, native=False, id=name))
     return caps
 
 

@@ -26,7 +26,7 @@ DUMMY_ENV: dict[str, str] = {
 }
 CDP_ENDPOINT = "http://localhost:9222"
 
-_CAP_FIELDS = ("id", "url", "allowed_tools", "description", "builtin", "effort")
+_CAP_FIELDS = ("id", "url", "allowed_tools", "description", "native", "effort")
 
 
 def _capability(cap: Any) -> dict[str, Any]:

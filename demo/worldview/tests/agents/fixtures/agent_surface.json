@@ -560,7 +560,7 @@
         "url": "https://w4hu71445m.execute-api.us-east-1.amazonaws.com/mcp/cmr/mcp/",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -578,7 +578,7 @@
         "url": "https://ieso-benchmark-mcp-tools.fastmcp.app/mcp",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -598,7 +598,7 @@
         "url": "https://sudden-gold-carp-features-tool-cmr-uat.fastmcp.app/mcp",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -618,7 +618,7 @@
         "url": "https://sudden-gold-carp-features-tools-earthdata-search-da3be0.fastmcp.app/mcp",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -638,7 +638,7 @@
         "url": "https://sudden-gold-carp-feature-pdf-parser-mcp.fastmcp.app/mcp",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -658,7 +658,7 @@
         "url": "https://brainy-lime-pheasant.fastmcp.app/mcp",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -678,7 +678,7 @@
         "url": "https://eonet-tool.fastmcp.app/mcp",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -701,7 +701,7 @@
           "browser_evaluate"
         ],
         "description": "Headed Chromium for opening Worldview URLs and reading back live state.",
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStdio",
@@ -723,7 +723,7 @@
         "url": null,
         "allowed_tools": null,
         "description": null,
-        "builtin": null,
+        "native": null,
         "effort": "medium"
       }
     ],
@@ -809,7 +809,7 @@
         "url": "https://w4hu71445m.execute-api.us-east-1.amazonaws.com/mcp/cmr/mcp/",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -827,7 +827,7 @@
         "url": "https://ieso-benchmark-mcp-tools.fastmcp.app/mcp",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -847,7 +847,7 @@
         "url": "https://sudden-gold-carp-features-tool-cmr-uat.fastmcp.app/mcp",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -867,7 +867,7 @@
         "url": "https://sudden-gold-carp-features-tools-earthdata-search-da3be0.fastmcp.app/mcp",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -887,7 +887,7 @@
         "url": "https://sudden-gold-carp-feature-pdf-parser-mcp.fastmcp.app/mcp",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -907,7 +907,7 @@
         "url": "https://brainy-lime-pheasant.fastmcp.app/mcp",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -927,7 +927,7 @@
         "url": "https://eonet-tool.fastmcp.app/mcp",
         "allowed_tools": null,
         "description": null,
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStreamableHTTP",
@@ -959,7 +959,7 @@
           "browser_evaluate"
         ],
         "description": "Headed Chromium for driving Worldview's UI directly via screenshot / snapshot / click / type.",
-        "builtin": false,
+        "native": false,
         "effort": null,
         "local": {
           "type": "MCPServerStdio",
@@ -983,7 +983,7 @@
         "url": null,
         "allowed_tools": null,
         "description": null,
-        "builtin": null,
+        "native": null,
         "effort": "medium"
       }
     ],

@@ -38,7 +38,7 @@ from worldview.plugin import (
     user_config_from_env,
 )
 
-MODEL_NAME = "openai:gpt-5.2"
+MODEL_NAME = "openai-chat:gpt-5.2"  # Chat Completions explicitly; bare "openai:" flips to the Responses API in pydantic-ai 2
 REASONING_EFFORT = "medium"
 #: pydantic-ai ``retries``: how many times a tool / output validation failure
 #: is handed back to the model as a retry prompt before the run fails.
@@ -133,14 +133,14 @@ def make_playwright_mcp(
 def playwright_capability(server: MCPServerStdio, *, allowed_tools: list[str], description: str) -> MCP:
     """Wrap a caller-owned Playwright ``MCPServerStdio`` as a capability.
 
-    ``builtin=False, local=server`` makes pydantic-ai use this exact server
+    ``native=False, local=server`` makes pydantic-ai use this exact server
     object, entered and exited inside each run (see the design note above).
     ``allowed_tools`` narrows the ~20-tool Playwright surface to what the
     agent's skill authorises.
     """
     return MCP(
         url="stdio://playwright-mcp",  # placeholder; only used for the capability id slug
-        builtin=False,
+        native=False,
         local=server,
         id="playwright_mcp",
         allowed_tools=allowed_tools,

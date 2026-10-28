@@ -188,7 +188,7 @@ def test_remote_capabilities_skip_local_servers(fake_plugin: Path):
     servers = load_mcp_config(fake_plugin, user_config=user_config)
     caps = remote_capabilities(servers)
     assert [c.id for c in caps] == ["cmr", "ieso-validation", "sde-search"]
-    assert all(c.builtin is False and c.local is servers[c.id] for c in caps)
+    assert all(c.native is False and c.local is servers[c.id] for c in caps)
 
 
 def test_playwright_server_appends_cdp_endpoint(fake_plugin: Path):
