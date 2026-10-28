@@ -9,9 +9,9 @@ The protocol exposes exactly two operations at the adapter boundary:
 
 This module holds the request/response models, the agent-facing docstrings
 and the plain async functions. It depends only on pydantic. ``worldview.mcp``
-serves these over MCP; ``worldview.tools.akd`` wraps them as akd
-``BaseTool`` classes. All three must keep the same names, parameter shapes
-and descriptions so logs and benchmarks stay comparable.
+serves these over MCP; ``worldview.tools.pai`` exposes them as a pydantic-ai
+toolset. All three must keep the same names, parameter shapes and
+descriptions so logs and benchmarks stay comparable.
 """
 
 from __future__ import annotations
