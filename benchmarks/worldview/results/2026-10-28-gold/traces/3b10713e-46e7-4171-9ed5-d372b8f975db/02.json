@@ -1,0 +1,114 @@
+{
+  "trace_id": "33f7bce0-713b-436a-afc7-833a28147223",
+  "thread_id": "3b10713e-46e7-4171-9ed5-d372b8f975db",
+  "source": "simulated",
+  "started_at": "2026-10-28T08:38:31.018656+00:00",
+  "duration_s": 24.619105458026752,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 26921,
+      "output_tokens": 218,
+      "duration_s": 4.189284000080079,
+      "offset_s": 3.274063790915534,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 28301,
+      "output_tokens": 95,
+      "duration_s": 2.7262120000086725,
+      "offset_s": 7.4981517910491675,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 28637,
+      "output_tokens": 22,
+      "duration_s": 1.3253810000605881,
+      "offset_s": 16.341104791034013,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 28880,
+      "output_tokens": 45,
+      "duration_s": 1.3816060000099242,
+      "offset_s": 18.186429790919647,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 28972,
+      "output_tokens": 309,
+      "duration_s": 4.552234000060707,
+      "offset_s": 20.04845979087986,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 6,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?v=-86.96203750000001,24.37801171875,-76.41516250000001,32.75398828125&l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,VIIRS_SNPP_CorrectedReflectance_TrueColor,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&s=-81.6886,28.566&t=2024-09-26-T07%3A54%3A54Z\n- Page Title: NASA Worldview\n- Console: 28 errors, 39 warnings\n### Snapshot\n```yaml\n- generic [ref=e1]:\n  - generic [ref=e2]:\n    - generic [ref=e5]:\n      - button [ref=e6] [cursor=pointer]\n      - searchbox [ref=e8]:\n        - combobox \"Search for places or enter coordinates\" [ref=e10]: Florida, USA\n        - button [ref=e1177] [cursor=pointer]\n        - button [ref=e1180] [cursor=pointer]\n      - button [ref=e12] [cursor=pointer]\n    - toolbar [ref=e15]:\n      - button \"Share this map\" [ref=e16] [cursor=pointer]\n      - button \"Switch projection\" [ref=e19] [cursor=pointer]\n      - button \"Take a snapshot\" [ref=e23] [cursor=pointer]\n      - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n    - generic [ref=e31]:\n      - generic [ref=e1688]:\n        - generic [ref=e1689]: Florida\n        - generic [ref=e1690]: 28.5660°, -81.6886°\n        - button [ref=e1697] [cursor=pointer]\n      - generic:\n        - generic: 50 mi\n        - generic: 100 km\n    - generic [ref=e41]:\n      - button \"Zoom in view\" [active] [ref=e42] [cursor=pointer]\n      - button \"Zoom out view\" [ref=e45] [cursor=pointer]\n    - generic:\n      - link \"Worldview\" [ref=e49] [cursor=pointer]:\n        - /url: /\n      - generic [ref=e50]:\n        - list [ref=e51]:\n          - listitem [ref=e52] [cursor=pointer]:\n            - generic \"Map Layers\" [ref=e53]: Layers\n          - listitem [ref=e55] [cursor=pointer]:\n            - generic \"Natural Events\" […",
+      "duration_s": 0.030078000156208873,
+      "offset_s": 7.46569279092364,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e219"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Increment date' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?v=-86.96203750000001,24.37801171875,-76.41516250000001,32.75398828125&l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,VIIRS_SNPP_CorrectedReflectance_TrueColor,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&s=-81.6886,28.566&t=2024-09-27-T07%3A54%3A54Z\n- Page Title: NASA Worldview\n- Console: 28 errors, 40 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-38-47-356Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-34-54-426Z.log#L69",
+      "duration_s": 6.109036999987438,
+      "offset_s": 10.229388790903613,
+      "error": null
+    },
+    {
+      "name": "browser_evaluate",
+      "args": {
+        "function": "() => window.location.href"
+      },
+      "output": "### Result\n\"https://worldview.earthdata.nasa.gov/?v=-86.96203750000001,24.37801171875,-76.41516250000001,32.75398828125&l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,VIIRS_SNPP_CorrectedReflectance_TrueColor,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&s=-81.6886,28.566&t=2024-09-27-T07%3A54%3A54Z\"\n### Ran Playwright code\n```js\nawait page.evaluate('() => window.location.href');\n```",
+      "duration_s": 0.5110379999969155,
+      "offset_s": 17.671660790918395,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "Date advanced from 2024-09-26 to 2024-09-27 in NASA Worldview; capture URL already updated."
+      },
+      "output": "{\"query\":\"Date advanced from 2024-09-26 to 2024-09-27 in NASA Worldview; capture URL already updated.\",\"_response\":\"\"}",
+      "duration_s": 0.4714039999525994,
+      "offset_s": 19.572693791007623,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 141711,
+    "output_tokens": 689,
+    "total_tokens": 142400,
+    "requests": 5,
+    "cache_read_tokens": 136064,
+    "reasoning_tokens": 262,
+    "tool_calls": 4,
+    "cost_usd": 0.04333945
+  },
+  "usage_source": "pydantic_ai"
+}

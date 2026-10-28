@@ -1,0 +1,146 @@
+{
+  "trace_id": "89dfa09f-e314-4b7f-934f-54b8a9c202d4",
+  "thread_id": "a510d1cc-4e8c-469d-81c3-45b5fb8fe1d5",
+  "source": "simulated",
+  "started_at": "2026-10-28T08:16:59.714972+00:00",
+  "duration_s": 24.74575358396396,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10745,
+      "output_tokens": 118,
+      "duration_s": 5.008780000032857,
+      "offset_s": 3.667286166921258,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 11054,
+      "output_tokens": 198,
+      "duration_s": 4.1287060000468045,
+      "offset_s": 9.196548166917637,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 11317,
+      "output_tokens": 255,
+      "duration_s": 4.5918889997992665,
+      "offset_s": 13.33168216701597,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 11577,
+      "output_tokens": 111,
+      "duration_s": 2.0862680000718683,
+      "offset_s": 17.933331166859716,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 11951,
+      "output_tokens": 228,
+      "duration_s": 4.099261000053957,
+      "offset_s": 20.638061166973785,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "browser_evaluate",
+      "args": {
+        "function": "() => window.location.href"
+      },
+      "output": "### Result\n\"https://worldview.earthdata.nasa.gov/?v=-88.14417628541447,24.3,-79.45582371458552,31.2&l=Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,VIIRS_SNPP_CorrectedReflectance_TrueColor&lg=false&t=2024-09-26-T00%3A00%3A00Z\"\n### Ran Playwright code\n```js\nawait page.evaluate('() => window.location.href');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?v=-88.14417628541447,24.3,-79.45582371458552,31.2&l=Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,VIIRS_SNPP_CorrectedReflectance_TrueColor&lg=false&t=2024-09-26-T00%3A00%3A00Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 24 warnings\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-16-45-939Z.log#L2-L25",
+      "duration_s": 0.5134729999117553,
+      "offset_s": 8.679889166960493,
+      "error": null
+    },
+    {
+      "name": "geo_ui_get_state_tool",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?v=-88.14417628541447,24.3,-79.45582371458552,31.2&l=Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,VIIRS_SNPP_CorrectedReflectance_TrueColor&lg=false&t=2024-09-26-T00%3A00%3A00Z"
+      },
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[],\"viewport\":{\"bbox\":[-88.14417628541447,24.3,-79.45582371458552,31.2],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2024-09-26-T00:00:00Z\"},\"layers\":[{\"id\":\"Admin_Boundaries\",\"visible\":true},{\"id\":\"DoS_International_Boundaries\",\"visible\":true},{\"id\":\"Coastlines_15m\",\"visible\":true},{\"id\":\"VIIRS_SNPP_CorrectedReflectance_TrueColor\",\"visible\":true}]}}",
+      "duration_s": 0.0005010000895708799,
+      "offset_s": 13.32734916685149,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "geoui_version": "1.0.0",
+          "viewport": {
+            "bbox": [
+              -88.14417628541447,
+              24.3,
+              -79.45582371458552,
+              31.2
+            ],
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2024-09-27"
+          },
+          "layers": [
+            {
+              "id": "Admin_Boundaries",
+              "visible": true
+            },
+            {
+              "id": "DoS_International_Boundaries",
+              "visible": true
+            },
+            {
+              "id": "Coastlines_15m",
+              "visible": true
+            },
+            {
+              "id": "VIIRS_SNPP_CorrectedReflectance_TrueColor",
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        }
+      },
+      "output": "{\"url\":\"https://worldview.earthdata.nasa.gov/?l=VIIRS_SNPP_CorrectedReflectance_TrueColor(opacity=1),Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,Reference_Features_15m&t=2024-09-27&v=-88.14417628541447,24.3,-79.45582371458552,31.2&p=geographic\"}",
+      "duration_s": 0.0006230000872164965,
+      "offset_s": 17.927178166806698,
+      "error": null
+    },
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=VIIRS_SNPP_CorrectedReflectance_TrueColor(opacity=1),Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,Reference_Features_15m&t=2024-09-27&v=-88.14417628541447,24.3,-79.45582371458552,31.2&p=geographic"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/?l=VIIRS_SNPP_CorrectedReflectance_TrueColor(opacity=1),Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,Reference_Features_15m&t=2024-09-27&v=-88.14417628541447,24.3,-79.45582371458552,31.2&p=geographic');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=VIIRS_SNPP_CorrectedReflectance_TrueColor(opacity=1),Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,Reference_Features_15m&t=2024-09-27&v=-88.14417628541447,24.3,-79.45582371458552,31.2&p=geographic\n- Page Title: NASA Worldview\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-17-20-348Z.yml)",
+      "duration_s": 0.6119829998351634,
+      "offset_s": 20.02373716700822,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 56644,
+    "output_tokens": 910,
+    "total_tokens": 57554,
+    "requests": 5,
+    "cache_read_tokens": 50048,
+    "reasoning_tokens": 272,
+    "tool_calls": 4,
+    "cost_usd": 0.0330414
+  },
+  "usage_source": "pydantic_ai"
+}

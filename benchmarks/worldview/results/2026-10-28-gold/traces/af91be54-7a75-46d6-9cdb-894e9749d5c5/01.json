@@ -1,0 +1,1271 @@
+{
+  "trace_id": "1a29a633-f6c1-4de3-96aa-80ca69abaf11",
+  "thread_id": "af91be54-7a75-46d6-9cdb-894e9749d5c5",
+  "source": "simulated",
+  "started_at": "2026-10-28T08:39:00.615172+00:00",
+  "duration_s": 355.1172266670037,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 8487,
+      "output_tokens": 168,
+      "duration_s": 3.0191409999970347,
+      "offset_s": 3.6776480828411877,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 8656,
+      "output_tokens": 60,
+      "duration_s": 1.6700330001767725,
+      "offset_s": 6.945965082850307,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 9975,
+      "output_tokens": 533,
+      "duration_s": 8.084538999944925,
+      "offset_s": 8.66004708292894,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10166,
+      "output_tokens": 245,
+      "duration_s": 4.533473999937996,
+      "offset_s": 17.360431083012372,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12339,
+      "output_tokens": 600,
+      "duration_s": 9.408704000059515,
+      "offset_s": 21.923071082914248,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12528,
+      "output_tokens": 196,
+      "duration_s": 3.615046000108123,
+      "offset_s": 32.51720608281903,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 17086,
+      "output_tokens": 366,
+      "duration_s": 6.053114000009373,
+      "offset_s": 36.16750408289954,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 17273,
+      "output_tokens": 793,
+      "duration_s": 10.950419999891892,
+      "offset_s": 42.27961608301848,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 17723,
+      "output_tokens": 210,
+      "duration_s": 3.5771099999547005,
+      "offset_s": 55.27573408302851,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 19009,
+      "output_tokens": 593,
+      "duration_s": 8.675971999997273,
+      "offset_s": 58.885904083028436,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 19163,
+      "output_tokens": 538,
+      "duration_s": 8.329067999962717,
+      "offset_s": 68.70157808298245,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 23378,
+      "output_tokens": 349,
+      "duration_s": 6.064856000011787,
+      "offset_s": 77.06213208287954,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 23703,
+      "output_tokens": 491,
+      "duration_s": 8.217744000023231,
+      "offset_s": 89.29164508287795,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 24413,
+      "output_tokens": 506,
+      "duration_s": 8.139890999998897,
+      "offset_s": 112.53413608297706,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 25011,
+      "output_tokens": 368,
+      "duration_s": 5.560883000027388,
+      "offset_s": 121.71457708301023,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 25254,
+      "output_tokens": 372,
+      "duration_s": 6.252908000024036,
+      "offset_s": 127.31067608296871,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 26106,
+      "output_tokens": 491,
+      "duration_s": 7.3947290000505745,
+      "offset_s": 135.60821208287962,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 26559,
+      "output_tokens": 18,
+      "duration_s": 1.7669790000654757,
+      "offset_s": 143.03734008292668,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 26854,
+      "output_tokens": 613,
+      "duration_s": 10.090567999985069,
+      "offset_s": 150.8688610829413,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 27462,
+      "output_tokens": 457,
+      "duration_s": 7.175464999862015,
+      "offset_s": 161.51970908301882,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 27690,
+      "output_tokens": 18,
+      "duration_s": 1.5539029999636114,
+      "offset_s": 168.72211708291434,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 27983,
+      "output_tokens": 1039,
+      "duration_s": 15.66562099987641,
+      "offset_s": 176.34819308295846,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 28290,
+      "output_tokens": 306,
+      "duration_s": 5.196448999922723,
+      "offset_s": 192.6068830830045,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 29558,
+      "output_tokens": 900,
+      "duration_s": 12.52534499997273,
+      "offset_s": 197.83520708302967,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 30620,
+      "output_tokens": 18,
+      "duration_s": 1.2178390000481158,
+      "offset_s": 210.98850408289582,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 30878,
+      "output_tokens": 554,
+      "duration_s": 8.368763000005856,
+      "offset_s": 212.75222508283332,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 31157,
+      "output_tokens": 1077,
+      "duration_s": 14.007225000066683,
+      "offset_s": 221.7004560828209,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 33973,
+      "output_tokens": 495,
+      "duration_s": 8.217644999967888,
+      "offset_s": 237.75719008292072,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 36377,
+      "output_tokens": 690,
+      "duration_s": 9.564445000141859,
+      "offset_s": 246.00902208290063,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 39139,
+      "output_tokens": 499,
+      "duration_s": 7.829763000132516,
+      "offset_s": 257.6178450828884,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 40515,
+      "output_tokens": 573,
+      "duration_s": 9.157730999868363,
+      "offset_s": 271.59178108302876,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 40824,
+      "output_tokens": 604,
+      "duration_s": 9.646535000065342,
+      "offset_s": 286.8504370828159,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 42236,
+      "output_tokens": 413,
+      "duration_s": 7.046682000160217,
+      "offset_s": 302.7039780828636,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 42545,
+      "output_tokens": 440,
+      "duration_s": 8.098254000069574,
+      "offset_s": 315.8631150829606,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 42854,
+      "output_tokens": 22,
+      "duration_s": 1.7098160001914948,
+      "offset_s": 330.065339082852,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 43060,
+      "output_tokens": 310,
+      "duration_s": 5.872477000113577,
+      "offset_s": 332.30491308285855,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 43165,
+      "output_tokens": 427,
+      "duration_s": 7.225315999938175,
+      "offset_s": 338.7655950828921,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 43273,
+      "output_tokens": 627,
+      "duration_s": 8.670449000084773,
+      "offset_s": 346.4339510828722,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/\n- Page Title: NASA Worldview\n- Console: 0 errors, 1 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-39-07-558Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L1",
+      "duration_s": 0.2433120000641793,
+      "offset_s": 6.70018508285284,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 6,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 22 warnings\n### Snapshot\n```yaml\n- generic [ref=e1]:\n  - generic [ref=e2]:\n    - generic [ref=e5]:\n      - button [ref=e6] [cursor=pointer]\n      - searchbox [ref=e8]:\n        - combobox \"Search for places or enter coordinates\" [ref=e10]\n        - generic [ref=e11]:\n          - button [disabled]\n      - button [ref=e12] [cursor=pointer]\n    - toolbar [ref=e15]:\n      - button \"Share this map\" [ref=e16] [cursor=pointer]\n      - button \"Switch projection\" [ref=e19] [cursor=pointer]\n      - button \"Take a snapshot\" [ref=e23] [cursor=pointer]\n      - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n    - generic [ref=e31]:\n      - generic:\n        - generic: 1000 mi\n        - generic: 1000 km\n    - generic [ref=e41]:\n      - button \"Zoom in view\" [ref=e42] [cursor=pointer]\n      - button \"Zoom out view\" [ref=e45] [cursor=pointer]\n    - generic:\n      - link \"Worldview\" [ref=e49] [cursor=pointer]:\n        - /url: /\n      - generic [ref=e50]:\n        - list [ref=e51]:\n          - listitem [ref=e52] [cursor=pointer]:\n            - generic \"Map Layers\" [ref=e53]: Layers\n          - listitem [ref=e55] [cursor=pointer]:\n            - generic \"Natural Events\" [ref=e56]: Events\n          - listitem [ref=e58] [cursor=pointer]:\n            - generic \"Data Download\" [ref=e59]: Data\n          - button \"Hide sidebar\" [ref=e61] [cursor=pointer]:\n            - img \"Hide sidebar\" [ref=e62]\n        - generic [ref=e64]:\n          - generic [ref=e65]:\n            - generic [ref=e67]\n            - generic [ref=e168]\n            - separator [ref=e177]\n          - generic [ref=e179]:\n            - button \"Start Charting\" [ref=e180]\n            - button \"Start Comparison\" [ref=e182] [cursor=pointer]\n    - generic [ref=e184]:\n      - generic [ref=e185]:\n        - generic [ref=e187]:\n          - generic [ref=e188]:\n            - button \"Increment …",
+      "duration_s": 0.03735599992796779,
+      "offset_s": 8.620174082927406,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e430",
+        "element": "Close button on the Welcome to NASA Worldview dialog"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('.tour-close-btn').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 24 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-39-17-971Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L24-L25",
+      "duration_s": 0.6095610000193119,
+      "offset_s": 16.748130082851276,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 24 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]\n      - generic [ref=e11]:\n        - button [disabled]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"Switch projection\" [ref=e19] [cursor=pointer]\n    - button \"Take a snapshot\" [ref=e23] [cursor=pointer]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 1000 mi\n      - generic: 1000 km\n  - generic [ref=e41]:\n    - button \"Zoom in view\" [ref=e42] [cursor=pointer]\n    - button \"Zoom out view\" [ref=e45] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"Natural Events\" [ref=e56]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"Data Download\" [ref=e59]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - img \"Hide sidebar\" [ref=e62]\n      - generic [ref=e64]:\n        - generic [ref=e65]:\n          - generic [ref=e67]:\n            - generic [ref=e68]:\n              - generic [ref=e69]:\n                - heading \"Overlays\" [level=3] [ref=e70]\n                - img [aria-hidden] [ref=e72] [cursor=pointer]\n              - list [ref=e74]:\n                - listitem [ref=e75]:\n                  - button \"Show layer\" [ref=e76] [cursor=pointer]\n                  - 'button \"Place Labels Sources: Esri, TomTom, Garmin, FAO, NOAA, USGS, © OpenStreetMap contributors, and the GIS User Community…",
+      "duration_s": 0.02252599992789328,
+      "offset_s": 21.897629082901403,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e169",
+        "element": "Add Layers button"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Add Layers' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 25 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-39-33-129Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L26",
+      "duration_s": 1.1790230001788586,
+      "offset_s": 31.335454082814977,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 26 warnings\n### Snapshot\n```yaml\n- generic [ref=e1]:\n  - generic [ref=e2]:\n    - generic [ref=e5]:\n      - button [ref=e6] [cursor=pointer]\n      - searchbox [ref=e8]:\n        - combobox \"Search for places or enter coordinates\" [ref=e10]\n        - generic [ref=e11]:\n          - button [disabled]\n      - button [ref=e12] [cursor=pointer]\n    - toolbar [ref=e15]:\n      - button \"Share this map\" [ref=e16] [cursor=pointer]\n      - button \"Switch projection\" [ref=e19] [cursor=pointer]\n      - button \"Take a snapshot\" [ref=e23] [cursor=pointer]\n      - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n    - generic [ref=e31]:\n      - generic:\n        - generic: 1000 mi\n        - generic: 1000 km\n    - generic [ref=e41]:\n      - button \"Zoom in view\" [ref=e42] [cursor=pointer]\n      - button \"Zoom out view\" [ref=e45] [cursor=pointer]\n    - generic:\n      - link \"Worldview\" [ref=e49] [cursor=pointer]:\n        - /url: /\n      - generic [ref=e50]:\n        - list [ref=e51]:\n          - listitem [ref=e52] [cursor=pointer]:\n            - generic \"Map Layers\" [ref=e53]: Layers\n          - listitem [ref=e55] [cursor=pointer]:\n            - generic \"Natural Events\" [ref=e56]: Events\n          - listitem [ref=e58] [cursor=pointer]:\n            - generic \"Data Download\" [ref=e59]: Data\n          - button [ref=e61] [cursor=pointer]:\n            - img \"Hide sidebar\" [ref=e62]\n        - generic [ref=e64]:\n          - generic [ref=e65]:\n            - generic [ref=e67]:\n              - generic [ref=e68]:\n                - generic [ref=e69]:\n                  - heading \"Overlays\" [level=3] [ref=e70]\n                  - img [aria-hidden] [ref=e72] [cursor=pointer]\n                - list [ref=e74]:\n                  - listitem [ref=e75]:\n                    - button \"Show layer\" [ref=e76] [cursor=pointer]\n                    - 'button \"Place Lab…",
+      "duration_s": 0.029119999846443534,
+      "offset_s": 36.135687083005905,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "e638",
+        "text": "GHRSST L4 MUR Sea Surface Temperature Anomalies",
+        "slowly": false
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('searchbox', { name: 'Search' }).fill('GHRSST L4 MUR Sea Surface Temperature Anomalies');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 27 warnings\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L28",
+      "duration_s": 0.053700000047683716,
+      "offset_s": 42.22342608286999,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "button:has-text(\"GHRSST L4 MUR Sea Surface Temperature Anomalies\")",
+        "element": "Search result for GHRSST L4 MUR Sea Surface Temperature Anomalies"
+      },
+      "output": "### Error\nError: \"button:has-text(\"GHRSST L4 MUR Sea Surface Temperature Anomalies\")\" does not match any elements.",
+      "duration_s": 0.014790000161156058,
+      "offset_s": 53.23489408288151,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "button:has-text(\"×\")",
+        "element": "Close Add Layers dialog"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('button:has-text(\"×\")').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 28 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-39-54-433Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L29",
+      "duration_s": 0.5827880001161247,
+      "offset_s": 53.23560208291747,
+      "error": null
+    },
+    {
+      "name": "browser_wait_for",
+      "args": {
+        "time": 2
+      },
+      "output": "### Result\nWaited for 2 seconds\n### Ran Playwright code\n```js\nawait new Promise(f => setTimeout(f, 2 * 1000));\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 28 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-39-55-887Z.yml)",
+      "duration_s": 2.038335000164807,
+      "offset_s": 53.23446508287452,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 8,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 28 warnings\n### Snapshot\n```yaml\n- generic [ref=e1]:\n  - generic [ref=e2]:\n    - generic [ref=e5]:\n      - button [ref=e6] [cursor=pointer]\n      - searchbox [ref=e8]:\n        - combobox \"Search for places or enter coordinates\" [ref=e10]\n        - generic [ref=e11]:\n          - button [disabled]\n      - button [ref=e12] [cursor=pointer]\n    - toolbar [ref=e15]:\n      - button \"Share this map\" [ref=e16] [cursor=pointer]\n      - button \"Switch projection\" [ref=e19] [cursor=pointer]\n      - button \"Take a snapshot\" [ref=e23] [cursor=pointer]\n      - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n    - generic [ref=e31]:\n      - generic:\n        - generic: 1000 mi\n        - generic: 1000 km\n    - generic [ref=e41]:\n      - button \"Zoom in view\" [ref=e42] [cursor=pointer]\n      - button \"Zoom out view\" [ref=e45] [cursor=pointer]\n    - generic:\n      - link \"Worldview\" [ref=e49] [cursor=pointer]:\n        - /url: /\n      - generic [ref=e50]:\n        - list [ref=e51]:\n          - listitem [ref=e52] [cursor=pointer]:\n            - generic \"Map Layers\" [ref=e53]: Layers\n          - listitem [ref=e55] [cursor=pointer]:\n            - generic \"Natural Events\" [ref=e56]: Events\n          - listitem [ref=e58] [cursor=pointer]:\n            - generic \"Data Download\" [ref=e59]: Data\n          - button [ref=e61] [cursor=pointer]:\n            - img \"Hide sidebar\" [ref=e62]\n        - generic [ref=e64]:\n          - generic [ref=e65]:\n            - generic [ref=e67]:\n              - generic [ref=e68]:\n                - generic [ref=e69]\n                - list [ref=e74]\n                - status [ref=e111]\n              - generic [ref=e113]:\n                - generic [ref=e114]\n                - list [ref=e119]\n                - status [ref=e167]\n            - generic [ref=e168]:\n              - button \"Add Layers\" [active] [ref=e169] [curso…",
+      "duration_s": 0.02586900000460446,
+      "offset_s": 58.8563570829574,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e169",
+        "element": "Add Layers button"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Add Layers' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 28 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-40-09-312Z.yml)",
+      "duration_s": 1.135416999924928,
+      "offset_s": 67.56352608301677,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 30 warnings\n### Snapshot\n```yaml\n- generic [ref=e1]:\n  - generic [ref=e2]:\n    - generic [ref=e5]:\n      - button [ref=e6] [cursor=pointer]\n      - searchbox [ref=e8]:\n        - combobox \"Search for places or enter coordinates\" [ref=e10]\n        - generic [ref=e11]:\n          - button [disabled]\n      - button [ref=e12] [cursor=pointer]\n    - toolbar [ref=e15]:\n      - button \"Share this map\" [ref=e16] [cursor=pointer]\n      - button \"Switch projection\" [ref=e19] [cursor=pointer]\n      - button \"Take a snapshot\" [ref=e23] [cursor=pointer]\n      - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n    - generic [ref=e31]:\n      - generic:\n        - generic: 1000 mi\n        - generic: 1000 km\n    - generic [ref=e41]:\n      - button \"Zoom in view\" [ref=e42] [cursor=pointer]\n      - button \"Zoom out view\" [ref=e45] [cursor=pointer]\n    - generic:\n      - link \"Worldview\" [ref=e49] [cursor=pointer]:\n        - /url: /\n      - generic [ref=e50]:\n        - list [ref=e51]:\n          - listitem [ref=e52] [cursor=pointer]:\n            - generic \"Map Layers\" [ref=e53]: Layers\n          - listitem [ref=e55] [cursor=pointer]:\n            - generic \"Natural Events\" [ref=e56]: Events\n          - listitem [ref=e58] [cursor=pointer]:\n            - generic \"Data Download\" [ref=e59]: Data\n          - button [ref=e61] [cursor=pointer]:\n            - img \"Hide sidebar\" [ref=e62]\n        - generic [ref=e64]:\n          - generic [ref=e65]:\n            - generic [ref=e67]:\n              - generic [ref=e68]:\n                - generic [ref=e69]:\n                  - heading \"Overlays\" [level=3] [ref=e70]\n                  - img [aria-hidden] [ref=e72] [cursor=pointer]\n                - list [ref=e74]:\n                  - listitem [ref=e75]:\n                    - button \"Show layer\" [ref=e76] [cursor=pointer]\n                    - 'button \"Place Lab…",
+      "duration_s": 0.02545799990184605,
+      "offset_s": 77.03416608297266,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e1093",
+        "element": "Add Layer button for Sea Surface Temperature Anomalies (L4, MUR)"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Add Layer', exact: true }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 60 errors, 31 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-40-29-902Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L32-L92",
+      "duration_s": 6.159591000061482,
+      "offset_s": 83.12948808283545,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e192",
+        "element": "Year timeline input"
+      },
+      "output": "### Error\nTimeoutError: browserBackend.callTool: Timeout 15000ms exceeded.\nCall log:\n\u001b[2m  - waiting for locator('aria-ref=e192')\u001b[22m\n\u001b[2m    - locator resolved to <input size=\"4\" type=\"text\" value=\"2026\" maxlength=\"4\" id=\"year-timeline\" class=\"button-input-group\" aria-label=\"year-timeline input\"/>\u001b[22m\n\u001b[2m  - attempting click action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div role=\"dialog\" tabindex=\"-1\" aria-modal=\"true\" class=\"modal fade show\">…</div> from <div tabindex=\"-1\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m      - element is visible, enabled and stable\u001b[22m\n\u001b[2m      - scrolling into view if needed\u001b[22m\n\u001b[2m      - done scrolling\u001b[22m\n\u001b[2m      - <div role=\"dialog\" tabindex=\"-1\" aria-modal=\"true\" class=\"modal fade show\">…</div> from <div tabindex=\"-1\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m    - retrying click action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    28 × waiting for element to be visible, enabled and stable\u001b[22m\n\u001b[2m       - element is visible, enabled and stable\u001b[22m\n\u001b[2m       - scrolling into view if needed\u001b[22m\n\u001b[2m       - done scrolling\u001b[22m\n\u001b[2m       - <div role=\"dialog\" tabindex=\"-1\" aria-modal=\"true\" class=\"modal fade show\">…</div> from <div tabindex=\"-1\">…</div> subtree intercepts pointer events\u001b[22m\n\u001b[2m     - retrying click action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+      "duration_s": 15.018547999905422,
+      "offset_s": 97.51145408302546,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e933",
+        "element": "Close (×) button on the Add Layers dialog"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '×' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 60 errors, 32 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-41-01-874Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L93",
+      "duration_s": 0.5842770000454038,
+      "offset_s": 120.6766180829145,
+      "error": null
+    },
+    {
+      "name": "browser_wait_for",
+      "args": {
+        "time": 1
+      },
+      "output": "### Result\nWaited for 1 seconds\n### Ran Playwright code\n```js\nawait new Promise(f => setTimeout(f, 1 * 1000));\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 60 errors, 32 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-41-02-326Z.yml)",
+      "duration_s": 1.0347970000002533,
+      "offset_s": 120.67688608285971,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='year-timeline input']",
+        "text": "2022",
+        "slowly": false
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'year-timeline input\\']').fill('2022');\n```",
+      "duration_s": 0.025726000079885125,
+      "offset_s": 127.28067308291793,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='month-timeline input']",
+        "text": "AUG",
+        "slowly": false
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'month-timeline input\\']').fill('AUG');\n```",
+      "duration_s": 0.025713999988511205,
+      "offset_s": 127.28158108284697,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='day-timeline input']",
+        "text": "19",
+        "slowly": false
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'day-timeline input\\']').fill('19');\n```",
+      "duration_s": 0.025836999993771315,
+      "offset_s": 127.28195508290082,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 64 errors, 33 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-41-15-225Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L94-L98",
+      "duration_s": 1.04480000003241,
+      "offset_s": 133.56636408297345,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "input[aria-label='day-timeline input']",
+        "element": "Day timeline input"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'day-timeline input\\']').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 64 errors, 33 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-41-15-241Z.yml)",
+      "duration_s": 1.0607559999916703,
+      "offset_s": 133.56598708289675,
+      "error": null
+    },
+    {
+      "name": "browser_wait_for",
+      "args": {
+        "time": 2
+      },
+      "output": "### Result\nWaited for 2 seconds\n### Ran Playwright code\n```js\nawait new Promise(f => setTimeout(f, 2 * 1000));\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 64 errors, 33 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-41-16-220Z.yml)",
+      "duration_s": 2.0388209999073297,
+      "offset_s": 133.56651908298954,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='year-timeline input']",
+        "text": "2022",
+        "slowly": false
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'year-timeline input\\']').fill('2022');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-28-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 64 errors, 34 warnings\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L99",
+      "duration_s": 0.02489100000821054,
+      "offset_s": 143.00840308284387,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='month-timeline input']",
+        "text": "08",
+        "slowly": false
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'month-timeline input\\']').fill('08');\n```",
+      "duration_s": 0.024843999883159995,
+      "offset_s": 143.00911808293313,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='day-timeline input']",
+        "text": "19",
+        "slowly": false
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'day-timeline input\\']').fill('19');\n```",
+      "duration_s": 0.025092999916523695,
+      "offset_s": 143.0093910829164,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-08-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 35 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-41-31-477Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L100-L102",
+      "duration_s": 6.057169999927282,
+      "offset_s": 144.8088150830008,
+      "error": null
+    },
+    {
+      "name": "browser_wait_for",
+      "args": {
+        "time": 0.5
+      },
+      "output": "### Result\nWaited for 0.5 seconds\n### Ran Playwright code\n```js\nawait new Promise(f => setTimeout(f, 0.5 * 1000));\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-08-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 36 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-41-42-118Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L103",
+      "duration_s": 0.5403560001868755,
+      "offset_s": 160.96296508284286,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "input[aria-label='year-timeline input']",
+        "element": "Year timeline input"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'year-timeline input\\']').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-08-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 36 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-41-42-132Z.yml)",
+      "duration_s": 0.5544259999878705,
+      "offset_s": 160.96267608297057,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='year-timeline input']",
+        "text": "2022"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'year-timeline input\\']').fill('2022');\n```",
+      "duration_s": 0.018157999962568283,
+      "offset_s": 168.69952708296478,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='month-timeline input']",
+        "text": "AUG"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'month-timeline input\\']').fill('AUG');\n```",
+      "duration_s": 0.018656000029295683,
+      "offset_s": 168.6997960829176,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='day-timeline input']",
+        "text": "19"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'day-timeline input\\']').fill('19');\n```",
+      "duration_s": 0.01928500016219914,
+      "offset_s": 168.7001230828464,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 37 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-41-56-960Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L104",
+      "duration_s": 6.063890999881551,
+      "offset_s": 170.28147508297116,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e193",
+        "element": "Decrement year button"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Decrement year' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-13-217Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L105",
+      "duration_s": 0.5860279998742044,
+      "offset_s": 192.01798708294518,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 6,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]\n      - generic [ref=e11]:\n        - button [disabled]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"Switch projection\" [ref=e19] [cursor=pointer]\n    - button \"Take a snapshot\" [ref=e23] [cursor=pointer]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 1000 mi\n      - generic: 1000 km\n  - generic [ref=e41]:\n    - button \"Zoom in view\" [ref=e42] [cursor=pointer]\n    - button \"Zoom out view\" [ref=e45] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"Natural Events\" [ref=e56]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"Data Download\" [ref=e59]: Data\n        - button \"Hide sidebar\" [ref=e61] [cursor=pointer]:\n          - img \"Hide sidebar\" [ref=e62]\n      - generic [ref=e64]:\n        - generic [ref=e65]:\n          - generic [ref=e67]:\n            - generic [ref=e68]\n            - generic [ref=e113]\n         …",
+      "duration_s": 0.023982000071555376,
+      "offset_s": 197.80837608291768,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='year-timeline input']",
+        "text": "2022",
+        "slowly": false
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'year-timeline input\\']').fill('2022');\n```",
+      "duration_s": 0.03269999986514449,
+      "offset_s": 210.36602508299984,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='month-timeline input']",
+        "text": "AUG",
+        "slowly": false
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'month-timeline input\\']').fill('AUG');\n```",
+      "duration_s": 0.03273200010880828,
+      "offset_s": 210.366646082839,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='day-timeline input']",
+        "text": "19",
+        "slowly": false
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'day-timeline input\\']').fill('19');\n```",
+      "duration_s": 0.032999000046402216,
+      "offset_s": 210.36704408284277,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "input[aria-label='year-timeline input']",
+        "element": "Year input in the timeline"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'year-timeline input\\']').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-31-589Z.yml)",
+      "duration_s": 0.6093950001522899,
+      "offset_s": 210.36567308288068,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "input[aria-label='month-timeline input']",
+        "element": "Month input in the timeline"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'month-timeline input\\']').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-31-589Z.yml)",
+      "duration_s": 0.6090490000788122,
+      "offset_s": 210.3664320828393,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "input[aria-label='day-timeline input']",
+        "element": "Day input in the timeline"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'day-timeline input\\']').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-31-601Z.yml)",
+      "duration_s": 0.6193339999299496,
+      "offset_s": 210.36683708289638,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-33-362Z.yml)",
+      "duration_s": 0.5405539998319,
+      "offset_s": 212.20864208298735,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "input[aria-label='year-timeline input']",
+        "element": "Year timeline input"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'year-timeline input\\']').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-42-311Z.yml)",
+      "duration_s": 0.5726449999492615,
+      "offset_s": 221.12488608295098,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.029473999980837107,
+      "offset_s": 235.7142340829596,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.036398999858647585,
+      "offset_s": 235.71519208303653,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.036155000096186996,
+      "offset_s": 235.7161260829307,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-56-906Z.yml)",
+      "duration_s": 0.5790359999518842,
+      "offset_s": 235.71482208301313,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-56-907Z.yml)",
+      "duration_s": 0.5790220000781119,
+      "offset_s": 235.7156720829662,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-56-909Z.yml)",
+      "duration_s": 0.5785410001408309,
+      "offset_s": 235.71651008282788,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='month-timeline input']",
+        "text": "AUG",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'month-timeline input\\']').pressSequentially('AUG');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-56-963Z.yml)",
+      "duration_s": 0.6340270000509918,
+      "offset_s": 235.7154800829012,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='year-timeline input']",
+        "text": "2022",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'year-timeline input\\']').pressSequentially('2022');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-56-964Z.yml)",
+      "duration_s": 0.6354300000239164,
+      "offset_s": 235.71461608284153,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "input[aria-label='day-timeline input']",
+        "text": "19",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'day-timeline input\\']').pressSequentially('19');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-56-962Z.yml)",
+      "duration_s": 0.6342250001616776,
+      "offset_s": 235.7163260828238,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "input[aria-label='year-timeline input']",
+        "element": "Year timeline input"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'year-timeline input\\']').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-56-964Z.yml)",
+      "duration_s": 0.6370289998594671,
+      "offset_s": 235.7139370830264,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "input[aria-label='month-timeline input']",
+        "element": "Month timeline input"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'month-timeline input\\']').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-56-965Z.yml)",
+      "duration_s": 0.636250999988988,
+      "offset_s": 235.715004083002,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "input[aria-label='day-timeline input']",
+        "element": "Day timeline input"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('input[aria-label=\\'day-timeline input\\']').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-56-973Z.yml)",
+      "duration_s": 0.6423720000311732,
+      "offset_s": 235.7158580829855,
+      "error": null
+    },
+    {
+      "name": "browser_wait_for",
+      "args": {
+        "time": 2
+      },
+      "output": "### Result\nWaited for 2 seconds\n### Ran Playwright code\n```js\nawait new Promise(f => setTimeout(f, 2 * 1000));\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-42-58-368Z.yml)",
+      "duration_s": 2.0363780001644045,
+      "offset_s": 235.7174000828527,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]\n      - generic [ref=e11]:\n        - button [disabled]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"Switch projection\" [ref=e19] [cursor=pointer]\n    - button \"Take a snapshot\" [ref=e23] [cursor=pointer]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 1000 mi\n      - generic: 1000 km\n  - generic [ref=e41]:\n    - button \"Zoom in view\" [ref=e42] [cursor=pointer]\n    - button \"Zoom out view\" [ref=e45] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"Natural Events\" [ref=e56]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"Data Download\" [ref=e59]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - img \"Hide sidebar\" [ref=e62]\n      - generic [ref=e64]:\n        - generic [ref=e65]:\n          - generic [ref=e67]:\n            - generic [ref=e68]:\n              - generic [ref=e69]:\n                - hea…",
+      "duration_s": 0.024985000025480986,
+      "offset_s": 245.9809130828362,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.021567000076174736,
+      "offset_s": 255.58175408281386,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.02214700006879866,
+      "offset_s": 255.5829210828524,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.022215999895706773,
+      "offset_s": 255.58376208296977,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-16-762Z.yml)",
+      "duration_s": 0.5668589998967946,
+      "offset_s": 255.5824220830109,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-16-764Z.yml)",
+      "duration_s": 0.5667580000590533,
+      "offset_s": 255.58329908293672,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-16-764Z.yml)",
+      "duration_s": 0.5665090000256896,
+      "offset_s": 255.5841430828441,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "e208",
+        "text": "19",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('textbox', { name: 'day-timeline input' }).pressSequentially('19');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-16-790Z.yml)",
+      "duration_s": 0.5924590001814067,
+      "offset_s": 255.5839580828324,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "e200",
+        "text": "AUG",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('textbox', { name: 'month-timeline input' }).pressSequentially('AUG');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-16-790Z.yml)",
+      "duration_s": 0.5937909998465329,
+      "offset_s": 255.58312208298594,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "e192",
+        "text": "2022",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('textbox', { name: 'year-timeline input' }).pressSequentially('2022');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-16-791Z.yml)",
+      "duration_s": 0.5950909999664873,
+      "offset_s": 255.58222508290783,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e192",
+        "element": "Year timeline textbox"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('textbox', { name: 'year-timeline input' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-16-834Z.yml)",
+      "duration_s": 0.6382009999360889,
+      "offset_s": 255.58140408294275,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e200",
+        "element": "Month timeline textbox"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('textbox', { name: 'month-timeline input' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-16-834Z.yml)",
+      "duration_s": 0.6374150000046939,
+      "offset_s": 255.58264008304104,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e208",
+        "element": "Day timeline textbox"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('textbox', { name: 'day-timeline input' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-16-863Z.yml)",
+      "duration_s": 0.6644460000097752,
+      "offset_s": 255.5835120829288,
+      "error": null
+    },
+    {
+      "name": "browser_wait_for",
+      "args": {
+        "time": 2
+      },
+      "output": "### Result\nWaited for 2 seconds\n### Ran Playwright code\n```js\nawait new Promise(f => setTimeout(f, 2 * 1000));\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2026-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-18-229Z.yml)",
+      "duration_s": 2.0296910000033677,
+      "offset_s": 255.58500708290376,
+      "error": null
+    },
+    {
+      "name": "browser_wait_for",
+      "args": {
+        "time": 1
+      },
+      "output": "### Result\nWaited for 1 seconds\n### Ran Playwright code\n```js\nawait new Promise(f => setTimeout(f, 1 * 1000));\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2025-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 38 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-27-099Z.yml)",
+      "duration_s": 1.0339840000960976,
+      "offset_s": 265.45123008289374,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e193",
+        "element": "Decrement year"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Decrement year' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2025-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 39 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-32-146Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L106",
+      "duration_s": 6.0805059999693185,
+      "offset_s": 265.4504920828622,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e193",
+        "element": "Decrement year"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Decrement year' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2025-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 39 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-32-191Z.yml)",
+      "duration_s": 6.125471999868751,
+      "offset_s": 265.45096208294854,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e193",
+        "element": "Decrement year"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Decrement year' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2025-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 39 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-32-191Z.yml)",
+      "duration_s": 6.12603299994953,
+      "offset_s": 265.45081308297813,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e193",
+        "element": "Decrement year"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Decrement year' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2025-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 39 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-32-204Z.yml)",
+      "duration_s": 6.138327000197023,
+      "offset_s": 265.4511010828428,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e193",
+        "element": "Decrement year button"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Decrement year' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2024-10-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 41 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-47-462Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L107-L108",
+      "duration_s": 6.094615000067279,
+      "offset_s": 280.7531130828429,
+      "error": null
+    },
+    {
+      "name": "browser_wait_for",
+      "args": {
+        "time": 2
+      },
+      "output": "### Result\nWaited for 2 seconds\n### Ran Playwright code\n```js\nawait new Promise(f => setTimeout(f, 2 * 1000));\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2023-09-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 42 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-43-59-168Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L109",
+      "duration_s": 2.0528039999771863,
+      "offset_s": 296.501415082952,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e193",
+        "element": "Decrement year"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Decrement year' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2023-09-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 43 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-44-03-218Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L110",
+      "duration_s": 6.10397500009276,
+      "offset_s": 296.50054608285427,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e193",
+        "element": "Decrement year"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Decrement year' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2023-09-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 43 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-44-03-267Z.yml)",
+      "duration_s": 6.15243100002408,
+      "offset_s": 296.500778082991,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e201",
+        "element": "Decrement month"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Decrement month' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2023-09-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 43 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-44-03-268Z.yml)",
+      "duration_s": 6.152575999964029,
+      "offset_s": 296.5010870830156,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e201",
+        "element": "Decrement month"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Decrement month' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2023-09-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 43 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-44-03-316Z.yml)",
+      "duration_s": 6.199600999942049,
+      "offset_s": 296.50125508289784,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e193",
+        "element": "Decrement year button"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Decrement year' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2022-09-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 45 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-44-16-475Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L111-L112",
+      "duration_s": 6.104500999907032,
+      "offset_s": 309.7558840829879,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e201",
+        "element": "Decrement month button"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Decrement month' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2022-08-19-T07%3A59%3A07Z\n- Page Title: NASA Worldview\n- Console: 66 errors, 47 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-44-30-675Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-39-07-319Z.log#L113-L114",
+      "duration_s": 6.095124999992549,
+      "offset_s": 323.9673900830094,
+      "error": null
+    },
+    {
+      "name": "browser_evaluate",
+      "args": {
+        "function": "() => window.location.href"
+      },
+      "output": "### Result\n\"https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2022-08-19-T07%3A59%3A07Z\"\n### Ran Playwright code\n```js\nawait page.evaluate('() => window.location.href');\n```",
+      "duration_s": 0.5171419999096543,
+      "offset_s": 331.78136208304204,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "Finalize Worldview configuration and present captured permalink for GHRSST L4 MUR Sea Surface Temperature Anomalies on 2022-08-19 (global view)."
+      },
+      "output": "{\"query\":\"Finalize Worldview configuration and present captured permalink for GHRSST L4 MUR Sea Surface Temperature Anomalies on 2022-08-19 (global view).\",\"_response\":\"\"}",
+      "duration_s": 0.5768959999550134,
+      "offset_s": 338.1799770828802,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "Prepare final user-facing Worldview link and brief caveat/disclaimer for GHRSST L4 MUR Sea Surface Temperature Anomalies on 2022-08-19."
+      },
+      "output": "{\"query\":\"Prepare final user-facing Worldview link and brief caveat/disclaimer for GHRSST L4 MUR Sea Surface Temperature Anomalies on 2022-08-19.\",\"_response\":\"\"}",
+      "duration_s": 0.43245600000955164,
+      "offset_s": 345.9932910830248,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 1035282,
+    "output_tokens": 16979,
+    "total_tokens": 1052261,
+    "requests": 38,
+    "cache_read_tokens": 971008,
+    "reasoning_tokens": 14144,
+    "tool_calls": 84,
+    "cost_usd": 0.5201119
+  },
+  "usage_source": "pydantic_ai"
+}

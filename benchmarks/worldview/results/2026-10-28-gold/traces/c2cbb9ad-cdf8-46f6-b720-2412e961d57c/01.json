@@ -1,0 +1,161 @@
+{
+  "trace_id": "ec379908-7fa9-4ad9-b4a0-13db7cf88070",
+  "thread_id": "c2cbb9ad-cdf8-46f6-b720-2412e961d57c",
+  "source": "simulated",
+  "started_at": "2026-10-28T08:17:50.315084+00:00",
+  "duration_s": 20.390023708110675,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 9996,
+      "output_tokens": 324,
+      "duration_s": 5.317132000112906,
+      "offset_s": 3.282839999999851,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10221,
+      "output_tokens": 230,
+      "duration_s": 3.581044999882579,
+      "offset_s": 8.616318000014871,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10568,
+      "output_tokens": 161,
+      "duration_s": 2.835082999896258,
+      "offset_s": 12.202951000072062,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 11138,
+      "output_tokens": 314,
+      "duration_s": 5.113378999987617,
+      "offset_s": 15.26683000009507,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "geoui_version": "1.0.0",
+          "geoui_extensions": [
+            "geoui:compare/v1.0.0"
+          ],
+          "viewport": {
+            "bbox": null,
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2025-08-01"
+          },
+          "layers": [
+            {
+              "id": "AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean",
+              "visible": true,
+              "opacity": 1
+            }
+          ],
+          "compare:layers": [
+            {
+              "id": "AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean",
+              "visible": true,
+              "opacity": 1
+            }
+          ],
+          "compare:time": {
+            "instant": "2025-08-01"
+          },
+          "compare:mode": "swipe",
+          "compare:value": 50,
+          "compare:active_side": "A"
+        },
+        "embed_mode": false
+      },
+      "output": "GeoIntent has `compare:*` fields but does not declare https://geoui.org/ext/compare/v1.0.0 in geoui_extensions",
+      "duration_s": 0.011999999871477485,
+      "offset_s": 8.601650000084192,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "geoui_version": "1.0.0",
+          "geoui_extensions": [
+            "https://geoui.org/ext/compare/v1.0.0"
+          ],
+          "viewport": {
+            "bbox": null,
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2025-08-01"
+          },
+          "layers": [
+            {
+              "id": "AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean",
+              "visible": true,
+              "opacity": 1.0
+            }
+          ],
+          "compare:layers": [
+            {
+              "id": "AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean",
+              "visible": true,
+              "opacity": 1.0
+            }
+          ],
+          "compare:time": {
+            "instant": "2025-08-01"
+          },
+          "compare:mode": "swipe",
+          "compare:value": 50,
+          "compare:active_side": "A"
+        },
+        "embed_mode": false
+      },
+      "output": "{\"url\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\"}",
+      "duration_s": 0.0004189999308437109,
+      "offset_s": 12.199398000026122,
+      "error": null
+    },
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\n- Page Title: NASA Worldview\n- Console: 0 errors, 1 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-18-05-576Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-18-05-359Z.log#L1",
+      "duration_s": 0.22198399994522333,
+      "offset_s": 15.042080000042915,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 41923,
+    "output_tokens": 1029,
+    "total_tokens": 42952,
+    "requests": 4,
+    "cache_read_tokens": 38400,
+    "reasoning_tokens": 182,
+    "tool_calls": 2,
+    "cost_usd": 0.02729125
+  },
+  "usage_source": "pydantic_ai"
+}

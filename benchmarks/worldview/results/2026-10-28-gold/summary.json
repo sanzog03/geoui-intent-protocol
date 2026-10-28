@@ -1,0 +1,1048 @@
+{
+  "run_name": "2026-10-28-gold",
+  "reference_agent": "geoui",
+  "rows": [
+    {
+      "golden": "core-1-single-render",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "11a40c3b-5e62-4d12-89cb-8af79b371303",
+      "turns": 1,
+      "error_turns": 0,
+      "tool_calls": 2,
+      "seconds": 23.874,
+      "input_tokens": 30676,
+      "output_tokens": 579,
+      "cache_read_tokens": 19200,
+      "reasoning_tokens": 127,
+      "total_tokens": 31255,
+      "cache_adjusted_tokens": 13975,
+      "requests": 3,
+      "cost_usd": 0.031549,
+      "final_url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MODIS_Aqua_Aerosol_Optical_Depth_3km(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-09-15&v=-125,24,-66.5,49.5&p=geographic",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:MODIS_Aqua_Aerosol_Optical_Depth_3km', 'time']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "conversation completeness 1.00: The score is 1.0 because the LLM response fully met the user’s intentions to visualize the NASA Worldview layer \"MODIS_Aqua_Aerosol_Optical_Depth_3km\" for the date \"2025-09-15\", zoom/focus on the \"contiguous United States\", and render the specified layer directly without extra dataset discovery or confirmation questions; there were no noted gaps or missing elements (\"Incompletenesses: []\")."
+        },
+        "Tool efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "2 tool calls, 0 wasted ({'duplicate': 0, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 23.9 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 13975 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), so no assistant message (and no specific information within any assistant message) is identified as irrelevant to any user message."
+        }
+      }
+    },
+    {
+      "golden": "core-1-single-render",
+      "agent": "vlm",
+      "dataset": "gold",
+      "session_id": "d4e73a11-2d55-4c63-be5c-4d530037bcf6",
+      "turns": 1,
+      "error_turns": 0,
+      "tool_calls": 47,
+      "seconds": 461.277,
+      "input_tokens": 769581,
+      "output_tokens": 24782,
+      "cache_read_tokens": 719104,
+      "reasoning_tokens": 22864,
+      "total_tokens": 794363,
+      "cache_adjusted_tokens": 147169,
+      "requests": 38,
+      "cost_usd": 0.561126,
+      "final_url": "https://worldview.earthdata.nasa.gov/?v=60.43359375,-28.398896484375,140.09765625,34.867646484375&l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Aqua_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&s=-99.4146,39.3987&t=2025-09-15-T07%3A47%3A15Z",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:MODIS_Aqua_Aerosol_Optical_Depth_3km', 'time']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "conversation completeness 1.00: The score is 1.0 because the LLM response fully matches the User’s intention to “Visualize the MODIS Aqua Aerosol Optical Depth 3km layer in NASA Worldview for the date 2025-09-15 focused on the contiguous United States, with the layer added via Add Layers search and the view set up directly,” and there are no noted gaps or missing steps (no issues were provided)."
+        },
+        "Tool efficiency": {
+          "score": 0.7234,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "47 tool calls, 13 wasted ({'duplicate': 13, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 0.1301,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 461.3 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 0.1359,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 147169 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no irrelevancies listed ([]), so there are no assistant messages or specific pieces of information to quote as irrelevant to the user."
+        }
+      }
+    },
+    {
+      "golden": "core-2-date-change",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "a510d1cc-4e8c-469d-81c3-45b5fb8fe1d5",
+      "turns": 2,
+      "error_turns": 0,
+      "tool_calls": 6,
+      "seconds": 48.808,
+      "input_tokens": 87234,
+      "output_tokens": 1911,
+      "cache_read_tokens": 78848,
+      "reasoning_tokens": 863,
+      "total_tokens": 89145,
+      "cache_adjusted_tokens": 18182,
+      "requests": 8,
+      "cost_usd": 0.055228,
+      "final_url": "https://worldview.earthdata.nasa.gov/?l=VIIRS_SNPP_CorrectedReflectance_TrueColor(opacity=1),Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,Reference_Features_15m&t=2024-09-27&v=-88.14417628541447,24.3,-79.45582371458552,31.2&p=geographic",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:VIIRS_SNPP_CorrectedReflectance_TrueColor', 'time']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "checkpoints 1.00 (reached [0]), conversation completeness 1.00: The score is 1.0 because the LLM response fully matched the user’s intentions to visualize the \"VIIRS_SNPP_CorrectedReflectance_TrueColor\" layer in NASA Worldview on \"2024-09-26\" focused on Florida, and then update the same visualization by advancing the date to \"2024-09-27\", with no missing steps or extra dataset discovery/confirmation indicated."
+        },
+        "Tool efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "6 tool calls, 0 wasted ({'duplicate': 0, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 24.4 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 9091 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), so no assistant message (or any quoted information from it) is identified as irrelevant to any user message in the conversation."
+        }
+      }
+    },
+    {
+      "golden": "core-2-date-change",
+      "agent": "vlm",
+      "dataset": "gold",
+      "session_id": "3b10713e-46e7-4171-9ed5-d372b8f975db",
+      "turns": 2,
+      "error_turns": 0,
+      "tool_calls": 32,
+      "seconds": 251.918,
+      "input_tokens": 539608,
+      "output_tokens": 10061,
+      "cache_read_tokens": 496768,
+      "reasoning_tokens": 8483,
+      "total_tokens": 549669,
+      "cache_adjusted_tokens": 102577,
+      "requests": 27,
+      "cost_usd": 0.302758,
+      "final_url": "https://worldview.earthdata.nasa.gov/?v=-86.96203750000001,24.37801171875,-76.41516250000001,32.75398828125&l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,VIIRS_SNPP_CorrectedReflectance_TrueColor,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&s=-81.6886,28.566&t=2024-09-27-T07%3A54%3A54Z",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:VIIRS_SNPP_CorrectedReflectance_TrueColor', 'time']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "checkpoints 1.00 (reached [0]), conversation completeness 1.00: The score is 1.0 because the LLM response fully meets the user’s intentions: it provides a way to visualize the \"VIIRS SNPP Corrected Reflectance (True Color)\" layer in NASA Worldview on \"2024-09-26\" focused on Florida with the layer and view set directly, and it also advances the visualization by one day to \"2024-09-27\" while keeping the same view/layer settings."
+        },
+        "Tool efficiency": {
+          "score": 0.7812,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "32 tool calls, 7 wasted ({'duplicate': 7, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 0.4763,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 126.0 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 0.39,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 51288 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), so no assistant message contains any quoted information that is irrelevant to any user message."
+        }
+      }
+    },
+    {
+      "golden": "core-3-pan",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "ce9ef19d-a572-4bf1-b123-4cd82e92ea41",
+      "turns": 1,
+      "error_turns": 0,
+      "tool_calls": 2,
+      "seconds": 15.679,
+      "input_tokens": 30586,
+      "output_tokens": 607,
+      "cache_read_tokens": 27776,
+      "reasoning_tokens": 168,
+      "total_tokens": 31193,
+      "cache_adjusted_tokens": 6195,
+      "requests": 3,
+      "cost_usd": 0.018276,
+      "final_url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies(opacity=1),Coastlines_15m,Reference_Features_15m&t=2022-08-19&p=geographic",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies', 'time']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "checkpoints 1.00 (reached [0]), conversation completeness 1.00: The score is 1.0 because the LLM response fully met the User’s intention to \"Visualize the specified GHRSST SST anomaly layer in NASA Worldview on a global view for the date 2022-08-19\" using the exact provided layer ID, and there were no noted gaps or missing steps (no issues were provided in the list)."
+        },
+        "Tool efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "2 tool calls, 0 wasted ({'duplicate': 0, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 15.7 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 6195 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), so there are no assistant messages or specific information quoted that deviated from the user’s requests."
+        }
+      }
+    },
+    {
+      "golden": "core-3-pan",
+      "agent": "vlm",
+      "dataset": "gold",
+      "session_id": "af91be54-7a75-46d6-9cdb-894e9749d5c5",
+      "turns": 1,
+      "error_turns": 0,
+      "tool_calls": 86,
+      "seconds": 355.117,
+      "input_tokens": 1035282,
+      "output_tokens": 16979,
+      "cache_read_tokens": 971008,
+      "reasoning_tokens": 14144,
+      "total_tokens": 1052261,
+      "cache_adjusted_tokens": 178354,
+      "requests": 38,
+      "cost_usd": 0.520112,
+      "final_url": "https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2022-08-19-T07%3A59%3A07Z",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies', 'time']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "checkpoints 1.00 (reached [0]), conversation completeness 1.00: The score is 1.0 because the LLM response fully satisfied the user’s intentions to visualize the “GHRSST L4 MUR Sea Surface Temperature Anomalies” layer in NASA Worldview for the date “2022-08-19” in a global view, and to add the layer via Worldview’s “Add Layers” search and set the view directly. There were no noted gaps or missing steps (no issues were provided)."
+        },
+        "Tool efficiency": {
+          "score": 0.5349,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "86 tool calls, 40 wasted ({'duplicate': 40, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 0.169,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 355.1 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 0.1121,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 178354 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), so no assistant message can be quoted as irrelevant and no mismatched information is identified."
+        }
+      }
+    },
+    {
+      "golden": "core-4-compare",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "c2cbb9ad-cdf8-46f6-b720-2412e961d57c",
+      "turns": 1,
+      "error_turns": 0,
+      "tool_calls": 3,
+      "seconds": 20.39,
+      "input_tokens": 41923,
+      "output_tokens": 1029,
+      "cache_read_tokens": 38400,
+      "reasoning_tokens": 182,
+      "total_tokens": 42952,
+      "cache_adjusted_tokens": 8392,
+      "requests": 4,
+      "cost_usd": 0.027291,
+      "final_url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean', 'time', 'compare', 'compare.mode', 'compare.layer:AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "conversation completeness 1.00: The score is 1.0 because the LLM response fully matches the user’s intentions: it provides a side-by-side comparison of the two specified Worldview layers for the requested date using swipe mode with a 50% slider on a global view, and it directly renders/provides the Worldview compare setup/link without extra dataset discovery or confirmation questions."
+        },
+        "Tool efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "3 tool calls, 0 wasted ({'duplicate': 0, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 20.4 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 8392 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), so there are no assistant messages to quote as irrelevant and no mismatched information to justify any lower score."
+        }
+      }
+    },
+    {
+      "golden": "core-4-compare",
+      "agent": "vlm",
+      "dataset": "gold",
+      "session_id": "d662b919-22d8-4d71-955e-b3ca588378f3",
+      "turns": 1,
+      "error_turns": 1,
+      "tool_calls": 84,
+      "seconds": 813.71,
+      "input_tokens": 1920775,
+      "output_tokens": 46743,
+      "cache_read_tokens": 0,
+      "reasoning_tokens": 0,
+      "total_tokens": 1967518,
+      "cache_adjusted_tokens": 1967518,
+      "requests": 50,
+      "cost_usd": 0.0,
+      "final_url": null,
+      "metrics": {
+        "Success": {
+          "score": 0.0,
+          "success": false,
+          "threshold": 1.0,
+          "reason": "matched nothing; missed ['layer:AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean', 'time', 'compare', 'compare.mode', 'compare.layer:AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean'] (no URL)"
+        },
+        "Completion": {
+          "score": 0.0,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "conversation completeness 0.00: The score is 0.0 because the User wanted UI steps to \"enable NASA Worldview swipe comparison\" and set the slider to \"50%\" for the already-selected AIRS Day vs Night layers on \"2025-08-01,\" but the LLM response provided no actionable instructions and instead only returned an error message: \"[UsageLimitExceeded] The next request would exceed the request_limit of 50...\", so none of the requested setup was addressed."
+        },
+        "Tool efficiency": {
+          "score": 0.6824,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "85 tool calls, 27 wasted ({'duplicate': 25, 'errored': 0, 'discovery': 1, 'error_turn': 1})"
+        },
+        "Time efficiency": {
+          "score": 0.0737,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 813.7 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 0.0102,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 1967518 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 0.0,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "The score is 0.0 because message 1 is entirely irrelevant: the user asked for \"UI steps to enable swipe compare mode in NASA Worldview with specific layers/date/slider position,\" but the assistant replied with an unrelated \"usage limit\" error about \"request_limit/budget\" patterns, providing no instructions or information about NASA Worldview swipe compare mode."
+        }
+      }
+    },
+    {
+      "golden": "core-5-chart",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "4843ea80-dca8-4dfe-ae0b-2417fa1e3a15",
+      "turns": 1,
+      "error_turns": 0,
+      "tool_calls": 3,
+      "seconds": 28.492,
+      "input_tokens": 41698,
+      "output_tokens": 1570,
+      "cache_read_tokens": 37376,
+      "reasoning_tokens": 801,
+      "total_tokens": 43268,
+      "cache_adjusted_tokens": 9630,
+      "requests": 4,
+      "cost_usd": 0.036084,
+      "final_url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MOD13Q1_NDVI_16Day(opacity=1),Coastlines_15m,Reference_Features_15m&t=2024-07-15&v=-125,31,-102,49&p=geographic&cha=true&chl=MOD13Q1_NDVI_16Day&chc=-125,31,-102,49&cht=2024-04-01&cht2=2024-10-31&chch=true",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:MOD13Q1_NDVI_16Day', 'time', 'chart', 'chart.layer', 'chart.start', 'chart.end', 'chart.autoload']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "conversation completeness 1.00: The score is 1.0 because the LLM response fully satisfies the user’s intentions: it visualizes the exact layer \"MOD13Q1_NDVI_16Day\" in NASA Worldview for \"2024-07-15\" over the western US, enables and autoloads Worldview’s chart panel to show a time-series for the same layer/area from \"2024-04-01\" through \"2024-10-31\", and uses the provided layer ID directly without extra dataset discovery or confirmation questions."
+        },
+        "Tool efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "3 tool calls, 0 wasted ({'duplicate': 0, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 28.5 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 9630 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), so no assistant message or information can be quoted as irrelevant to any user message."
+        }
+      }
+    },
+    {
+      "golden": "core-5-chart",
+      "agent": "vlm",
+      "dataset": "gold",
+      "session_id": "7b502c99-fc4c-45fc-9059-52f7e5c0034b",
+      "turns": 1,
+      "error_turns": 1,
+      "tool_calls": 62,
+      "seconds": 818.467,
+      "input_tokens": 1981734,
+      "output_tokens": 46251,
+      "cache_read_tokens": 0,
+      "reasoning_tokens": 0,
+      "total_tokens": 2027985,
+      "cache_adjusted_tokens": 2027985,
+      "requests": 50,
+      "cost_usd": 0.0,
+      "final_url": null,
+      "metrics": {
+        "Success": {
+          "score": 0.0,
+          "success": false,
+          "threshold": 1.0,
+          "reason": "matched nothing; missed ['layer:MOD13Q1_NDVI_16Day', 'time', 'chart', 'chart.layer', 'chart.start', 'chart.end', 'chart.autoload'] (no URL)"
+        },
+        "Completion": {
+          "score": 0.0,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "conversation completeness 0.00: The score is 0.0 because the User wanted UI-based instructions to “visualize the MOD13Q1 NDVI 16-Day layer on NASA Worldview for 2024-07-15 over the western US” and to “enable and autoload Worldview’s chart panel” for “2024-04-01 through 2024-10-31,” but the LLM response provided no Worldview UI actions, links, or configuration steps and instead only returned the error message \"[UsageLimitExceeded] The next request would exceed the request_limit of 50...\", leaving the visualization and chart/time-series setup unaddressed."
+        },
+        "Tool efficiency": {
+          "score": 0.5714,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "63 tool calls, 27 wasted ({'duplicate': 26, 'errored': 0, 'discovery': 0, 'error_turn': 1})"
+        },
+        "Time efficiency": {
+          "score": 0.0733,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 818.5 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 0.0099,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 2027985 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 0.0,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "The score is 0.0 because message 1 is entirely off-topic: the user requested instructions to visualize a specific NASA Worldview layer and enable the chart panel for a defined time range, but the assistant instead responded with a 'usage-limit error message' and did not provide any steps or information relevant to NASA Worldview, the layer, the chart panel, or the time range."
+        }
+      }
+    },
+    {
+      "golden": "core-6-multilayer",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "eb746cbc-6315-45be-95aa-1a05fc948dc4",
+      "turns": 1,
+      "error_turns": 0,
+      "tool_calls": 2,
+      "seconds": 20.569,
+      "input_tokens": 30754,
+      "output_tokens": 1084,
+      "cache_read_tokens": 27776,
+      "reasoning_tokens": 98,
+      "total_tokens": 31838,
+      "cache_adjusted_tokens": 6840,
+      "requests": 3,
+      "cost_usd": 0.025248,
+      "final_url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Aqua_CorrectedReflectance_TrueColor(opacity=1),Reference_Labels_15m(opacity=0.6),Reference_Features_15m(opacity=0.8),Coastlines_15m&t=2024-07-04&p=geographic",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:MODIS_Aqua_CorrectedReflectance_TrueColor', 'layer:Reference_Labels_15m', 'layer:Reference_Features_15m', 'time']; missed nothing"
+        },
+        "Completion": {
+          "score": 0.0,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "conversation completeness 0.00: The score is 0.0 because, while the LLM response mostly met the intent by providing a NASA Worldview link for \"2024-07-04\" with \"the three requested layers in order and specified opacities,\" it did not satisfy the requirement to render exactly and only those three layers; it added extra layers in the URL (\"Reference_Features_15m(opacity=0.8),Coastlines_15m\"), violating the user’s instruction to stack only the specified layers without additions."
+        },
+        "Tool efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "2 tool calls, 0 wasted ({'duplicate': 0, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 20.6 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 6840 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), so no assistant message (or any quoted information from it) is identified as irrelevant to any user message."
+        }
+      }
+    },
+    {
+      "golden": "core-6-multilayer",
+      "agent": "vlm",
+      "dataset": "gold",
+      "session_id": "75dc172c-3f46-4df6-97fd-f1c3e3b12478",
+      "turns": 1,
+      "error_turns": 1,
+      "tool_calls": 52,
+      "seconds": 933.337,
+      "input_tokens": 1454296,
+      "output_tokens": 56537,
+      "cache_read_tokens": 0,
+      "reasoning_tokens": 0,
+      "total_tokens": 1510833,
+      "cache_adjusted_tokens": 1510833,
+      "requests": 50,
+      "cost_usd": 0.0,
+      "final_url": null,
+      "metrics": {
+        "Success": {
+          "score": 0.0,
+          "success": false,
+          "threshold": 1.0,
+          "reason": "matched nothing; missed ['layer:MODIS_Aqua_CorrectedReflectance_TrueColor', 'layer:Reference_Labels_15m', 'layer:Reference_Features_15m', 'time'] (no URL)"
+        },
+        "Completion": {
+          "score": 0.0,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "conversation completeness 0.00: The score is 0.0 because the User wanted the LLM response to \"add and stack three specific NASA Worldview layers for 2024-07-04 with specified opacities\" in a global view using Worldview’s Add Layers search, but the LLM response \"did not perform or describe any of those steps\" and instead only returned an error message: \"[UsageLimitExceeded] The next request would exceed the request_limit of 50...\", which provides no layer setup, date selection, or opacity instructions."
+        },
+        "Tool efficiency": {
+          "score": 0.6415,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "53 tool calls, 19 wasted ({'duplicate': 17, 'errored': 0, 'discovery': 1, 'error_turn': 1})"
+        },
+        "Time efficiency": {
+          "score": 0.0643,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 933.3 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 0.0132,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 1510833 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 0.0,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "The score is 0.0 because the assistant’s message #1 is completely unrelated: the user requested “step-by-step actions to add and configure specific NASA Worldview layers and opacities,” but message #1 only provides an unrelated “usage-limit error notice” and does not describe any steps, layers, or opacity settings."
+        }
+      }
+    },
+    {
+      "golden": "workflow-a-wildfire",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "ff23f4db-231a-47ef-9b0c-525f368d8db6",
+      "turns": 5,
+      "error_turns": 0,
+      "tool_calls": 20,
+      "seconds": 208.989,
+      "input_tokens": 383142,
+      "output_tokens": 11644,
+      "cache_read_tokens": 354688,
+      "reasoning_tokens": 6122,
+      "total_tokens": 394786,
+      "cache_adjusted_tokens": 75567,
+      "requests": 25,
+      "cost_usd": 0.274881,
+      "final_url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MODIS_Terra_Aerosol_Optical_Depth_3km(opacity=1,min=0,max=2,squash),Coastlines_15m,Admin_Boundaries,DoS_International_Boundaries,Reference_Features_15m&t=2025-09-30&v=-125.61070304302204,31.999999999999993,-112.38929695697796,42.50000000000001&p=geographic&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=-125.61070304302204,31.999999999999993,-112.38929695697796,42.50000000000001&cht=2025-09-01&cht2=2025-09-30&chch=true",
+      "metrics": {
+        "Success": {
+          "score": 0.6923,
+          "success": false,
+          "threshold": 0.8,
+          "reason": "matched ['layer:MODIS_Terra_Aerosol_Optical_Depth_3km', 'chart', 'chart.layer', 'chart.start', 'chart.end', 'styling', 'styling.min', 'styling.max', 'styling.squash']; missed ['time', 'compare', 'compare.time', 'compare.mode']"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "checkpoints 1.00 (reached [0, 1, 2, 3, 4]), conversation completeness 1.00: The score is 1.0 because the LLM response fully satisfied all stated user intentions: it guided the user to visualize the MODIS Aqua Aerosol Optical Depth 3km layer in NASA Worldview on 2025-09-15 over California using the provided layer ID, set up a swipe comparison between 2025-09-15 and 2025-09-14 for the same view, switched the swipe from Aqua to the Terra equivalent layer, produced instructions to plot a 2025-09-01 to 2025-09-30 September 2025 time series over the same California area via Worldview’s chart panel, and explained how to adjust the color scale/palette range to 0–2 to highlight high AOD values. No missing steps or unaddressed requirements are indicated."
+        },
+        "Tool efficiency": {
+          "score": 0.85,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "20 tool calls, 3 wasted ({'duplicate': 3, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 41.8 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 15113 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), so there are no assistant messages or specific information to quote as irrelevant to the user messages."
+        }
+      }
+    },
+    {
+      "golden": "workflow-a-wildfire",
+      "agent": "vlm",
+      "dataset": "gold",
+      "session_id": "d3bfdd66-e527-4f3b-b226-0569607cb66e",
+      "turns": 5,
+      "error_turns": 2,
+      "tool_calls": 267,
+      "seconds": 2437.979,
+      "input_tokens": 14954342,
+      "output_tokens": 128133,
+      "cache_read_tokens": 2708608,
+      "reasoning_tokens": 28598,
+      "total_tokens": 15082475,
+      "cache_adjusted_tokens": 12644728,
+      "requests": 175,
+      "cost_usd": 1.164087,
+      "final_url": "https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,MODIS_Aqua_Aerosol_Optical_Depth_3km(hidden),OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2025-09-15-T08%3A48%3A39Z&t1=2025-09-14-T08%3A48%3A39Z",
+      "metrics": {
+        "Success": {
+          "score": 0.3846,
+          "success": false,
+          "threshold": 0.8,
+          "reason": "matched ['layer:MODIS_Terra_Aerosol_Optical_Depth_3km', 'time', 'compare', 'compare.time', 'compare.mode']; missed ['chart', 'chart.layer', 'chart.start', 'chart.end', 'styling', 'styling.min', 'styling.max', 'styling.squash']"
+        },
+        "Completion": {
+          "score": 0.7,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "checkpoints 0.60 (reached [0, 1, 2]), conversation completeness 0.80: The score is 0.8 because the assistant largely addressed the user’s Worldview visualization and swipe-comparison goals, but it did not complete the final request to \"plot a time series of AOD … for September 2025 … using Worldview’s chart panel\" for \"MODIS_Terra_Aerosol_Optical_Depth_3km\". Instead of providing the chart steps or a configured Worldview link, the response stopped with an error: \"[UsageLimitExceeded] The next request would exceed the request_limit of 50,\" so the September 2025 Terra AOD time-series chart over California was not produced."
+        },
+        "Tool efficiency": {
+          "score": 0.6245,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "269 tool calls, 101 wasted ({'duplicate': 99, 'errored': 0, 'discovery': 0, 'error_turn': 2})"
+        },
+        "Time efficiency": {
+          "score": 0.1231,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 487.6 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 0.0079,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 2528946 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 0.6,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "The score is 0.6 because multiple assistant replies fail to address the user’s concrete Worldview requests. In message 3, after the user asked to 'switch the swipe comparison from MODIS Aqua to the MODIS Terra AOD 3km layer while keeping the same dates,' the assistant instead gives an unrelated 'usage-limit error' and provides no Worldview link/configuration or instructions for the layer swap. In message 5, when the user asked to 'plot a September 2025 time series in Worldview’s chart panel for the Terra AOD layer,' the assistant again only reports a 'usage limit error' and does not explain how to open the chart, select the layer, choose dates, or generate the time series."
+        }
+      }
+    },
+    {
+      "golden": "workflow-b-saharan-dust",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "9e8be41b-ce6d-4d5d-97d4-22040c5f2b3d",
+      "turns": 5,
+      "error_turns": 0,
+      "tool_calls": 24,
+      "seconds": 217.287,
+      "input_tokens": 449137,
+      "output_tokens": 12767,
+      "cache_read_tokens": 413568,
+      "reasoning_tokens": 8237,
+      "total_tokens": 461904,
+      "cache_adjusted_tokens": 89694,
+      "requests": 29,
+      "cost_usd": 0.313358,
+      "final_url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,MODIS_Aqua_Aerosol_Optical_Depth_3km,Reference_Features_15m&t=2023-06-15&v=-30.055089192025186,10,-14.944910807974816,22&p=geographic&cha=true&chl=MODIS_Aqua_Aerosol_Optical_Depth_3km&chc=-26,14,-22,18&cht=2023-06-15&cht2=2023-06-30&chch=true",
+      "metrics": {
+        "Success": {
+          "score": 0.5556,
+          "success": false,
+          "threshold": 0.8,
+          "reason": "matched ['layer:MODIS_Aqua_Aerosol_Optical_Depth_3km', 'chart', 'chart.layer', 'chart.start', 'chart.end']; missed ['time', 'compare', 'compare.time', 'compare.mode']"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "checkpoints 1.00 (reached [0, 1, 2, 3]), conversation completeness 1.00: The score is 1.0 because the LLM response fully addresses the user’s goals: it visualizes the \"MODIS_Aqua_Aerosol_Optical_Depth_3km\" layer in NASA Worldview for the requested date/region, updates the visualization date while preserving the same layer and view, sets up a swipe comparison between two dates for that same layer/view, generates a Worldview chart of daily mean AOD over the specified region and date range, and then narrows the chart’s date range without changing the layer or region."
+        },
+        "Tool efficiency": {
+          "score": 0.875,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "24 tool calls, 3 wasted ({'duplicate': 3, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 43.5 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 17939 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because the Irrelevancies list is empty ([]), so there are no identified cases where any assistant message (no specific message quoted) contained irrelevant information relative to the user messages."
+        }
+      }
+    },
+    {
+      "golden": "workflow-b-saharan-dust",
+      "agent": "vlm",
+      "dataset": "gold",
+      "session_id": "e0e65627-99b8-4765-b34e-5f6684516803",
+      "turns": 5,
+      "error_turns": 1,
+      "tool_calls": 187,
+      "seconds": 1431.706,
+      "input_tokens": 9058640,
+      "output_tokens": 78958,
+      "cache_read_tokens": 4878208,
+      "reasoning_tokens": 40482,
+      "total_tokens": 9137598,
+      "cache_adjusted_tokens": 4747212,
+      "requests": 144,
+      "cost_usd": 1.857145,
+      "final_url": "https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Aqua_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Aqua_Aerosol_Optical_Depth_3km&chc=8.5195,-9.9766,35.0742,16.5781&cht=2023-06-15-T09%3A29%3A18Z&cht2=2023-06-30-T09%3A29%3A18Z&chch=true&t=2023-06-18-T09%3A29%3A18Z",
+      "metrics": {
+        "Success": {
+          "score": 0.6667,
+          "success": false,
+          "threshold": 0.8,
+          "reason": "matched ['layer:MODIS_Aqua_Aerosol_Optical_Depth_3km', 'time', 'chart', 'chart.layer', 'chart.start', 'chart.end']; missed ['compare', 'compare.time', 'compare.mode']"
+        },
+        "Completion": {
+          "score": 0.775,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "checkpoints 0.75 (reached [0, 1, 2]), conversation completeness 0.80: The score is 0.8 because most visualization steps appear to have been addressed, but the charting goal was only partially met: when the user asked to \"Chart the daily mean AOD over the Cabo Verde region for June 2023...\" the LLM response failed with \"[UsageLimitExceeded] The next request would exceed the request_limit of 50.\" As a result, the full June 2023 (\"2023-06-01 through 2023-06-30\") daily-mean Cabo Verde AOD time-series was not produced; the later response only confirms a narrower range (\"Charting date range is now narrowed to **2023-06-15 through 2023-06-30**\"), which doesn’t fulfill the original full-month chart request."
+        },
+        "Tool efficiency": {
+          "score": 0.5904,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "188 tool calls, 77 wasted ({'duplicate': 76, 'errored': 0, 'discovery': 0, 'error_turn': 1})"
+        },
+        "Time efficiency": {
+          "score": 0.2095,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 286.3 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 0.0211,
+          "success": false,
+          "threshold": 0.5,
+          "reason": "mean 949442 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 0.8,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 0.8 because message 4 is largely irrelevant: the user asked to “chart the daily mean AOD over the Cabo Verde region for June 2023 using Worldview’s chart panel,” but the assistant only stated a “usage limit error” and did not provide the requested chart, steps to use the chart panel, or any AOD results for Cabo Verde in June 2023."
+        }
+      }
+    }
+  ],
+  "ratios": {
+    "core-1-single-render": {
+      "vlm/geoui": {
+        "tool_calls": 23.5,
+        "seconds": 19.321,
+        "cache_adjusted_tokens": 10.531,
+        "total_tokens": 25.416
+      }
+    },
+    "core-2-date-change": {
+      "vlm/geoui": {
+        "tool_calls": 5.333,
+        "seconds": 5.161,
+        "cache_adjusted_tokens": 5.642,
+        "total_tokens": 6.166
+      }
+    },
+    "core-3-pan": {
+      "vlm/geoui": {
+        "tool_calls": 43.0,
+        "seconds": 22.649,
+        "cache_adjusted_tokens": 28.79,
+        "total_tokens": 33.734
+      }
+    },
+    "core-4-compare": {
+      "vlm/geoui": {
+        "tool_calls": 28.0,
+        "seconds": 39.907,
+        "cache_adjusted_tokens": 234.452,
+        "total_tokens": 45.807
+      }
+    },
+    "core-5-chart": {
+      "vlm/geoui": {
+        "tool_calls": 20.667,
+        "seconds": 28.726,
+        "cache_adjusted_tokens": 210.59,
+        "total_tokens": 46.87
+      }
+    },
+    "core-6-multilayer": {
+      "vlm/geoui": {
+        "tool_calls": 26.0,
+        "seconds": 45.376,
+        "cache_adjusted_tokens": 220.882,
+        "total_tokens": 47.454
+      }
+    },
+    "workflow-a-wildfire": {
+      "vlm/geoui": {
+        "tool_calls": 13.35,
+        "seconds": 11.666,
+        "cache_adjusted_tokens": 167.331,
+        "total_tokens": 38.204
+      }
+    },
+    "workflow-b-saharan-dust": {
+      "vlm/geoui": {
+        "tool_calls": 7.792,
+        "seconds": 6.589,
+        "cache_adjusted_tokens": 52.927,
+        "total_tokens": 19.782
+      }
+    }
+  },
+  "totals": [
+    {
+      "agent": "geoui",
+      "conversations": 8,
+      "turns": 17,
+      "error_turns": 0,
+      "tool_calls": 62,
+      "seconds": 584.088,
+      "total_tokens": 1126341,
+      "cache_adjusted_tokens": 228475,
+      "cost_usd": 0.781915,
+      "pass_rate": {
+        "Success": 0.75,
+        "Completion": 0.875,
+        "Tool efficiency": 1.0,
+        "Time efficiency": 1.0,
+        "Token efficiency": 1.0,
+        "Turn Relevancy": 1.0
+      },
+      "mean_score": {
+        "Success": 0.906,
+        "Completion": 0.875,
+        "Tool efficiency": 0.9656,
+        "Time efficiency": 1.0,
+        "Token efficiency": 1.0,
+        "Turn Relevancy": 1.0
+      }
+    },
+    {
+      "agent": "vlm",
+      "conversations": 8,
+      "turns": 17,
+      "error_turns": 6,
+      "tool_calls": 817,
+      "seconds": 7503.511,
+      "total_tokens": 32122702,
+      "cache_adjusted_tokens": 23326376,
+      "cost_usd": 4.405228,
+      "pass_rate": {
+        "Success": 0.375,
+        "Completion": 0.625,
+        "Tool efficiency": 0.25,
+        "Time efficiency": 0.0,
+        "Token efficiency": 0.0,
+        "Turn Relevancy": 0.5
+      },
+      "mean_score": {
+        "Success": 0.5064,
+        "Completion": 0.5594,
+        "Tool efficiency": 0.6437,
+        "Time efficiency": 0.1649,
+        "Token efficiency": 0.0875,
+        "Turn Relevancy": 0.55
+      }
+    }
+  ],
+  "metric_names": [
+    "Success",
+    "Completion",
+    "Tool efficiency",
+    "Time efficiency",
+    "Token efficiency",
+    "Turn Relevancy"
+  ]
+}

@@ -1,0 +1,167 @@
+{
+  "trace_id": "cb004bdc-0328-4295-9e74-a776f338e22d",
+  "thread_id": "4843ea80-dca8-4dfe-ae0b-2417fa1e3a15",
+  "source": "simulated",
+  "started_at": "2026-10-28T08:18:15.891454+00:00",
+  "duration_s": 28.49170370795764,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 9988,
+      "output_tokens": 707,
+      "duration_s": 10.55348899983801,
+      "offset_s": 3.2442547080572695,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10193,
+      "output_tokens": 423,
+      "duration_s": 6.60812500002794,
+      "offset_s": 13.805716708069667,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10499,
+      "output_tokens": 144,
+      "duration_s": 2.6806479999795556,
+      "offset_s": 20.42054570792243,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 11018,
+      "output_tokens": 296,
+      "duration_s": 5.111786999972537,
+      "offset_s": 23.369452707935125,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "geoui_extensions": [
+            "geoui:chart/v1.0.0"
+          ],
+          "viewport": {
+            "bbox": [
+              -125,
+              31,
+              -102,
+              49
+            ],
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2024-07-15"
+          },
+          "layers": [
+            {
+              "id": "MOD13Q1_NDVI_16Day",
+              "visible": true,
+              "opacity": 1
+            }
+          ],
+          "chart:layer": "MOD13Q1_NDVI_16Day",
+          "chart:area": [
+            -125,
+            31,
+            -102,
+            49
+          ],
+          "chart:time": {
+            "start": "2024-04-01",
+            "end": "2024-10-31"
+          },
+          "chart:autoload": true
+        },
+        "embed_mode": false
+      },
+      "output": "GeoIntent has `chart:*` fields but does not declare https://geoui.org/ext/chart/v1.0.0 in geoui_extensions",
+      "duration_s": 0.003022999968379736,
+      "offset_s": 13.799721708055586,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "geoui_extensions": [
+            "https://geoui.org/ext/chart/v1.0.0"
+          ],
+          "viewport": {
+            "bbox": [
+              -125,
+              31,
+              -102,
+              49
+            ],
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2024-07-15"
+          },
+          "layers": [
+            {
+              "id": "MOD13Q1_NDVI_16Day",
+              "visible": true,
+              "opacity": 1
+            }
+          ],
+          "chart:layer": "MOD13Q1_NDVI_16Day",
+          "chart:area": [
+            -125,
+            31,
+            -102,
+            49
+          ],
+          "chart:time": {
+            "start": "2024-04-01",
+            "end": "2024-10-31"
+          },
+          "chart:autoload": true
+        },
+        "embed_mode": false
+      },
+      "output": "{\"url\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MOD13Q1_NDVI_16Day(opacity=1),Coastlines_15m,Reference_Features_15m&t=2024-07-15&v=-125,31,-102,49&p=geographic&cha=true&chl=MOD13Q1_NDVI_16Day&chc=-125,31,-102,49&cht=2024-04-01&cht2=2024-10-31&chch=true\"}",
+      "duration_s": 0.0005989999044686556,
+      "offset_s": 20.416190708056092,
+      "error": null
+    },
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MOD13Q1_NDVI_16Day(opacity=1),Coastlines_15m,Reference_Features_15m&t=2024-07-15&v=-125,31,-102,49&p=geographic&cha=true&chl=MOD13Q1_NDVI_16Day&chc=-125,31,-102,49&cht=2024-04-01&cht2=2024-10-31&chch=true"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MOD13Q1_NDVI_16Day(opacity=1),Coastlines_15m,Reference_Features_15m&t=2024-07-15&v=-125,31,-102,49&p=geographic&cha=true&chl=MOD13Q1_NDVI_16Day&chc=-125,31,-102,49&cht=2024-04-01&cht2=2024-10-31&chch=true');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MOD13Q1_NDVI_16Day(opacity=1),Coastlines_15m,Reference_Features_15m&t=2024-07-15&v=-125,31,-102,49&p=geographic&cha=true&chl=MOD13Q1_NDVI_16Day&chc=-125,31,-102,49&cht=2024-04-01&cht2=2024-10-31&chch=true\n- Page Title: NASA Worldview\n- Console: 0 errors, 1 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-28T08-18-39-255Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-28T08-18-38-997Z.log#L1",
+      "duration_s": 0.26241500000469387,
+      "offset_s": 23.10434970795177,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 41698,
+    "output_tokens": 1570,
+    "total_tokens": 43268,
+    "requests": 4,
+    "cache_read_tokens": 37376,
+    "reasoning_tokens": 801,
+    "tool_calls": 2,
+    "cost_usd": 0.0360843
+  },
+  "usage_source": "pydantic_ai"
+}
