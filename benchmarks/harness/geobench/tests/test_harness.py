@@ -165,6 +165,15 @@ def test_no_cdp_endpoint_means_no_reset(tmp_path):
     assert resets.calls == []
 
 
+def test_respond_is_what_deepeval_sees_as_an_async_callback(tmp_path):
+    import inspect
+
+    runner, _ = _runner(tmp_path, _text_agent)
+    assert inspect.iscoroutinefunction(runner.respond)
+    assert not inspect.iscoroutinefunction(runner)  # the instance itself would be treated as sync by deepeval
+    assert set(inspect.signature(runner.respond).parameters) == {"input", "turns", "thread_id"}
+
+
 def test_unknown_kind_is_rejected(tmp_path):
     with pytest.raises(ValueError):
         ConversationRunner(FakeApp(), "nope", run_dir=tmp_path, cdp_endpoint=None, dataset="d", run_name="r")

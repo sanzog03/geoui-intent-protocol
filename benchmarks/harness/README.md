@@ -17,7 +17,7 @@ dataset JSON ──goldens_for(agent)──▶ ConversationalGolden (+ verbatim 
                                          │
                        deepeval ConversationSimulator (simulated user, gpt-5.2)
                                          │  calls, per user turn
-                            ConversationRunner(app, kind)        ← harness.py
+                     ConversationRunner(app, kind).respond     ← harness.py
                                          │  traced_turn: agent.run under a deepeval span
                            TurnTrace (llm/tool spans)  +  TurnRecord row
                                          │

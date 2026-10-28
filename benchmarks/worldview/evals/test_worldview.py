@@ -113,7 +113,7 @@ def test_conversation(runner: ConversationRunner, dataset_name: str, golden: Con
     runner.dataset = dataset_name
     runner.start_golden(golden.name)
 
-    simulator_kwargs = {"model_callback": runner, "simulator_model": JUDGE, "max_concurrent": 1}
+    simulator_kwargs = {"model_callback": runner.respond, "simulator_model": JUDGE, "max_concurrent": 1}
     if meta.is_gold:  # synthetic goldens keep deepeval's expected_outcome stop rule
         simulator_kwargs["stopping_controller"] = state_reached_controller(APP)
     simulator = ConversationSimulator(**simulator_kwargs)

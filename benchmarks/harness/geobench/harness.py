@@ -147,7 +147,13 @@ class ConversationRunner:
 
     # -- the callback ----------------------------------------------------
 
-    async def __call__(self, input: str, turns: list[Turn], thread_id: str) -> Turn:
+    async def respond(self, input: str, turns: list[Turn], thread_id: str) -> Turn:
+        """Answer one simulated user turn.
+
+        Pass **this bound method** as deepeval's ``model_callback``: the simulator
+        detects async callbacks with ``inspect.iscoroutinefunction``, which is false
+        for an instance whose ``__call__`` is async.
+        """
         agent = self.ensure_agent()
         if thread_id not in self._history:
             self._history[thread_id] = []
@@ -225,6 +231,9 @@ class ConversationRunner:
             ],
             metadata=turn_metadata(record, run.trace),
         )
+
+    async def __call__(self, input: str, turns: list[Turn], thread_id: str) -> Turn:
+        return await self.respond(input, turns, thread_id)
 
     async def _reset_for_new_conversation(self) -> None:
         if self._reset_browser is None or not self.cdp_endpoint:
