@@ -85,7 +85,13 @@ def observe_or_none(app: BenchmarkApp, url: str | None) -> Any:
 
 
 class _DeterministicMetric(BaseConversationalMetric):
-    """No LLM: ``measure`` sets score / success / reason; ``a_measure`` delegates to it."""
+    """No LLM: ``measure`` sets score / success / reason; ``a_measure`` delegates to it.
+
+    deepeval re-instantiates metrics per test case (``copy_metrics``) by calling the
+    class with every instance attribute whose name is an ``__init__`` parameter
+    somewhere in the MRO, so each constructor accepts ``threshold`` and the
+    attributes it stores under their own names.
+    """
 
     name = "Deterministic"
     evaluation_cost = None
@@ -127,8 +133,8 @@ class SuccessMetric(_DeterministicMetric):
 
     name = "Success"
 
-    def __init__(self, app: BenchmarkApp):
-        super().__init__(threshold=1.0)
+    def __init__(self, app: BenchmarkApp, threshold: float = 1.0):
+        super().__init__(threshold=threshold)
         self.app = app
 
     def measure(self, test_case: ConversationalTestCase, *args: Any, **kwargs: Any) -> float:

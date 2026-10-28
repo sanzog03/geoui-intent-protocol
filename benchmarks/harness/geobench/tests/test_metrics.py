@@ -195,6 +195,16 @@ def test_metric_sets_are_fresh_instances():
     ]
 
 
+def test_metrics_survive_deepevals_per_test_case_copy():
+    from deepeval.metrics.utils.metrics import copy_metrics
+
+    originals = gold_metrics(APP, model=None)
+    copies = copy_metrics(originals)
+    assert [type(c) for c in copies] == [type(o) for o in originals]
+    assert all(c is not o for c, o in zip(copies, originals, strict=True))
+    assert copies[0].app is APP and copies[2].threshold == originals[2].threshold
+
+
 def _golden(**meta: Any) -> ConversationalGolden:
     return ConversationalGolden(scenario="s", additional_metadata=meta)
 
