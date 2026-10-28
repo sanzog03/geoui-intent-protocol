@@ -82,6 +82,10 @@ extend-exclude = ["demo/worldview/agents/artifact"]
 line-ending = "lf"
 quote-style = "double"
 
+[tool.ruff.lint.isort]
+# the four workspace packages are first-party wherever they are imported from
+known-first-party = ["geoui", "worldview", "geobench", "worldview_benchmark"]
+
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = ["F841"]
 "demo/worldview/tests/**/*.py" = ["F841"]

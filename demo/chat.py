@@ -278,6 +278,7 @@ def _agent(VARIANT, cdp_endpoint, missing_keys):
     task.
     """
     from pydantic_ai.capabilities import Hooks
+
     from worldview.agents import TextOutput
     from worldview.agents.benchmark import new_session_id
 
@@ -383,6 +384,7 @@ def _chat(AGENT, TextOutput, VARIANT, agent, mo, session):
 
     from pydantic_ai.exceptions import ModelAPIError
     from pydantic_ai.usage import RunUsage, UsageLimits
+
     from worldview.agents import REQUEST_LIMIT
     from worldview.agents.benchmark import (
         ErrorRecord,
