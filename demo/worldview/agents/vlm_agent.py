@@ -2,13 +2,14 @@
 Playwright browser control, on a bare pydantic-ai ``Agent``.
 
 The skill knows nothing about the GeoUI protocol: it discovers layers with
-the same remote MCPs and builds URLs with ``worldview_permalink_tool``. The
-baseline adds a second system-prompt part, :data:`VLM_BROWSER_ADDENDUM`,
-that tells the model to apply changes through Worldview's own UI with the
-eleven Playwright tools (snapshot, screenshot, click, type, drag, ...) and to
-read the final URL back from ``window.location.href``. This is the "drive
-the app like a person would" baseline the poster compared the protocol
-against.
+the same remote MCPs and, in its own step 6, would build URLs with
+``worldview_permalink_tool``. The baseline does not wire that tool (the poster
+baseline never had it, and offering it next to UI control made the model loop
+on it); instead a second system-prompt part, :data:`VLM_BROWSER_ADDENDUM`,
+overrides step 6: apply changes through Worldview's own UI with the eleven
+Playwright tools (snapshot, screenshot, click, type, drag, ...) and read the
+final URL back from ``window.location.href``. This is the "drive the app like
+a person would" baseline the poster compared the protocol against.
 
 Smoke test (one LLM call, needs ``.env``)::
 
@@ -36,7 +37,6 @@ from worldview.agents._common import (
     standard_capabilities,
 )
 from worldview.plugin import MIO_SKILL_DIR, Skill, load_skill, reference_toolset
-from worldview.tools.pai import permalink_toolset
 
 AGENT_NAME = "worldview_vlm_agent"
 SKILL_NAME = "mio-worldviewagent-v2"
@@ -48,6 +48,12 @@ VLM_BROWSER_ADDENDUM = """# BROWSER INTERACTION (this deployment)
 
 You drive the live NASA Worldview page through Playwright MCP tools. The
 browser is your primary action and observation surface.
+
+**This overrides step 6 ("Permalink generation") above.** `worldview_permalink_tool`
+is NOT available in this deployment and you must not try to call it or to
+assemble a Worldview URL yourself. The visualization is produced by operating
+Worldview's UI, and the URL you present is the one you read back from the
+browser at the end of the turn.
 
 ## Available browser tools
 - Observation:
@@ -77,10 +83,9 @@ browser is your primary action and observation surface.
 
 ## Hard constraints
 - **All visualization changes must flow through Worldview's UI controls** —
-  clicks, typing, drags against the live page. `worldview_permalink_tool`
-  may be used to *reason about* parameters, but the state of the
+  clicks, typing, drags against the live page. The state of the
   visualization is whatever you produce by manipulating the UI; do not
-  `browser_navigate` to a permalink after the initial landing-page navigation.
+  `browser_navigate` to any URL other than the initial landing page.
 - **Once-per-turn observation budget.** Take at most **one** `browser_snapshot`
   at the start of the turn, and at most **one** `browser_take_screenshot` if
   the snapshot alone is insufficient. If you've already snapshotted and
@@ -175,7 +180,7 @@ def vlm_spec(
     return AgentSpec(
         name=AGENT_NAME,
         system_prompts=[skill.body, VLM_BROWSER_ADDENDUM],
-        toolsets=[permalink_toolset, reference_toolset(skill)],
+        toolsets=[reference_toolset(skill)],
         capabilities=standard_capabilities(
             servers,
             cdp_endpoint=cdp_endpoint,

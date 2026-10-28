@@ -67,7 +67,7 @@ def test_variants_differ_only_where_intended():
         "list_references",
         "read_reference",
     }
-    assert set(vlm["local_tools"]) == {"worldview_permalink_tool", "list_references", "read_reference"}
+    assert set(vlm["local_tools"]) == {"list_references", "read_reference"}  # no URL builder: UI only
 
     pw = lambda s: next(c for c in s["capabilities"] if c["id"] == "playwright_mcp")
     assert pw(geoui)["allowed_tools"] == ["browser_navigate", "browser_evaluate"]
