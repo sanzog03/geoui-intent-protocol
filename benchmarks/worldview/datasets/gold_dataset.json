@@ -1,0 +1,208 @@
+[
+  {
+    "name": "core-1-single-render",
+    "scenario": "You are an atmospheric scientist who has already identified the exact NASA Worldview layer you need (MODIS Aqua Aerosol Optical Depth 3 km, layer id MODIS_Aqua_Aerosol_Optical_Depth_3km) and the date (2025-09-15). You want it shown over the contiguous US. You will not ask for anything else: once the assistant shows the layer on that date and gives you the Worldview link, you are done.",
+    "expected_outcome": "The assistant renders MODIS_Aqua_Aerosol_Optical_Depth_3km on 2025-09-15 over the contiguous US without running dataset discovery or asking the user to confirm, and replies with a Worldview URL that shows that layer on that date.",
+    "persona": {
+      "characteristics": "Terse, knows Worldview well, states exactly what they want and expects it done without questions. Never invents extra requests."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/manual/prompts.md#1-single-shot-initial-render-baseline",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to visualize the layer `MODIS_Aqua_Aerosol_Optical_Depth_3km` on Worldview for 2025-09-15, focused on the contiguous US. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm.",
+        "vlm": "I want to visualize the \"MODIS Aqua Aerosol Optical Depth 3km\" layer on NASA Worldview for 2025-09-15, focused on the contiguous US. I've already picked this layer — please add it via Worldview's Add Layers search and set up the view directly, no further dataset discovery or confirmation needed."
+      },
+      "max_user_simulations": 0,
+      "state_threshold": 1.0,
+      "expected_state": {
+        "layers": {"MODIS_Aqua_Aerosol_Optical_Depth_3km": null},
+        "time": "2025-09-15"
+      }
+    }
+  },
+  {
+    "name": "core-2-date-change",
+    "scenario": "You are a remote-sensing analyst looking at Florida. You have already identified the exact Worldview layer (VIIRS SNPP Corrected Reflectance True Color, layer id VIIRS_SNPP_CorrectedReflectance_TrueColor) for 2024-09-26. Steps still to request, in order, one per message: 1. Move the date forward by one day, to 2024-09-27 (say exactly: \"Now move the date forward by one day, to 2024-09-27.\"). After the date is moved and you have the link, you are done.",
+    "expected_outcome": "The assistant first shows VIIRS_SNPP_CorrectedReflectance_TrueColor over Florida on 2024-09-26, then, on request, moves the same view to 2024-09-27 and replies with a Worldview URL for 2024-09-27 with the same layer.",
+    "persona": {
+      "characteristics": "Brief and precise. Follows the listed steps in order, one per message, never skips a step and never adds requests that are not listed."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/manual/prompts.md#2-refining-change-date-only",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to visualize the layer `VIIRS_SNPP_CorrectedReflectance_TrueColor` on Worldview for 2024-09-26, focused on Florida. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm.",
+        "vlm": "I want to visualize the \"VIIRS SNPP Corrected Reflectance (True Color)\" layer on NASA Worldview for 2024-09-26, focused on Florida. I've already picked this layer — please add it via Worldview's Add Layers search and set up the view directly, no further dataset discovery or confirmation needed."
+      },
+      "max_user_simulations": 1,
+      "state_threshold": 1.0,
+      "expected_state": {
+        "layers": {"VIIRS_SNPP_CorrectedReflectance_TrueColor": null},
+        "time": "2024-09-27"
+      },
+      "checkpoints": [
+        {"layers": {"VIIRS_SNPP_CorrectedReflectance_TrueColor": null}, "time": "2024-09-26"}
+      ]
+    }
+  },
+  {
+    "name": "core-3-pan",
+    "scenario": "You are an oceanographer. You have already identified the exact Worldview layer (GHRSST L4 MUR Sea Surface Temperature Anomalies, layer id GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies) for 2022-08-19 on a global view. Steps still to request, in order, one per message: 1. Pan the map to the Gulf of Mexico (say exactly: \"Now pan the map to the Gulf of Mexico.\"). After the map is centred on the Gulf of Mexico and you have the link, you are done.",
+    "expected_outcome": "The assistant shows GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies on 2022-08-19 globally, then on request pans the view to the Gulf of Mexico keeping the same layer and date, and replies with a Worldview URL.",
+    "persona": {
+      "characteristics": "Brief and precise. Follows the listed steps in order, one per message, never skips a step and never adds requests that are not listed."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/manual/prompts.md#3-refining-pan-to-a-place-by-name",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to visualize the layer `GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies` on Worldview for 2022-08-19 on a global view. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm.",
+        "vlm": "I want to visualize the \"GHRSST L4 MUR Sea Surface Temperature Anomalies\" layer on NASA Worldview for 2022-08-19 on a global view. I've already picked this layer — please add it via Worldview's Add Layers search and set up the view directly, no further dataset discovery or confirmation needed."
+      },
+      "max_user_simulations": 1,
+      "state_threshold": 1.0,
+      "expected_state": {
+        "layers": {"GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies": null},
+        "time": "2022-08-19"
+      },
+      "checkpoints": [
+        {"layers": {"GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies": null}, "time": "2022-08-19"}
+      ]
+    }
+  },
+  {
+    "name": "core-4-compare",
+    "scenario": "You are a climate scientist comparing day and night surface air temperature. You have already identified both exact Worldview layers: AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean (A side) and AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean (B side), for 2025-08-01, global view, swipe compare with the slider at 50%. You will not ask for anything else: once the comparison is set up and you have the link, you are done.",
+    "expected_outcome": "The assistant enables Worldview's swipe comparison on 2025-08-01 with the AIRS day-mean layer on side A and the AIRS night-mean layer on side B, without discovery or confirmation, and replies with a Worldview URL in compare mode.",
+    "persona": {
+      "characteristics": "Terse, knows Worldview well, states exactly what they want and expects it done without questions. Never invents extra requests."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/manual/prompts.md#4-comparison-mode-ab-swipe",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to compare two layers side-by-side on Worldview for 2025-08-01: `AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean` as the A-side and `AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean` as the B-side, on a global view, using swipe compare mode with the slider at 50%. I've already identified both exact layer IDs — please render this directly without further dataset discovery or asking me to confirm.",
+        "vlm": "I want to compare two layers side-by-side on NASA Worldview for 2025-08-01: \"AIRS Surface Air Temperature (Day)\" as the A-side and \"AIRS Surface Air Temperature (Night)\" as the B-side, on a global view, using swipe compare mode with the slider at 50%. I've already picked both layers — please enable comparison via Worldview's UI directly, no further dataset discovery or confirmation needed."
+      },
+      "max_user_simulations": 0,
+      "state_threshold": 1.0,
+      "expected_state": {
+        "layers": {"AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean": null},
+        "time": "2025-08-01",
+        "compare": {"mode": "swipe", "layers": ["AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean"]}
+      }
+    }
+  },
+  {
+    "name": "core-5-chart",
+    "scenario": "You are a vegetation scientist. You have already identified the exact Worldview layer (MOD13Q1 NDVI 16-Day, layer id MOD13Q1_NDVI_16Day) for 2024-07-15 over the western US, and you also want Worldview's chart panel showing a time series of that layer over the same area from 2024-04-01 through 2024-10-31, autoloaded. You will not ask for anything else: once the view and the chart are set up and you have the link, you are done.",
+    "expected_outcome": "The assistant shows MOD13Q1_NDVI_16Day on 2024-07-15 over the western US with Worldview's chart panel enabled for that layer from 2024-04-01 to 2024-10-31, autoloaded, without discovery or confirmation, and replies with a Worldview URL that carries the chart state.",
+    "persona": {
+      "characteristics": "Terse, knows Worldview well, states exactly what they want and expects it done without questions. Never invents extra requests."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/manual/prompts.md#5-charting-time-series",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to visualize the layer `MOD13Q1_NDVI_16Day` on Worldview for 2024-07-15 over the western US, and also enable Worldview's chart panel showing a time series of that same layer over the same area from 2024-04-01 through 2024-10-31, autoloaded. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm.",
+        "vlm": "I want to visualize the \"MOD13Q1 NDVI 16-Day\" layer on NASA Worldview for 2024-07-15 over the western US, and also enable Worldview's chart panel showing a time series of that same layer over the same area from 2024-04-01 through 2024-10-31, autoloaded. I've already picked this layer — please render and enable the chart via Worldview's UI directly, no further dataset discovery or confirmation needed."
+      },
+      "max_user_simulations": 0,
+      "state_threshold": 1.0,
+      "expected_state": {
+        "layers": {"MOD13Q1_NDVI_16Day": null},
+        "time": "2024-07-15",
+        "chart": {"layer": "MOD13Q1_NDVI_16Day", "start": "2024-04-01", "end": "2024-10-31", "autoload": true}
+      }
+    }
+  },
+  {
+    "name": "core-6-multilayer",
+    "scenario": "You are a cartographer stacking three Worldview layers for 2024-07-04 on a global view, all already identified by exact id: MODIS_Aqua_CorrectedReflectance_TrueColor at full opacity as the base, Reference_Labels_15m at 60% opacity, and Reference_Features_15m at 80% opacity. You will not ask for anything else: once the three layers are stacked at those opacities and you have the link, you are done.",
+    "expected_outcome": "The assistant stacks MODIS Aqua true color (opacity 1.0), Reference Labels (opacity 0.6) and Reference Features (opacity 0.8) on 2024-07-04 globally, without discovery or confirmation, and replies with a Worldview URL carrying those layers and opacities.",
+    "persona": {
+      "characteristics": "Terse, knows Worldview well, states exactly what they want and expects it done without questions. Never invents extra requests."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/manual/prompts.md#6-multi-layer-overlay",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to visualize three layers stacked together on Worldview for 2024-07-04 on a global view: `MODIS_Aqua_CorrectedReflectance_TrueColor` at full opacity as the base, `Reference_Labels_15m` at 60% opacity, and `Reference_Features_15m` at 80% opacity. I've already identified all three exact layer IDs — please render this directly without further dataset discovery or asking me to confirm.",
+        "vlm": "I want to visualize three layers stacked together on NASA Worldview for 2024-07-04 on a global view: \"MODIS Aqua Corrected Reflectance (True Color)\" at full opacity as the base, \"Reference Labels\" at 60% opacity, and \"Reference Features\" at 80% opacity. I've already picked all three layers — please add them via Worldview's Add Layers search and stack them at those opacities directly, no further dataset discovery or confirmation needed."
+      },
+      "max_user_simulations": 0,
+      "state_threshold": 1.0,
+      "expected_state": {
+        "layers": {
+          "MODIS_Aqua_CorrectedReflectance_TrueColor": 1.0,
+          "Reference_Labels_15m": 0.6,
+          "Reference_Features_15m": 0.8
+        },
+        "time": "2024-07-04"
+      }
+    }
+  },
+  {
+    "name": "workflow-a-wildfire",
+    "scenario": "You are tracking California wildfire smoke in Worldview. You have already identified the exact aerosol layer (MODIS Aqua Aerosol Optical Depth 3 km, layer id MODIS_Aqua_Aerosol_Optical_Depth_3km) for 2025-09-15 over California. Steps still to request, in order, one per message, after the first view is shown: 1. \"Compare it to the previous day.\" (a swipe comparison of the same layer against 2025-09-14). 2. \"Switch to the morning MODIS Terra sensor instead of Aqua.\" (the Terra equivalent is MODIS_Terra_Aerosol_Optical_Depth_3km; mention that exact id). 3. \"Plot a time series of AOD over that area for September 2025, from 2025-09-01 through 2025-09-30.\" (Worldview's chart panel for the aerosol layer). 4. \"Adjust the colour scale to emphasise high AOD values, 0 to 2, squashing the palette to that range.\" After step 4 is applied and you have the link, you are done.",
+    "expected_outcome": "Over five turns the assistant shows the Aqua aerosol layer over California on 2025-09-15, enables a swipe comparison against 2025-09-14, switches the aerosol layer to MODIS_Terra_Aerosol_Optical_Depth_3km, enables a chart of that layer over the area for 2025-09-01 to 2025-09-30, and finally sets the aerosol layer's colour scale to min 0, max 2 with squash, replying with a Worldview URL after each step.",
+    "persona": {
+      "characteristics": "A focused analyst. Follows the listed steps in order, one per message, waits for each to be applied, never skips a step and never adds requests that are not listed. Quotes exact layer ids and dates when given."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/manual/workflows.md#workflow-a-california-wildfire-smoke-tracking",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to visualize the layer `MODIS_Aqua_Aerosol_Optical_Depth_3km` on Worldview for 2025-09-15, focused on California. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm.",
+        "vlm": "I want to visualize the \"MODIS Aqua Aerosol Optical Depth 3km\" layer on NASA Worldview for 2025-09-15, focused on California. I've already picked this layer — please add it via Worldview's Add Layers search and set up the view directly, no further dataset discovery or confirmation needed."
+      },
+      "max_user_simulations": 4,
+      "state_threshold": 0.8,
+      "expected_state": {
+        "layers": {"MODIS_Terra_Aerosol_Optical_Depth_3km": null},
+        "time": "2025-09-15",
+        "compare": {"time": "2025-09-14", "mode": "swipe"},
+        "chart": {"layer": "MODIS_Terra_Aerosol_Optical_Depth_3km", "start": "2025-09-01", "end": "2025-09-30"},
+        "styling": {"layer": "MODIS_Terra_Aerosol_Optical_Depth_3km", "min": 0, "max": 2, "squash": true}
+      },
+      "checkpoints": [
+        {"layers": {"MODIS_Aqua_Aerosol_Optical_Depth_3km": null}, "time": "2025-09-15"},
+        {"compare": {"time": "2025-09-14", "mode": "swipe"}},
+        {"layers": {"MODIS_Terra_Aerosol_Optical_Depth_3km": null}},
+        {"chart": {"layer": "MODIS_Terra_Aerosol_Optical_Depth_3km", "start": "2025-09-01", "end": "2025-09-30"}},
+        {"styling": {"layer": "MODIS_Terra_Aerosol_Optical_Depth_3km", "min": 0, "max": 2, "squash": true}}
+      ]
+    }
+  },
+  {
+    "name": "workflow-b-saharan-dust",
+    "scenario": "You are studying Saharan dust transport over the tropical Atlantic in Worldview. You have already identified the exact aerosol layer (MODIS Aqua Aerosol Optical Depth 3 km, layer id MODIS_Aqua_Aerosol_Optical_Depth_3km) for 2023-06-15 over the tropical Atlantic. Steps still to request, in order, one per message, after the first view is shown: 1. \"Step forward three days.\" (to 2023-06-18). 2. \"Compare this date with the same date last week.\" (a swipe comparison against 2023-06-11). 3. \"Chart the daily mean AOD over the Cabo Verde region for June 2023, 2023-06-01 through 2023-06-30.\" (Worldview's chart panel for the aerosol layer). 4. \"Narrow the chart's date range to the second half of June, 2023-06-15 through 2023-06-30.\" After step 4 is applied and you have the link, you are done.",
+    "expected_outcome": "Over five turns the assistant shows the Aqua aerosol layer over the tropical Atlantic on 2023-06-15, steps the date to 2023-06-18, enables a swipe comparison against 2023-06-11, enables a chart of the aerosol layer over Cabo Verde for 2023-06-01 to 2023-06-30, and narrows the chart range to 2023-06-15 to 2023-06-30, replying with a Worldview URL after each step.",
+    "persona": {
+      "characteristics": "A focused analyst. Follows the listed steps in order, one per message, waits for each to be applied, never skips a step and never adds requests that are not listed. Quotes exact layer ids and dates when given."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/manual/workflows.md#workflow-b-saharan-dust-transport-over-the-atlantic",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to visualize the layer `MODIS_Aqua_Aerosol_Optical_Depth_3km` on Worldview for 2023-06-15, focused on the tropical Atlantic. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm.",
+        "vlm": "I want to visualize the \"MODIS Aqua Aerosol Optical Depth 3km\" layer on NASA Worldview for 2023-06-15, focused on the tropical Atlantic. I've already picked this layer — please add it via Worldview's Add Layers search and set up the view directly, no further dataset discovery or confirmation needed."
+      },
+      "max_user_simulations": 4,
+      "state_threshold": 0.8,
+      "expected_state": {
+        "layers": {"MODIS_Aqua_Aerosol_Optical_Depth_3km": null},
+        "time": "2023-06-18",
+        "compare": {"time": "2023-06-11", "mode": "swipe"},
+        "chart": {"layer": "MODIS_Aqua_Aerosol_Optical_Depth_3km", "start": "2023-06-15", "end": "2023-06-30"}
+      },
+      "checkpoints": [
+        {"layers": {"MODIS_Aqua_Aerosol_Optical_Depth_3km": null}, "time": "2023-06-15"},
+        {"time": "2023-06-18"},
+        {"compare": {"time": "2023-06-11", "mode": "swipe"}},
+        {"chart": {"layer": "MODIS_Aqua_Aerosol_Optical_Depth_3km", "start": "2023-06-01", "end": "2023-06-30"}}
+      ]
+    }
+  }
+]

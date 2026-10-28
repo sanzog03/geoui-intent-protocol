@@ -1,0 +1,33 @@
+[
+  {
+    "name": "single-shot",
+    "scenario": "The user wants one layer on one date and will not ask anything else.",
+    "expected_outcome": "The assistant shows the layer on the date and gives a URL.",
+    "persona": {"characteristics": "Terse scientist."},
+    "additional_metadata": {
+      "source": "fixture",
+      "fully_specified": true,
+      "openers": {"a": "opener for a", "b": "opener for b"},
+      "max_user_simulations": 0,
+      "expected_state": {"layers": {"L1": null}, "time": "2025-09-15"}
+    }
+  },
+  {
+    "name": "two-step",
+    "scenario": "The user wants a layer, then a date change.",
+    "expected_outcome": "The date is moved.",
+    "additional_metadata": {
+      "openers": {"a": "opener for a", "b": "opener for b"},
+      "max_user_simulations": 1,
+      "state_threshold": 0.8,
+      "expected_state": {"layers": {"L1": null}, "time": "2025-09-16"},
+      "checkpoints": [{"layers": {"L1": null}, "time": "2025-09-15"}],
+      "budgets": {"seconds_per_turn": 10, "tokens_per_turn": 1000}
+    }
+  },
+  {
+    "name": "synthetic-like",
+    "scenario": "Generated scenario with no expected state.",
+    "expected_outcome": "Something reasonable."
+  }
+]
