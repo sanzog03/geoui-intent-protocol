@@ -1,0 +1,3 @@
+[submodule "demo/vendor/akd-plugins"]
+	path = demo/vendor/akd-plugins
+	url = https://github.com/NASA-IMPACT/akd-plugins
