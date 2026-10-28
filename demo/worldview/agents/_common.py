@@ -43,6 +43,12 @@ REASONING_EFFORT = "medium"
 #: pydantic-ai ``retries``: how many times a tool / output validation failure
 #: is handed back to the model as a retry prompt before the run fails.
 DEFAULT_RETRIES = 1
+#: The UI-driving baseline gets more: Playwright clicks on Worldview time out
+#: now and then (overlays, tile loads) and each timeout is one retry.
+VLM_RETRIES = 3
+#: Playwright MCP action timeout for the baseline (default 5000 ms is too
+#: tight for Worldview's first-visit tour overlay and panel animations).
+VLM_PLAYWRIGHT_ARGS: list[str] = ["--timeout-action", "15000"]
 #: ``UsageLimits.request_limit`` the notebook passes to every run. This is
 #: also pydantic-ai's default; it is stated explicitly so the cap is visible.
 REQUEST_LIMIT = 50
@@ -106,14 +112,19 @@ VLM_BROWSER_DESCRIPTION = (
 )
 
 
-def make_playwright_mcp(servers: Mapping[str, MCPServer], cdp_endpoint: str | None = None) -> MCPServerStdio:
+def make_playwright_mcp(
+    servers: Mapping[str, MCPServer],
+    cdp_endpoint: str | None = None,
+    *,
+    extra_args: Sequence[str] = (),
+) -> MCPServerStdio:
     """A fresh, unstarted Playwright MCP from the plugin config.
 
     ``cdp_endpoint`` (e.g. ``"http://localhost:9222"``) attaches it to the
     already-running Chromium so map state survives across turns; ``None``
     boots a private Chromium per run (first boot downloads ~150 MB).
     """
-    return playwright_server(servers, cdp_endpoint)
+    return playwright_server(servers, cdp_endpoint, extra_args=extra_args)
 
 
 def playwright_capability(server: MCPServerStdio, *, allowed_tools: list[str], description: str) -> MCP:
@@ -174,6 +185,8 @@ class AgentSpec:
     output_cls: type[BaseModel]
     #: Remote MCP servers by config name, after secret substitution.
     servers: dict[str, MCPServer] = field(default_factory=dict)
+    #: pydantic-ai ``retries`` (per-tool and output-validation retry budget).
+    retries: int = DEFAULT_RETRIES
 
 
 def load_servers(environ: Mapping[str, str] | None = None) -> dict[str, MCPServer]:
@@ -188,13 +201,14 @@ def standard_capabilities(
     cdp_endpoint: str | None,
     browser_tools: list[str],
     browser_description: str,
+    playwright_args: Sequence[str] = (),
     extra: Sequence[AbstractCapability] = (),
 ) -> list[AbstractCapability]:
     """Remote discovery MCPs + narrowed Playwright + reasoning effort + extras."""
     return [
         *remote_capabilities(servers),
         playwright_capability(
-            make_playwright_mcp(servers, cdp_endpoint),
+            make_playwright_mcp(servers, cdp_endpoint, extra_args=playwright_args),
             allowed_tools=browser_tools,
             description=browser_description,
         ),
@@ -214,7 +228,7 @@ def build_agent(spec: AgentSpec) -> Agent:
         output_type=[spec.output_cls, TextOutput],
         toolsets=list(spec.toolsets),
         capabilities=list(spec.capabilities),
-        retries=DEFAULT_RETRIES,
+        retries=spec.retries,
     )
     agent.output_validator(validate_structured_output)
     return agent
@@ -261,6 +275,8 @@ __all__ = [
     "RESULT_DESCRIPTION",
     "VLM_BROWSER_DESCRIPTION",
     "VLM_BROWSER_TOOLS",
+    "VLM_PLAYWRIGHT_ARGS",
+    "VLM_RETRIES",
     "AgentSpec",
     "TextOutput",
     "build_agent",

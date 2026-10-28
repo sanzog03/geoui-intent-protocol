@@ -27,6 +27,8 @@ from worldview.agents._common import (
     RESULT_DESCRIPTION,
     VLM_BROWSER_DESCRIPTION,
     VLM_BROWSER_TOOLS,
+    VLM_PLAYWRIGHT_ARGS,
+    VLM_RETRIES,
     AgentSpec,
     build_agent,
     load_servers,
@@ -179,10 +181,12 @@ def vlm_spec(
             cdp_endpoint=cdp_endpoint,
             browser_tools=VLM_BROWSER_TOOLS,
             browser_description=VLM_BROWSER_DESCRIPTION,
+            playwright_args=VLM_PLAYWRIGHT_ARGS,
             extra=extra_capabilities,
         ),
         output_cls=VLMAgentOutput,
         servers=servers,
+        retries=VLM_RETRIES,
     )
 
 

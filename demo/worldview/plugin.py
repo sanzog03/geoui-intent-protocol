@@ -29,7 +29,7 @@ import json
 import logging
 import os
 import re
-from collections.abc import Iterable, Mapping
+from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -273,18 +273,21 @@ def playwright_server(
     servers: Mapping[str, MCPServer],
     cdp_endpoint: str | None,
     *,
+    extra_args: Sequence[str] = (),
     timeout: float = REMOTE_MCP_INIT_TIMEOUT_S,
 ) -> MCPServerStdio:
     """The plugin's Playwright MCP, attached to an already-running Chromium when
     ``cdp_endpoint`` is given (see the CDP design note in ``agents._common``).
-    A fresh instance is returned every call; one Playwright MCP must not be
-    shared across agent runs."""
+    ``extra_args`` are appended to the MCP's command line (for example
+    ``--timeout-action 15000`` for UI-driving agents). A fresh instance is
+    returned every call; one Playwright MCP must not be shared across runs."""
     base = servers.get("playwright")
     if not isinstance(base, MCPServerStdio):
         raise KeyError("plugin .mcp.json has no stdio 'playwright' server")
     args = list(base.args)
     if cdp_endpoint:
         args += ["--cdp-endpoint", cdp_endpoint]
+    args += list(extra_args)
     return MCPServerStdio(base.command, args, env=base.env, id="playwright", timeout=timeout)
 
 

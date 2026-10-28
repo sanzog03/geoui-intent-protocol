@@ -757,7 +757,8 @@
           "content": null
         }
       }
-    ]
+    ],
+    "retries": 1
   },
   "vlm": {
     "agent_name": "worldview_vlm_agent",
@@ -1271,7 +1272,9 @@
           "args": [
             "@playwright/mcp@latest",
             "--cdp-endpoint",
-            "http://localhost:9222"
+            "http://localhost:9222",
+            "--timeout-action",
+            "15000"
           ],
           "timeout": 30.0,
           "url": null,
@@ -1326,6 +1329,7 @@
           "content": null
         }
       }
-    ]
+    ],
+    "retries": 3
   }
 }

@@ -204,6 +204,9 @@ def test_playwright_server_appends_cdp_endpoint(fake_plugin: Path):
     assert list(fresh.args) == ["@playwright/mcp@latest"]
     assert fresh is not attached
 
+    tuned = playwright_server(servers, "http://localhost:9222", extra_args=["--timeout-action", "15000"])
+    assert list(tuned.args)[-4:] == ["--cdp-endpoint", "http://localhost:9222", "--timeout-action", "15000"]
+
 
 def test_plugin_dir_env_override_and_error(tmp_path: Path, monkeypatch):
     monkeypatch.setenv("WORLDVIEW_PLUGIN_DIR", str(tmp_path))

@@ -84,4 +84,5 @@ def surface(spec: AgentSpec) -> dict[str, Any]:
         "servers": sorted(spec.servers),
         "output_tools": output_tools,
         "output_schemas": [_schema(spec.output_cls), _schema(TextOutput)],
+        "retries": spec.retries,
     }
