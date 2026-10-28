@@ -155,7 +155,7 @@ echo
 # benchmark logger writes to <repo>/benchmarks/ and `uv run` picks up the
 # project environment.
 cd "$SCRIPT_DIR/.."
-if [[ -z "${WORLDVIEW_PLUGIN_DIR:-}" && ! -f demo/vendor/akd-plugins/plugins/worldview-assistant/.mcp.json ]]; then
+if [[ -z "${WORLDVIEW_PLUGIN_DIR:-}" && ! -f demo/worldview/agents/artifact/worldview/geoui/akd-plugins/plugins/worldview-assistant/.mcp.json ]]; then
     echo "Error: the worldview-assistant plugin is missing. Run: git submodule update --init" >&2
     exit 2
 fi

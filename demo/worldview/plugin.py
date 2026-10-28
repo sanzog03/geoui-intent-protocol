@@ -46,14 +46,17 @@ log = logging.getLogger(__name__)
 #: (``url`` / ``headers``).
 MCPServer = MCPToolset
 
-_DEMO_DIR = Path(__file__).resolve().parents[1]
+#: Vendored prompt material the agents run, one folder per agent variant:
+#: ``geoui/`` holds the akd-plugins submodule (the ``worldview-assistant``
+#: plugin), ``vlm/`` the exported non-GeoUI skill.
+ARTIFACT_DIR = Path(__file__).resolve().parent / "agents" / "artifact" / "worldview"
 
 #: The ``worldview-assistant`` plugin, vendored as a git submodule of
 #: NASA-IMPACT/akd-plugins. Override with ``WORLDVIEW_PLUGIN_DIR``.
-DEFAULT_PLUGIN_DIR = _DEMO_DIR / "vendor" / "akd-plugins" / "plugins" / "worldview-assistant"
+DEFAULT_PLUGIN_DIR = ARTIFACT_DIR / "geoui" / "akd-plugins" / "plugins" / "worldview-assistant"
 
 #: The non-GeoUI skill the baseline agent runs (vendored copy, see its README).
-MIO_SKILL_DIR = _DEMO_DIR / "skills" / "mio-worldviewagent-v2"
+MIO_SKILL_DIR = ARTIFACT_DIR / "vlm" / "mio-worldviewagent-v2"
 
 #: Remote MCP servers get this long to initialise. The 5 s pydantic-ai default
 #: trips on FastMCP Cloud cold starts (anyio.fail_after inside mcp.py).
@@ -315,6 +318,7 @@ def playwright_server(
 
 
 __all__ = [
+    "ARTIFACT_DIR",
     "DEFAULT_PLUGIN_DIR",
     "LOCAL_SERVER_NAMES",
     "MIO_SKILL_DIR",

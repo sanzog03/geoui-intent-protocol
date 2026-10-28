@@ -3,7 +3,7 @@
 ## Setup
 
 ```bash
-git submodule update --init  # demo/vendor/akd-plugins (the worldview-assistant plugin)
+git submodule update --init  # demo/worldview/agents/artifact/worldview/geoui/akd-plugins (the worldview-assistant plugin)
 uv sync                      # library + Worldview demo + dev tools
 uv run pre-commit install    # optional
 ```
@@ -43,7 +43,7 @@ Markers: `integration` (spawns a subprocess or touches the network), `agents`
    `demo/worldview/tests/mcp/fixtures/akd_contract.json` in the same commit.
 6. Prompts are not written in this repo. The GeoUI agent's system prompt is
    the plugin's `SKILL.md` (bump the submodule to change it); the baseline's
-   is the vendored `demo/skills/mio-worldviewagent-v2/SKILL.md` (re-export to
+   is the vendored `demo/worldview/agents/artifact/worldview/vlm/mio-worldviewagent-v2/SKILL.md` (re-export to
    change it) plus `VLM_BROWSER_ADDENDUM` in `vlm_agent.py`. Everything the
    model sees (prompts, tool descriptions and schemas, output tool names,
    capability ids, browser allow-lists) is pinned by

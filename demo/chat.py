@@ -61,7 +61,7 @@ def _variant():
     # Worldview GeoUI Agent — Multi-turn Chat
 
     The `worldview-assistant` Claude Code skill (vendored under
-    `demo/vendor/akd-plugins`) running on a bare pydantic-ai agent. The
+    `demo/worldview/agents/artifact/worldview/geoui/`) running on a bare pydantic-ai agent. The
     agent speaks **GeoIntent** through the GeoUI Protocol tools
     (`geo_ui_render_intent_tool`, `geo_ui_get_state_tool`, served
     in-process from this repo) and gets Worldview permalink URLs back.
@@ -102,7 +102,7 @@ def _variant():
 
     The **baseline** for the token-efficiency comparison against the
     GeoUI Protocol: the non-GeoUI `mio-worldviewagent-v2` skill (vendored
-    under `demo/skills/`) plus a browser addendum, on a bare pydantic-ai
+    under `demo/worldview/agents/artifact/worldview/vlm/`) plus a browser addendum, on a bare pydantic-ai
     agent. Instead of a structured `GeoIntent`, this agent treats NASA
     Worldview the way a person would: it **looks at the page** (PNG
     screenshot + accessibility-tree snapshot) and **manipulates it**

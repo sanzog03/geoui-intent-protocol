@@ -31,8 +31,8 @@ carries everything application-specific.
 | `demo/worldview/mcp/` | FastMCP server exposing `geo_ui_render_intent_tool` and `geo_ui_get_state_tool`; CLI `worldview-mcp` | fastmcp |
 | `demo/worldview/plugin.py` | Loads a Claude Code plugin for pydantic-ai: `SKILL.md` as system prompt, `references/` behind `read_reference`, `.mcp.json` servers with `${user_config.*}` filled from the environment | pydantic-ai |
 | `demo/worldview/agents/` | The two agents as bare pydantic-ai `Agent`s built from the plugin skills (GeoUI treatment, VLM baseline), MCP warm-up, benchmark logger | pydantic-ai |
-| `demo/vendor/akd-plugins/` | git submodule of [NASA-IMPACT/akd-plugins](https://github.com/NASA-IMPACT/akd-plugins); the `worldview-assistant` plugin is the GeoUI agent's skill and MCP server list | — |
-| `demo/skills/mio-worldviewagent-v2/` | Vendored non-GeoUI skill (`SKILL.md` + `references/`) the baseline agent runs | — |
+| `demo/worldview/agents/artifact/worldview/geoui/akd-plugins/` | git submodule of [NASA-IMPACT/akd-plugins](https://github.com/NASA-IMPACT/akd-plugins); the `worldview-assistant` plugin is the GeoUI agent's skill and MCP server list | — |
+| `demo/worldview/agents/artifact/worldview/vlm/mio-worldviewagent-v2/` | Vendored non-GeoUI skill (`SKILL.md` + `references/`) the baseline agent runs | — |
 | `demo/worldview/tests/` | Tests for the adapter, tools, MCP contract, plugin loader and agents | — |
 | `demo/chat.py`, `demo/start.sh` | One marimo chat notebook for both agents (`AGENT=geoui\|vlm`) and the launcher (Chromium over CDP + notebook) | marimo |
 | `tests/` | Library tests (`test_core.py`) and repo-level checks | — |
@@ -106,7 +106,7 @@ a golden fixture. `fastmcp.json` at the repo root points FastMCP Cloud (or
 
 The Claude Code plugin that consumes this server is `worldview-assistant` from
 [NASA-IMPACT/akd-plugins](https://github.com/NASA-IMPACT/akd-plugins), vendored
-here as the `demo/vendor/akd-plugins` submodule because the demo agents run the
+here as the `demo/worldview/agents/artifact/worldview/geoui/akd-plugins` submodule because the demo agents run the
 same skill and MCP server list (see below).
 
 ## Agents, benchmark and demo

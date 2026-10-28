@@ -10,7 +10,7 @@ Origin: exported from the CARE workspace as `mio-worldviewagent-v2-skill-vlm.zip
 Only `SKILL.md` and `references/` are vendored. The export's `assets/`
 (catalog and story mirrors, ~1,500 JSON files) and `.docx` files are omitted;
 the same assets ship with the `worldview-assistant` plugin under
-`demo/vendor/akd-plugins`.
+`demo/worldview/agents/artifact/worldview/geoui/akd-plugins`.
 
 To update: re-export the skill, replace `SKILL.md` and `references/`, and
 regenerate `demo/worldview/tests/agents/fixtures/agent_surface.json`.

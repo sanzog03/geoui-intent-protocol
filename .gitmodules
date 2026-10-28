@@ -1,3 +1,3 @@
-[submodule "demo/vendor/akd-plugins"]
-	path = demo/vendor/akd-plugins
+[submodule "demo/worldview/agents/artifact/worldview/geoui/akd-plugins"]
+	path = demo/worldview/agents/artifact/worldview/geoui/akd-plugins
 	url = https://github.com/NASA-IMPACT/akd-plugins

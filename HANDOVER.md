@@ -50,8 +50,8 @@ two reference agents, a marimo chat demo, and the head-to-head benchmark.
 | `demo/worldview/agents/geoui_agent.py` | `geoui_spec` / `build_geoui_agent` (treatment): the `worldview-assistant` skill as system prompt, `geoui_toolset` + `permalink_toolset` + references, `GEOUI_BROWSER_TOOLS`, `GeoUIAgentOutput`. | `_common` |
 | `demo/worldview/agents/vlm_agent.py` | `vlm_spec` / `build_vlm_agent` (baseline): the vendored `mio-worldviewagent-v2` skill plus `VLM_BROWSER_ADDENDUM` as a second prompt part, `permalink_toolset` + references (no GeoUI tools), `VLM_BROWSER_TOOLS`, `VLMAgentOutput`. | `_common` |
 | `demo/worldview/agents/warm_mcps.py` | Pings each enabled remote MCP once at launch to absorb FastMCP cold starts. | httpx |
-| `demo/vendor/akd-plugins/` | git submodule of `NASA-IMPACT/akd-plugins`; `plugins/worldview-assistant/` holds `.mcp.json`, `.claude-plugin/plugin.json` (declares the `userConfig` keys) and `skills/worldview-assistant/`. | — |
-| `demo/skills/mio-worldviewagent-v2/` | Vendored non-GeoUI skill (`SKILL.md` + `references/`, see its README for provenance). | — |
+| `demo/worldview/agents/artifact/worldview/geoui/akd-plugins/` | git submodule of `NASA-IMPACT/akd-plugins`; `plugins/worldview-assistant/` holds `.mcp.json`, `.claude-plugin/plugin.json` (declares the `userConfig` keys) and `skills/worldview-assistant/`. | — |
+| `demo/worldview/agents/artifact/worldview/vlm/mio-worldviewagent-v2/` | Vendored non-GeoUI skill (`SKILL.md` + `references/`, see its README for provenance). | — |
 | `demo/worldview/agents/benchmark/log.py` | Per-turn JSONL logging (`TurnRecord`, `ErrorRecord`, `append_*`, `load_runs`). | pydantic |
 | `demo/start.sh` | Launches a long-lived Chromium with remote debugging, warms MCPs, opens the marimo notebook. `AGENT=geoui` (default) or `vlm`. | uv, npx |
 | `demo/chat.py` | One marimo multi-turn chat app for both agents; `AGENT=geoui` (default) or `vlm` picks the factory, intro text, example prompts and benchmark-log label. Carries pydantic-ai `message_history` across turns; attaches Playwright per turn via CDP. | marimo |
@@ -226,7 +226,7 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
   golden is still called `akd_contract.json` because it was captured from the
   original akd-ext server.
 - **The plugin is a git submodule.** A fresh clone without
-  `--recurse-submodules` has an empty `demo/vendor/akd-plugins`; `start.sh`
+  `--recurse-submodules` has an empty `agents/artifact/worldview/geoui/akd-plugins`; `start.sh`
   and `worldview.plugin.plugin_dir()` say so. `WORLDVIEW_PLUGIN_DIR` points at
   any other checkout of the plugin.
 - **Missing MCP keys shrink the tool set silently (well, with a warning).**

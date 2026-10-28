@@ -62,7 +62,7 @@ markers = [
 target-version = "py312"
 line-length = 120
 # vendored plugin submodule and skills are not ours to lint or reformat
-extend-exclude = ["demo/vendor", "demo/skills"]
+extend-exclude = ["demo/worldview/agents/artifact"]
 
 [tool.ruff.format]
 line-ending = "lf"
