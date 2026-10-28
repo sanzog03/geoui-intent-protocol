@@ -16,7 +16,7 @@ What stays in each agent module is everything the model can see or that
 the benchmark logs record: the system prompt, the config ``description``,
 the output-schema class (its name becomes the pydantic-ai output tool
 name) and the agent class (its name becomes ``agent.name``). See
-``tests/agents/test_agent_surface.py``.
+``demo/worldview/tests/agents/test_agent_surface.py``.
 """
 
 from __future__ import annotations

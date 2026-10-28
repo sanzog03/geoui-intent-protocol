@@ -1,6 +1,6 @@
 """Serialize every model-visible / logged surface of an IESO Worldview agent.
 
-Used by ``tests/agents/test_agent_surface.py`` (assert against the golden) and
+Used by ``demo/worldview/tests/agents/test_agent_surface.py`` (assert against the golden) and
 ``scripts/capture_agent_surface.py`` (regenerate the golden). Anything that
 reaches the model prompt, the pydantic-ai tool definitions, or the benchmark
 log rows is included; internals that do not (e.g. input schema class names)
