@@ -253,6 +253,19 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
   `geo_ui_render_intent_tool` calls, then success). The skill's step 6 spells
   out the declare-and-populate rule; if the plugin changes it, re-run
   Workflow A turns 2/4/5.
+- **MCP tools carry their own retry budget.** pydantic-ai's agent-level
+  `retries` never reaches MCP tools; each server has `max_retries` (default
+  1). The VLM baseline's Playwright server gets `max_retries=3` and
+  `--timeout-action 15000` because Worldview's first-visit tour overlay made
+  a `browser_click` time out twice and abort the turn. The GeoUI agent never
+  clicks and keeps 1.
+- **The VLM baseline has no URL builder.** With `worldview_permalink_tool`
+  wired next to full browser control, the skill's step 6 ("call the permalink
+  tool") and the addendum ("only the UI changes state") pulled the model both
+  ways and it looped on the tool until the 50-request cap. The addendum now
+  states it overrides step 6; the baseline's only local tools are the skill
+  references. A clean baseline turn took 26 tool calls and 6.3 minutes, versus
+  4 calls and 21 s for the GeoUI agent on the same request.
 - **marimo is pinned `<0.24`.** 0.25.x's frontend rejects its own chat
   requests (`messages[0].metadata` missing) before the handler runs.
 - **Usage token counts read 0** in `runs.jsonl` rows produced with the
