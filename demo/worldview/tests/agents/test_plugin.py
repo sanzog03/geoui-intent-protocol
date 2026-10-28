@@ -4,8 +4,9 @@ import json
 from pathlib import Path
 
 import pytest
+from fastmcp.client.transports import StdioTransport, StreamableHttpTransport
 from pydantic_ai import ModelRetry
-from pydantic_ai.mcp import MCPServerStdio, MCPServerStreamableHTTP
+from pydantic_ai.mcp import MCPToolset
 
 from worldview import plugin
 from worldview.plugin import (
@@ -146,17 +147,16 @@ def test_load_mcp_config_substitutes_and_drops_servers_with_missing_keys(fake_pl
     assert "VECTOR_DB_TOOL_KEY" in caplog.text
 
     sde = servers["sde-search"]
-    assert isinstance(sde, MCPServerStreamableHTTP)
-    assert sde.url == "https://example.test/sde/mcp"
-    assert sde.headers == {"Authorization": "Bearer sde-token"}
+    assert isinstance(sde, MCPToolset)
+    sde_transport = plugin.transport_of(sde)
+    assert isinstance(sde_transport, StreamableHttpTransport)
+    assert str(sde_transport.url) == "https://example.test/sde/mcp"
+    assert sde_transport.headers == {"Authorization": "Bearer sde-token"}
     assert sde.id == "sde-search"
-    assert sde.tool_prefix is None
-    assert sde.timeout == plugin.REMOTE_MCP_INIT_TIMEOUT_S
 
-    cmr = servers["cmr"]
-    assert isinstance(cmr, MCPServerStreamableHTTP)
-    assert cmr.url.endswith("/mcp/")  # trailing slash preserved
-    assert isinstance(servers["playwright"], MCPServerStdio)
+    cmr_transport = plugin.transport_of(servers["cmr"])
+    assert str(cmr_transport.url).endswith("/mcp/")  # trailing slash preserved
+    assert isinstance(plugin.transport_of(servers["playwright"]), StdioTransport)
 
 
 def test_real_plugin_config_loads_with_no_keys_at_all():
@@ -180,7 +180,7 @@ def test_real_plugin_config_loads_with_all_keys():
         "eonet",
         "playwright",
     } <= set(servers)
-    assert servers["ieso-validation"].headers == {"Authorization": "Bearer token-vector_db_token"}
+    assert plugin.transport_of(servers["ieso-validation"]).headers == {"Authorization": "Bearer token-vector_db_token"}
 
 
 def test_remote_capabilities_skip_local_servers(fake_plugin: Path):
@@ -196,16 +196,22 @@ def test_playwright_server_appends_cdp_endpoint(fake_plugin: Path):
         fake_plugin, user_config={"ieso_mcp_key": "k", "vector_db_token": "v", "sde_mcp_key": "s"}
     )
     attached = playwright_server(servers, "http://localhost:9222")
-    assert attached.command == "npx"
-    assert list(attached.args) == ["@playwright/mcp@latest", "--cdp-endpoint", "http://localhost:9222"]
-    assert attached.timeout == plugin.REMOTE_MCP_INIT_TIMEOUT_S
+    t = plugin.transport_of(attached)
+    assert t.command == "npx"
+    assert list(t.args) == ["@playwright/mcp@latest", "--cdp-endpoint", "http://localhost:9222"]
+    assert attached.id == "playwright"
 
     fresh = playwright_server(servers, None)
-    assert list(fresh.args) == ["@playwright/mcp@latest"]
+    assert list(plugin.transport_of(fresh).args) == ["@playwright/mcp@latest"]
     assert fresh is not attached
 
     tuned = playwright_server(servers, "http://localhost:9222", extra_args=["--timeout-action", "15000"], max_retries=3)
-    assert list(tuned.args)[-4:] == ["--cdp-endpoint", "http://localhost:9222", "--timeout-action", "15000"]
+    assert list(plugin.transport_of(tuned).args)[-4:] == [
+        "--cdp-endpoint",
+        "http://localhost:9222",
+        "--timeout-action",
+        "15000",
+    ]
     assert tuned.max_retries == 3 and attached.max_retries == 1
 
 

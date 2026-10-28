@@ -33,14 +33,18 @@ from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import dataclass
 from pathlib import Path
 
+from fastmcp.client.transports import StdioTransport, StreamableHttpTransport
 from pydantic_ai import ModelRetry
 from pydantic_ai.capabilities import MCP
-from pydantic_ai.mcp import MCPServerConfig, MCPServerSSE, MCPServerStdio, MCPServerStreamableHTTP
+from pydantic_ai.mcp import MCPToolset
 from pydantic_ai.toolsets import FunctionToolset
 
 log = logging.getLogger(__name__)
 
-MCPServer = MCPServerStdio | MCPServerStreamableHTTP | MCPServerSSE
+#: One configured MCP server, ready to connect. Its transport (``server.client.transport``)
+#: is a fastmcp ``StdioTransport`` (``command`` / ``args``) or ``StreamableHttpTransport``
+#: (``url`` / ``headers``).
+MCPServer = MCPToolset
 
 _DEMO_DIR = Path(__file__).resolve().parents[1]
 
@@ -218,22 +222,28 @@ def _substitute(value: object, user_config: Mapping[str, str | None], missing: s
     return value
 
 
+def transport_of(server: MCPServer) -> StdioTransport | StreamableHttpTransport:
+    """The fastmcp transport behind a configured server (command/args or url/headers)."""
+    return server.client.transport
+
+
 def load_mcp_config(
     plugin_root: Path,
     *,
     user_config: Mapping[str, str | None],
     timeout: float = REMOTE_MCP_INIT_TIMEOUT_S,
 ) -> dict[str, MCPServer]:
-    """Build pydantic-ai MCP servers from the plugin's ``.mcp.json``.
+    """Build pydantic-ai ``MCPToolset``s from the plugin's ``.mcp.json``.
 
     ``${user_config.<key>}`` placeholders are filled from ``user_config``. A
     server that still needs a key you have not provided is left out and logged,
     so the agent runs with fewer tools rather than failing every call with a
-    401. Server ``id`` is the config name; no ``tool_prefix`` is applied because
-    the skill text names the tools bare.
+    401. Toolset ``id`` is the config name; no tool prefix is applied because
+    the skill text names the tools bare. ``type`` is ignored (the transport is
+    inferred from ``command`` vs ``url``, like pydantic-ai's own loader).
     """
     raw = json.loads((plugin_root / ".mcp.json").read_text(encoding="utf-8"))
-    entries: dict[str, dict] = {}
+    servers: dict[str, MCPServer] = {}
     for name, entry in raw.get("mcpServers", {}).items():
         missing: set[str] = set()
         substituted = _substitute(entry, user_config, missing)
@@ -242,13 +252,20 @@ def load_mcp_config(
             log.warning("MCP server %r skipped: set %s to enable it", name, needed)
             continue
         assert isinstance(substituted, dict)
-        entries[name] = {k: v for k, v in substituted.items() if k != "type"}  # pydantic-ai infers the transport
-    config = MCPServerConfig.model_validate({"mcpServers": entries})
-    servers: dict[str, MCPServer] = {}
-    for name, server in config.mcp_servers.items():
-        server.id = name
-        server.timeout = timeout
-        servers[name] = server
+        if "command" in substituted:
+            transport = StdioTransport(
+                command=substituted["command"],
+                args=list(substituted.get("args") or []),
+                env=substituted.get("env"),
+                cwd=substituted.get("cwd"),
+            )
+            servers[name] = MCPToolset(transport, id=name, init_timeout=timeout)
+        elif "url" in substituted:
+            servers[name] = MCPToolset(
+                substituted["url"], id=name, headers=substituted.get("headers"), init_timeout=timeout
+            )
+        else:
+            raise ValueError(f"MCP server config {name!r} must have either `command` or `url`")
     return servers
 
 
@@ -257,15 +274,16 @@ def remote_capabilities(
     *,
     exclude: Iterable[str] = LOCAL_SERVER_NAMES,
 ) -> list[MCP]:
-    """One ``MCP`` capability per remote server, skipping the ones the demo
-    provides itself. ``native=False`` forces pydantic-ai's local client, which
+    """One ``MCP`` capability per remote (HTTP) server, skipping the ones the
+    demo provides itself. ``native=False`` keeps the local client, which
     respects the CMR URL's load-bearing trailing slash."""
     skip = set(exclude)
     caps: list[MCP] = []
     for name, server in servers.items():
-        if name in skip or not isinstance(server, MCPServerStreamableHTTP | MCPServerSSE):
+        transport = transport_of(server)
+        if name in skip or not isinstance(transport, StreamableHttpTransport):
             continue
-        caps.append(MCP(url=server.url, local=server, native=False, id=name))
+        caps.append(MCP(url=str(transport.url), local=server, native=False, id=name))
     return caps
 
 
@@ -276,22 +294,24 @@ def playwright_server(
     extra_args: Sequence[str] = (),
     max_retries: int = 1,
     timeout: float = REMOTE_MCP_INIT_TIMEOUT_S,
-) -> MCPServerStdio:
+) -> MCPServer:
     """The plugin's Playwright MCP, attached to an already-running Chromium when
     ``cdp_endpoint`` is given (see the CDP design note in ``agents._common``).
     ``extra_args`` are appended to the MCP's command line (for example
     ``--timeout-action 15000`` for UI-driving agents). ``max_retries`` is the
-    per-tool retry budget pydantic-ai applies to *this server's* tools; the
-    agent-level ``retries`` does not reach MCP tools. A fresh instance is
-    returned every call; one Playwright MCP must not be shared across runs."""
+    per-tool retry budget for *this server's* tools (``None`` would inherit the
+    agent's). A fresh instance is returned every call; one Playwright MCP must
+    not be shared across runs."""
     base = servers.get("playwright")
-    if not isinstance(base, MCPServerStdio):
+    transport = transport_of(base) if base is not None else None
+    if not isinstance(transport, StdioTransport):
         raise KeyError("plugin .mcp.json has no stdio 'playwright' server")
-    args = list(base.args)
+    args = list(transport.args)
     if cdp_endpoint:
         args += ["--cdp-endpoint", cdp_endpoint]
     args += list(extra_args)
-    return MCPServerStdio(base.command, args, env=base.env, id="playwright", timeout=timeout, max_retries=max_retries)
+    fresh = StdioTransport(command=transport.command, args=args, env=transport.env, cwd=transport.cwd)
+    return MCPToolset(fresh, id="playwright", init_timeout=timeout, max_retries=max_retries)
 
 
 __all__ = [
@@ -309,6 +329,7 @@ __all__ = [
     "plugin_dir",
     "reference_toolset",
     "remote_capabilities",
+    "transport_of",
     "user_config_from_env",
     "user_config_keys",
 ]

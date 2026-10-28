@@ -19,10 +19,10 @@ from dataclasses import dataclass
 
 import httpx
 from dotenv import load_dotenv
-from pydantic_ai.mcp import MCPServerSSE, MCPServerStreamableHTTP
+from fastmcp.client.transports import StreamableHttpTransport
 
 from worldview.agents._common import load_servers
-from worldview.plugin import LOCAL_SERVER_NAMES
+from worldview.plugin import LOCAL_SERVER_NAMES, transport_of
 
 _WARM_TIMEOUT_S = 15.0
 
@@ -49,9 +49,9 @@ def _remote_mcp_urls() -> list[str]:
     """Every HTTP(S) MCP URL the agents will connect to (local and stdio
     servers excluded)."""
     return [
-        server.url
+        str(transport.url)
         for name, server in load_servers().items()
-        if name not in LOCAL_SERVER_NAMES and isinstance(server, MCPServerStreamableHTTP | MCPServerSSE)
+        if name not in LOCAL_SERVER_NAMES and isinstance(transport := transport_of(server), StreamableHttpTransport)
     ]
 
 

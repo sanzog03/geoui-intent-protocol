@@ -26,7 +26,6 @@ from typing import Any
 from pydantic import BaseModel
 from pydantic_ai import Agent, ModelRetry
 from pydantic_ai.capabilities import MCP, AbstractCapability, Thinking
-from pydantic_ai.mcp import MCPServerStdio
 from pydantic_ai.toolsets import AbstractToolset
 
 from worldview.plugin import (
@@ -122,7 +121,7 @@ def make_playwright_mcp(
     *,
     extra_args: Sequence[str] = (),
     max_retries: int = DEFAULT_RETRIES,
-) -> MCPServerStdio:
+) -> MCPServer:
     """A fresh, unstarted Playwright MCP from the plugin config.
 
     ``cdp_endpoint`` (e.g. ``"http://localhost:9222"``) attaches it to the
@@ -132,16 +131,15 @@ def make_playwright_mcp(
     return playwright_server(servers, cdp_endpoint, extra_args=extra_args, max_retries=max_retries)
 
 
-def playwright_capability(server: MCPServerStdio, *, allowed_tools: list[str], description: str) -> MCP:
-    """Wrap a caller-owned Playwright ``MCPServerStdio`` as a capability.
+def playwright_capability(server: MCPServer, *, allowed_tools: list[str], description: str) -> MCP:
+    """Wrap a caller-owned Playwright ``MCPToolset`` as a capability.
 
-    ``native=False, local=server`` makes pydantic-ai use this exact server
-    object, entered and exited inside each run (see the design note above).
+    ``native=False, local=server`` makes pydantic-ai use this exact toolset,
+    entered and exited inside each run (see the design note above).
     ``allowed_tools`` narrows the ~20-tool Playwright surface to what the
     agent's skill authorises.
     """
     return MCP(
-        url="stdio://playwright-mcp",  # placeholder; only used for the capability id slug
         native=False,
         local=server,
         id="playwright_mcp",

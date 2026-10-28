@@ -563,11 +563,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://w4hu71445m.execute-api.us-east-1.amazonaws.com/mcp/cmr/mcp/",
           "header_names": null
         }
@@ -581,11 +581,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://ieso-benchmark-mcp-tools.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -601,11 +601,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://sudden-gold-carp-features-tool-cmr-uat.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -621,11 +621,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://sudden-gold-carp-features-tools-earthdata-search-da3be0.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -641,11 +641,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://sudden-gold-carp-feature-pdf-parser-mcp.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -661,11 +661,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://brainy-lime-pheasant.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -681,11 +681,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://eonet-tool.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -695,7 +695,7 @@
       {
         "type": "MCP",
         "id": "playwright_mcp",
-        "url": "stdio://playwright-mcp",
+        "url": null,
         "allowed_tools": [
           "browser_navigate",
           "browser_evaluate"
@@ -704,14 +704,14 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStdio",
+          "type": "MCPToolset",
+          "transport": "StdioTransport",
           "command": "npx",
           "args": [
             "@playwright/mcp@latest",
             "--cdp-endpoint",
             "http://localhost:9222"
           ],
-          "timeout": 30.0,
           "max_retries": 1,
           "url": null,
           "header_names": null
@@ -719,7 +719,7 @@
       },
       {
         "type": "Thinking",
-        "id": null,
+        "id": "thinking",
         "url": null,
         "allowed_tools": null,
         "description": null,
@@ -812,11 +812,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://w4hu71445m.execute-api.us-east-1.amazonaws.com/mcp/cmr/mcp/",
           "header_names": null
         }
@@ -830,11 +830,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://ieso-benchmark-mcp-tools.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -850,11 +850,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://sudden-gold-carp-features-tool-cmr-uat.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -870,11 +870,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://sudden-gold-carp-features-tools-earthdata-search-da3be0.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -890,11 +890,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://sudden-gold-carp-feature-pdf-parser-mcp.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -910,11 +910,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://brainy-lime-pheasant.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -930,11 +930,11 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStreamableHTTP",
+          "type": "MCPToolset",
+          "transport": "StreamableHttpTransport",
           "command": null,
           "args": null,
-          "timeout": 30.0,
-          "max_retries": 1,
+          "max_retries": null,
           "url": "https://eonet-tool.fastmcp.app/mcp",
           "header_names": [
             "Authorization"
@@ -944,7 +944,7 @@
       {
         "type": "MCP",
         "id": "playwright_mcp",
-        "url": "stdio://playwright-mcp",
+        "url": null,
         "allowed_tools": [
           "browser_navigate",
           "browser_snapshot",
@@ -962,7 +962,8 @@
         "native": false,
         "effort": null,
         "local": {
-          "type": "MCPServerStdio",
+          "type": "MCPToolset",
+          "transport": "StdioTransport",
           "command": "npx",
           "args": [
             "@playwright/mcp@latest",
@@ -971,7 +972,6 @@
             "--timeout-action",
             "15000"
           ],
-          "timeout": 30.0,
           "max_retries": 3,
           "url": null,
           "header_names": null
@@ -979,7 +979,7 @@
       },
       {
         "type": "Thinking",
-        "id": null,
+        "id": "thinking",
         "url": null,
         "allowed_tools": null,
         "description": null,

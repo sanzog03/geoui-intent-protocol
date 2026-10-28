@@ -144,10 +144,10 @@ def extract_usage(usage_obj: Any) -> TurnUsage | None:
     compatible) object.
 
     ``RunUsage`` exposes ``input_tokens``, ``output_tokens``, ``requests``,
-    ``tool_calls``, ``cache_read_tokens`` and ``total_tokens`` as attributes
-    and provider extras such as ``reasoning_tokens`` in ``details``. Older
-    log producers kept ``cache_read_tokens`` / ``tool_calls`` in ``details``;
-    both layouts are read. Every value is ``Optional[int]``.
+    ``tool_calls``, ``cache_read_tokens``, ``output_reasoning_tokens`` and
+    ``total_tokens`` as attributes; older versions kept reasoning tokens (and
+    before that ``cache_read_tokens`` / ``tool_calls``) in ``details``. All
+    layouts are read. Every value is ``Optional[int]``.
     """
     if usage_obj is None:
         return None
@@ -164,7 +164,7 @@ def extract_usage(usage_obj: Any) -> TurnUsage | None:
         total_tokens=total() if callable(total) else total,
         requests=getattr(usage_obj, "requests", None),
         cache_read_tokens=attr_or_detail("cache_read_tokens"),
-        reasoning_tokens=details.get("reasoning_tokens"),
+        reasoning_tokens=getattr(usage_obj, "output_reasoning_tokens", None) or details.get("reasoning_tokens"),
         tool_calls=attr_or_detail("tool_calls"),
     )
 

@@ -18,7 +18,7 @@ from pydantic import BaseModel
 from pydantic_ai.toolsets import FunctionToolset
 
 from worldview.agents._common import AgentSpec, TextOutput, build_agent
-from worldview.plugin import DEFAULT_PLUGIN_DIR, env_var_for, user_config_keys
+from worldview.plugin import DEFAULT_PLUGIN_DIR, env_var_for, transport_of, user_config_keys
 
 DUMMY_ENV: dict[str, str] = {
     "OPENAI_API_KEY": "dummy",
@@ -35,14 +35,16 @@ def _capability(cap: Any) -> dict[str, Any]:
         entry[name] = getattr(cap, name, None)
     local = getattr(cap, "local", None)
     if local is not None:
+        transport = transport_of(local)
+        url = getattr(transport, "url", None)
         entry["local"] = {
             "type": type(local).__name__,
-            "command": getattr(local, "command", None),
-            "args": list(getattr(local, "args", None) or []) or None,
-            "timeout": getattr(local, "timeout", None),
+            "transport": type(transport).__name__,
+            "command": getattr(transport, "command", None),
+            "args": list(getattr(transport, "args", None) or []) or None,
             "max_retries": getattr(local, "max_retries", None),
-            "url": getattr(local, "url", None),
-            "header_names": sorted((getattr(local, "headers", None) or {}).keys()) or None,
+            "url": str(url) if url is not None else None,
+            "header_names": sorted((getattr(transport, "headers", None) or {}).keys()) or None,
         }
     return entry
 
