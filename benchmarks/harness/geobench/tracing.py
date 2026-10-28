@@ -42,9 +42,20 @@ from geobench.records import Source, TurnUsage, usage_from_run_usage
 OUTPUT_LIMIT = 2000
 
 
+_settings: DeepEvalInstrumentationSettings | None = None
+
+
+def instrumentation_settings() -> DeepEvalInstrumentationSettings:
+    """One deepeval OpenTelemetry pipeline per process (constructing it sets the global tracer provider)."""
+    global _settings
+    if _settings is None:
+        _settings = DeepEvalInstrumentationSettings()
+    return _settings
+
+
 def tracing_capability() -> Instrumentation:
     """deepeval's pydantic-ai instrumentation as an agent capability."""
-    return Instrumentation(settings=DeepEvalInstrumentationSettings())
+    return Instrumentation(settings=instrumentation_settings())
 
 
 class LLMCall(BaseModel):
@@ -245,6 +256,7 @@ __all__ = [
     "ToolCallRecord",
     "TracedRun",
     "TurnTrace",
+    "instrumentation_settings",
     "load_trace",
     "save_trace",
     "traced_turn",
