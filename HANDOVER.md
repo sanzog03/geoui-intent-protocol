@@ -309,6 +309,10 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
   LLM spans carry input/output tokens but not cache-read or reasoning tokens
   (taken from `result.usage`); MCP tool calls appear twice in a trace and
   `tools/list` calls appear as untyped spans (filtered in `geobench.tracing`).
+  deepeval's `Observer` never clears `current_trace_context`, so consecutive
+  `@observe` calls on one event loop nest under the first trace and every
+  later turn's trace accumulates the earlier spans; `traced_turn` clears the
+  context variables around each turn (`reset_trace_context`).
   `deepeval generate --method docs` needs chromadb (not installed) and
   `--method goldens` / `scratch` emit one-line scenarios with no expected
   outcome; the synthetic set was made with `--method contexts` from the gold
