@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from urllib.parse import parse_qs, urlparse
 
-from geoui.adapters.worldview.permalink import LayerSpec, WorldviewPermalinkInputSchema
+from worldview.adapter.permalink import LayerSpec, WorldviewPermalinkInputSchema
 
 _LAYER_FLAG_KEYS = frozenset({"hidden", "squash"})
 _LAYER_LIST_KEYS = frozenset({"palettes"})

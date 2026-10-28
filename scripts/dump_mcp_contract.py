@@ -1,7 +1,7 @@
 """Print an MCP server's tool contract (names, schemas, descriptions) as JSON.
 
 Use it to diff the standalone server against the hosted akd-ext deployment,
-or against the golden fixture in ``tests/mcp/fixtures/akd_contract.json``.
+or against the golden fixture in ``demo/worldview/tests/mcp/fixtures/akd_contract.json``.
 
 Examples::
 
@@ -32,7 +32,7 @@ from fastmcp import Client
 
 async def dump(target: str, only: str | None) -> dict:
     if target == "local":
-        from geoui.mcp.server import mcp
+        from worldview.mcp.server import mcp
 
         transport = mcp
     elif target.startswith("http"):

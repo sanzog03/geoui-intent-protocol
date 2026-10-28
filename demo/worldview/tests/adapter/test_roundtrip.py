@@ -2,9 +2,9 @@
 
 import pytest
 
-from geoui.adapters.worldview import intent_to_url, url_to_intent
 from geoui.core import GeoIntent, LayerRef, TimeWindow, Viewport
 from geoui.extensions import chart, compare, raster_styling
+from worldview.adapter import intent_to_url, url_to_intent
 
 
 @pytest.fixture

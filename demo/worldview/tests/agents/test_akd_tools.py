@@ -11,21 +11,21 @@ import pytest
 
 pytest.importorskip("akd")
 
-from geoui.agents._akd_tools import (
-    GeoUIGetStateInputSchema,
-    GeoUIGetStateTool,
-    GeoUIRenderIntentInputSchema,
-    GeoUIRenderIntentTool,
-)
 from geoui.core import GeoIntent, LayerRef, TimeWindow, Viewport
-from geoui.mcp._describe import describe
-from geoui.tools import (
+from worldview.mcp._describe import describe
+from worldview.tools import (
     GET_STATE_DOC,
     RENDER_INTENT_DOC,
     GeoUIGetStateRequest,
     GeoUIGetStateResult,
     GeoUIRenderIntentRequest,
     GeoUIRenderIntentResult,
+)
+from worldview.tools.akd import (
+    GeoUIGetStateInputSchema,
+    GeoUIGetStateTool,
+    GeoUIRenderIntentInputSchema,
+    GeoUIRenderIntentTool,
 )
 
 pytestmark = pytest.mark.agents

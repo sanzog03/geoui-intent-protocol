@@ -4,7 +4,7 @@
 descriptions, tool and capability lists, Playwright allow-lists and the
 output-schema names/docstrings/field descriptions for both agents. Refactors
 of the agent plumbing must leave it byte-identical. Regenerate deliberately
-with ``uv run --extra agents python scripts/capture_agent_surface.py``.
+with ``uv run python scripts/capture_agent_surface.py``.
 
 Requires the ``agents`` extra; skipped otherwise.
 """
@@ -16,8 +16,8 @@ import pytest
 
 pytest.importorskip("akd")
 
-from geoui.agents import geoui_agent, vlm_agent
-from tests.agents._surface import surface
+from worldview.agents import geoui_agent, vlm_agent
+from worldview.tests.agents._surface import surface
 
 pytestmark = pytest.mark.agents
 

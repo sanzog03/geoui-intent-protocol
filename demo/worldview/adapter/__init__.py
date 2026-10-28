@@ -5,7 +5,7 @@ application itself is never modified; the adapter only maps protocol
 fields onto Worldview's existing permalink grammar.
 """
 
-from geoui.adapters.worldview.adapter import (
+from worldview.adapter.mapping import (
     CRS_TO_WORLDVIEW_PROJECTION,
     WORLDVIEW_PROJECTION_TO_CRS,
     intent_to_permalink_input,
@@ -13,14 +13,14 @@ from geoui.adapters.worldview.adapter import (
     permalink_input_to_intent,
     url_to_intent,
 )
-from geoui.adapters.worldview.permalink import (
+from worldview.adapter.permalink import (
     BASE_LAYERS,
     DEFAULT_BASE_URL,
     LayerSpec,
     WorldviewPermalinkInputSchema,
     build_url,
 )
-from geoui.adapters.worldview.url_parser import parse_url
+from worldview.adapter.url_parser import parse_url
 
 __all__ = [
     "BASE_LAYERS",

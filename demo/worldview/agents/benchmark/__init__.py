@@ -9,7 +9,7 @@ script (or notebook cell) can then read the file and produce
 poster-ready summaries — see :func:`load_runs`.
 """
 
-from geoui.agents.benchmark.log import (
+from worldview.agents.benchmark.log import (
     DEFAULT_ERROR_LOG_PATH,
     DEFAULT_LOG_PATH,
     ErrorRecord,

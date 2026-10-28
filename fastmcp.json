@@ -1,5 +1,5 @@
 {
   "$schema": "https://gofastmcp.com/public/schemas/fastmcp.json/v1.json",
-  "source": { "path": "geoui/mcp/server.py", "entrypoint": "mcp" },
+  "source": { "path": "demo/worldview/mcp/server.py", "entrypoint": "mcp" },
   "environment": { "python": "3.12", "project": "." }
 }

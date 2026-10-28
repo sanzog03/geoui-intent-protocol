@@ -8,6 +8,10 @@ resolution-markers = [
 ]
 
 [manifest]
+members = [
+    "geoui-protocol",
+    "geoui-worldview-demo",
+]
 overrides = [
     { name = "mistralai", specifier = "<2" },
     { name = "wrapt", specifier = ">=1.14" },
@@ -1238,25 +1242,11 @@ version = "0.1.0"
 source = { editable = "." }
 dependencies = [
     { name = "pydantic" },
-    { name = "python-dateutil" },
-]
-
-[package.optional-dependencies]
-agents = [
-    { name = "akd-ext" },
-    { name = "fastmcp" },
-    { name = "httpx" },
-    { name = "marimo" },
-    { name = "pydantic-ai" },
-    { name = "python-dotenv" },
-]
-mcp = [
-    { name = "fastmcp" },
 ]
 
 [package.dev-dependencies]
 dev = [
-    { name = "fastmcp" },
+    { name = "geoui-worldview-demo" },
     { name = "pre-commit" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
@@ -1265,27 +1255,43 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "akd-ext", marker = "extra == 'agents'", git = "https://github.com/NASA-IMPACT/akd-ext.git?rev=2ca52da191f756b62378c828a2f9eb66494cb707" },
-    { name = "fastmcp", marker = "extra == 'agents'", specifier = ">=3.0,<3.2.4" },
-    { name = "fastmcp", marker = "extra == 'mcp'", specifier = ">=3.0,<3.2.4" },
-    { name = "httpx", marker = "extra == 'agents'", specifier = ">=0.27" },
-    { name = "marimo", marker = "extra == 'agents'", specifier = ">=0.23.1,<0.24" },
-    { name = "pydantic", specifier = ">=2.7" },
-    { name = "pydantic-ai", marker = "extra == 'agents'", specifier = ">=1.81.0,<2" },
-    { name = "python-dateutil", specifier = ">=2.8" },
-    { name = "python-dotenv", marker = "extra == 'agents'", specifier = ">=1.0" },
-]
-provides-extras = ["mcp", "agents"]
+requires-dist = [{ name = "pydantic", specifier = ">=2.7" }]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "fastmcp", specifier = ">=3.0,<3.2.4" },
+    { name = "geoui-worldview-demo", editable = "demo" },
     { name = "pre-commit", specifier = ">=4.2" },
     { name = "pytest", specifier = ">=9.0" },
     { name = "pytest-asyncio", specifier = ">=1.3" },
     { name = "pytest-cov", specifier = ">=7.0" },
     { name = "ruff", specifier = ">=0.14" },
+]
+
+[[package]]
+name = "geoui-worldview-demo"
+version = "0.1.0"
+source = { editable = "demo" }
+dependencies = [
+    { name = "akd-ext" },
+    { name = "fastmcp" },
+    { name = "geoui-protocol" },
+    { name = "httpx" },
+    { name = "marimo" },
+    { name = "pydantic-ai" },
+    { name = "python-dateutil" },
+    { name = "python-dotenv" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "akd-ext", git = "https://github.com/NASA-IMPACT/akd-ext.git?rev=2ca52da191f756b62378c828a2f9eb66494cb707" },
+    { name = "fastmcp", specifier = ">=3.0,<3.2.4" },
+    { name = "geoui-protocol", editable = "." },
+    { name = "httpx", specifier = ">=0.27" },
+    { name = "marimo", specifier = ">=0.23.1,<0.24" },
+    { name = "pydantic-ai", specifier = ">=1.81.0,<2" },
+    { name = "python-dateutil", specifier = ">=2.8" },
+    { name = "python-dotenv", specifier = ">=1.0" },
 ]
 
 [[package]]

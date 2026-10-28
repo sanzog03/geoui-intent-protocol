@@ -163,7 +163,7 @@ export AGENT   # demo/chat.py reads it to pick the agent
 # capability list) so the first chat turn doesn't pay cold-start
 # latency. `|| true` keeps a failed warm from aborting launch — the
 # agent will retry on its first real call.
-uv run --extra agents python -m geoui.agents.warm_mcps || true
+uv run python -m worldview.agents.warm_mcps || true
 echo
 
-exec uv run --extra agents marimo "$MARIMO_MODE" demo/chat.py
+exec uv run marimo "$MARIMO_MODE" demo/chat.py

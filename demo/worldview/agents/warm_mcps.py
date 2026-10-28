@@ -2,9 +2,9 @@
 
 Two entry points share one implementation:
 
-- CLI:    ``uv run python -m geoui.agents.warm_mcps``
+- CLI:    ``uv run python -m worldview.agents.warm_mcps``
           (used by ``start.sh`` at notebook launch)
-- Python: ``from geoui.agents.warm_mcps import warm``
+- Python: ``from worldview.agents.warm_mcps import warm``
           (used by the marimo "Warm MCPs" button)
 
 URLs are derived from the agent's own capability list so this stays
@@ -19,7 +19,7 @@ from dataclasses import dataclass
 import httpx
 from pydantic_ai.capabilities import MCP
 
-from geoui.agents._common import get_default_ieso_worldview_capabilities
+from worldview.agents._common import get_default_ieso_worldview_capabilities
 
 _WARM_TIMEOUT_S = 15.0
 

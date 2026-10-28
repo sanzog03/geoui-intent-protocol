@@ -19,7 +19,7 @@ Run from the repo root (``demo/start.sh`` does all of this):
 
     ./demo/start.sh                                  # GeoUI treatment
     AGENT=vlm ./demo/start.sh                        # VLM baseline
-    AGENT=vlm uv run --extra agents marimo edit demo/chat.py   # editor
+    AGENT=vlm uv run marimo edit demo/chat.py   # editor
 
 Requires `.env` with at minimum OPENAI_API_KEY and VECTOR_DB_TOOL_KEY
 (see `.env.example`). The notebook auto-loads `.env` by walking up from
@@ -50,7 +50,7 @@ def _variant():
     """
     import os as _os  # private: ``os`` is also imported by the env cell
 
-    from geoui.agents import geoui_agent, vlm_agent
+    from worldview.agents import geoui_agent, vlm_agent
 
     AGENT = _os.environ.get("AGENT", "geoui").strip().lower()
     if AGENT not in ("geoui", "vlm"):
@@ -275,7 +275,7 @@ async def _warm_handler(mo, warm_btn):
     if not warm_btn.value:
         out = mo.md("")
     else:
-        from geoui.agents.warm_mcps import warm
+        from worldview.agents.warm_mcps import warm
 
         results = await warm()
         if not results:
@@ -303,9 +303,8 @@ def _agent(VARIANT, cdp_endpoint, missing_keys):
     """
     from akd._base import TextOutput
     from pydantic_ai.capabilities.hooks import Hooks
-
-    from geoui.agents._common import get_default_ieso_worldview_capabilities, make_playwright_mcp
-    from geoui.agents.benchmark import new_session_id
+    from worldview.agents._common import get_default_ieso_worldview_capabilities, make_playwright_mcp
+    from worldview.agents.benchmark import new_session_id
 
     AgentInputSchema = VARIANT["input_cls"]
 
@@ -417,8 +416,7 @@ def _chat(AGENT, AgentInputSchema, TextOutput, VARIANT, agent, mo, session):
     import time
 
     from pydantic_ai.exceptions import ModelAPIError
-
-    from geoui.agents.benchmark import (
+    from worldview.agents.benchmark import (
         ErrorRecord,
         TurnRecord,
         append_error_record,
@@ -788,7 +786,7 @@ def _session_view(chat, mo, session):
     cum_usage = session.get("cum_usage")
     cum_usage_str = str(cum_usage) if cum_usage is not None else "n/a"
 
-    from geoui.agents.benchmark import DEFAULT_LOG_PATH
+    from worldview.agents.benchmark import DEFAULT_LOG_PATH
 
     log_session = session.get("log_session_id", "n/a")
     attempts = session.get("attempts", 0)
@@ -827,7 +825,7 @@ def _reset_handler(mo, reset, session):
         # cell as a duplicate definition of ``new_session_id``
         # (which is also imported by the ``_agent`` cell for the
         # initial session-id assignment).
-        from geoui.agents.benchmark import new_session_id as _new_session_id
+        from worldview.agents.benchmark import new_session_id as _new_session_id
 
         session["ctx"] = None
         session["turns"] = 0

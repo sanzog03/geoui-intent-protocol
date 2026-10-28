@@ -8,8 +8,8 @@ The protocol exposes exactly two operations at the adapter boundary:
   returns the application state as a ``GeoIntent``.
 
 This module holds the request/response models, the agent-facing docstrings
-and the plain async functions. It depends only on pydantic. ``geoui.mcp``
-serves these over MCP; ``geoui.agents._akd_tools`` wraps them as akd
+and the plain async functions. It depends only on pydantic. ``worldview.mcp``
+serves these over MCP; ``worldview.tools.akd`` wraps them as akd
 ``BaseTool`` classes. All three must keep the same names, parameter shapes
 and descriptions so logs and benchmarks stay comparable.
 """
@@ -20,8 +20,8 @@ import inspect
 
 from pydantic import BaseModel, Field
 
-from geoui.adapters.worldview import intent_to_url, url_to_intent
 from geoui.core import GeoIntent
+from worldview.adapter import intent_to_url, url_to_intent
 
 # -----------------------------------------------------------------------------
 # Agent-facing text. Kept verbatim from the original akd tools so the MCP

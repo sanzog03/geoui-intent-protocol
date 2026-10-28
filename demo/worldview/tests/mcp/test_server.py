@@ -15,9 +15,9 @@ from fastmcp import Client
 from fastmcp.exceptions import ToolError
 
 from geoui.core import GeoIntent
-from geoui.mcp._describe import describe
-from geoui.mcp.server import mcp
-from geoui.tools import (
+from worldview.mcp._describe import describe
+from worldview.mcp.server import mcp
+from worldview.tools import (
     GET_STATE_DOC,
     RENDER_INTENT_DOC,
     GeoUIGetStateRequest,
@@ -103,7 +103,7 @@ class TestCalls:
 @pytest.mark.integration
 async def test_stdio_smoke():
     """Spawn the server as a subprocess over stdio and list its tools."""
-    server_path = Path(__file__).resolve().parents[2] / "geoui" / "mcp" / "server.py"
+    server_path = Path(__file__).resolve().parents[2] / "mcp" / "server.py"
     async with Client(str(server_path)) as client:
         names = {t.name for t in await client.list_tools()}
     assert names == GEOUI_TOOL_NAMES

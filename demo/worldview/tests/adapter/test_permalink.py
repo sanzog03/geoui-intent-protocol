@@ -3,7 +3,7 @@
 import pytest
 from pydantic import ValidationError
 
-from geoui.adapters.worldview.permalink import (
+from worldview.adapter.permalink import (
     LayerSpec,
     WorldviewPermalinkInputSchema,
     build_url,

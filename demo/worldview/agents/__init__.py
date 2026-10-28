@@ -1,4 +1,4 @@
-"""IESO Worldview reference agents and benchmark harness (optional extra ``agents``).
+"""IESO Worldview reference agents and benchmark harness.
 
 Two pydantic-ai agents that share the same discovery tools and differ only
 in the interaction mechanism:
@@ -8,22 +8,22 @@ in the interaction mechanism:
 - :class:`IESOWorldviewVLMAgent` — drives Worldview through Playwright
   screenshots / snapshots / clicks (baseline).
 
-Importing this package requires ``akd-ext`` (``uv sync --extra agents``).
+Importing this package requires ``akd-ext``, installed by ``uv sync`` as part of the ``geoui-worldview-demo`` workspace member.
 """
 
-from geoui.agents._akd_tools import GeoUIGetStateTool, GeoUIRenderIntentTool
-from geoui.agents.geoui_agent import (
+from worldview.agents.geoui_agent import (
     IESOWorldviewGeoUIAgent,
     IESOWorldviewGeoUIAgentConfig,
     IESOWorldviewGeoUIAgentInputSchema,
     IESOWorldviewGeoUIAgentOutputSchema,
 )
-from geoui.agents.vlm_agent import (
+from worldview.agents.vlm_agent import (
     IESOWorldviewVLMAgent,
     IESOWorldviewVLMAgentConfig,
     IESOWorldviewVLMAgentInputSchema,
     IESOWorldviewVLMAgentOutputSchema,
 )
+from worldview.tools.akd import GeoUIGetStateTool, GeoUIRenderIntentTool
 
 __all__ = [
     "GeoUIGetStateTool",

@@ -6,7 +6,7 @@ permalink URL grammar directly. The Worldview-specific permalink MCP
 tool is replaced with two local tools: ``geoui_render_intent`` (intent →
 URL) and ``geoui_get_state`` (URL → intent). All other capabilities
 (CMR, layer lookup, Earthdata search, vector DB, SDE fallback) are shared
-with the VLM baseline via :mod:`geoui.agents._common`.
+with the VLM baseline via :mod:`worldview.agents._common`.
 
 This module keeps only what the model can see: the system prompt, the
 config description, the output schema and the agent class.
@@ -29,14 +29,14 @@ from pydantic import Field
 from pydantic_ai.capabilities import MCP
 from pydantic_ai.mcp import MCPServerStdio
 
-from geoui.agents import _common
-from geoui.agents._akd_tools import GeoUIGetStateTool, GeoUIRenderIntentTool
-from geoui.agents._common import (
+from worldview.agents import _common
+from worldview.agents._common import (
     IESOWorldviewAgentBase,
     IESOWorldviewAgentInputSchema,
     get_default_ieso_worldview_capabilities,
     make_playwright_mcp,
 )
+from worldview.tools.akd import GeoUIGetStateTool, GeoUIRenderIntentTool
 
 # Kept under its historical name; both agents share the same remote MCPs.
 get_default_ieso_worldview_geoui_capabilities = get_default_ieso_worldview_capabilities
@@ -446,7 +446,7 @@ def playwright_capability(server: MCPServerStdio) -> MCP:
     The GeoUI agent only opens the URL ``geoui_render_intent`` returns and
     reads the live URL back; everything else (snapshot, click, …) is
     filtered out so the model doesn't wander. See
-    :func:`geoui.agents._common.playwright_capability`.
+    :func:`worldview.agents._common.playwright_capability`.
     """
     return _common.playwright_capability(
         server,
@@ -564,7 +564,7 @@ __all__ = [
 ]
 
 # Wiring smoke test (one LLM round-trip; needs OPENAI_API_KEY and VECTOR_DB_TOOL_KEY):
-#   uv run --extra agents python -m geoui.agents.geoui_agent
+#   uv run python -m worldview.agents.geoui_agent
 if __name__ == "__main__":
     _common.run_smoke(
         IESOWorldviewGeoUIAgent,

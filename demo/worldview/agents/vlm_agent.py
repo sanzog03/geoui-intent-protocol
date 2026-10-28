@@ -16,7 +16,7 @@ claim of the comparison — is that each turn costs roughly an order
 of magnitude more tokens than the GeoUI variant.
 
 Shared plumbing (remote MCPs, discovery tools, Playwright-over-CDP
-wiring, input schema, output check) lives in :mod:`geoui.agents._common`;
+wiring, input schema, output check) lives in :mod:`worldview.agents._common`;
 this module keeps only what the model can see.
 
 Public API:
@@ -37,8 +37,8 @@ from pydantic import Field
 from pydantic_ai.capabilities import MCP
 from pydantic_ai.mcp import MCPServerStdio
 
-from geoui.agents import _common
-from geoui.agents._common import (
+from worldview.agents import _common
+from worldview.agents._common import (
     IESOWorldviewAgentBase,
     IESOWorldviewAgentInputSchema,
     get_default_ieso_worldview_capabilities,
@@ -495,7 +495,7 @@ def playwright_capability(server: MCPServerStdio) -> MCP:
     worldview.earthdata.nasa.gov; ``browser_evaluate`` is permitted only
     for the end-of-turn URL read-back into the output schema. The system
     prompt enforces the once-per-turn observation budget. See
-    :func:`geoui.agents._common.playwright_capability`.
+    :func:`worldview.agents._common.playwright_capability`.
     """
     return _common.playwright_capability(
         server,
@@ -613,7 +613,7 @@ __all__ = [
 
 # Wiring smoke test (one LLM round-trip; needs OPENAI_API_KEY and VECTOR_DB_TOOL_KEY).
 # No browser is attached here, so the agent most likely answers with a clarifying TextOutput:
-#   uv run --extra agents python -m geoui.agents.vlm_agent
+#   uv run python -m worldview.agents.vlm_agent
 if __name__ == "__main__":
     _common.run_smoke(
         IESOWorldviewVLMAgent,

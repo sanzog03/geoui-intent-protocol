@@ -12,7 +12,7 @@ from urllib.parse import parse_qs
 import pytest
 from pydantic import ValidationError
 
-from geoui.adapters.worldview.permalink import (
+from worldview.adapter.permalink import (
     LayerSpec,
     WorldviewPermalinkInputSchema,
     build_url,

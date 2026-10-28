@@ -6,11 +6,11 @@ descriptions as the original akd-ext deployment.
 
 Run locally::
 
-    geoui-mcp                      # stdio (default)
-    geoui-mcp --transport http --port 8000
+    worldview-mcp                      # stdio (default)
+    worldview-mcp --transport http --port 8000
 
 or with the FastMCP CLI / FastMCP Cloud via ``fastmcp.json`` at the repo root
-(entrypoint ``geoui/mcp/server.py:mcp``).
+(entrypoint ``demo/worldview/mcp/server.py:mcp``).
 """
 
 from __future__ import annotations
@@ -20,8 +20,8 @@ import os
 
 from fastmcp import FastMCP
 
-from geoui import tools
-from geoui.mcp._describe import describe
+from worldview import tools
+from worldview.mcp._describe import describe
 
 mcp = FastMCP("geoui")
 

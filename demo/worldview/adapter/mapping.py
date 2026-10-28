@@ -14,15 +14,15 @@ Public API:
 
 from __future__ import annotations
 
-from geoui.adapters.worldview.permalink import (
+from geoui.core import GeoIntent, LayerRef, TimeWindow, Viewport
+from geoui.extensions import chart, compare, raster_styling
+from worldview.adapter.permalink import (
     DEFAULT_BASE_URL,
     LayerSpec,
     WorldviewPermalinkInputSchema,
     build_url,
 )
-from geoui.adapters.worldview.url_parser import parse_url
-from geoui.core import GeoIntent, LayerRef, TimeWindow, Viewport
-from geoui.extensions import chart, compare, raster_styling
+from worldview.adapter.url_parser import parse_url
 
 # CRS ↔ Worldview projection name. The geographic / arctic / antarctic
 # projection literals are Worldview's own three-state.

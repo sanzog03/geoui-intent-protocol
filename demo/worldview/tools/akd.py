@@ -3,11 +3,11 @@
 Used by the IESO reference agents: a ``PydanticAIBaseAgentConfig`` accepts
 akd ``BaseTool`` instances in its ``tools`` field and converts them to
 pydantic_ai tools. Both tools are pure / no I/O and delegate to
-``geoui.tools``. Names (``geo_ui_render_intent_tool`` /
+``worldview.tools``. Names (``geo_ui_render_intent_tool`` /
 ``geo_ui_get_state_tool``) and descriptions are identical to the MCP server
-in ``geoui.mcp`` so benchmark logs are comparable across both paths.
+in ``worldview.mcp`` so benchmark logs are comparable across both paths.
 
-Requires the ``agents`` extra (akd-ext installed).
+Requires akd-ext, installed with the ``geoui-worldview-demo`` project.
 """
 
 from __future__ import annotations
@@ -17,9 +17,9 @@ from akd._base.errors import SchemaValidationError
 from akd.tools import BaseTool
 from pydantic import Field
 
-from geoui.adapters.worldview import intent_to_url, url_to_intent
 from geoui.core import GeoIntent
-from geoui.tools import (
+from worldview.adapter import intent_to_url, url_to_intent
+from worldview.tools import (
     EMBED_MODE_DESCRIPTION,
     GET_STATE_DOC,
     INTENT_FIELD_DESCRIPTION,
