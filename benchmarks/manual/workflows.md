@@ -1,5 +1,10 @@
 # Benchmark Workflows — GeoUI Protocol vs. VLM Baseline
 
+> **Manual procedure.** This file drives the notebook-based benchmark under
+> `benchmarks/manual/`. The re-runnable deepeval benchmark codifies these
+> scenarios in `benchmarks/worldview/datasets/gold_dataset.json`; edit that
+> file to change what the automated runs do.
+
 Candidate iterative-analysis workflows for the schema-vs-VLM token-efficiency
 benchmark. Each workflow is a fixed sequence of 5 turns; the same five user
 utterances are run, in order, against both the GeoUI-schema agent and the

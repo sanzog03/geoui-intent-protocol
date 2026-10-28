@@ -1,5 +1,10 @@
 # Benchmark prompt suite — GeoUI vs VLM-baseline
 
+> **Manual procedure.** This file drives the notebook-based benchmark under
+> `benchmarks/manual/`. The re-runnable deepeval benchmark codifies these
+> scenarios in `benchmarks/worldview/datasets/gold_dataset.json`; edit that
+> file to change what the automated runs do.
+
 A small, hand-curated set of conversation scripts covering the
 distinct *kinds* of interaction a Worldview user would actually do.
 Each script is a sequence of user turns; run the same script on

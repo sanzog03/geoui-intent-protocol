@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-RESULTS = Path(__file__).resolve().parents[1] / "benchmarks" / "results" / "poster-2026-05"
+RESULTS = Path(__file__).resolve().parents[1] / "benchmarks" / "manual" / "results" / "poster-2026-05"
 
 
 @pytest.mark.parametrize("name", ["runs.jsonl", "errors.jsonl"])

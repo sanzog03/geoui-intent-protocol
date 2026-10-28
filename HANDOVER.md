@@ -55,8 +55,8 @@ two reference agents, a marimo chat demo, and the head-to-head benchmark.
 | `demo/worldview/agents/benchmark/log.py` | Per-turn JSONL logging (`TurnRecord`, `ErrorRecord`, `append_*`, `load_runs`). | pydantic |
 | `demo/start.sh` | Launches a long-lived Chromium with remote debugging, warms MCPs, opens the marimo notebook. `AGENT=geoui` (default) or `vlm`. | uv, npx |
 | `demo/chat.py` | One marimo multi-turn chat app for both agents; `AGENT=geoui` (default) or `vlm` picks the factory, intro text, example prompts and benchmark-log label. Carries pydantic-ai `message_history` across turns; attaches Playwright per turn via CDP. | marimo |
-| `benchmarks/prompts.md`, `benchmarks/workflows.md` | Prompt suite (Core 6 + Optional 4) and 5-turn scenario scripts (A: CA wildfire smoke; B: Saharan dust; C: Lake Erie bloom). | — |
-| `benchmarks/results/poster-2026-05/` | Frozen `runs.jsonl` (51 rows) and `errors.jsonl` (22 rows) behind the poster. Absolute paths in tracebacks were replaced (`<worktree>` for the source checkout, `<python>` for the interpreter install). | — |
+| `benchmarks/manual/prompts.md`, `benchmarks/manual/workflows.md` | Prompt suite (Core 6 + Optional 4) and 5-turn scenario scripts (A: CA wildfire smoke; B: Saharan dust; C: Lake Erie bloom). | — |
+| `benchmarks/manual/results/poster-2026-05/` | Frozen `runs.jsonl` (51 rows) and `errors.jsonl` (22 rows) behind the poster. Absolute paths in tracebacks were replaced (`<worktree>` for the source checkout, `<python>` for the interpreter install). | — |
 | `scripts/dump_mcp_contract.py` | Dump any server's tool contract as JSON. | fastmcp |
 | `demo/pyproject.toml` | The `geoui-worldview-demo` project: a uv workspace member that depends on `geoui-protocol` and owns the heavy dependencies (pydantic-ai, fastmcp, marimo). The root dev group installs it editable. | — |
 | `tests/` | `test_core.py` and `test_benchmark_results.py` (library and repo-level). | — |
@@ -198,7 +198,7 @@ the observe/act mechanism varies. Prompts are fully specified (exact layer
 IDs for GeoUI, searchable names for VLM) so discovery does not dominate the
 measured cost. Judging is state-field equivalence on the parsed URL,
 excluding `viewport.bbox`, `chart:area` and auto-injected layers. Each turn
-writes one row to `benchmarks/runs.jsonl` under the current working
+writes one row to `benchmarks/manual/runs.jsonl` under the current working
 directory (the repo root when launched via `demo/start.sh`); override with
 `BENCHMARK_LOG_PATH` / `BENCHMARK_ERROR_LOG_PATH`. Poster figures came from
 the frozen logs; the aggregation was done ad hoc and **there is still no
@@ -290,7 +290,7 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
 - **Chart `time` must be a range**; root/compare `time` must be an instant.
 - **Workflow C** needs the chlorophyll GIBS layer id looked up before it runs.
 - **Benchmark log default path changed** from "worktree root derived from the
-  module's location" to `Path.cwd()/benchmarks/`. Always launch from the repo
+  module's location" to `Path.cwd()/benchmarks/manual/`. Always launch from the repo
   root, or set the env overrides.
 - **Not in this repo:** the old `ieso_w_geoui` shim modules, the
   poster-era prompts that lived in `geoui_agent.py` / `vlm_agent.py` (git

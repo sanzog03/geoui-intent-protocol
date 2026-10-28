@@ -152,7 +152,7 @@ echo "PLAYWRIGHT_CDP_ENDPOINT=${PLAYWRIGHT_CDP_ENDPOINT}"
 echo
 
 # Run marimo from the repo root (one level up from this script) so the
-# benchmark logger writes to <repo>/benchmarks/ and `uv run` picks up the
+# benchmark logger writes to <repo>/benchmarks/manual/ and `uv run` picks up the
 # project environment.
 cd "$SCRIPT_DIR/.."
 if [[ -z "${WORLDVIEW_PLUGIN_DIR:-}" && ! -f demo/worldview/agents/artifact/worldview/geoui/akd-plugins/plugins/worldview-assistant/.mcp.json ]]; then

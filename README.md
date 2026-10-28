@@ -36,7 +36,7 @@ carries everything application-specific.
 | `demo/worldview/tests/` | Tests for the adapter, tools, MCP contract, plugin loader and agents | — |
 | `demo/chat.py`, `demo/start.sh` | One marimo chat notebook for both agents (`AGENT=geoui\|vlm`) and the launcher (Chromium over CDP + notebook) | marimo |
 | `tests/` | Library tests (`test_core.py`) and repo-level checks | — |
-| `benchmarks/` | Prompt suite, workflow scripts, frozen poster run logs | — |
+| `benchmarks/manual/` | Manual (notebook-driven) procedure: prompt suite, workflow scripts, frozen poster run logs | — |
 | `docs/spec.md` | GeoUI Protocol v1.0.0 specification | — |
 | `docs/poster/` | Poster narrative, abstract, interaction diagrams, results chart | — |
 | `scripts/dump_mcp_contract.py` | Print any MCP server's tool contract as JSON, for diffing | fastmcp |
@@ -132,10 +132,10 @@ cp .env.example .env            # OPENAI_API_KEY, then the MCP keys you have
 AGENT=vlm ./demo/start.sh       # VLM + browser-control baseline
 ```
 
-Each chat turn appends a record to `benchmarks/runs.jsonl` (errors to
-`benchmarks/errors.jsonl`). The runs behind the poster are frozen under
-`benchmarks/results/poster-2026-05/`. The prompt suite is `benchmarks/prompts.md`
-and the scenario scripts are `benchmarks/workflows.md`. `HANDOVER.md` has the
+Each chat turn appends a record to `benchmarks/manual/runs.jsonl` (errors to
+`benchmarks/manual/errors.jsonl`). The runs behind the poster are frozen under
+`benchmarks/manual/results/poster-2026-05/`. The prompt suite is `benchmarks/manual/prompts.md`
+and the scenario scripts are `benchmarks/manual/workflows.md`. `HANDOVER.md` has the
 operational detail, including the Playwright-over-CDP design and known gotchas.
 
 ## Tests
