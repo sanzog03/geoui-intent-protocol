@@ -30,7 +30,7 @@ from typing import Any
 
 from deepeval.integrations.pydantic_ai import DeepEvalInstrumentationSettings
 from deepeval.tracing import observe, update_current_span, update_current_trace
-from deepeval.tracing.context import current_trace_context
+from deepeval.tracing.context import current_span_context, current_trace_context
 from deepeval.tracing.types import BaseSpan, LlmSpan, ToolSpan, Trace
 from pydantic import BaseModel, Field
 from pydantic_ai import Agent
@@ -207,7 +207,21 @@ class TracedRun(BaseModel):
     trace: TurnTrace
 
 
-@observe(type="agent", name="turn")
+def reset_trace_context() -> None:
+    """Forget any deepeval trace/span left in the current context.
+
+    deepeval's ``Observer`` sets ``current_trace_context`` on entry and does not
+    clear it on exit, so consecutive ``@observe`` calls on one event loop (the
+    simulator's) would nest every later turn under the first turn's trace and
+    each turn's trace would accumulate all earlier spans. Clearing both context
+    variables before a turn gives it a trace of its own.
+    """
+    if current_trace_context.get() is not None:
+        current_trace_context.set(None)
+    if current_span_context.get() is not None:
+        current_span_context.set(None)
+
+
 async def traced_turn(
     agent: Agent[Any, Any],
     user_input: str,
@@ -217,12 +231,31 @@ async def traced_turn(
     source: Source = "simulated",
     **run_kwargs: Any,
 ) -> TracedRun:
-    """Run one agent turn inside a deepeval trace and return the result with its :class:`TurnTrace`.
+    """Run one agent turn inside a fresh deepeval trace and return the result with its :class:`TurnTrace`.
 
     Exceptions from the run are caught and returned in ``TracedRun.error``
     so the (partial) trace is still captured; the caller decides what an
     error turn means. The deepeval trace is never posted anywhere.
     """
+    reset_trace_context()
+    try:
+        return await _observed_turn(
+            agent, user_input, message_history=message_history, thread_id=thread_id, source=source, **run_kwargs
+        )
+    finally:
+        reset_trace_context()
+
+
+@observe(type="agent", name="turn")
+async def _observed_turn(
+    agent: Agent[Any, Any],
+    user_input: str,
+    *,
+    message_history: list[Any] | None,
+    thread_id: str,
+    source: Source,
+    **run_kwargs: Any,
+) -> TracedRun:
     update_current_trace(thread_id=thread_id, metadata={"source": source})
     started_at = datetime.now(UTC)
     t0 = perf_counter()
@@ -271,6 +304,7 @@ __all__ = [
     "TurnTrace",
     "instrumentation_settings",
     "load_trace",
+    "reset_trace_context",
     "save_trace",
     "traced_turn",
     "tracing_capability",

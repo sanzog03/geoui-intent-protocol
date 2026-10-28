@@ -32,7 +32,7 @@ from dotenv import load_dotenv
 
 from geobench.datasets import GoldenMeta, dataset_hash, goldens_for
 from geobench.deepeval_results import entries_from_current_test_run, metric_entry
-from geobench.harness import ConversationRunner, conversation_record
+from geobench.harness import ConversationRecord, ConversationRunner, conversation_record
 from geobench.metrics import JUDGE_MODEL_NAME, judge_model, metrics_for, state_reached_controller
 from geobench.records import append_record
 from geobench.run_dir import CONVERSATIONS, RUN_INFO, RunInfo, git_sha, package_versions, write_run_info
@@ -122,7 +122,27 @@ def test_conversation(runner: ConversationRunner, dataset_name: str, golden: Con
         simulator_kwargs["stopping_controller"] = state_reached_controller(APP)
     simulator = ConversationSimulator(**simulator_kwargs)
     extra_turns = 1 if SMOKE else meta.max_user_simulations
-    test_case = simulator.simulate([golden], max_user_simulations=max(1, extra_turns))[0]
+    try:
+        test_case = simulator.simulate([golden], max_user_simulations=max(1, extra_turns))[0]
+    except Exception as exc:
+        # The simulator itself failed (its own model call, for instance); keep a record of the attempt.
+        append_record(
+            ConversationRecord(
+                name=f"{golden.name}[{AGENT}]",
+                agent=AGENT,
+                dataset=dataset_name,
+                run_name=RUN,
+                golden_name=golden.name,
+                session_id=None,
+                scenario=golden.scenario,
+                expected_outcome=golden.expected_outcome,
+                chatbot_role=APP.chatbot_role(AGENT),
+                turns=[],
+                metadata={"simulator_error": f"{type(exc).__name__}: {exc}"},
+            ),
+            RUN_DIR / CONVERSATIONS,
+        )
+        raise
     test_case.chatbot_role = APP.chatbot_role(AGENT)
     test_case.name = f"{golden.name}[{AGENT}]"
 

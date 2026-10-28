@@ -119,6 +119,28 @@ def test_structured_turns_build_history_write_rows_and_traces(tmp_path):
     assert ToolEfficiencyMetric(runner.app).measure(tc) == 1.0
 
 
+def test_consecutive_turns_in_one_loop_get_separate_traces(tmp_path):
+    """The simulator calls the callback repeatedly on one event loop; each turn must get its own trace.
+
+    Before the fix, deepeval's trace context leaked between calls and turn N's trace held the
+    spans of turns 1..N (turn 3 would show three tool calls and six LLM calls).
+    """
+    runner, _ = _runner(tmp_path, _structured_agent)
+
+    async def go():
+        fresh = [await runner.respond("render", [], f"conv-{i}") for i in range(3)]
+        again = await runner.respond("now zoom", [], "conv-0")  # with history: TestModel answers without a tool
+        return fresh, again
+
+    fresh, again = asyncio.run(go())
+    for turn in fresh:
+        assert trace_of(turn).tool_names == ["lookup"]
+        assert len(trace_of(turn).llm_calls) == 2
+    assert len({trace_of(t).trace_id for t in fresh}) == 3
+    assert trace_of(again).tool_names == [] and len(trace_of(again).llm_calls) == 1
+    assert trace_of(again).trace_id not in {trace_of(t).trace_id for t in fresh}
+
+
 def test_text_turn_is_classified_as_text(tmp_path):
     runner, _ = _runner(tmp_path, _text_agent)
     turn = asyncio.run(runner("hi", [], "t"))
