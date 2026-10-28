@@ -17,7 +17,7 @@ state*. A pure adapter translates it to and from Worldview's permalink URL.
 Thesis: an intent schema is an order of magnitude cheaper (tokens, tool calls,
 latency) than driving the UI with a vision-language model, and it stays
 reproducible and auditable. The repo ships the protocol, the Worldview
-adapter, the two tools (plain functions, an MCP server, and akd wrappers), the
+adapter, the two tools (plain functions, an MCP server, and a pydantic-ai toolset), the
 two reference agents, a marimo chat demo, and the head-to-head benchmark.
 
 ```
@@ -44,25 +44,29 @@ two reference agents, a marimo chat demo, and the head-to-head benchmark.
 | `demo/worldview/tools/__init__.py` | The two operations as async functions, request/response models, and the agent-facing docstrings and field descriptions (single source of truth for all three tool surfaces). | adapter |
 | `demo/worldview/mcp/_describe.py` | Rebuilds akd's `INPUT/OUTPUT FIELD DESCRIPTIONS` description suffix so the MCP contract matches the original deployment. | — |
 | `demo/worldview/mcp/server.py` | `FastMCP("geoui")` with the two tools; `main()` is the `worldview-mcp` CLI. Absolute `worldview.*` imports only: FastMCP loads this file standalone. | fastmcp |
-| `demo/worldview/tools/akd.py` | akd `BaseTool` subclasses the agents pass to `PydanticAIBaseAgentConfig.tools`. Same names and descriptions as the MCP server; protocol `ValueError`s become `SchemaValidationError` so the model gets a retry. | akd |
-| `demo/worldview/agents/_common.py` | Plumbing shared by both agents: the two remote MCPs (`get_default_ieso_worldview_capabilities`), the three discovery tools, `make_playwright_mcp` / `playwright_capability` with the two browser allow-lists, the input schema, the structured-output check (`IESOWorldviewAgentBase`) and the `run_smoke` runner. The Playwright/CDP design note lives here. | akd-ext, pydantic-ai |
-| `demo/worldview/agents/geoui_agent.py` | `IESOWorldviewGeoUIAgent` (treatment): only what the model sees. Its system prompt, config `description`, output schema, agent class, the GeoUI tool list and the two-tool browser allow-list. | `_common` |
-| `demo/worldview/agents/vlm_agent.py` | `IESOWorldviewVLMAgent` (baseline): same shape. Differs in the observe/act steps of the prompt, the tool list (no GeoUI tools) and the eleven-tool browser allow-list. | `_common` |
-| `demo/worldview/agents/warm_mcps.py` | Pings each remote MCP once at launch to absorb FastMCP cold starts. | httpx |
+| `demo/worldview/tools/pai.py` | pydantic-ai toolsets: `geoui_toolset` (the two protocol tools, same names/descriptions as the MCP server, real parameter descriptions) and `permalink_toolset` (`worldview_permalink_tool` over `build_url`). Protocol `ValueError`s become `ModelRetry` so the model gets a retry. | pydantic-ai |
+| `demo/worldview/plugin.py` | Claude Code plugin loader: `load_skill` (SKILL.md body = system prompt, frontmatter stripped), `reference_toolset` (`list_references` / `read_reference` over the skill's `references/`), `load_mcp_config` (`.mcp.json` → pydantic-ai MCP servers, `${user_config.*}` filled from env, keyless servers dropped with a warning), `remote_capabilities`, `playwright_server` (`--cdp-endpoint` appended). | pydantic-ai |
+| `demo/worldview/agents/_common.py` | `AgentSpec` + `build_agent` (bare `pydantic_ai.Agent`, output type `[<Structured>, TextOutput]`, output validator for empty result/url), `standard_capabilities` (remote MCPs + narrowed Playwright + `Thinking(effort="medium")`), the two browser allow-lists, `TextOutput`, `run_smoke`. The Playwright/CDP design note lives here. | pydantic-ai, `plugin` |
+| `demo/worldview/agents/geoui_agent.py` | `geoui_spec` / `build_geoui_agent` (treatment): the `worldview-assistant` skill as system prompt, `geoui_toolset` + `permalink_toolset` + references, `GEOUI_BROWSER_TOOLS`, `GeoUIAgentOutput`. | `_common` |
+| `demo/worldview/agents/vlm_agent.py` | `vlm_spec` / `build_vlm_agent` (baseline): the vendored `mio-worldviewagent-v2` skill plus `VLM_BROWSER_ADDENDUM` as a second prompt part, `permalink_toolset` + references (no GeoUI tools), `VLM_BROWSER_TOOLS`, `VLMAgentOutput`. | `_common` |
+| `demo/worldview/agents/warm_mcps.py` | Pings each enabled remote MCP once at launch to absorb FastMCP cold starts. | httpx |
+| `demo/vendor/akd-plugins/` | git submodule of `NASA-IMPACT/akd-plugins`; `plugins/worldview-assistant/` holds `.mcp.json`, `.claude-plugin/plugin.json` (declares the `userConfig` keys) and `skills/worldview-assistant/`. | — |
+| `demo/skills/mio-worldviewagent-v2/` | Vendored non-GeoUI skill (`SKILL.md` + `references/`, see its README for provenance). | — |
 | `demo/worldview/agents/benchmark/log.py` | Per-turn JSONL logging (`TurnRecord`, `ErrorRecord`, `append_*`, `load_runs`). | pydantic |
 | `demo/start.sh` | Launches a long-lived Chromium with remote debugging, warms MCPs, opens the marimo notebook. `AGENT=geoui` (default) or `vlm`. | uv, npx |
-| `demo/chat.py` | One marimo multi-turn chat app for both agents; `AGENT=geoui` (default) or `vlm` picks the agent, intro text, example prompts and benchmark-log label. Carries `run_context` across turns; attaches Playwright per turn via CDP. | marimo |
+| `demo/chat.py` | One marimo multi-turn chat app for both agents; `AGENT=geoui` (default) or `vlm` picks the factory, intro text, example prompts and benchmark-log label. Carries pydantic-ai `message_history` across turns; attaches Playwright per turn via CDP. | marimo |
 | `benchmarks/prompts.md`, `benchmarks/workflows.md` | Prompt suite (Core 6 + Optional 4) and 5-turn scenario scripts (A: CA wildfire smoke; B: Saharan dust; C: Lake Erie bloom). | — |
 | `benchmarks/results/poster-2026-05/` | Frozen `runs.jsonl` (51 rows) and `errors.jsonl` (22 rows) behind the poster. Absolute paths in tracebacks were replaced (`<worktree>` for the source checkout, `<python>` for the interpreter install). | — |
 | `scripts/dump_mcp_contract.py` | Dump any server's tool contract as JSON. | fastmcp |
-| `demo/pyproject.toml` | The `geoui-worldview-demo` project: a uv workspace member that depends on `geoui-protocol` and owns the heavy dependencies (akd-ext, pydantic-ai, fastmcp, marimo). The root dev group installs it editable. | — |
+| `demo/pyproject.toml` | The `geoui-worldview-demo` project: a uv workspace member that depends on `geoui-protocol` and owns the heavy dependencies (pydantic-ai, fastmcp, marimo). The root dev group installs it editable. | — |
 | `tests/` | `test_core.py` and `test_benchmark_results.py` (library and repo-level). | — |
-| `demo/worldview/tests/` | `adapter/` (permalink, assembly, round trip); `mcp/test_server.py` (contract vs golden, calls, stdio smoke); `agents/test_akd_tools.py` (parity) and `agents/test_agent_surface.py` (model-visible surface golden). Collected by the root `pytest` via `testpaths`. | — |
+| `demo/worldview/tests/` | `adapter/` (permalink, assembly, round trip); `mcp/test_server.py` (contract vs golden, calls, stdio smoke); `agents/test_plugin.py` (loader), `agents/test_pai_tools.py` (toolset parity) and `agents/test_agent_surface.py` (model-visible surface golden, plus a no-akd check). Collected by the root `pytest` via `testpaths`. | — |
 
 **Layering rule:** `geoui` imports only pydantic and never `worldview`.
 `worldview.adapter` adds dateutil; `worldview.tools` the adapter;
-`worldview.mcp` fastmcp; `worldview.agents` and `worldview.tools.akd` akd /
-akd-ext / pydantic-ai. The README import check depends on the first clause.
+`worldview.mcp` fastmcp; `worldview.tools.pai`, `worldview.plugin` and
+`worldview.agents` pydantic-ai. Nothing imports akd. The README import check
+depends on the first clause.
 
 **Why two projects.** The library is meant to be published and depended on;
 the Worldview code is a reference implementation until a generic adapter and
@@ -110,7 +114,7 @@ Three surfaces share one contract, defined in `demo/worldview/tools/__init__.py`
 |---|---|---|
 | async functions | `worldview.tools` | anything Python |
 | MCP tools `geo_ui_render_intent_tool`, `geo_ui_get_state_tool` | `worldview.mcp.server` (`worldview-mcp`) | Claude plugin, any MCP client |
-| akd `BaseTool`s | `worldview.tools.akd` | the IESO agents |
+| pydantic-ai toolset | `worldview.tools.pai` | the demo agents |
 
 `demo/worldview/tests/mcp/fixtures/akd_contract.json` is a golden capture of the
 original akd-ext server (names, input schemas, descriptions, output schemas).
@@ -140,17 +144,33 @@ branch `feature/geoui-mcp-tools`):
 
 ## 6. The agents and the benchmark
 
-`IESOWorldviewGeoUIAgent` is a `PydanticAIBaseAgent` (defaults
-`openai:gpt-5.2`, `reasoning_effort="medium"`). Output is the structured
-schema (`result` + `url`) or `TextOutput` for clarifying turns.
+Both agents are bare `pydantic_ai.Agent`s (`openai:gpt-5.2`,
+`Thinking(effort="medium")`, `retries=1`) built by `build_agent(AgentSpec)`.
+Output is the structured class (`result` + `url`) or `TextOutput` for
+clarifying turns, so the output tools are `final_result_GeoUIAgentOutput` /
+`final_result_VLMAgentOutput` and `final_result_TextOutput`.
 
-**Tooling split, deliberate:** local akd tools (`GeoUIRenderIntentTool`,
-`GeoUIGetStateTool`, `UMMVisLookupTool`, `EarthdataSearchLandingPageTool`,
-`SDESearchTool`; the last three were moved from hosted MCPs to local tools to
-dodge cold-start flakiness); two remote MCPs (`CMR_MCP_Server`, AWS-hosted;
-`IESO_Validation_MCP_Server`, FastMCP-hosted, needs `VECTOR_DB_TOOL_KEY`);
-Playwright MCP added by the notebook and narrowed to `browser_navigate` +
-`browser_evaluate` (the VLM agent allows eleven browser tools).
+**Prompts come from Claude Code skills.** The GeoUI agent's only system
+prompt is `skills/worldview-assistant/SKILL.md` from the plugin submodule
+(frontmatter stripped). The baseline runs the vendored
+`mio-worldviewagent-v2/SKILL.md`, which knows nothing about GeoUI and builds
+URLs with `worldview_permalink_tool`, plus `VLM_BROWSER_ADDENDUM` (the
+observe/act and turn-gate rules from the poster-era prompt). Each skill's
+`references/` tree is reachable through `list_references` / `read_reference`;
+nothing under `references/` is injected up front, and `assets/` (the catalog
+and story mirrors) is not exposed.
+
+**Tooling split, deliberate:** in-process `geoui_toolset` (the two protocol
+tools) and `permalink_toolset`; every discovery tool is a remote MCP taken
+from the plugin's `.mcp.json` (`cmr`, `ieso-validation`, `umm-vis-lookup`,
+`earthdata-search`, `pdf-parser`, `sde-search`, `eonet`), the plugin's
+`geoui` and `worldview-permalink` entries being replaced by the local
+toolsets. Secrets are `${user_config.*}` placeholders filled from
+`VECTOR_DB_TOOL_KEY`, `IESO_MCP_KEY`, `SDE_MCP_KEY`, `EONET_TOKEN`; a server
+whose key is unset is dropped with a `worldview.plugin` warning, so the agent
+simply has fewer tools. Playwright comes from the same config, gets
+`--cdp-endpoint` appended, and is narrowed to `browser_navigate` +
+`browser_evaluate` for GeoUI and to eleven tools for the baseline.
 
 **Playwright/CDP design, the subtle part.** Chromium is launched externally
 by `demo/start.sh` with `--remote-debugging-port=9222`; a fresh Playwright
@@ -158,20 +178,20 @@ MCP attaches per turn over CDP (`demo/worldview/agents/_common.py`). Holding one
 `RuntimeError: Attempted to exit cancel scope in a different task than it was
 entered in` (anyio binds the task group to the entering task; marimo's
 per-cell tasks die on return). Map state lives outside Python, in Chromium;
-the MCP lives one `arun` at a time. The long docstrings in
-`make_playwright_mcp` / `playwright_capability` explain this. Do not simplify
-them.
+the MCP lives one run at a time. The design note in `_common.py` explains
+this. Do not simplify it.
 
 **What the model sees is pinned.** `demo/worldview/tests/agents/fixtures/agent_surface.json`
-is a golden of each agent's system prompt, bound config description, tool
-and capability lists, browser allow-list and output-schema names, docstrings
-and field descriptions. `test_agent_surface.py` fails on any drift. Change
-prompts or schemas deliberately, then regenerate with
-`uv run python scripts/capture_agent_surface.py` and review
-the fixture diff. Output-schema and agent class names are part of that
-surface: pydantic-ai names the output tool `final_result_<ClassName>` and
-`agent.name` is the snake_case class name, both of which appear in the
-frozen logs.
+is a golden of each agent's system prompts, in-process tool names /
+descriptions / parameter schemas, capability list (remote MCP ids and URLs,
+Playwright allow-list, reasoning effort), output tool names and output
+schemas. `test_agent_surface.py` fails on any drift, including a plugin
+submodule bump or a re-exported skill. Change things deliberately, then
+regenerate with `uv run python scripts/capture_agent_surface.py` and review
+the fixture diff. Output class names are part of that surface: pydantic-ai
+names the output tool `final_result_<ClassName>`, and the name appears in the
+benchmark logs. Logs written before October 28, 2026 carry the old names
+(`final_result_IESOWorldview*OutputSchema`, agents `ieso_worldview_*`).
 
 **Benchmark.** Same agent skeleton, same discovery tools, same prompts; only
 the observe/act mechanism varies. Prompts are fully specified (exact layer
@@ -187,28 +207,37 @@ the frozen logs; the aggregation was done ad hoc and **there is still no
 **Run:**
 
 ```bash
+git submodule update --init               # once: the worldview-assistant plugin
 uv sync
-cp .env.example .env                      # OPENAI_API_KEY, VECTOR_DB_TOOL_KEY
+cp .env.example .env                      # OPENAI_API_KEY, then the MCP keys you have
 ./demo/start.sh                           # treatment
 AGENT=vlm ./demo/start.sh                 # baseline
 uv run python -m worldview.agents.geoui_agent  # one-LLM-call wiring smoke
+uv run python -m worldview.agents.warm_mcps    # lists the enabled remote servers
 ```
 
 ## 7. Gotchas, known issues, open TODOs
 
-- **pydantic-ai is pinned `<2`.** akd-ext at the pinned commit imports
-  `pydantic_ai.messages.BuiltinToolCallEvent`, which 2.x removed. Lift the pin
-  only together with an akd-ext bump.
-- **akd-ext is pinned to commit `2ca52da`** because `origin/develop` lacks
-  `akd_ext/tools/worldview/` (UMM-Vis lookup, Earthdata Search). `uv sync`
-  therefore needs GitHub access to `NASA-IMPACT/akd-ext`; `uv sync --no-dev`
-  installs the library alone.
+- **pydantic-ai is pinned `>=1.81,<2`.** 1.81 introduced the capabilities
+  API (`MCP`, `Hooks`, `Thinking`) the agents use; 2.x has not been tried.
+- **No akd anywhere** since October 28, 2026. The agents are bare pydantic-ai;
+  `test_no_akd_anywhere` fails if an import creeps back. The MCP contract
+  golden is still called `akd_contract.json` because it was captured from the
+  original akd-ext server.
+- **The plugin is a git submodule.** A fresh clone without
+  `--recurse-submodules` has an empty `demo/vendor/akd-plugins`; `start.sh`
+  and `worldview.plugin.plugin_dir()` say so. `WORLDVIEW_PLUGIN_DIR` points at
+  any other checkout of the plugin.
+- **Missing MCP keys shrink the tool set silently (well, with a warning).**
+  `load_mcp_config` drops every server whose `${user_config.*}` is unset. The
+  env cell lists the disabled groups; the skill then falls back to the
+  remaining tools or asks the user. The local copy of the plugin under
+  `claude-skills-and-plugins` holds literal tokens: never vendor it.
 - **Duplicated permalink logic.** `demo/worldview/adapter/permalink.py` and
-  akd-ext's `akd_ext/tools/worldview/permalink.py` are now two copies. This
-  repo is the source of truth. Follow-up in akd-ext: depend on
-  `geoui-protocol` plus `geoui-worldview-demo` (or whatever the adapter is
-  published as), reduce its permalink module to a `BaseTool` wrapper over
-  `worldview.adapter`, and drop `akd_ext/tools/geoui/`.
+  akd-ext's `akd_ext/tools/worldview/permalink.py` are two copies. This repo
+  is the source of truth. Follow-up in akd-ext: depend on `geoui-protocol`
+  (plus the adapter once it is published), reduce its permalink module to a
+  wrapper over `worldview.adapter`, and drop `akd_ext/tools/geoui/`.
 - **Do not move `demo/chat.py` into `demo/worldview/`.** marimo inserts the
   notebook's directory at the front of `sys.path`. Inside the package that
   directory contains `mcp/` and `agents/`, which would shadow the installed
@@ -217,19 +246,19 @@ uv run python -m worldview.agents.geoui_agent  # one-LLM-call wiring smoke
 - **`IESO_Validation_MCP_Server` auth.** The agent flags a possible
   authorization issue. Confirm `VECTOR_DB_TOOL_KEY`; it is sent as
   `Bearer {key}` (prefix required by FastMCP servers).
-- **Extension declare/use mismatch** is the top logged agent error. Since
-  October 2026 the akd tool wrappers raise it as `SchemaValidationError`,
-  which akd-ext turns into a pydantic-ai `ModelRetry`, so the model gets to
-  add the URI and call the tool again instead of the whole turn failing
-  (verified live: turn 2 of the demo shows two `geo_ui_render_intent_tool`
-  calls, then success). If you touch the system prompt's extension
-  instructions, re-run Workflow A turns 2/4/5.
+- **Extension declare/use mismatch** is the top logged agent error. The
+  in-process toolset raises it as a pydantic-ai `ModelRetry`, so the model
+  gets to add the URI and call the tool again instead of the whole turn
+  failing (verified live: turn 2 of the demo shows two
+  `geo_ui_render_intent_tool` calls, then success). The skill's step 6 spells
+  out the declare-and-populate rule; if the plugin changes it, re-run
+  Workflow A turns 2/4/5.
 - **marimo is pinned `<0.24`.** 0.25.x's frontend rejects its own chat
   requests (`messages[0].metadata` missing) before the handler runs.
-- **Usage token counts read 0** in `runs.jsonl` rows produced with
-  pydantic-ai 1.81 + gpt-5.2 (`reasoning_tokens` and `requests` are
-  populated). `extract_usage` in `benchmark/log.py` needs revisiting before
-  the next benchmark round; the poster numbers came from an older stack.
+- **Usage token counts read 0** in `runs.jsonl` rows produced with the
+  akd-era stack (pydantic-ai 1.81 + gpt-5.2; `reasoning_tokens` and
+  `requests` were populated). `extract_usage` now reads pydantic-ai's
+  `RunUsage` directly; check the first rows of the next benchmark round.
 - **The open-ended smoke query is expensive.** "What can you help with?"
   drove 46 tool calls before the agent asked a clarifying question. The
   fully specified fast path (exact layer id + bbox + date) takes 3.
@@ -240,16 +269,16 @@ uv run python -m worldview.agents.geoui_agent  # one-LLM-call wiring smoke
 - **Benchmark log default path changed** from "worktree root derived from the
   module's location" to `Path.cwd()/benchmarks/`. Always launch from the repo
   root, or set the env overrides.
-- **Not in this repo:** the `ieso-worldview-plugin/` directory from the old
-  worktree (the live copy is `claude-skills-and-plugins/plugins/worldview-assistant`),
-  the old `ieso_w_geoui` shim modules, Playwright console logs, and the
-  partial `benchmarks/backup` duplicate.
+- **Not in this repo:** the old `ieso_w_geoui` shim modules, the
+  poster-era prompts that lived in `geoui_agent.py` / `vlm_agent.py` (git
+  history before October 28, 2026), Playwright console logs, and the partial
+  `benchmarks/backup` duplicate.
 
 ## 8. Orientation checklist for the next person
 
 1. Read `docs/spec.md`, then §3–§5 here.
-2. `uv sync && uv run pytest`: 140-odd tests, no keys, no network except the
-   stdio smoke spawning a subprocess.
+2. `git submodule update --init && uv sync && uv run pytest`: 160-odd tests,
+   no keys, no network except the stdio smoke spawning a subprocess.
 3. `uv run worldview-mcp --transport http --port 8000` and
    `uv run python scripts/dump_mcp_contract.py http://127.0.0.1:8000/mcp`.
 4. Fill `.env`, `./demo/start.sh`, try *"Show

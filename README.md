@@ -27,10 +27,13 @@ carries everything application-specific.
 | `geoui/core.py`, `geoui/extensions/` | **The protocol.** `GeoIntent`, `Viewport`, `TimeWindow`, `LayerRef`; `compare`, `chart`, `raster-styling` extensions | pydantic |
 | `demo/pyproject.toml` | The demo project (`geoui-worldview-demo`), a uv workspace member installed editable by `uv sync` | geoui-protocol |
 | `demo/worldview/adapter/` | Reference adapter: `GeoIntent` ⇄ Worldview permalink URL (`mapping.py`, `permalink.py`, `url_parser.py`) | geoui, dateutil |
-| `demo/worldview/tools/` | The two protocol operations as plain async functions plus request/response models; `akd.py` wraps them as akd `BaseTool`s | adapter; akd-ext for `akd.py` |
+| `demo/worldview/tools/` | The two protocol operations as plain async functions plus request/response models; `pai.py` exposes them (and `worldview_permalink_tool`) as pydantic-ai toolsets | adapter; pydantic-ai for `pai.py` |
 | `demo/worldview/mcp/` | FastMCP server exposing `geo_ui_render_intent_tool` and `geo_ui_get_state_tool`; CLI `worldview-mcp` | fastmcp |
-| `demo/worldview/agents/` | IESO Worldview reference agents (GeoUI treatment, VLM baseline), MCP warm-up, benchmark logger | akd-ext, pydantic-ai |
-| `demo/worldview/tests/` | Tests for the adapter, tools, MCP contract and agents | — |
+| `demo/worldview/plugin.py` | Loads a Claude Code plugin for pydantic-ai: `SKILL.md` as system prompt, `references/` behind `read_reference`, `.mcp.json` servers with `${user_config.*}` filled from the environment | pydantic-ai |
+| `demo/worldview/agents/` | The two agents as bare pydantic-ai `Agent`s built from the plugin skills (GeoUI treatment, VLM baseline), MCP warm-up, benchmark logger | pydantic-ai |
+| `demo/vendor/akd-plugins/` | git submodule of [NASA-IMPACT/akd-plugins](https://github.com/NASA-IMPACT/akd-plugins); the `worldview-assistant` plugin is the GeoUI agent's skill and MCP server list | — |
+| `demo/skills/mio-worldviewagent-v2/` | Vendored non-GeoUI skill (`SKILL.md` + `references/`) the baseline agent runs | — |
+| `demo/worldview/tests/` | Tests for the adapter, tools, MCP contract, plugin loader and agents | — |
 | `demo/chat.py`, `demo/start.sh` | One marimo chat notebook for both agents (`AGENT=geoui\|vlm`) and the launcher (Chromium over CDP + notebook) | marimo |
 | `tests/` | Library tests (`test_core.py`) and repo-level checks | — |
 | `benchmarks/` | Prompt suite, workflow scripts, frozen poster run logs | — |
@@ -38,7 +41,7 @@ carries everything application-specific.
 | `docs/poster/` | Poster narrative, abstract, interaction diagrams, results chart | — |
 | `scripts/dump_mcp_contract.py` | Print any MCP server's tool contract as JSON, for diffing | fastmcp |
 
-Importing `geoui` pulls in nothing from `worldview`, akd or fastmcp. The
+Importing `geoui` pulls in nothing from `worldview`, pydantic-ai or fastmcp. The
 generic adapter and MCP layer that will eventually live in `geoui` are not
 written yet; until then every application-specific piece stays under `demo/`.
 
@@ -52,7 +55,8 @@ uv add "geoui-protocol @ git+https://github.com/NASA-IMPACT/geoui-intent-protoco
 Developing in this repo:
 
 ```bash
-uv sync    # library + Worldview demo (installs akd-ext from git) + dev tools, in one venv
+git clone --recurse-submodules https://github.com/NASA-IMPACT/geoui-intent-protocol   # or: git submodule update --init
+uv sync    # library + Worldview demo + dev tools, in one venv
 ```
 
 `uv sync --no-dev` installs the library alone.
@@ -100,14 +104,30 @@ drop-in replacement. `demo/worldview/tests/mcp/` asserts that contract against
 a golden fixture. `fastmcp.json` at the repo root points FastMCP Cloud (or
 `fastmcp run`) at `demo/worldview/mcp/server.py:mcp`.
 
-The Claude plugin that consumes this server is `worldview-assistant`, maintained
-in `claude-skills-and-plugins/plugins/worldview-assistant` (not part of this repo).
+The Claude Code plugin that consumes this server is `worldview-assistant` from
+[NASA-IMPACT/akd-plugins](https://github.com/NASA-IMPACT/akd-plugins), vendored
+here as the `demo/vendor/akd-plugins` submodule because the demo agents run the
+same skill and MCP server list (see below).
 
 ## Agents, benchmark and demo
 
+Two bare pydantic-ai agents, each driven by a Claude Code skill so Claude Code
+users and the demo share one source of truth:
+
+| `AGENT` | Skill (system prompt) | Tools | Browser |
+|---|---|---|---|
+| `geoui` | `worldview-assistant` from the plugin submodule | GeoUI protocol tools in-process, `worldview_permalink_tool`, the plugin's remote discovery MCPs, `read_reference` over the skill's `references/` | `browser_navigate` + `browser_evaluate` only: open the rendered URL, read the live one back |
+| `vlm` | `mio-worldviewagent-v2` (vendored, no GeoUI) plus a browser addendum | `worldview_permalink_tool`, the same discovery MCPs, `read_reference` | Eleven Playwright tools: snapshot, screenshot, click, type, drag, ... |
+
+The plugin's `.mcp.json` references its secrets as `${user_config.*}`; the
+loader fills them from `.env` (`VECTOR_DB_TOOL_KEY`, `IESO_MCP_KEY`,
+`SDE_MCP_KEY`, `EONET_TOKEN`) and skips, with a warning, any server whose key
+is unset. The `geoui` and `worldview-permalink` servers are always replaced by
+the in-process implementations from this repo.
+
 ```bash
 uv sync
-cp .env.example .env            # OPENAI_API_KEY, VECTOR_DB_TOOL_KEY
+cp .env.example .env            # OPENAI_API_KEY, then the MCP keys you have
 ./demo/start.sh                 # GeoUI treatment: Chromium + marimo chat
 AGENT=vlm ./demo/start.sh       # VLM + browser-control baseline
 ```
@@ -123,7 +143,7 @@ operational detail, including the Playwright-over-CDP design and known gotchas.
 ```bash
 uv run pytest                      # library + demo (tests/ and demo/worldview/tests/)
 uv run pytest -m "not integration" # skip the stdio subprocess smoke
-uv run pytest -m agents            # agent-tool parity and the model-visible surface golden
+uv run pytest -m agents            # plugin loader, toolset parity and the model-visible surface golden
 ```
 
 ## Status and roadmap

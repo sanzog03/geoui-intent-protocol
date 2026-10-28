@@ -3,7 +3,8 @@
 ## Setup
 
 ```bash
-uv sync                      # library + Worldview demo + dev tools; installs akd-ext from git (needs GitHub access)
+git submodule update --init  # demo/vendor/akd-plugins (the worldview-assistant plugin)
+uv sync                      # library + Worldview demo + dev tools
 uv run pre-commit install    # optional
 ```
 
@@ -16,12 +17,12 @@ the repo root.
 
 ```bash
 uv run ruff check . && uv run ruff format --check .
-uv run pytest                        # agents tests auto-skip when akd is not installed
+uv run pytest                        # library + demo, no keys, no network
 uv run pytest -m "not integration"   # skip the stdio subprocess smoke test
 ```
 
 Markers: `integration` (spawns a subprocess or touches the network), `agents`
-(requires akd-ext, which `uv sync` installs with the demo).
+(needs the demo project and the plugin submodule).
 
 ## Layering rules
 
@@ -29,23 +30,30 @@ Markers: `integration` (spawns a subprocess or touches the network), `agents`
    library. Nothing in `geoui` may import `worldview`. The README import check
    relies on this.
 2. `worldview.adapter` imports `geoui` and dateutil. `worldview.tools` imports
-   the adapter; `worldview.tools.akd` additionally imports akd.
+   the adapter; `worldview.tools.pai` additionally imports pydantic-ai.
 3. `worldview.mcp` may import fastmcp. It must not import `worldview.agents`.
    `server.py` uses absolute `worldview.*` imports because FastMCP loads it as
    a standalone file.
-4. `worldview.agents` may import akd / akd-ext / pydantic-ai. Nothing outside
-   it (and `worldview.tools.akd`) may.
+4. `worldview.plugin` and `worldview.agents` import pydantic-ai. Nothing
+   imports akd or akd-ext; `test_agent_surface.py::test_no_akd_anywhere`
+   enforces it.
 5. The two tool names, their parameter names and their descriptions are a
-   public contract shared by the MCP server, the akd wrappers and the
+   public contract shared by the MCP server, the pydantic-ai toolset and the
    benchmark logs. Change them only deliberately, and update
    `demo/worldview/tests/mcp/fixtures/akd_contract.json` in the same commit.
-6. In `worldview.agents`, model-visible text (system prompts, config
-   `description`, output-schema names, docstrings and field descriptions,
-   agent class names) lives in `geoui_agent.py` / `vlm_agent.py`; shared
-   plumbing lives in `_common.py`. `demo/worldview/tests/agents/test_agent_surface.py`
-   proves a refactor is prose-neutral; regenerate its fixture with
-   `scripts/capture_agent_surface.py` only for intentional changes.
-7. `demo/chat.py` stays at `demo/`, not inside `demo/worldview/`. marimo puts
+6. Prompts are not written in this repo. The GeoUI agent's system prompt is
+   the plugin's `SKILL.md` (bump the submodule to change it); the baseline's
+   is the vendored `demo/skills/mio-worldviewagent-v2/SKILL.md` (re-export to
+   change it) plus `VLM_BROWSER_ADDENDUM` in `vlm_agent.py`. Everything the
+   model sees (prompts, tool descriptions and schemas, output tool names,
+   capability ids, browser allow-lists) is pinned by
+   `demo/worldview/tests/agents/test_agent_surface.py`; regenerate its fixture
+   with `scripts/capture_agent_surface.py` only for intentional changes and
+   review the diff.
+7. Secrets never enter the repo. The plugin's `.mcp.json` uses
+   `${user_config.*}` placeholders; the loader fills them from the
+   environment at run time. Do not vendor a plugin copy with literal tokens.
+8. `demo/chat.py` stays at `demo/`, not inside `demo/worldview/`. marimo puts
    the notebook's directory at the front of `sys.path`; from inside the
    package that would shadow the installed `mcp` SDK and `agents` packages.
 
