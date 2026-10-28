@@ -1,13 +1,22 @@
-"""The frozen poster logs are published data: no machine-specific paths."""
+"""Committed benchmark artifacts are published data: no machine-specific paths."""
 
 from pathlib import Path
 
 import pytest
 
-RESULTS = Path(__file__).resolve().parents[1] / "benchmarks" / "manual" / "results" / "poster-2026-05"
+ROOT = Path(__file__).resolve().parents[1]
+MANUAL = ROOT / "benchmarks" / "manual" / "results" / "poster-2026-05"
+RUNS = ROOT / "benchmarks" / "worldview" / "results"
 
 
-@pytest.mark.parametrize("name", ["runs.jsonl", "errors.jsonl"])
-def test_frozen_logs_contain_no_absolute_user_paths(name):
-    text = (RESULTS / name).read_text()
+def _artifacts() -> list[Path]:
+    files = [MANUAL / "runs.jsonl", MANUAL / "errors.jsonl"]
+    if RUNS.exists():
+        files += [p for p in RUNS.rglob("*") if p.is_file() and p.suffix in (".jsonl", ".json", ".md")]
+    return files
+
+
+@pytest.mark.parametrize("path", _artifacts(), ids=lambda p: str(p.relative_to(ROOT)))
+def test_committed_artifacts_contain_no_absolute_user_paths(path):
+    text = path.read_text()
     assert "/Users/" not in text and "/home/" not in text

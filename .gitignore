@@ -29,3 +29,7 @@ node_modules/
 # live benchmark logs (frozen results live under benchmarks/manual/results/)
 benchmarks/manual/runs.jsonl
 benchmarks/manual/errors.jsonl
+
+# deepeval scratch (results are committed per run under benchmarks/worldview/results/)
+.deepeval/
+.deepeval-cache.json
