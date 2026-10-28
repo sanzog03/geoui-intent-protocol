@@ -21,16 +21,23 @@ dependencies = [
 Repository = "https://github.com/NASA-IMPACT/geoui-intent-protocol"
 
 [tool.uv.workspace]
-members = ["demo"]
+members = ["demo", "benchmarks/harness", "benchmarks/worldview"]
 
 [tool.uv.sources]
 # The Worldview demo (adapter, tools, MCP server, agents) is a sibling project; the dev
 # group installs it editable so `uv run` sees `worldview` the same way it sees `geoui`.
 geoui-worldview-demo = { workspace = true }
+# The benchmark harness (deepeval, mechanism-neutral) and its Worldview bindings are
+# two more members; only the dev group pulls them in, so the library and demo stay
+# deepeval-free.
+geobench = { workspace = true }
+geoui-worldview-benchmark = { workspace = true }
 
 [dependency-groups]
 dev = [
     "geoui-worldview-demo",
+    "geobench",
+    "geoui-worldview-benchmark",
     "pytest>=9.0",
     "pytest-asyncio>=1.3",
     "pytest-cov>=7.0",
@@ -51,8 +58,15 @@ geoui = ["py.typed"]
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-testpaths = ["tests", "demo/worldview/tests"]
-addopts = ["-ra", "--strict-markers", "--strict-config"]
+testpaths = [
+    "tests",
+    "demo/worldview/tests",
+    "benchmarks/harness/geobench/tests",
+    "benchmarks/worldview/worldview_benchmark/tests",
+]
+# deepeval registers a pytest plugin that would load into every run; `deepeval test run`
+# re-enables it explicitly, so the unit suite stays free of it.
+addopts = ["-ra", "--strict-markers", "--strict-config", "-p", "no:deepeval"]
 markers = [
     "agents: needs the geoui-worldview-demo project (pydantic-ai, vendored plugin)",
     "integration: spawns a subprocess or touches the network",
@@ -71,5 +85,6 @@ quote-style = "double"
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = ["F841"]
 "demo/worldview/tests/**/*.py" = ["F841"]
+"benchmarks/**/tests/**/*.py" = ["F841"]
 # marimo notebook: bare expressions render cell output; silent excepts guard UI teardown
 "demo/chat.py" = ["B018", "S110"]
