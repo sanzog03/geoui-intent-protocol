@@ -247,15 +247,22 @@ def run_smoke(build: Callable[..., Agent], *, query: str) -> None:
     """One LLM round-trip to prove the agent wiring works.
 
     Requires ``OPENAI_API_KEY`` (from ``.env`` or the shell); MCP servers whose
-    key is missing are skipped. The query is intentionally light; a clarifying
-    ``TextOutput`` is a successful wiring test too.
+    key is missing are skipped, and ``PLAYWRIGHT_CDP_ENDPOINT`` is honoured so
+    the turn can open the result in the running Chromium. A query given on the
+    command line (``python -m worldview.agents.geoui_agent "..."``) replaces
+    the module's default; a clarifying ``TextOutput`` is a successful wiring
+    test too.
     """
+    import sys
+
     from dotenv import load_dotenv
 
     load_dotenv()
     if not os.getenv("OPENAI_API_KEY"):
         print("Missing OPENAI_API_KEY. Create a .env from .env.example and populate it.")
         raise SystemExit(1)
+    if len(sys.argv) > 1:
+        query = " ".join(sys.argv[1:])
 
     async def _smoke() -> None:
         agent = build(cdp_endpoint=os.getenv("PLAYWRIGHT_CDP_ENDPOINT"))
@@ -264,7 +271,7 @@ def run_smoke(build: Callable[..., Agent], *, query: str) -> None:
         output = result.output
         print(f"Output type: {type(output).__name__}\n")
         print(output.model_dump_json(indent=2, exclude_none=True) if isinstance(output, BaseModel) else output)
-        print(f"\nUsage: {result.usage()}")
+        print(f"\nUsage: {result.usage}")
 
     asyncio.run(_smoke())
 

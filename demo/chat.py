@@ -577,7 +577,7 @@ def _chat(AGENT, TextOutput, VARIANT, agent, mo, session):
                     turn_error = exc
 
                 wall_clock = time.monotonic() - t_start
-                turn_usage = result.usage() if result is not None else None
+                turn_usage = result.usage if result is not None else None  # a property in pydantic-ai 2.x
 
                 # Build + write benchmark log row. We log success and
                 # error turns uniformly; the distinguishing field is
