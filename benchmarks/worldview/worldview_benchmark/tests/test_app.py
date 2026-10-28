@@ -76,11 +76,30 @@ def test_observe_rejects_garbage(app):
         app.observe("not a url at all")
 
 
-def test_output_url_reads_structured_outputs_only(app):
+def test_output_url_reads_structured_outputs_and_inline_urls(app):
     assert app.output_url(GeoUIAgentOutput(result="r", url="https://x")) == "https://x"
     assert app.output_url(VLMAgentOutput(result="r", url="https://y")) == "https://y"
     assert app.output_url(TextOutput(content="hello")) is None
     assert app.output_url(None) is None
+    text = TextOutput(
+        content="Worldview is set.\n\nhttps://worldview.earthdata.nasa.gov/?l=A&t=2025-09-15&v=-125,24,-66,50.\nDone."
+    )
+    assert app.output_url(text) == "https://worldview.earthdata.nasa.gov/?l=A&t=2025-09-15&v=-125,24,-66,50"
+    markdown = TextOutput(
+        content="[open](https://worldview.earthdata.nasa.gov/?l=A&t=2025-09-15) — then [again](https://worldview.earthdata.nasa.gov/?l=B&t=2025-09-16)"
+    )
+    assert app.output_url(markdown) == "https://worldview.earthdata.nasa.gov/?l=B&t=2025-09-16"
+    assert app.output_url(TextOutput(content="see https://example.com/?x=1")) is None
+    with_modifiers = TextOutput(
+        content="Done.\n\nhttps://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,"
+        "MODIS_Aqua_Aerosol_Optical_Depth_3km(opacity=1),Coastlines_15m&t=2025-09-15&v=-125,24,-66,50&p=geographic.\n"
+    )
+    assert app.output_url(with_modifiers) == (
+        "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,"
+        "MODIS_Aqua_Aerosol_Optical_Depth_3km(opacity=1),Coastlines_15m&t=2025-09-15&v=-125,24,-66,50&p=geographic"
+    )
+    linked = TextOutput(content="[view](https://worldview.earthdata.nasa.gov/?l=A(opacity=0.6),B&t=2025-09-15)")
+    assert app.output_url(linked) == "https://worldview.earthdata.nasa.gov/?l=A(opacity=0.6),B&t=2025-09-15"
 
 
 def test_chatbot_roles_are_one_sentence_each(app):

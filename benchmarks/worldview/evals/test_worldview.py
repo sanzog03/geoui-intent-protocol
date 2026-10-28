@@ -31,11 +31,11 @@ from deepeval.simulator import ConversationSimulator
 from dotenv import load_dotenv
 
 from geobench.datasets import GoldenMeta, dataset_hash, goldens_for
+from geobench.deepeval_results import entries_from_current_test_run, metric_entry
 from geobench.harness import ConversationRunner, conversation_record
 from geobench.metrics import JUDGE_MODEL_NAME, judge_model, metrics_for, state_reached_controller
 from geobench.records import append_record
 from geobench.run_dir import CONVERSATIONS, RUN_INFO, RunInfo, git_sha, package_versions, write_run_info
-from geobench.score import metric_entry
 from worldview_benchmark import DEFAULT_BUDGETS, GOLD_DATASET, RESULTS_DIR, SYNTHETIC_DATASET
 from worldview_benchmark.app import WorldviewApp
 
@@ -45,7 +45,11 @@ os.environ.setdefault("DEEPEVAL_TELEMETRY_OPT_OUT", "YES")
 APP = WorldviewApp()
 AGENT = os.environ.get("BENCHMARK_AGENT", "geoui").strip().lower()
 DATASET = os.environ.get("BENCHMARK_DATASET", "gold").strip().lower()
-RUN = os.environ.get("BENCHMARK_RUN", "dev").strip()
+RUN = os.environ.get("BENCHMARK_RUN", "").strip()
+if not RUN:
+    # Guard against `pytest benchmarks/worldview` collecting this file by accident: every test here
+    # spends real agent turns. run.sh always sets BENCHMARK_RUN.
+    pytest.skip("live benchmark: set BENCHMARK_RUN (use benchmarks/worldview/run.sh)", allow_module_level=True)
 SMOKE = os.environ.get("BENCHMARK_SMOKE", "").strip() not in ("", "0", "false")
 RUN_DIR = RESULTS_DIR / RUN
 CDP_ENDPOINT = os.environ.get("PLAYWRIGHT_CDP_ENDPOINT") or None
@@ -133,7 +137,8 @@ def test_conversation(runner: ConversationRunner, dataset_name: str, golden: Con
                 dataset=dataset_name,
                 run_name=RUN,
                 golden_name=golden.name,
-                metrics=[metric_entry(m) for m in metrics],
+                # deepeval scores copies of the metric objects; read its record, fall back to ours
+                metrics=entries_from_current_test_run(test_case.name) or [metric_entry(m) for m in metrics],
             ),
             RUN_DIR / CONVERSATIONS,
         )

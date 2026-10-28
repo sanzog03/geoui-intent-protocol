@@ -10,6 +10,7 @@ mechanism produced it.
 
 from __future__ import annotations
 
+import re
 from collections.abc import Sequence
 from typing import Any
 from urllib.parse import urlparse
@@ -37,6 +38,18 @@ DISCOVERY_TOOLS: frozenset[str] = frozenset(
         "earthdata_search_landing_page_tool",
     }
 )
+
+#: A Worldview URL inside free text. Layer modifiers use parentheses (``(opacity=1)``), so the
+#: match runs to whitespace and :func:`_clean_url` trims markdown / punctuation afterwards.
+WORLDVIEW_URL_RE = re.compile(r"https?://worldview\.earthdata\.nasa\.gov/\?\S+")
+
+
+def _clean_url(url: str) -> str:
+    url = url.rstrip(".,;:!?*`'\"<>]")
+    while url.endswith(")") and url.count("(") < url.count(")"):  # a markdown link's closing paren
+        url = url[:-1].rstrip(".,;:!?*`'\"")
+    return url
+
 
 CHATBOT_ROLES: dict[str, str] = {
     "geoui": (
@@ -75,10 +88,25 @@ class WorldviewApp:
         return CHATBOT_ROLES[kind]
 
     def output_url(self, output: Any) -> str | None:
-        if output is None or isinstance(output, TextOutput):
+        """The Worldview URL the assistant presented.
+
+        Structured outputs carry it in ``url``. Either agent also sometimes
+        answers as a text turn with the URL inline (both skills require a
+        WORLDVIEW_URL in the reply); the last Worldview URL in the text counts,
+        so a rendered view is not judged as "no state" because of the output form.
+        """
+        if output is None:
             return None
         url = getattr(output, "url", None)
-        return url or None
+        if isinstance(url, str) and url.strip():
+            return url.strip()
+        text = getattr(output, "content", None) if isinstance(output, TextOutput) else None
+        if text is None and isinstance(output, str):
+            text = output
+        if not text:
+            return None
+        found = WORLDVIEW_URL_RE.findall(text)
+        return _clean_url(found[-1]) if found else None
 
     def observe(self, url: str) -> UIState:
         """Parse a Worldview URL (permalink or live ``window.location.href``) and drop hidden layers."""

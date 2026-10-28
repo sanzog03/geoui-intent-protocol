@@ -1,0 +1,274 @@
+[
+  {
+    "name": "synthetic-01",
+    "scenario": "Minutes before a lab meeting, a domain atmospheric scientist asks the NASA Worldview assistant to quickly visualize the MODIS Aqua Aerosol Optical Depth 3 km layer (MODIS_Aqua_Aerosol_Optical_Depth_3km) on the date 2025-09-15, framed over the contiguous United States. The assistant immediately sets the date, adds the specified layer, pans/zooms to the CONUS extent without asking discovery or confirmation questions, and replies with an updated Worldview URL showing that exact view.",
+    "expected_outcome": "Worldview is set to 2025-09-15 with the MODIS_Aqua_Aerosol_Optical_Depth_3km layer enabled, centered and zoomed to the contiguous United States. The assistant provides a Worldview URL that opens directly to that date/layer/CONUS view with no extra layers, comparisons, charts, or styling changes.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are an atmospheric scientist who has already identified the exact NASA Worldview layer you need (MODIS Aqua Aerosol Optical Depth 3 km, layer id MODIS_Aqua_Aerosol_Optical_Depth_3km) and the date (2025-09-15). You want it shown over the contiguous US. You will not ask for anything else: once the assistant shows the layer on that date and gives you the Worldview link, you are done.",
+      "Expected outcome: The assistant renders MODIS_Aqua_Aerosol_Optical_Depth_3km on 2025-09-15 over the contiguous US without running dataset discovery or asking the user to confirm, and replies with a Worldview URL that shows that layer on that date."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-02",
+    "scenario": "During a last-minute aerosol retrieval intercomparison, an atmospheric scientist messages the NASA Worldview assistant to load the MODIS Aqua Aerosol Optical Depth 3 km layer (MODIS_Aqua_Aerosol_Optical_Depth_3km) for 2025-09-15, zoom to the contiguous US, and respond with a single NASA Worldview URL showing that view without asking any follow-up questions.",
+    "expected_outcome": "Worldview displays the **MODIS_Aqua_Aerosol_Optical_Depth_3km** layer for **2025-09-15**, centered/zoomed over the **contiguous United States** with no additional layers, comparisons, charts, or special styling enabled. The assistant provides a **single NASA Worldview URL** that opens directly to that date/layer/CONUS view without asking any follow-up questions.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are an atmospheric scientist who has already identified the exact NASA Worldview layer you need (MODIS Aqua Aerosol Optical Depth 3 km, layer id MODIS_Aqua_Aerosol_Optical_Depth_3km) and the date (2025-09-15). You want it shown over the contiguous US. You will not ask for anything else: once the assistant shows the layer on that date and gives you the Worldview link, you are done.",
+      "Expected outcome: The assistant renders MODIS_Aqua_Aerosol_Optical_Depth_3km on 2025-09-15 over the contiguous US without running dataset discovery or asking the user to confirm, and replies with a Worldview URL that shows that layer on that date."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-03",
+    "scenario": "During a late-night lab check, a polar boundary-layer researcher asks the NASA Worldview assistant to set up a global swipe comparison for 2025-08-01 to inspect diurnal inversion signatures, placing the AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean layer on side A and AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean on side B with the slider at 50%, and the assistant configures the compare view and returns the corresponding compare-mode Worldview URL.",
+    "expected_outcome": "Worldview is set to global view on 2025-08-01 with swipe compare enabled, showing AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean on side A and AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean on side B. The compare slider is at 50% and the assistant provides a compare-mode Worldview URL reflecting this setup.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are a climate scientist comparing day and night surface air temperature. You have already identified both exact Worldview layers: AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean (A side) and AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean (B side), for 2025-08-01, global view, swipe compare with the slider at 50%. You will not ask for anything else: once the comparison is set up and you have the link, you are done.",
+      "Expected outcome: The assistant enables Worldview's swipe comparison on 2025-08-01 with the AIRS day-mean layer on side A and the AIRS night-mean layer on side B, without discovery or confirmation, and replies with a Worldview URL in compare mode."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-04",
+    "scenario": "During a remote call, a domain scientist tells the NASA Worldview assistant they have already chosen the exact layers—AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean for side A and AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean for side B—and requests a global compare-mode view dated 2025-08-01 with the swipe slider set to 50%, instructing the assistant not to ask any extra questions and to reply only with the resulting Worldview compare URL and then stop.",
+    "expected_outcome": "Worldview is set to global view on 2025-08-01 with swipe compare enabled at a 50% slider position, showing AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean on side A and AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean on side B. The conversation ends after the assistant provides a single Worldview compare-mode URL reflecting these layers, date, region, and swipe state.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are a climate scientist comparing day and night surface air temperature. You have already identified both exact Worldview layers: AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean (A side) and AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean (B side), for 2025-08-01, global view, swipe compare with the slider at 50%. You will not ask for anything else: once the comparison is set up and you have the link, you are done.",
+      "Expected outcome: The assistant enables Worldview's swipe comparison on 2025-08-01 with the AIRS day-mean layer on side A and the AIRS night-mean layer on side B, without discovery or confirmation, and replies with a Worldview URL in compare mode."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-05",
+    "scenario": "In a remote screen-sharing session, a domain scientist and a NASA Worldview assistant review GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies for 2022-08-19, with the scientist noting that the global view and a Gulf-focused interpretation use the same layer and date. The scientist then asks to pan the map to the Gulf of Mexico, and the assistant responds by generating a Gulf-centered Worldview URL that preserves the same layer and date.",
+    "expected_outcome": "The final Worldview view is centered on the Gulf of Mexico with the GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies layer still enabled and the date set to 2022-08-19. The assistant provides a Gulf-centered Worldview URL preserving the same layer/date and no additional compare/chart/styling changes.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are an oceanographer. You have already identified the exact Worldview layer (GHRSST L4 MUR Sea Surface Temperature Anomalies, layer id GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies) for 2022-08-19 on a global view. Steps still to request, in order, one per message: 1. Pan the map to the Gulf of Mexico (say exactly: \"Now pan the map to the Gulf of Mexico.\"). After the map is centred on the Gulf of Mexico and you have the link, you are done.",
+      "Expected outcome: The assistant shows GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies on 2022-08-19 globally, then on request pans the view to the Gulf of Mexico keeping the same layer and date, and replies with a Worldview URL."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-06",
+    "scenario": "Minutes before a 09:00 sea-surface-temperature anomalies briefing, a domain scientist (an oceanographer) asks the NASA Worldview assistant to open the GHRSST L4 MUR Sea Surface Temperature Anomalies layer on 2022-08-19 in a global view. The assistant provides a Worldview URL. The scientist confirms the layer and date should not be changed, then asks the assistant to pan the map to the Gulf of Mexico; the assistant responds with an updated Worldview URL centered on the Gulf after the change.",
+    "expected_outcome": "The user ends with NASA Worldview displaying the GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies layer for 2022-08-19 with the date and layer unchanged. The map view is panned/centered to the Gulf of Mexico (no additional layers or styling changes), and the assistant provides the updated Worldview URL.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are an oceanographer. You have already identified the exact Worldview layer (GHRSST L4 MUR Sea Surface Temperature Anomalies, layer id GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies) for 2022-08-19 on a global view. Steps still to request, in order, one per message: 1. Pan the map to the Gulf of Mexico (say exactly: \"Now pan the map to the Gulf of Mexico.\"). After the map is centred on the Gulf of Mexico and you have the link, you are done.",
+      "Expected outcome: The assistant shows GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies on 2022-08-19 globally, then on request pans the view to the Gulf of Mexico keeping the same layer and date, and replies with a Worldview URL."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-07",
+    "scenario": "In a lab workflow, a domain scientist asks the NASA Worldview assistant to open Worldview focused on Florida using the VIIRS SNPP Corrected Reflectance True Color layer (VIIRS_SNPP_CorrectedReflectance_TrueColor) for 2024-09-26. The assistant provides a Worldview URL and the scientist verifies that the layer and date are correct. After confirmation, the scientist requests moving the date forward to 2024-09-27, and the assistant keeps the same map extent and returns an updated Worldview URL reflecting the new date.",
+    "expected_outcome": "Worldview is opened centered on Florida with the VIIRS_SNPP_CorrectedReflectance_TrueColor layer enabled and the date set to 2024-09-26. The date is then advanced to 2024-09-27 while keeping the same Florida view and layer, and the assistant provides the updated Worldview URL for 2024-09-27.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are a remote-sensing analyst looking at Florida. You have already identified the exact Worldview layer (VIIRS SNPP Corrected Reflectance True Color, layer id VIIRS_SNPP_CorrectedReflectance_TrueColor) for 2024-09-26. Steps still to request, in order, one per message: 1. Move the date forward by one day, to 2024-09-27 (say exactly: \"Now move the date forward by one day, to 2024-09-27.\"). After the date is moved and you have the link, you are done.",
+      "Expected outcome: The assistant first shows VIIRS_SNPP_CorrectedReflectance_TrueColor over Florida on 2024-09-26, then, on request, moves the same view to 2024-09-27 and replies with a Worldview URL for 2024-09-27 with the same layer."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-08",
+    "scenario": "During a virtual review of satellite imagery over Florida, a domain scientist asks the NASA Worldview assistant to open the VIIRS_SNPP_CorrectedReflectance_TrueColor layer for 2024-09-26 centered on Florida and share the resulting Worldview link. In the next message, the scientist requests exactly: “Now move the date forward by one day, to 2024-09-27.” The assistant keeps the same layer and view settings, updates only the date, and returns the updated Worldview URL.",
+    "expected_outcome": "The user ends with NASA Worldview showing the VIIRS_SNPP_CorrectedReflectance_TrueColor layer over Florida with the date updated from 2024-09-26 to 2024-09-27 while keeping the same view/layer settings and no additional styling or comparisons. The assistant provides a Worldview URL reflecting 2024-09-27 for the same layer and Florida-centered region.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are a remote-sensing analyst looking at Florida. You have already identified the exact Worldview layer (VIIRS SNPP Corrected Reflectance True Color, layer id VIIRS_SNPP_CorrectedReflectance_TrueColor) for 2024-09-26. Steps still to request, in order, one per message: 1. Move the date forward by one day, to 2024-09-27 (say exactly: \"Now move the date forward by one day, to 2024-09-27.\"). After the date is moved and you have the link, you are done.",
+      "Expected outcome: The assistant first shows VIIRS_SNPP_CorrectedReflectance_TrueColor over Florida on 2024-09-26, then, on request, moves the same view to 2024-09-27 and replies with a Worldview URL for 2024-09-27 with the same layer."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-09",
+    "scenario": "In a mapping workstation chat, a domain scientist asks the NASA Worldview assistant to construct a July 4, 2024 global basemap in three ordered steps—first adding MODIS_Aqua_CorrectedReflectance_TrueColor at 1.0 opacity, then overlaying Reference_Labels_15m at 0.6, then Reference_Features_15m at 0.8—where the assistant replies with a new Worldview URL after each step so the scientist can verify layer order and readability.",
+    "expected_outcome": "The user ends with a global NASA Worldview view dated 2024-07-04 showing, in order, MODIS_Aqua_CorrectedReflectance_TrueColor at 1.0 opacity, then Reference_Labels_15m at 0.6, then Reference_Features_15m at 0.8. The final state includes the correct layer stacking and opacities (no charts/compare/styling changes) and is confirmed via the last provided Worldview URL.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are a cartographer stacking three Worldview layers for 2024-07-04 on a global view, all already identified by exact id: MODIS_Aqua_CorrectedReflectance_TrueColor at full opacity as the base, Reference_Labels_15m at 60% opacity, and Reference_Features_15m at 80% opacity. You will not ask for anything else: once the three layers are stacked at those opacities and you have the link, you are done.",
+      "Expected outcome: The assistant stacks MODIS Aqua true color (opacity 1.0), Reference Labels (opacity 0.6) and Reference Features (opacity 0.8) on 2024-07-04 globally, without discovery or confirmation, and replies with a Worldview URL carrying those layers and opacities."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-10",
+    "scenario": "During a polar sea-ice atlas QA niche review on 2024-07-04 (global extent), a domain scientist asks the NASA Worldview assistant to build a Worldview view by screen-sharing: the assistant first loads MODIS_Aqua_CorrectedReflectance_TrueColor at opacity 1.0 and shares a Worldview URL, then adds Reference_Labels_15m at opacity 0.6 and shares an updated URL, then adds Reference_Features_15m at opacity 0.8 and shares the final Worldview URL, ending the interaction once the last link is provided.",
+    "expected_outcome": "The final Worldview view is set to the global region on 2024-07-04 with MODIS_Aqua_CorrectedReflectance_TrueColor at 1.0 opacity, Reference_Labels_15m at 0.6 opacity, and Reference_Features_15m at 0.8 opacity stacked on top. The conversation ends after the assistant provides the final NASA Worldview URL encoding this layer order and opacity styling state.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are a cartographer stacking three Worldview layers for 2024-07-04 on a global view, all already identified by exact id: MODIS_Aqua_CorrectedReflectance_TrueColor at full opacity as the base, Reference_Labels_15m at 60% opacity, and Reference_Features_15m at 80% opacity. You will not ask for anything else: once the three layers are stacked at those opacities and you have the link, you are done.",
+      "Expected outcome: The assistant stacks MODIS Aqua true color (opacity 1.0), Reference Labels (opacity 0.6) and Reference Features (opacity 0.8) on 2024-07-04 globally, without discovery or confirmation, and replies with a Worldview URL carrying those layers and opacities."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-11",
+    "scenario": "In an office setting, a vegetation scientist works with a NASA Worldview assistant to visualize MOD13Q1 NDVI in the western United States. The assistant opens Worldview to 2024-07-15 with the MOD13Q1_NDVI_16Day layer visible, then—at the scientist’s insistence—turns on the Chart panel and demonstrates that the chart is using that same NDVI layer rather than a default selection. The scientist then has the assistant set a time series window from 2024-04-01 to 2024-10-31 with autoload enabled, and the assistant provides a single shareable Worldview URL that preserves the map view and chart state.",
+    "expected_outcome": "Worldview is set to the western US with the MOD13Q1_NDVI_16Day layer displayed on 2024-07-15, and the Chart panel is enabled explicitly using the same MOD13Q1_NDVI_16Day layer. The chart is configured to autoload a time series over the same region from 2024-04-01 through 2024-10-31, and a single shareable Worldview URL is provided that preserves both the map and chart state.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are a vegetation scientist. You have already identified the exact Worldview layer (MOD13Q1 NDVI 16-Day, layer id MOD13Q1_NDVI_16Day) for 2024-07-15 over the western US, and you also want Worldview's chart panel showing a time series of that layer over the same area from 2024-04-01 through 2024-10-31, autoloaded. You will not ask for anything else: once the view and the chart are set up and you have the link, you are done.",
+      "Expected outcome: The assistant shows MOD13Q1_NDVI_16Day on 2024-07-15 over the western US with Worldview's chart panel enabled for that layer from 2024-04-01 to 2024-10-31, autoloaded, without discovery or confirmation, and replies with a Worldview URL that carries the chart state."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-12",
+    "scenario": "During a live screen-share, a vegetation scientist directs the NASA Worldview assistant to keep the already-selected MOD13Q1_NDVI_16Day layer, pan and zoom the map to the western United States, and set the date to 2024-07-15. The scientist then asks the assistant to enable the chart panel, ensure it is bound to the same NDVI layer and the current map footprint, and automatically load a time series covering 2024-04-01 through 2024-10-31. After each adjustment, the assistant confirms the change and provides an updated Worldview URL, finishing with one shareable link that encodes the full configuration.",
+    "expected_outcome": "Worldview ends with the MOD13Q1_NDVI_16Day layer displayed over the western United States on the date 2024-07-15. The chart panel is enabled and autoloaded for the same layer and current map footprint, showing a time series from 2024-04-01 through 2024-10-31 via a final shareable Worldview URL that encodes this full state.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are a vegetation scientist. You have already identified the exact Worldview layer (MOD13Q1 NDVI 16-Day, layer id MOD13Q1_NDVI_16Day) for 2024-07-15 over the western US, and you also want Worldview's chart panel showing a time series of that layer over the same area from 2024-04-01 through 2024-10-31, autoloaded. You will not ask for anything else: once the view and the chart are set up and you have the link, you are done.",
+      "Expected outcome: The assistant shows MOD13Q1_NDVI_16Day on 2024-07-15 over the western US with Worldview's chart panel enabled for that layer from 2024-04-01 to 2024-10-31, autoloaded, without discovery or confirmation, and replies with a Worldview URL that carries the chart state."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-13",
+    "scenario": "In a lab setting, a remote-sensing scientist works with the NASA Worldview assistant to visualize MODIS_Aqua_Aerosol_Optical_Depth_3km over the tropical Atlantic on 2023-06-15, then step forward to 2023-06-18 to assess dust progression, use the comparison swipe against 2023-06-11 to isolate changes, and validate the interpretation by opening a daily-mean AOD chart for Cabo Verde for June 1–30 narrowed to June 15–30; after each view change (loading the layer, changing dates, setting up the swipe, and opening/refining the chart), the assistant provides the corresponding Worldview URL, asking at most one clarifying question only if any dataset detail is ambiguous.",
+    "expected_outcome": "The user ends with Worldview showing MODIS_Aqua_Aerosol_Optical_Depth_3km over the tropical Atlantic on 2023-06-18 with a swipe comparison against 2023-06-11. The chart panel is open for the Cabo Verde region displaying daily-mean AOD for 2023-06-15 through 2023-06-30, and a final Worldview URL reflecting this full state has been provided (with URLs also shared after each prior step).",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are studying Saharan dust transport over the tropical Atlantic in Worldview. You have already identified the exact aerosol layer (MODIS Aqua Aerosol Optical Depth 3 km, layer id MODIS_Aqua_Aerosol_Optical_Depth_3km) for 2023-06-15 over the tropical Atlantic. Steps still to request, in order, one per message, after the first view is shown: 1. \"Step forward three days.\" (to 2023-06-18). 2. \"Compare this date with the same date last week.\" (a swipe comparison against 2023-06-11). 3. \"Chart the daily mean AOD over the Cabo Verde region for June 2023, 2023-06-01 through 2023-06-30.\" (Worldview's chart panel for the aerosol layer). 4. \"Narrow the chart's date range to the second half of June, 2023-06-15 through 2023-06-30.\" After step 4 is applied and you have the link, you are done.",
+      "Expected outcome: Over five turns the assistant shows the Aqua aerosol layer over the tropical Atlantic on 2023-06-15, steps the date to 2023-06-18, enables a swipe comparison against 2023-06-11, enables a chart of the aerosol layer over Cabo Verde for 2023-06-01 to 2023-06-30, and narrows the chart range to 2023-06-15 to 2023-06-30, replying with a Worldview URL after each step."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-14",
+    "scenario": "During a focused aerosol-teleconnection call, a domain scientist works with the NASA Worldview assistant to recreate a Saharan dust pulse associated with an African easterly wave. The scientist confirms the MODIS_Aqua_Aerosol_Optical_Depth_3km layer over the tropical Atlantic on 2023-06-15, then asks the assistant to advance to 2023-06-18, use swipe/compare against 2023-06-11, and generate a daily-mean AOD chart for the Cabo Verde region spanning 2023-06-01 to 2023-06-30, finally narrowing the chart to 2023-06-15 to 2023-06-30. After each adjustment (date change, compare setup, chart creation, and time-window refinement), the assistant provides an updated Worldview URL and asks only a single clarifying question if any dataset or region detail is ambiguous.",
+    "expected_outcome": "The user ends on NASA Worldview with the MODIS_Aqua_Aerosol_Optical_Depth_3km layer over the tropical Atlantic set to 2023-06-18 and a swipe comparison enabled against 2023-06-11. The chart panel is open showing daily-mean AOD over the Cabo Verde region with the date range narrowed to 2023-06-15 through 2023-06-30, and the assistant has provided the final Worldview URL reflecting this state.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are studying Saharan dust transport over the tropical Atlantic in Worldview. You have already identified the exact aerosol layer (MODIS Aqua Aerosol Optical Depth 3 km, layer id MODIS_Aqua_Aerosol_Optical_Depth_3km) for 2023-06-15 over the tropical Atlantic. Steps still to request, in order, one per message, after the first view is shown: 1. \"Step forward three days.\" (to 2023-06-18). 2. \"Compare this date with the same date last week.\" (a swipe comparison against 2023-06-11). 3. \"Chart the daily mean AOD over the Cabo Verde region for June 2023, 2023-06-01 through 2023-06-30.\" (Worldview's chart panel for the aerosol layer). 4. \"Narrow the chart's date range to the second half of June, 2023-06-15 through 2023-06-30.\" After step 4 is applied and you have the link, you are done.",
+      "Expected outcome: Over five turns the assistant shows the Aqua aerosol layer over the tropical Atlantic on 2023-06-15, steps the date to 2023-06-18, enables a swipe comparison against 2023-06-11, enables a chart of the aerosol layer over Cabo Verde for 2023-06-01 to 2023-06-30, and narrows the chart range to 2023-06-15 to 2023-06-30, replying with a Worldview URL after each step."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-15",
+    "scenario": "During an incident-command micrometeorology huddle, a smoke-modeling domain scientist works with the NASA Worldview assistant to validate aerosol optical depth over California. The scientist asks the assistant to open Worldview on 2025-09-15 with the MODIS Aqua Aerosol Optical Depth 3 km layer, then generate and share a Worldview URL after each step as they (1) request a swipe comparison with 2025-09-14, (2) switch the layer to MODIS Terra Aerosol Optical Depth 3 km, (3) create a time-series chart covering Sep 1–30, 2025, and (4) restyle the layer by compressing the color scale to 0–2, with the assistant asking at most one clarifying question only if any dataset setting is ambiguous.",
+    "expected_outcome": "Worldview ends with a California view using the MODIS_Terra_Aerosol_Optical_Depth_3km layer, with the date context including a swipe comparison between 2025-09-15 and 2025-09-14. The chart panel shows a September 2025 (2025-09-01 to 2025-09-30) AOD time series over the selected area, and the layer styling is adjusted to a squashed color scale range of 0–2, with a Worldview URL shared after each step.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are tracking California wildfire smoke in Worldview. You have already identified the exact aerosol layer (MODIS Aqua Aerosol Optical Depth 3 km, layer id MODIS_Aqua_Aerosol_Optical_Depth_3km) for 2025-09-15 over California. Steps still to request, in order, one per message, after the first view is shown: 1. \"Compare it to the previous day.\" (a swipe comparison of the same layer against 2025-09-14). 2. \"Switch to the morning MODIS Terra sensor instead of Aqua.\" (the Terra equivalent is MODIS_Terra_Aerosol_Optical_Depth_3km; mention that exact id). 3. \"Plot a time series of AOD over that area for September 2025, from 2025-09-01 through 2025-09-30.\" (Worldview's chart panel for the aerosol layer). 4. \"Adjust the colour scale to emphasise high AOD values, 0 to 2, squashing the palette to that range.\" After step 4 is applied and you have the link, you are done.",
+      "Expected outcome: Over five turns the assistant shows the Aqua aerosol layer over California on 2025-09-15, enables a swipe comparison against 2025-09-14, switches the aerosol layer to MODIS_Terra_Aerosol_Optical_Depth_3km, enables a chart of that layer over the area for 2025-09-01 to 2025-09-30, and finally sets the aerosol layer's colour scale to min 0, max 2 with squash, replying with a Worldview URL after each step."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  },
+  {
+    "name": "synthetic-16",
+    "scenario": "During a smoke-plume attribution workshop, a domain scientist works with a NASA Worldview assistant to investigate a niche pyrocumulonimbus-driven aerosol layer over California. The scientist directs the assistant to open NASA Worldview with the MODIS Aqua Aerosol Optical Depth 3 km layer for 2025-09-15 and share the corresponding Worldview URL, then, in subsequent turns, asks the assistant to swipe-compare against 2025-09-14, switch the visualization to the MODIS Terra Aerosol Optical Depth 3 km layer, generate a September 1–30 time-series chart for the region, and restyle the layer by compressing the color scale to an AOD range of 0–2—each time returning an updated Worldview URL, with at most one clarifying question if any dataset or layer choice is ambiguous.",
+    "expected_outcome": "Worldview ends showing California with the MODIS_Terra_Aerosol_Optical_Depth_3km layer on 2025-09-15, with a swipe comparison enabled against 2025-09-14. The chart panel is open plotting AOD over the selected California area for 2025-09-01 through 2025-09-30, and the layer styling is adjusted to a squashed color scale range of 0–2, with an updated Worldview URL provided at each step.",
+    "persona": {
+      "characteristics": "A domain scientist who knows what they want to see, states layers, dates and regions precisely, asks for the refinements in the scenario one at a time, and stops once the final view is shown."
+    },
+    "context": [
+      "Scenario: You are tracking California wildfire smoke in Worldview. You have already identified the exact aerosol layer (MODIS Aqua Aerosol Optical Depth 3 km, layer id MODIS_Aqua_Aerosol_Optical_Depth_3km) for 2025-09-15 over California. Steps still to request, in order, one per message, after the first view is shown: 1. \"Compare it to the previous day.\" (a swipe comparison of the same layer against 2025-09-14). 2. \"Switch to the morning MODIS Terra sensor instead of Aqua.\" (the Terra equivalent is MODIS_Terra_Aerosol_Optical_Depth_3km; mention that exact id). 3. \"Plot a time series of AOD over that area for September 2025, from 2025-09-01 through 2025-09-30.\" (Worldview's chart panel for the aerosol layer). 4. \"Adjust the colour scale to emphasise high AOD values, 0 to 2, squashing the palette to that range.\" After step 4 is applied and you have the link, you are done.",
+      "Expected outcome: Over five turns the assistant shows the Aqua aerosol layer over California on 2025-09-15, enables a swipe comparison against 2025-09-14, switches the aerosol layer to MODIS_Terra_Aerosol_Optical_Depth_3km, enables a chart of that layer over the area for 2025-09-01 to 2025-09-30, and finally sets the aerosol layer's colour scale to min 0, max 2 with squash, replying with a Worldview URL after each step."
+    ],
+    "additional_metadata": {
+      "source": "deepeval generate --method contexts (contexts built from gold_dataset.json)",
+      "fully_specified": false,
+      "max_user_simulations": 4
+    }
+  }
+]

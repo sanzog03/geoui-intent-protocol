@@ -106,6 +106,19 @@ class TurnTrace(BaseModel):
     def tool_names(self) -> list[str]:
         return [t.name for t in self.tool_calls]
 
+    def usage_from_spans(self) -> TurnUsage:
+        """Token counts summed over the LLM spans; the fallback for turns where the run raised and left no RunUsage."""
+        return TurnUsage(
+            input_tokens=self.span_input_tokens,
+            output_tokens=self.span_output_tokens,
+            total_tokens=self.span_input_tokens + self.span_output_tokens,
+            requests=len(self.llm_calls),
+            cache_read_tokens=self.usage.cache_read_tokens if self.usage else None,
+            reasoning_tokens=self.usage.reasoning_tokens if self.usage else None,
+            tool_calls=len(self.tool_calls),
+            cost_usd=self.usage.cost_usd if self.usage else None,
+        )
+
 
 def _duration(span: BaseSpan) -> float:
     return max(0.0, (span.end_time or span.start_time) - span.start_time)

@@ -11,6 +11,7 @@ from pydantic_ai import Agent
 from pydantic_ai.models.test import TestModel
 from pydantic_ai.toolsets import FunctionToolset
 
+from geobench.deepeval_results import metric_entry
 from geobench.harness import ConversationRunner, conversation_record
 from geobench.metrics import gold_metrics
 from geobench.run_dir import (
@@ -24,7 +25,7 @@ from geobench.run_dir import (
     write_conversations,
     write_run_info,
 )
-from geobench.score import load_app, merge_metrics, metric_entry, rebuild_test_case, score_run
+from geobench.score import load_app, merge_metrics, rebuild_test_case, score_run
 from geobench.summarize import summarize_run
 from geobench.summary import render_markdown, summarize
 from geobench.tests._fake_app import FakeApp, FakeOutput, fake_url

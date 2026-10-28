@@ -34,9 +34,11 @@ carries everything application-specific.
 | `demo/worldview/agents/artifact/worldview/geoui/akd-plugins/` | git submodule of [NASA-IMPACT/akd-plugins](https://github.com/NASA-IMPACT/akd-plugins); the `worldview-assistant` plugin is the GeoUI agent's skill and MCP server list | — |
 | `demo/worldview/agents/artifact/worldview/vlm/mio-worldviewagent-v2/` | Vendored non-GeoUI skill (`SKILL.md` + `references/`) the baseline agent runs | — |
 | `demo/worldview/tests/` | Tests for the adapter, tools, MCP contract, plugin loader and agents | — |
-| `demo/chat.py`, `demo/start.sh` | One marimo chat notebook for both agents (`AGENT=geoui\|vlm`) and the launcher (Chromium over CDP + notebook) | marimo |
+| `demo/chat.py`, `demo/start.sh`, `demo/chromium.sh` | One marimo chat notebook for both agents (`AGENT=geoui\|vlm`), the launcher, and the Chromium-over-CDP helper it shares with the benchmark | marimo |
 | `tests/` | Library tests (`test_core.py`) and repo-level checks | — |
-| `benchmarks/manual/` | Manual (notebook-driven) procedure: prompt suite, workflow scripts, frozen poster run logs | — |
+| `benchmarks/harness/` | `geobench`: mechanism-neutral deepeval benchmark harness (simulated multi-turn user, per-turn traces, six metrics, offline re-scoring) | deepeval, pydantic-ai |
+| `benchmarks/worldview/` | The Worldview benchmark on `geobench`: app binding, gold + synthetic datasets, the eval suite, `run.sh`, committed results per run | geobench, demo |
+| `benchmarks/manual/` | The earlier notebook-driven procedure: prompt suite, workflow scripts, frozen poster run logs | — |
 | `docs/spec.md` | GeoUI Protocol v1.0.0 specification | — |
 | `docs/poster/` | Poster narrative, abstract, interaction diagrams, results chart | — |
 | `scripts/dump_mcp_contract.py` | Print any MCP server's tool contract as JSON, for diffing | fastmcp |
@@ -56,7 +58,7 @@ Developing in this repo:
 
 ```bash
 git clone --recurse-submodules https://github.com/NASA-IMPACT/geoui-intent-protocol   # or: git submodule update --init
-uv sync    # library + Worldview demo + dev tools, in one venv
+uv sync    # library + Worldview demo + benchmark harness + dev tools, in one venv
 ```
 
 `uv sync --no-dev` installs the library alone.
@@ -133,15 +135,35 @@ AGENT=vlm ./demo/start.sh       # VLM + browser-control baseline
 ```
 
 Each chat turn appends a record to `benchmarks/manual/runs.jsonl` (errors to
-`benchmarks/manual/errors.jsonl`). The runs behind the poster are frozen under
-`benchmarks/manual/results/poster-2026-05/`. The prompt suite is `benchmarks/manual/prompts.md`
-and the scenario scripts are `benchmarks/manual/workflows.md`. `HANDOVER.md` has the
-operational detail, including the Playwright-over-CDP design and known gotchas.
+`benchmarks/manual/errors.jsonl`); that notebook-driven procedure, its prompt
+suite and the frozen poster logs live under `benchmarks/manual/`.
+
+## Benchmark
+
+The re-runnable comparison lives in `benchmarks/`: `geobench`
+(`benchmarks/harness/`) is a mechanism-neutral deepeval harness, and
+`benchmarks/worldview/` binds both agents to it. deepeval's
+`ConversationSimulator` plays the user (the first turn verbatim per agent, the
+follow-ups improvised from the scenario), every turn is traced, and six
+metrics score each conversation: success (final UI state vs the expected
+state), completion, tool / time / token efficiency, and turn relevancy. The
+summary lays the two agents side by side with VLM ÷ GeoUI ratios.
+
+```bash
+BENCHMARK_SMOKE=1 ./benchmarks/worldview/run.sh gold smoke   # one scenario, both agents
+./benchmarks/worldview/run.sh gold 2026-10-28-gold           # the full gold set
+uv run python -m geobench.score benchmarks/worldview/results/2026-10-28-gold   # re-score from committed traces, no agent
+```
+
+See `benchmarks/worldview/README.md` (running, reading and verifying a run)
+and `benchmarks/harness/README.md` (the app contract, dataset format, metrics
+and how traces are captured). `HANDOVER.md` has the operational detail,
+including the Playwright-over-CDP design and known gotchas.
 
 ## Tests
 
 ```bash
-uv run pytest                      # library + demo (tests/ and demo/worldview/tests/)
+uv run pytest                      # library + demo + benchmark harness/bindings, offline
 uv run pytest -m "not integration" # skip the stdio subprocess smoke
 uv run pytest -m agents            # plugin loader, toolset parity and the model-visible surface golden
 ```
@@ -150,7 +172,7 @@ uv run pytest -m agents            # plugin loader, toolset parity and the model
 
 Research prototype. Open items, in rough priority order:
 
-- Benchmark is four hand-curated workflows with no variance; add an aggregator and push `n`.
+- The benchmark's gold set is eight hand-curated scenarios and one synthetic set; push `n` and add scenarios beyond the compare/chart/styling extensions.
 - Accuracy evidence is one worked example; log a question-and-answer set.
 - No runnable conformance harness for new adapters (round-trip identity, read-only `get_state`, idempotent `render_intent`, declared extensions match the adapter, layer IDs validated).
 - No second adapter; the `geoui.org` extension URIs are placeholders.

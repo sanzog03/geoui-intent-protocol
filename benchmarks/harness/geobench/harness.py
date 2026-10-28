@@ -83,10 +83,9 @@ def classify_output(app: BenchmarkApp, run: TracedRun) -> tuple[OutputKind, str 
     if run.error is not None:
         return "error", None, f"[{type(run.error).__name__}] {run.error}"
     output = run.result.output
-    url = app.output_url(output)
-    if url is None:
-        return "text", None, output_text(output)
-    return "structured", url, output_text(output)
+    url = app.output_url(output)  # from the structured field, or from the text when the app can find one
+    structured = bool(getattr(output, "url", None))
+    return ("structured" if structured else "text"), url, output_text(output)
 
 
 # --- the runner -------------------------------------------------------------
@@ -174,7 +173,8 @@ class ConversationRunner:
         trace_rel = default_trace_relpath(thread_id, turn_index)
         save_trace(run.trace, self.run_dir / trace_rel)
         output_kind, final_url, content = classify_output(self.app, run)
-        usage = usage_from_run_usage(run.result.usage) if run.result is not None else None
+        # an errored run has no RunUsage; the spans still know what the turn cost
+        usage = usage_from_run_usage(run.result.usage) if run.result is not None else run.trace.usage_from_spans()
         tool_names = run.trace.tool_names
 
         record = TurnRecord(

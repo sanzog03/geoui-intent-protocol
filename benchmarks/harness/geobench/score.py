@@ -17,11 +17,11 @@ from typing import Any
 
 from deepeval import evaluate
 from deepeval.evaluate.configs import AsyncConfig, DisplayConfig, ErrorConfig
-from deepeval.metrics import BaseConversationalMetric
 from deepeval.test_case import ConversationalTestCase, ToolCall, Turn
 
 from geobench.app import BenchmarkApp
 from geobench.datasets import GoldenMeta
+from geobench.deepeval_results import metric_entry, metric_entry_from_data
 from geobench.harness import ConversationRecord
 from geobench.metrics import deterministic_only, judge_model, metrics_for
 from geobench.run_dir import DEEPEVAL_DIR, load_conversations, read_run_info, write_conversations
@@ -74,19 +74,6 @@ def rebuild_test_case(run_dir: Path, record: ConversationRecord) -> Conversation
     )
 
 
-def metric_entry(metric: BaseConversationalMetric) -> dict[str, Any]:
-    return {
-        "name": metric.__name__,
-        "score": metric.score,
-        "success": metric.success,
-        "threshold": metric.threshold,
-        "reason": metric.reason,
-        "breakdown": getattr(metric, "score_breakdown", None),
-        "error": metric.error,
-        "evaluation_cost": metric.evaluation_cost,
-    }
-
-
 def merge_metrics(existing: list[dict[str, Any]], new: list[dict[str, Any]]) -> list[dict[str, Any]]:
     by_name = {m["name"]: m for m in existing if "name" in m}
     for m in new:
@@ -121,7 +108,7 @@ def score_run(
             updated.append(record)
             continue
         if use_deepeval_evaluate:
-            evaluate(
+            result = evaluate(
                 [test_case],
                 metrics,
                 identifier=f"{info.run_name}-rescore",
@@ -134,12 +121,14 @@ def score_run(
                 ),
                 error_config=ErrorConfig(ignore_errors=True),
             )
+            # deepeval may score copies of the metric objects; read the results it returns
+            data = result.test_results[0].metrics_data if result.test_results else None
+            entries = [metric_entry_from_data(m) for m in data] if data else [metric_entry(m) for m in metrics]
         else:
             for metric in metrics:
                 metric.measure(test_case)
-        updated.append(
-            record.model_copy(update={"metrics": merge_metrics(record.metrics, [metric_entry(m) for m in metrics])})
-        )
+            entries = [metric_entry(m) for m in metrics]
+        updated.append(record.model_copy(update={"metrics": merge_metrics(record.metrics, entries)}))
     write_conversations(run_dir, updated)
     summarize_run(run_dir)
     return updated

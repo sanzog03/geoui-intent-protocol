@@ -97,20 +97,29 @@ golden carries both openers, the ordered follow-up steps in its `scenario`, an
 (0 for single-shot prompts). Edit the JSON to change what runs; the unit tests
 validate it.
 
-**Synthetic** (`datasets/synthetic_queries.json`) is generated from the gold set once,
-reviewed, and committed. Synthetic goldens have no openers and no expected state, so
-the simulator phrases every turn and only metrics 2–6 run on them:
+**Synthetic** (`datasets/synthetic_queries.json`) is generated from the gold set
+once, reviewed, and committed. Synthetic goldens have no openers and no expected
+state, so the simulator phrases every turn and only metrics 2–6 run on them.
+deepeval's `--method goldens` and `--method scratch` emit one-line scenarios with no
+expected outcome and `--method docs` needs chromadb, so the set is produced with
+`--method contexts` from one context per gold scenario; `worldview_benchmark.synthetic`
+wraps the two steps around deepeval's own generator:
 
 ```bash
-uv run deepeval generate --method goldens --variation multi-turn \
-  --goldens-file benchmarks/worldview/datasets/gold_dataset.json --num-goldens 16 --model gpt-5.2 \
-  --scenario-context "A scientist asking a NASA Worldview assistant to visualise satellite imagery: specific GIBS layers, dates, regions, and refinements such as comparing dates, charting a time series or restyling a layer" \
+WORK=/tmp/geobench-synthetic
+uv run python -m worldview_benchmark.synthetic contexts $WORK/contexts.json
+uv run --env-file .env deepeval generate --method contexts --variation multi-turn --include-expected \
+  --contexts-file $WORK/contexts.json --max-goldens-per-context 2 --model gpt-5.2 \
+  --scenario-context "A scientist asking a NASA Worldview assistant to visualise satellite imagery available in Worldview (GIBS layers such as MODIS and VIIRS corrected reflectance, MODIS aerosol optical depth, AIRS surface air temperature, GHRSST sea surface temperature anomalies, MOD13Q1 NDVI, Reference Labels and Features), on specific dates and regions, with refinements such as changing the date, panning to a place, comparing two dates, charting a time series or restyling a layer's colour scale" \
   --conversational-task "Produce the requested Worldview view and give the user a Worldview URL after each change, asking at most one clarifying question when the dataset is ambiguous" \
   --participant-roles "A domain scientist (user) and the Worldview assistant" \
-  --scenario-format "Who the user is, which layer(s), date(s) and region they want, and the follow-up refinements they will ask for, in order" \
-  --expected-outcome-format "The final Worldview view the user should end up with, in prose" \
-  --output-dir benchmarks/worldview/datasets --file-name synthetic_queries
+  --scenario-format "Three to six sentences: who the user is, which layer(s), date(s) and region they want, and the two to four follow-up refinements they will ask for, in order" \
+  --expected-outcome-format "Two sentences describing the final Worldview view the user should end up with: layers, date, region and any compare/chart/styling state" \
+  --output-dir $WORK --file-name synthetic_queries
+uv run python -m worldview_benchmark.synthetic prepare $WORK/synthetic_queries.json   # names, persona, metadata
 ```
+
+The committed set (2026-10-28) is 16 goldens, two variations of each gold scenario.
 
 ## Budgets
 

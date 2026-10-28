@@ -53,20 +53,26 @@ two reference agents, a marimo chat demo, and the head-to-head benchmark.
 | `demo/worldview/agents/artifact/worldview/geoui/akd-plugins/` | git submodule of `NASA-IMPACT/akd-plugins`; `plugins/worldview-assistant/` holds `.mcp.json`, `.claude-plugin/plugin.json` (declares the `userConfig` keys) and `skills/worldview-assistant/`. | — |
 | `demo/worldview/agents/artifact/worldview/vlm/mio-worldviewagent-v2/` | Vendored non-GeoUI skill (`SKILL.md` + `references/`, see its README for provenance). | — |
 | `demo/worldview/agents/benchmark/log.py` | Per-turn JSONL logging (`TurnRecord`, `ErrorRecord`, `append_*`, `load_runs`). | pydantic |
-| `demo/start.sh` | Launches a long-lived Chromium with remote debugging, warms MCPs, opens the marimo notebook. `AGENT=geoui` (default) or `vlm`. | uv, npx |
+| `demo/chromium.sh` | Chromium-over-CDP helpers (`ensure_chromium` launches or reattaches on port 9222 and exports `PLAYWRIGHT_CDP_ENDPOINT`), sourced by `demo/start.sh` and `benchmarks/worldview/run.sh`. | curl, npx |
+| `demo/start.sh` | Sources `chromium.sh`, warms MCPs, opens the marimo notebook. `AGENT=geoui` (default) or `vlm`. | uv, npx |
 | `demo/chat.py` | One marimo multi-turn chat app for both agents; `AGENT=geoui` (default) or `vlm` picks the factory, intro text, example prompts and benchmark-log label. Carries pydantic-ai `message_history` across turns; attaches Playwright per turn via CDP. | marimo |
+| `benchmarks/harness/geobench/` | **The benchmark harness, mechanism-neutral.** `app.py` (`BenchmarkApp` protocol, `UIState`), `state.py` (expected vs observed UI state), `datasets.py` (goldens + harness metadata, per-agent openers, dataset hash), `records.py` (TurnRecord/ErrorRecord superset of the notebook's rows), `tracing.py` (deepeval pydantic-ai instrumentation as a capability, `traced_turn`, `TurnTrace`), `harness.py` (`ConversationRunner.respond`, the simulator callback; CDP tab reset; transcripts), `metrics.py` (the six metrics + `state_reached_controller`), `score.py` (offline re-score from traces), `summary.py` / `summarize.py` (rows, ratios, totals, markdown), `run_dir.py` (run.json, path scrubbing). Tests under `geobench/tests/` with a `FakeApp` on `TestModel`. | deepeval, pydantic-ai |
+| `benchmarks/worldview/` | **The Worldview benchmark.** `worldview_benchmark/app.py` (`WorldviewApp`: both factories, `observe(url)`, discovery tools, roles), `synthetic.py` (contexts + prepare steps around `deepeval generate`), `datasets/gold_dataset.json` (Core 1–6 + workflows A/B with openers, expected state, checkpoints), `datasets/synthetic_queries.json`, `evals/test_worldview.py` (the deepeval suite), `run.sh`, `results/<run-id>/` (committed runs). | geobench, demo |
 | `benchmarks/manual/prompts.md`, `benchmarks/manual/workflows.md` | Prompt suite (Core 6 + Optional 4) and 5-turn scenario scripts (A: CA wildfire smoke; B: Saharan dust; C: Lake Erie bloom). | — |
 | `benchmarks/manual/results/poster-2026-05/` | Frozen `runs.jsonl` (51 rows) and `errors.jsonl` (22 rows) behind the poster. Absolute paths in tracebacks were replaced (`<worktree>` for the source checkout, `<python>` for the interpreter install). | — |
 | `scripts/dump_mcp_contract.py` | Dump any server's tool contract as JSON. | fastmcp |
 | `demo/pyproject.toml` | The `geoui-worldview-demo` project: a uv workspace member that depends on `geoui-protocol` and owns the heavy dependencies (pydantic-ai, fastmcp, marimo). The root dev group installs it editable. | — |
-| `tests/` | `test_core.py` and `test_benchmark_results.py` (library and repo-level). | — |
+| `benchmarks/harness/pyproject.toml`, `benchmarks/worldview/pyproject.toml` | Two more workspace members: `geobench` (owns deepeval) and `geoui-worldview-benchmark` (depends on geobench and the demo). The root dev group installs both editable; the demo never depends on them. | — |
+| `tests/` | `test_core.py` and `test_benchmark_results.py` (library and repo-level; the latter scans every committed benchmark artifact for absolute paths). | — |
 | `demo/worldview/tests/` | `adapter/` (permalink, assembly, round trip); `mcp/test_server.py` (contract vs golden, calls, stdio smoke); `agents/test_plugin.py` (loader), `agents/test_pai_tools.py` (toolset parity) and `agents/test_agent_surface.py` (model-visible surface golden, plus a no-akd check). Collected by the root `pytest` via `testpaths`. | — |
 
 **Layering rule:** `geoui` imports only pydantic and never `worldview`.
 `worldview.adapter` adds dateutil; `worldview.tools` the adapter;
 `worldview.mcp` fastmcp; `worldview.tools.pai`, `worldview.plugin` and
-`worldview.agents` pydantic-ai. Nothing imports akd. The README import check
-depends on the first clause.
+`worldview.agents` pydantic-ai. The benchmark sits on top: `geoui` ←
+`geobench` ← `worldview_benchmark` → `worldview`; `geobench` never imports
+`worldview`, and `demo/` never imports `geobench` or deepeval. Nothing imports
+akd. The README import check depends on the first clause.
 
 **Why two projects.** The library is meant to be published and depended on;
 the Worldview code is a reference implementation until a generic adapter and
@@ -193,16 +199,27 @@ names the output tool `final_result_<ClassName>`, and the name appears in the
 benchmark logs. Logs written before October 28, 2026 carry the old names
 (`final_result_IESOWorldview*OutputSchema`, agents `ieso_worldview_*`).
 
-**Benchmark.** Same agent skeleton, same discovery tools, same prompts; only
-the observe/act mechanism varies. Prompts are fully specified (exact layer
-IDs for GeoUI, searchable names for VLM) so discovery does not dominate the
-measured cost. Judging is state-field equivalence on the parsed URL,
-excluding `viewport.bbox`, `chart:area` and auto-injected layers. Each turn
-writes one row to `benchmarks/manual/runs.jsonl` under the current working
-directory (the repo root when launched via `demo/start.sh`); override with
-`BENCHMARK_LOG_PATH` / `BENCHMARK_ERROR_LOG_PATH`. Poster figures came from
-the frozen logs; the aggregation was done ad hoc and **there is still no
-`benchmarks/aggregate.py`**. The VLM sample is thin (5 logged turns vs 46).
+**Benchmark (deepeval, since October 28, 2026).** `benchmarks/worldview/run.sh`
+runs both agents on the same goldens and scores them with the same six
+metrics; `benchmarks/worldview/README.md` is the operating manual and
+`benchmarks/harness/README.md` the design. The shape: deepeval's
+`ConversationSimulator` (gpt-5.2) plays the user, answering each gold
+scenario's verbatim opener (layer-id wording for geoui, searchable-name
+wording for vlm, as `prompts.md` does on purpose) and improvising the listed
+follow-up steps; `geobench.harness.ConversationRunner.respond` runs each turn
+under deepeval's pydantic-ai instrumentation (passed through the factories'
+`extra_capabilities`, so the agents are untouched) and saves one `TurnTrace`
+per turn; `state_reached_controller` stops a conversation when the final URL
+satisfies the golden's `expected_state` and every checkpoint, or at the
+golden's extra-turn cap. Metrics: **Success** (final URL → UI state vs
+expected, bbox excluded), **Completion** (checkpoints + deepeval
+`ConversationCompletenessMetric`), **Tool / Time / Token efficiency**
+(deterministic, from the traces, against per-scenario budgets identical for
+both agents), **Turn relevancy** (deepeval). `python -m geobench.score <run>`
+recomputes the deterministic four from the committed traces without an agent;
+`summary.md` has the VLM ÷ GeoUI ratios. The notebook procedure, its prompt
+suite and the frozen poster logs stayed under `benchmarks/manual/`; the
+notebook still logs there and knows nothing about deepeval.
 
 **Run:**
 
@@ -213,14 +230,18 @@ cp .env.example .env                      # OPENAI_API_KEY, then the MCP keys yo
 ./demo/start.sh                           # treatment
 AGENT=vlm ./demo/start.sh                 # baseline
 uv run python -m worldview.agents.geoui_agent  # one-LLM-call wiring smoke
+BENCHMARK_SMOKE=1 ./benchmarks/worldview/run.sh gold smoke   # benchmark: one scenario, both agents
+./benchmarks/worldview/run.sh gold 2026-10-28-gold           # benchmark: the gold set (~15 min geoui, 1.5–2.5 h vlm)
 uv run python -m worldview.agents.warm_mcps    # lists the enabled remote servers
 ```
 
 ## 7. Gotchas, known issues, open TODOs
 
-- **pydantic-ai is pinned `>=1.107.9,<2`.** 1.81 introduced the capabilities
-  API (`MCP`, `Hooks`, `Thinking`) the agents use; 1.107 is needed for
-  correct token usage (below); 2.x has not been tried.
+- **pydantic-ai is pinned `>=2.63,<3`** (since October 28, 2026). MCP servers
+  are `MCPToolset`s over fastmcp transports (`worldview.plugin.transport_of`),
+  `result.usage` is a property, `RunUsage.output_reasoning_tokens` is a
+  top-level field, and the model string stays `openai-chat:` so the 2.x
+  Responses-API default does not change behaviour silently.
 - **No akd anywhere** since October 28, 2026. The agents are bare pydantic-ai;
   `test_no_akd_anywhere` fails if an import creeps back. The MCP contract
   golden is still called `akd_contract.json` because it was captured from the
@@ -269,19 +290,32 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
   4 calls and 21 s for the GeoUI agent on the same request.
 - **marimo is pinned `<0.24`.** 0.25.x's frontend rejects its own chat
   requests (`messages[0].metadata` missing) before the handler runs.
-- **Usage token counts read 0** in every `runs.jsonl` row written on
-  pydantic-ai 1.81 (`reasoning_tokens` and `requests` were populated). Cause:
-  1.81 accepted any `genai-prices`, and 0.1.x added `output_reasoning_tokens`,
-  which 1.81's `RequestUsage` rejects; `RequestUsage.extract` swallows the
-  `TypeError` and returns zeros. Fixed by pydantic-ai 1.107 (pins
-  `genai-prices<0.1`); verified live on 2026-10-28 (30.6k input / 586 output
-  / 23.7k cache-read tokens for a 3-request turn). Rows before that date are
-  not token-comparable.
-- **pydantic-ai 2.x migration is pending.** 1.107 deprecates
-  `MCPServerStdio` / `MCPServerStreamableHTTP` in favour of `MCPToolset`, and
-  the model string is `openai-chat:` so the 2.x default flip to the Responses
-  API does not change behaviour silently. Expect to touch `worldview.plugin`
-  and `_common.py` when bumping to 2.x.
+- **Usage token counts read 0** in every manual `runs.jsonl` row written on
+  pydantic-ai 1.81 (`reasoning_tokens` and `requests` were populated): 1.81
+  accepted any `genai-prices`, 0.1.x added `output_reasoning_tokens`, and
+  1.81's `RequestUsage.extract` swallowed the resulting `TypeError`. Gone
+  since 1.107; rows before October 28, 2026 are not token-comparable.
+- **deepeval gotchas (benchmark).** Its pytest plugin auto-registers into
+  every pytest run; the root `addopts` carries `-p no:deepeval`, which
+  `deepeval test run` re-enables. It only writes result JSON when launched by
+  its CLI (`DEEPEVAL_RESULTS_FOLDER`). `ConversationSimulator` detects async
+  callbacks with `inspect.iscoroutinefunction`, so pass the bound method
+  `runner.respond`, never the runner instance. It re-instantiates metrics per
+  test case with every attribute whose name is an `__init__` parameter in the
+  MRO, so custom metric constructors must accept `threshold` and the
+  attributes they store. `max_user_simulations` must be > 0; single-shot
+  goldens rely on `state_reached_controller` to stop after the opener. Never
+  run the eval suite with `-n`: both agents share one Chromium tab. deepeval's
+  LLM spans carry input/output tokens but not cache-read or reasoning tokens
+  (taken from `result.usage`); MCP tool calls appear twice in a trace and
+  `tools/list` calls appear as untyped spans (filtered in `geobench.tracing`).
+  `deepeval generate --method docs` needs chromadb (not installed) and
+  `--method goldens` / `scratch` emit one-line scenarios with no expected
+  outcome; the synthetic set was made with `--method contexts` from the gold
+  scenarios (`worldview_benchmark.synthetic`).
+- **Playwright MCP is `@playwright/mcp@latest`** in the plugin's `.mcp.json`;
+  `run.json` does not pin it. Pin it in the plugin if runs must be
+  byte-for-byte reproducible.
 - **The open-ended smoke query is expensive.** "What can you help with?"
   drove 46 tool calls before the agent asked a clarifying question. The
   fully specified fast path (exact layer id + bbox + date) takes 3.
@@ -300,12 +334,16 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
 ## 8. Orientation checklist for the next person
 
 1. Read `docs/spec.md`, then §3–§5 here.
-2. `git submodule update --init && uv sync && uv run pytest`: 160-odd tests,
-   no keys, no network except the stdio smoke spawning a subprocess.
+2. `git submodule update --init && uv sync && uv run pytest`: 250-odd tests
+   across the four workspace projects, no keys, no network except the stdio
+   smoke spawning a subprocess.
 3. `uv run worldview-mcp --transport http --port 8000` and
    `uv run python scripts/dump_mcp_contract.py http://127.0.0.1:8000/mcp`.
 4. Fill `.env`, `./demo/start.sh`, try *"Show
    aerosol optical depth over California on 2025-09-15"*, then *"compare it
    to the previous day"*.
-5. Pick up §7 and the README roadmap: aggregation script, more VLM runs,
+5. `BENCHMARK_SMOKE=1 ./benchmarks/worldview/run.sh gold smoke`, read
+   `benchmarks/worldview/results/smoke/summary.md`, then re-score it with
+   `uv run python -m geobench.score benchmarks/worldview/results/smoke`.
+6. Pick up §7 and the README roadmap: more scenarios and runs, the
    conformance harness.

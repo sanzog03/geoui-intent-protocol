@@ -134,6 +134,7 @@ def test_error_turn_is_recorded_and_history_is_unchanged(tmp_path):
     assert runner.history("t") == []
     rows = load_records(tmp_path / "run" / "turns.jsonl", TurnRecord)
     assert rows[0].output_kind == "error" and rows[0].error_type == "RuntimeError"
+    assert rows[0].usage is not None and rows[0].usage.requests == 1 and rows[0].usage.input_tokens > 0
     errors = load_records(tmp_path / "run" / "errors.jsonl", ErrorRecord)
     assert len(errors) == 1 and "tool exploded" in errors[0].traceback and errors[0].golden_name == "g2"
     assert (tmp_path / "run" / "traces" / "t" / "01.json").exists()
