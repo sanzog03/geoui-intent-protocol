@@ -38,7 +38,9 @@ from worldview.plugin import (
     user_config_from_env,
 )
 
-MODEL_NAME = "openai-chat:gpt-5.2"  # Chat Completions explicitly; bare "openai:" flips to the Responses API in pydantic-ai 2
+MODEL_NAME = (
+    "openai-chat:gpt-5.2"  # Chat Completions explicitly; bare "openai:" flips to the Responses API in pydantic-ai 2
+)
 REASONING_EFFORT = "medium"
 #: pydantic-ai ``retries``: how many times a tool / output validation failure
 #: is handed back to the model as a retry prompt before the run fails.
