@@ -6,9 +6,10 @@ requires-python = ">=3.12"
 dependencies = [
     "geoui-protocol",
     "python-dateutil>=2.8",
-    "fastmcp>=3.0,<3.2.4",
-    # 1.81 is the first release with the capabilities API (MCP, Hooks, Thinking) the agents use
-    "pydantic-ai>=1.81.0,<2",
+    "fastmcp>=3.3,<4",
+    # 1.81+ has the capabilities API (MCP, Hooks, Thinking); 1.107 pins genai-prices<0.1, whose newer
+    # 0.1.x releases made pydantic-ai 1.8x silently report zero token usage (RequestUsage.extract TypeError)
+    "pydantic-ai>=1.107.9,<2",
     "httpx>=0.27",
     "python-dotenv>=1.0",
     # marimo 0.25.x frontend rejects its own chat requests (messages[0].metadata); 0.23 is what the poster runs used
