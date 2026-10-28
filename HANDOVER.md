@@ -218,8 +218,9 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
 
 ## 7. Gotchas, known issues, open TODOs
 
-- **pydantic-ai is pinned `>=1.81,<2`.** 1.81 introduced the capabilities
-  API (`MCP`, `Hooks`, `Thinking`) the agents use; 2.x has not been tried.
+- **pydantic-ai is pinned `>=1.107.9,<2`.** 1.81 introduced the capabilities
+  API (`MCP`, `Hooks`, `Thinking`) the agents use; 1.107 is needed for
+  correct token usage (below); 2.x has not been tried.
 - **No akd anywhere** since October 28, 2026. The agents are bare pydantic-ai;
   `test_no_akd_anywhere` fails if an import creeps back. The MCP contract
   golden is still called `akd_contract.json` because it was captured from the
@@ -268,10 +269,19 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
   4 calls and 21 s for the GeoUI agent on the same request.
 - **marimo is pinned `<0.24`.** 0.25.x's frontend rejects its own chat
   requests (`messages[0].metadata` missing) before the handler runs.
-- **Usage token counts read 0** in `runs.jsonl` rows produced with the
-  akd-era stack (pydantic-ai 1.81 + gpt-5.2; `reasoning_tokens` and
-  `requests` were populated). `extract_usage` now reads pydantic-ai's
-  `RunUsage` directly; check the first rows of the next benchmark round.
+- **Usage token counts read 0** in every `runs.jsonl` row written on
+  pydantic-ai 1.81 (`reasoning_tokens` and `requests` were populated). Cause:
+  1.81 accepted any `genai-prices`, and 0.1.x added `output_reasoning_tokens`,
+  which 1.81's `RequestUsage` rejects; `RequestUsage.extract` swallows the
+  `TypeError` and returns zeros. Fixed by pydantic-ai 1.107 (pins
+  `genai-prices<0.1`); verified live on 2026-10-28 (30.6k input / 586 output
+  / 23.7k cache-read tokens for a 3-request turn). Rows before that date are
+  not token-comparable.
+- **pydantic-ai 2.x migration is pending.** 1.107 deprecates
+  `MCPServerStdio` / `MCPServerStreamableHTTP` in favour of `MCPToolset`, and
+  the model string is `openai-chat:` so the 2.x default flip to the Responses
+  API does not change behaviour silently. Expect to touch `worldview.plugin`
+  and `_common.py` when bumping to 2.x.
 - **The open-ended smoke query is expensive.** "What can you help with?"
   drove 46 tool calls before the agent asked a clarifying question. The
   fully specified fast path (exact layer id + bbox + date) takes 3.
