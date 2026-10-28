@@ -313,6 +313,12 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
   `--method goldens` / `scratch` emit one-line scenarios with no expected
   outcome; the synthetic set was made with `--method contexts` from the gold
   scenarios (`worldview_benchmark.synthetic`).
+  An errored turn (UsageLimitExceeded, tool retries exhausted) has no
+  RunUsage, so its tokens come from the LLM spans with no cache-read credit:
+  its cache-adjusted token count is an upper bound. Plain
+  `pytest benchmarks/worldview` would collect the live eval file; it skips
+  itself unless BENCHMARK_RUN is set, and two runs must never share the
+  Chromium tab.
 - **Playwright MCP is `@playwright/mcp@latest`** in the plugin's `.mcp.json`;
   `run.json` does not pin it. Pin it in the plugin if runs must be
   byte-for-byte reproducible.
