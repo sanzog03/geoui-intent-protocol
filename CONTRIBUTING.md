@@ -4,24 +4,35 @@
 
 ```bash
 git submodule update --init  # demo/worldview/agents/artifact/worldview/geoui/akd-plugins (the worldview-assistant plugin)
-uv sync                      # library + Worldview demo + benchmark utility + dev tools
+uv sync                      # library + Worldview demo + CDP bridge + benchmark utility + dev tools
+npm install                  # @geoui/react SDK + MapLibre demo (Node 20+)
 uv run pre-commit install    # optional
 ```
 
-Python 3.12+. The repo is a uv workspace with three projects: `geoui-protocol`
-(root, import `geoui`), `geoui-worldview-demo` (`demo/`, import `worldview`) and
+Python 3.12+. The repo is a uv workspace with four projects: `geoui-protocol`
+(root, import `geoui`), `geoui-worldview-demo` (`demo/`, import `worldview`),
+`geoui-bridge` (`bridge/`, import `geoui_bridge`, the GeoUI MCP over CDP) and
 `geouibench` (`benchmarks/`, the deepeval benchmark utility). Benchmark app
 directories such as `benchmarks/worldview/` are not packages; the utility loads
-their `app.py` by path. One `uv.lock` covers all three; commit it. Run every
-`uv` command from the repo root.
+their `app.py` by path. One `uv.lock` covers all four; commit it. Run every
+`uv` command from the repo root. The TypeScript side is an npm workspace
+(`sdk/geoui-react`, `demo/maplibre`) with one `package-lock.json`; commit it.
 
 ## Checks
 
 ```bash
 uv run ruff check . && uv run ruff format --check .
 uv run pytest                        # all four projects, no keys, no network
-uv run pytest -m "not integration"   # skip the stdio subprocess smoke test
+uv run pytest -m "not integration"   # skip the stdio subprocess smoke tests
+uv run python scripts/export_schemas.py --check   # schemas/ matches the pydantic models
+npm test && npm run lint && npm run build         # SDK (vitest, jsdom) and the MapLibre app (tsc + vite)
 ```
+
+pytest never needs node and `npm test` never needs Python: the schema contract
+is checked on both sides from the committed `schemas/` files
+(`tests/test_schemas.py`, `sdk/geoui-react/src/__tests__/schemas.test.ts`).
+After changing a pydantic model: `uv run python scripts/export_schemas.py`,
+then `npm run gen:types`, and commit both outputs.
 
 Markers: `integration` (spawns a subprocess or touches the network), `agents`
 (needs the demo project and the plugin submodule).
@@ -65,11 +76,29 @@ Markers: `integration` (spawns a subprocess or touches the network), `agents`
    its docs or its tests. `demo/` never imports `geouibench` or deepeval (the
    README import check covers it). deepeval's pytest plugin stays blocked in the
    unit suite (`-p no:deepeval`); only `deepeval test run` enables it.
+10. `geoui_bridge` imports `geoui`, playwright, fastmcp and pydantic-ai and
+    never `worldview`: it knows no application, the page's
+    `window.geoui.describe()` says what is supported. `demo/maplibre` imports
+    only `@geoui/react` (through the Vite alias to its source). The three tool
+    names are the same as the Worldview server's (rule 5); the bridge's
+    contract golden is `bridge/geoui_bridge/tests/mcp/fixtures/bridge_contract.json`
+    (`scripts/dump_mcp_contract.py local --module geoui_bridge.mcp.server:mcp
+    --golden <that path> --update-golden`).
+11. Agent-facing wording is shared across the boundary on purpose: the SDK's
+    `validate()` messages (`sdk/geoui-react/src/errors.ts`) mirror
+    `prepare_intent` in `geoui_bridge.catalogue` and `worldview.tools`. Change
+    them together.
 
 ## Adding an adapter
 
-`geoui` has no generic adapter interface yet; each application is its own
-workspace member under `demo/`, mirroring `demo/worldview/`. Create
+Two paths exist. **A React app** attaches its state with `@geoui/react`
+(`GeoUIProvider` + the attach hooks, see `demo/maplibre/src/App.tsx`), publishes
+its layer catalogue through the provider's `layers` prop, and is driven by
+`geoui-bridge-mcp` with no Python code of its own; benchmark it with a
+`benchmarks/<name>/app.py` modelled on `benchmarks/maplibre/app.py`. **A
+URL-state application** gets a Python adapter: `geoui` has no generic adapter
+interface yet; each such application is its own workspace member under
+`demo/`, mirroring `demo/worldview/`. Create
 `demo/<app>/pyproject.toml` and `demo/<app>/<app>/adapter/` with:
 
 - `intent_to_<native>(intent: GeoIntent) -> NativeState` and
@@ -104,9 +133,10 @@ Once two adapters exist, lift the shared interface into `geoui`.
   `benchmarks/<app>/results/<run-id>/`; commit the folder with its
   `summary.md`. The artifact test fails on absolute paths.
 - **Bind another application:** a new directory `benchmarks/<name>/` with an
-  `app.py` (`APP` satisfying `geouibench.BenchmarkApp`, optionally `prepare()`
-  and `SYNTHETIC_STYLE`) and a gold dataset. No package, no eval file, no
-  script. See `benchmarks/README.md`.
+  `app.py` (`APP` satisfying `geouibench.BenchmarkApp`, optionally `prepare()`,
+  `snapshot()` for apps whose state is not a URL, and `SYNTHETIC_STYLE`) and a
+  gold dataset. No package, no eval file, no script. See `benchmarks/README.md`
+  and, for the page-state pattern, `benchmarks/maplibre/`.
 
 ## Adding an extension
 

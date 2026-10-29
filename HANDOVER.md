@@ -60,13 +60,25 @@ two reference agents, a marimo chat demo, and the head-to-head benchmark.
 | `benchmarks/worldview/` | **The Worldview app directory** (no package, no pyproject). `app.py` (`APP = WorldviewApp()`: both factories, `observe(url)`, discovery tools, roles, `DEFAULT_BUDGETS`, `prepare()` = plugin check + `demo/chromium.sh` + MCP warm-up, `SYNTHETIC_STYLE`), `datasets/gold_dataset.json` (Core 1–6 + workflows A/B with openers, expected state, checkpoints), `datasets/synthetic_queries.json`, `tests/`, `results/<run-id>/` (committed runs). | geouibench, demo |
 | `benchmarks/worldview_legacy/prompts.md`, `benchmarks/worldview_legacy/workflows.md` | Prompt suite (Core 6 + Optional 4) and 5-turn scenario scripts (A: CA wildfire smoke; B: Saharan dust; C: Lake Erie bloom). | — |
 | `benchmarks/worldview_legacy/results/poster-2026-05/` | Frozen `runs.jsonl` (51 rows) and `errors.jsonl` (22 rows) behind the poster. Absolute paths in tracebacks were replaced (`<worktree>` for the source checkout, `<python>` for the interpreter install). | — |
-| `scripts/dump_mcp_contract.py` | Dump any server's tool contract as JSON. | fastmcp |
+| `scripts/dump_mcp_contract.py` | Dump any server's tool contract as JSON (`--module` picks the server, `--golden` the fixture). | fastmcp |
+| `geoui/extensions/spec.py` | `ExtensionSpec` (uri, prefix, scope, fields, summary; `describe()`), `used_prefixes`, `declare`: what a consumer needs to advertise and pre-declare extensions. | pydantic |
+| `schemas/`, `scripts/export_schemas.py`, `tests/test_schemas.py` | The protocol's JSON Schemas exported from pydantic (core + one `describe()` per extension), committed and drift-checked. The TypeScript SDK embeds them. | — |
+| `sdk/geoui-react/` | **`@geoui/react`**: `registry.ts` (slots, `compose`, `validate` with the same wording as `prepare_intent`, `apply` with replace semantics, `settle`), `bridge.ts` (`window.geoui`), `provider.tsx` (`GeoUIProvider`, `useGeoUIState`, `useGeoUIBridge`), `hooks.ts` (the attach hooks), `generated/` (types + schema literals from `scripts/gen-types.ts`). vitest + jsdom tests drive `window.geoui` from outside React. | react |
+| `demo/maplibre/` | React + MapLibre + GIBS app on the SDK: `App.tsx` owns the state and attaches it; `layers.ts` is the catalogue (`describe().layers`); `components/MapView.tsx` fits itself from a fit request (the primary map is uncontrolled). | @geoui/react, react-map-gl |
+| `bridge/geoui_bridge/` | **The GeoUI MCP over CDP.** `cdp.py` (`BridgeSession`: `connect_over_cdp`, page by origin, tab opened via the browser's `/json/new`), `catalogue.py` (`check_catalogue` against `geoui.extensions.ALL`, `prepare_intent`), `tools/` (docs, models, operations; `pai.py` toolset with `ModelRetry`), `mcp/server.py` (`create_server`, one lazy reconnecting session, `geoui-bridge-mcp`), `agents/maplibre_agent.py` (bare agent, three tools, short prompt). Tests use `tests/_fake_session.py`; the contract golden is `tests/mcp/fixtures/bridge_contract.json`. | geoui, playwright, fastmcp, pydantic-ai |
+| `bridge/pyproject.toml` | The fourth workspace member, `geoui-bridge`; the only one that declares playwright. Not nested under `demo/` because uv refuses a member inside another member's directory. | — |
+| `benchmarks/maplibre/` | The MapLibre app directory: `app.py` (`MaplibreApp`: `output_url` is always `None`, `snapshot()` reads the page state as `geoui+json:<json>`, `observe()` parses it), the gold set minus chart with the geoui opener only, tests, `results/`. | geouibench, geoui-bridge |
+| `docs/maplibre-demo/architecture.md` | Component / sequence / deployment diagrams (Mermaid) of the whole path and a Worldview-vs-MapLibre table. | — |
+| `package.json`, `tsconfig.base.json`, `eslint.config.js` | npm workspaces (`sdk/geoui-react`, `demo/maplibre`); `npm test`, `npm run build`, `npm run lint`, `npm run gen:types`. | node |
 | `demo/pyproject.toml` | The `geoui-worldview-demo` project: a uv workspace member that depends on `geoui-protocol` and owns the heavy dependencies (pydantic-ai, fastmcp, marimo). The root dev group installs it editable. | — |
 | `benchmarks/pyproject.toml` | The third workspace member, `geouibench` (owns deepeval). The root dev group installs it editable; the demo never depends on it. App directories under `benchmarks/` are not members. | — |
 | `tests/` | `test_core.py` and `test_benchmark_results.py` (library and repo-level; the latter scans every committed benchmark artifact for absolute paths). | — |
 | `demo/worldview/tests/` | `adapter/` (permalink, assembly, round trip); `mcp/test_server.py` (contract vs golden, calls, stdio smoke); `agents/test_plugin.py` (loader), `agents/test_pai_tools.py` (toolset parity) and `agents/test_agent_surface.py` (model-visible surface golden, plus a no-akd check). Collected by the root `pytest` via `testpaths`. | — |
 
-**Layering rule:** `geoui` imports only pydantic and never `worldview`.
+**Layering rule:** `geoui` imports only pydantic and never `worldview` or
+`geoui_bridge`. `geoui_bridge` imports `geoui`, playwright, fastmcp and
+pydantic-ai, never `worldview`; `demo/maplibre` imports only `@geoui/react`;
+`benchmarks/maplibre/app.py` imports `geouibench` and `geoui_bridge`.
 `worldview.adapter` adds dateutil; `worldview.tools` the adapter;
 `worldview.mcp` fastmcp; `worldview.tools.pai`, `worldview.plugin` and
 `worldview.agents` pydantic-ai. The benchmark sits on top: `geoui` ←
@@ -238,8 +250,31 @@ uv run python -m geouibench run benchmarks/worldview gold --run-id 2026-10-28-go
 uv run python -m worldview.agents.warm_mcps    # lists the enabled remote servers
 ```
 
+**The MapLibre path (since October 28, 2026).** The same six metrics on an
+application with no URL: `geoui_bridge.agents.build_maplibre_agent` is a bare
+agent with only the three GeoUI tools (in-process toolset over a per-call CDP
+session; no skill, discovery MCPs or browser tools), and
+`benchmarks/maplibre/app.py` uses the `snapshot()` hook to read
+`window.geoui.getState()` after each turn as the handle `observe()` parses
+offline. The gold set is the Worldview one minus chart, geoui opener only,
+workflows rewritten to compare / sensor switch / styling (A) and date step /
+compare / opacity (B). The first full run is `benchmarks/maplibre/results/`.
+
 ## 7. Gotchas, known issues, open TODOs
 
+- **react-map-gl reverts an imperative `fitBounds` on a controlled map** until
+  its `viewState` props catch up, one render later; the demo's primary map is
+  uncontrolled (`initialViewState`) and only the compare B map mirrors it
+  through props. A map instance swap (compare on/off) means the render
+  result's viewport can be the moment before the new map fitted itself;
+  `get_state` is right once it has.
+- **A Playwright CDP connection closes the pages it created when it
+  disconnects.** The bridge opens the app tab through the browser's
+  `/json/new` instead, and only accepts pages at `GEOUI_APP_URL`'s origin.
+- **The `act()` trap in SDK tests.** Awaiting `window.geoui.render()` inside
+  React's `act()` deadlocks: the render waits for the commit that `act`
+  holds back. The provider tests call the bridge from outside React
+  (`IS_REACT_ACT_ENVIRONMENT` off for the call), which is what the MCP does.
 - **CDP bridge spike (October 28, 2026): GO.** A Python process can drive a
   page that exposes `window.geoui` over Chrome DevTools Protocol with
   Playwright-python 1.64 (`chromium.connect_over_cdp`, no browser download:
@@ -396,5 +431,10 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
 5. `uv run python -m geouibench run benchmarks/worldview gold --smoke --run-id smoke`,
    read `benchmarks/worldview/results/smoke/summary.md`, then re-score it with
    `uv run python -m geouibench score benchmarks/worldview/results/smoke`.
-6. Pick up §7 and the README roadmap: more scenarios and runs, the
-   conformance harness.
+6. `npm install && npm test`, then `npm run dev -w demo/maplibre`,
+   `GEOUI_APP_URL=http://127.0.0.1:5173 uv run geoui-bridge-mcp` from Claude
+   Code (or `uv run python -m geoui_bridge.agents.maplibre_agent "..."`), and
+   `uv run python -m geouibench run benchmarks/maplibre gold --smoke --run-id smoke`.
+   Read `docs/maplibre-demo/architecture.md` first.
+7. Pick up §7 and the README roadmap: more scenarios and runs, the
+   conformance harness, the deck.gl / auto-attach adapter.

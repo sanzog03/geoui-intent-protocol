@@ -17,14 +17,20 @@ for Earth Observation (NASA MSFC, May 2026).
 
 ## Layout
 
-Two projects in one uv workspace. `geoui-protocol` (import `geoui`) is the
-library and depends on pydantic alone. `geoui-worldview-demo` (import
-`worldview`, under `demo/`) is the NASA Worldview reference implementation and
-carries everything application-specific.
+Four projects in one uv workspace, plus an npm workspace. `geoui-protocol`
+(import `geoui`) is the library and depends on pydantic alone.
+`geoui-worldview-demo` (import `worldview`, under `demo/`) is the NASA
+Worldview reference implementation and carries everything Worldview-specific.
+`geoui-bridge` (import `geoui_bridge`, under `bridge/`) is the GeoUI MCP for
+any page that exposes `window.geoui`, and `geouibench` (`benchmarks/`) is the
+benchmark utility. On the TypeScript side, `@geoui/react` (`sdk/geoui-react`)
+is the adapter SDK for React apps and `demo/maplibre` is a map app built with
+it.
 
 | Path | What it is | Depends on |
 |---|---|---|
-| `geoui/core.py`, `geoui/extensions/` | **The protocol.** `GeoIntent`, `Viewport`, `TimeWindow`, `LayerRef`; `compare`, `chart`, `raster-styling` extensions | pydantic |
+| `geoui/core.py`, `geoui/extensions/` | **The protocol.** `GeoIntent`, `Viewport`, `TimeWindow`, `LayerRef`; `compare`, `chart`, `raster-styling` extensions; `ExtensionSpec` (`describe()`, `declare`, `used_prefixes`) for consumers that advertise what they support | pydantic |
+| `schemas/`, `scripts/export_schemas.py` | The protocol's JSON Schemas (core + one `describe()` document per extension), exported from the pydantic models and drift-checked by `tests/test_schemas.py`; what non-Python consumers read | — |
 | `demo/pyproject.toml` | The demo project (`geoui-worldview-demo`), a uv workspace member installed editable by `uv sync` | geoui-protocol |
 | `demo/worldview/adapter/` | Reference adapter: `GeoIntent` ⇄ Worldview permalink URL (`mapping.py`, `permalink.py`, `url_parser.py`) | geoui, dateutil |
 | `demo/worldview/tools/` | The two protocol operations as plain async functions plus request/response models; `pai.py` exposes them (and `worldview_permalink_tool`) as pydantic-ai toolsets | adapter; pydantic-ai for `pai.py` |
@@ -34,18 +40,25 @@ carries everything application-specific.
 | `demo/worldview/agents/artifact/worldview/geoui/akd-plugins/` | git submodule of [NASA-IMPACT/akd-plugins](https://github.com/NASA-IMPACT/akd-plugins); the `worldview-assistant` plugin is the GeoUI agent's skill and MCP server list | — |
 | `demo/worldview/agents/artifact/worldview/vlm/mio-worldviewagent-v2/` | Vendored non-GeoUI skill (`SKILL.md` + `references/`) the baseline agent runs | — |
 | `demo/worldview/tests/` | Tests for the adapter, tools, MCP contract, plugin loader and agents | — |
-| `demo/chat.py`, `demo/start.sh`, `demo/chromium.sh` | One marimo chat notebook for both agents (`AGENT=geoui\|vlm`), the launcher, and the Chromium-over-CDP helper it shares with the benchmark | marimo |
+| `demo/chat.py`, `demo/start.sh`, `demo/chromium.sh` | One marimo chat notebook for both agents (`AGENT=geoui\|vlm`), the launcher, and the Chromium-over-CDP helper it shares with the benchmarks | marimo |
+| `sdk/geoui-react/` | **`@geoui/react`**, the adapter SDK for React apps: `GeoUIProvider`, attach hooks (`useGeoUIViewport` / `Time` / `Layers` / `Extension` / `LayerExtension`), a registry that composes and applies a `GeoIntent`, and `window.geoui` (`describe` / `getState` / `render`). Types and extension specs are generated from `schemas/` | react (peer) |
+| `demo/maplibre/` | A React + MapLibre + NASA GIBS map app with the SDK attached: nothing in the URL; an agent drives it through `window.geoui`. `npm run dev -w demo/maplibre` | @geoui/react, react-map-gl |
+| `bridge/` | **`geoui-bridge`** (import `geoui_bridge`): the GeoUI MCP over CDP for any `window.geoui` page. `cdp.py` (Playwright `connect_over_cdp` session), `catalogue.py` (the page's catalogue checked against the library, consumer-side pre-declaration), `tools/` (the three tools; `pai.py` as a pydantic-ai toolset), `mcp/server.py` (`geoui-bridge-mcp`), `agents/maplibre_agent.py` | geoui, playwright, fastmcp, pydantic-ai |
 | `tests/` | Library tests (`test_core.py`) and repo-level checks | — |
 | `benchmarks/geouibench/` | `geouibench`: the benchmark utility (simulated multi-turn user, per-turn traces, six metrics, synthetic goldens, offline re-scoring, cross-agent summary, `python -m geouibench` CLI); names no application | deepeval, pydantic-ai |
 | `benchmarks/worldview/` | The Worldview app directory for `geouibench`: `app.py` (both agents, state read-back, prepare hook), gold + synthetic datasets, committed results per run | geouibench, demo |
+| `benchmarks/maplibre/` | The MapLibre app directory for `geouibench`: `app.py` (the bridge's agent, state read from the page as a `geoui+json` handle), the gold set without chart, committed results | geouibench, geoui-bridge |
 | `benchmarks/worldview_legacy/` | The earlier notebook-driven procedure: prompt suite, workflow scripts, frozen poster run logs | — |
 | `docs/spec.md` | GeoUI Protocol v1.0.0 specification | — |
 | `docs/poster/` | Poster narrative, abstract, interaction diagrams, results chart | — |
+| `docs/maplibre-demo/architecture.md` | Component, sequence and deployment diagrams of the agent → MCP → CDP → SDK → app path | — |
 | `scripts/dump_mcp_contract.py` | Print any MCP server's tool contract as JSON, for diffing | fastmcp |
 
-Importing `geoui` pulls in nothing from `worldview`, pydantic-ai or fastmcp. The
-generic adapter and MCP layer that will eventually live in `geoui` are not
-written yet; until then every application-specific piece stays under `demo/`.
+Importing `geoui` pulls in nothing from `worldview`, `geoui_bridge`,
+pydantic-ai or fastmcp. Two adapter paths exist today: the Worldview adapter
+(Python, URL-based, under `demo/worldview`) and the React SDK + CDP bridge
+(for apps whose state is not in a URL); the shared Python interface they will
+eventually meet in is not lifted into `geoui` yet.
 
 ## Install
 
@@ -58,10 +71,27 @@ Developing in this repo:
 
 ```bash
 git clone --recurse-submodules https://github.com/NASA-IMPACT/geoui-intent-protocol   # or: git submodule update --init
-uv sync    # library + Worldview demo + benchmark harness + dev tools, in one venv
+uv sync    # library + Worldview demo + CDP bridge + benchmark utility + dev tools, in one venv
+npm install   # the @geoui/react SDK and the MapLibre demo (Node 20+)
 ```
 
 `uv sync --no-dev` installs the library alone.
+
+## MapLibre demo: an application with no URL state
+
+```bash
+npm run dev -w demo/maplibre                        # the app at http://127.0.0.1:5173
+source demo/chromium.sh && ensure_chromium          # Chromium with CDP on :9222
+GEOUI_APP_URL=http://127.0.0.1:5173 uv run geoui-bridge-mcp   # the GeoUI MCP (stdio), e.g. from Claude Code
+uv run python -m geoui_bridge.agents.maplibre_agent "Show MODIS Aqua AOD over California on 2025-09-15"
+uv run python -m geouibench run benchmarks/maplibre gold --smoke --run-id smoke
+```
+
+The app attaches its state with the `@geoui/react` hooks and exposes
+`window.geoui`; the bridge attaches to Chromium over CDP, reads the page's
+extension catalogue, pre-declares the supported URIs and renders intents with
+`page.evaluate`. The same three tools, the same benchmark: see
+[`docs/maplibre-demo/architecture.md`](docs/maplibre-demo/architecture.md).
 
 ## Quickstart
 
