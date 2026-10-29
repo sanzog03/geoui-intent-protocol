@@ -24,7 +24,9 @@
 #   CDP_PORT                    remote-debugging port (default 9222)
 #   WORLDVIEW_CHROMIUM_PROFILE  user-data-dir (default /tmp/worldview-chromium)
 #   MARIMO_MODE                 "run" (default) or "edit"
-#   AGENT                       "geoui" (default) or "vlm" — which agent
+#   AGENT                       "geoui" (default), "vlm" or "maplibre" — which agent
+#   GEOUI_APP_URL               maplibre only: where `npm run dev -w demo/maplibre`
+#                               serves the app (default http://127.0.0.1:5173)
 #                               demo/chat.py runs (treatment vs baseline)
 #
 # Platform support:
@@ -65,19 +67,30 @@ ensure_chromium || exit 1
 # benchmark logger writes to <repo>/benchmarks/worldview_legacy/ and `uv run` picks up the
 # project environment.
 cd "$SCRIPT_DIR/.."
-if [[ -z "${WORLDVIEW_PLUGIN_DIR:-}" && ! -f demo/worldview/agents/artifact/worldview/geoui/akd-plugins/plugins/worldview-assistant/.mcp.json ]]; then
-    echo "Error: the worldview-assistant plugin is missing. Run: git submodule update --init" >&2
-    exit 2
-fi
 AGENT="${AGENT:-geoui}"
-case "$AGENT" in geoui|vlm) ;; *) echo "AGENT must be 'geoui' or 'vlm' (got '$AGENT')" >&2; exit 2 ;; esac
+case "$AGENT" in geoui|vlm|maplibre) ;; *) echo "AGENT must be 'geoui', 'vlm' or 'maplibre' (got '$AGENT')" >&2; exit 2 ;; esac
 export AGENT   # demo/chat.py reads it to pick the agent
 
-# Pre-warm remote MCP endpoints (auto-discovered from the agent's
-# capability list) so the first chat turn doesn't pay cold-start
-# latency. `|| true` keeps a failed warm from aborting launch — the
-# agent will retry on its first real call.
-uv run python -m worldview.agents.warm_mcps || true
+if [[ "$AGENT" == "maplibre" ]]; then
+    # The MapLibre demo has no plugin and no remote MCPs; it needs the Vite dev
+    # server (npm run dev -w demo/maplibre) so the agent has a page to drive.
+    export GEOUI_APP_URL="${GEOUI_APP_URL:-http://127.0.0.1:5173}"
+    if ! curl -fs -o /dev/null "$GEOUI_APP_URL"; then
+        echo "Error: the MapLibre demo is not answering at $GEOUI_APP_URL. Start it first: npm run dev -w demo/maplibre" >&2
+        exit 2
+    fi
+    echo "MapLibre demo at $GEOUI_APP_URL"
+else
+    if [[ -z "${WORLDVIEW_PLUGIN_DIR:-}" && ! -f demo/worldview/agents/artifact/worldview/geoui/akd-plugins/plugins/worldview-assistant/.mcp.json ]]; then
+        echo "Error: the worldview-assistant plugin is missing. Run: git submodule update --init" >&2
+        exit 2
+    fi
+    # Pre-warm remote MCP endpoints (auto-discovered from the agent's
+    # capability list) so the first chat turn doesn't pay cold-start
+    # latency. `|| true` keeps a failed warm from aborting launch — the
+    # agent will retry on its first real call.
+    uv run python -m worldview.agents.warm_mcps || true
+fi
 echo
 
 exec uv run marimo "$MARIMO_MODE" demo/chat.py

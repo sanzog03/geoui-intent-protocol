@@ -1,6 +1,6 @@
-"""Multi-turn chat with a Worldview agent.
+"""Multi-turn chat with a GeoUI demo agent.
 
-One notebook, two agents, selected by the ``AGENT`` environment variable:
+One notebook, three agents, selected by the ``AGENT`` environment variable:
 
 - ``geoui`` (default): the ``worldview-assistant`` Claude Code skill on a
   bare pydantic-ai agent. It speaks **GeoIntent** through the GeoUI
@@ -10,6 +10,10 @@ One notebook, two agents, selected by the ``AGENT`` environment variable:
   Playwright browser control, the baseline. It observes NASA Worldview via
   screenshots + an accessibility-tree snapshot and acts by clicking,
   typing and dragging against the live page.
+- ``maplibre``: the bridge's agent on the MapLibre demo (``demo/maplibre``,
+  an app with no URL state). Only the three GeoUI tools, served in-process
+  over CDP by ``geoui_bridge``; no plugin, no remote MCPs, no browser tools.
+  Needs the Vite dev server (``npm run dev -w demo/maplibre``).
 
 Same Chromium-on-CDP plumbing, same live tool-call trace, same
 session/reset controls and benchmark logging; the agent is where the
@@ -20,6 +24,7 @@ Run from the repo root (``demo/start.sh`` does all of this):
 
     ./demo/start.sh                                  # GeoUI treatment
     AGENT=vlm ./demo/start.sh                        # VLM baseline
+    AGENT=maplibre ./demo/start.sh                   # MapLibre demo (npm run dev -w demo/maplibre first)
     AGENT=vlm uv run marimo edit demo/chat.py   # editor
 
 Requires `.env` with at minimum OPENAI_API_KEY and VECTOR_DB_TOOL_KEY
@@ -43,19 +48,26 @@ def _setup_marimo():
 
 @app.cell
 def _variant():
-    """Pick the agent from ``AGENT`` (``geoui`` or ``vlm``; default ``geoui``).
+    """Pick the agent from ``AGENT`` (``geoui``, ``vlm`` or ``maplibre``; default ``geoui``).
 
-    Everything that differs between the two demo flavours lives in this
-    one dict: the agent factory, the intro text and the example prompts.
-    The rest of the notebook is variant-agnostic.
+    Everything that differs between the demo flavours lives in this one
+    dict: the agent factory, the text-output class, whether the Worldview
+    plugin and its remote MCPs are involved, the intro text and the example
+    prompts. The rest of the notebook is variant-agnostic.
     """
     import os as _os  # private: ``os`` is also imported by the env cell
 
+    from worldview.agents import TextOutput as _worldview_text_output
     from worldview.agents import geoui_agent, vlm_agent
 
     AGENT = _os.environ.get("AGENT", "geoui").strip().lower()
-    if AGENT not in ("geoui", "vlm"):
-        raise ValueError(f"AGENT must be 'geoui' or 'vlm' (got {AGENT!r})")
+    if AGENT not in ("geoui", "vlm", "maplibre"):
+        raise ValueError(f"AGENT must be 'geoui', 'vlm' or 'maplibre' (got {AGENT!r})")
+    if AGENT == "maplibre":
+        from geoui_bridge.agents import TextOutput as _maplibre_text_output
+        from geoui_bridge.agents import build_maplibre_agent as _build_maplibre_agent
+    else:
+        _maplibre_text_output = _build_maplibre_agent = None
 
     geoui_intro = r"""
     # Worldview GeoUI Agent — Multi-turn Chat
@@ -137,9 +149,49 @@ def _variant():
       the cleanup will cancel the background task.
     """
 
+    maplibre_intro = r"""
+    # MapLibre GeoUI Agent — Multi-turn Chat
+
+    The GeoUI protocol on an application with **no URL state**: the
+    MapLibre + NASA GIBS demo (`demo/maplibre`) attaches its React state to
+    the protocol with the `@geoui/react` SDK and exposes `window.geoui`.
+    The agent (`geoui_bridge.agents.build_maplibre_agent`) is a bare
+    pydantic-ai agent with only the three GeoUI tools
+    (`geo_ui_list_intent_extensions_tool`, `geo_ui_get_state_tool`,
+    `geo_ui_render_intent_tool`), served in-process by `geoui_bridge`
+    over Chrome DevTools Protocol. No plugin, no discovery MCPs, no
+    browser tools: the page's own catalogue tells the agent which layers
+    and extensions exist.
+
+    ### One-time setup
+
+    ```bash
+    npm run dev -w demo/maplibre        # the app at http://127.0.0.1:5173 (GEOUI_APP_URL)
+    AGENT=maplibre ./demo/start.sh      # Chromium on CDP + this notebook
+    ```
+
+    The bridge opens the app in a tab of that Chromium on the first turn
+    (or reuses one already at `GEOUI_APP_URL`). Nothing is navigated
+    afterwards: each render writes the state into the page.
+
+    ### Using it
+
+    - Type a query (e.g. *"Show MODIS Aqua aerosol optical depth over
+      California on 2025-09-15"*). Expect `list` then `render` on the first
+      turn, `get_state` then `render` on refinements.
+    - Pan, zoom or change layers by hand in the app between turns; the
+      agent reads the live state back with `geo_ui_get_state_tool`.
+    - Rendering replaces the whole state, so *"compare it to the previous
+      day"* keeps the layer and date because the agent resends them.
+    - Compare swipe and per-layer styling fields work; the chart extension
+      is not attached, and the agent is told so if it tries.
+    """
+
     VARIANT = {
         "geoui": {
             "build": geoui_agent.build_geoui_agent,
+            "text_output": _worldview_text_output,
+            "uses_plugin": True,
             "intro_md": geoui_intro,
             "example_prompts": [
                 "I'd like to look at Saharan dust transport over the Atlantic on June 15, 2023.",
@@ -149,11 +201,24 @@ def _variant():
         },
         "vlm": {
             "build": vlm_agent.build_vlm_agent,
+            "text_output": _worldview_text_output,
+            "uses_plugin": True,
             "intro_md": vlm_intro,
             "example_prompts": [
                 "Show MODIS Aqua Aerosol on 2025-09-15.",
                 "Now zoom to Huntsville, Alabama.",
                 "Compare with the following day.",
+            ],
+        },
+        "maplibre": {
+            "build": _build_maplibre_agent,
+            "text_output": _maplibre_text_output,
+            "uses_plugin": False,
+            "intro_md": maplibre_intro,
+            "example_prompts": [
+                "Show MODIS Aqua aerosol optical depth over California on 2025-09-15.",
+                "Compare it to the previous day with a swipe.",
+                "Make the aerosol layer 60% opaque and add coastlines on top.",
             ],
         },
     }[AGENT]
@@ -166,9 +231,10 @@ def _intro(VARIANT, mo):
 
 
 @app.cell
-def _env(mo):
+def _env(VARIANT, mo):
     """Load `.env` and surface missing required keys before any agent
-    instantiation downstream.
+    instantiation downstream. For the MapLibre variant the plugin keys do
+    not apply; the app must be reachable at ``GEOUI_APP_URL`` instead.
     """
     import os
 
@@ -176,15 +242,26 @@ def _env(mo):
 
     load_dotenv()  # walks up from cwd; no-op if .env is missing
 
-    from worldview.plugin import env_var_for, plugin_dir, user_config_from_env
-
     required_keys = ["OPENAI_API_KEY"]
     missing_keys = [k for k in required_keys if not os.getenv(k)]
 
-    # Optional: each unlocks a group of the plugin's MCP servers. Missing
-    # ones are skipped by ``worldview.plugin.load_mcp_config`` with a warning.
-    _root = plugin_dir()
-    unset_mcp_keys = [env_var_for(k) for k, v in user_config_from_env(_root).items() if v is None]
+    unset_mcp_keys = []
+    app_url_problem = None
+    if VARIANT["uses_plugin"]:
+        from worldview.plugin import env_var_for, plugin_dir, user_config_from_env
+
+        # Optional: each unlocks a group of the plugin's MCP servers. Missing
+        # ones are skipped by ``worldview.plugin.load_mcp_config`` with a warning.
+        _root = plugin_dir()
+        unset_mcp_keys = [env_var_for(k) for k, v in user_config_from_env(_root).items() if v is None]
+    else:
+        import httpx as _httpx
+
+        _app_url = os.getenv("GEOUI_APP_URL") or "http://127.0.0.1:5173"
+        try:
+            _httpx.get(_app_url, timeout=3.0).raise_for_status()
+        except _httpx.HTTPError as _exc:
+            app_url_problem = f"{_app_url} ({type(_exc).__name__})"
 
     cdp_endpoint = os.getenv("PLAYWRIGHT_CDP_ENDPOINT")
 
@@ -196,6 +273,15 @@ def _env(mo):
             ),
             kind="danger",
         )
+    elif app_url_problem:
+        env_status = mo.callout(
+            mo.md(
+                f"**The MapLibre demo is not answering at `{app_url_problem}`.** "
+                "Start it with `npm run dev -w demo/maplibre` (or set `GEOUI_APP_URL`) and re-run."
+            ),
+            kind="danger",
+        )
+        missing_keys = ["GEOUI_APP_URL"]  # no agent until the page exists
     elif not cdp_endpoint:
         env_status = mo.callout(
             mo.md(
@@ -224,8 +310,8 @@ def _env(mo):
 
 
 @app.cell
-def _warm_button(mo):
-    """Manual MCP warm-up trigger.
+def _warm_button(VARIANT, mo):
+    """Manual MCP warm-up trigger (plugin variants only; the MapLibre demo has no remote MCPs).
 
     The first call to a remote MCP after it has gone cold (FastMCP
     DNS-level suspension, Lambda cold-start) can take several
@@ -234,7 +320,7 @@ def _warm_button(mo):
     you care about timing.
     """
     warm_btn = mo.ui.run_button(label="Warm MCPs")
-    warm_btn
+    warm_btn if VARIANT["uses_plugin"] else mo.md("")
     return (warm_btn,)
 
 
@@ -279,8 +365,9 @@ def _agent(VARIANT, cdp_endpoint, missing_keys):
     """
     from pydantic_ai.capabilities import Hooks
 
-    from worldview.agents import TextOutput
     from worldview.agents.benchmark import new_session_id
+
+    TextOutput = VARIANT["text_output"]
 
     # Session dict has to exist before the trace hook so the hook's
     # closure can append to ``current_turn_tools``.
@@ -687,7 +774,7 @@ def _chat(AGENT, TextOutput, VARIANT, agent, mo, session):
                     # ``str(output)`` would give the Pydantic repr with escaped \n.
                     lines = [output.result.strip()]
                     url = getattr(output, "url", "") or ""
-                    if url.strip():
+                    if url.strip():  # the MapLibre agent reports no URL: the view is already on screen
                         lines.append(f"\n**Worldview URL:** [{url}]({url})")
                     body = "\n".join(lines)
 

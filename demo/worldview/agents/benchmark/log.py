@@ -18,7 +18,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel, Field
 
-AgentKind = Literal["geoui", "vlm"]
+AgentKind = Literal["geoui", "vlm", "maplibre"]
 OutputKind = Literal["structured", "text", "error"]
 
 

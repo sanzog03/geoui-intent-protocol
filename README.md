@@ -40,7 +40,7 @@ it.
 | `demo/worldview/agents/artifact/worldview/geoui/akd-plugins/` | git submodule of [NASA-IMPACT/akd-plugins](https://github.com/NASA-IMPACT/akd-plugins); the `worldview-assistant` plugin is the GeoUI agent's skill and MCP server list | — |
 | `demo/worldview/agents/artifact/worldview/vlm/mio-worldviewagent-v2/` | Vendored non-GeoUI skill (`SKILL.md` + `references/`) the baseline agent runs | — |
 | `demo/worldview/tests/` | Tests for the adapter, tools, MCP contract, plugin loader and agents | — |
-| `demo/chat.py`, `demo/start.sh`, `demo/chromium.sh` | One marimo chat notebook for both agents (`AGENT=geoui\|vlm`), the launcher, and the Chromium-over-CDP helper it shares with the benchmarks | marimo |
+| `demo/chat.py`, `demo/start.sh`, `demo/chromium.sh` | One marimo chat notebook for all three agents (`AGENT=geoui\|vlm\|maplibre`), the launcher, and the Chromium-over-CDP helper it shares with the benchmarks | marimo |
 | `sdk/geoui-react/` | **`@geoui/react`**, the adapter SDK for React apps: `GeoUIProvider`, attach hooks (`useGeoUIViewport` / `Time` / `Layers` / `Extension` / `LayerExtension`), a registry that composes and applies a `GeoIntent`, and `window.geoui` (`describe` / `getState` / `render`). Types and extension specs are generated from `schemas/` | react (peer) |
 | `demo/maplibre/` | A React + MapLibre + NASA GIBS map app with the SDK attached: nothing in the URL; an agent drives it through `window.geoui`. `npm run dev -w demo/maplibre` | @geoui/react, react-map-gl |
 | `bridge/` | **`geoui-bridge`** (import `geoui_bridge`): the GeoUI MCP over CDP for any `window.geoui` page. `cdp.py` (Playwright `connect_over_cdp` session), `catalogue.py` (the page's catalogue checked against the library, consumer-side pre-declaration), `tools/` (the three tools; `pai.py` as a pydantic-ai toolset), `mcp/server.py` (`geoui-bridge-mcp`), `agents/maplibre_agent.py` | geoui, playwright, fastmcp, pydantic-ai |
@@ -84,6 +84,7 @@ npm run dev -w demo/maplibre                        # the app at http://127.0.0.
 source demo/chromium.sh && ensure_chromium          # Chromium with CDP on :9222
 GEOUI_APP_URL=http://127.0.0.1:5173 uv run geoui-bridge-mcp   # the GeoUI MCP (stdio), e.g. from Claude Code
 uv run python -m geoui_bridge.agents.maplibre_agent "Show MODIS Aqua AOD over California on 2025-09-15"
+AGENT=maplibre ./demo/start.sh                      # the marimo chat notebook on the MapLibre agent
 uv run python -m geouibench run benchmarks/maplibre gold --smoke --run-id smoke
 ```
 
