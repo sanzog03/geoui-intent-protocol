@@ -22,7 +22,7 @@ from deepeval.models.base_model import DeepEvalBaseLLM
 from deepeval.simulator import ConversationSimulator
 from deepeval.test_case import ConversationalTestCase
 
-from geouibench.apps import AppDir
+from geouibench.appdir import AppDir
 from geouibench.datasets import GoldenMeta, dataset_hash
 from geouibench.deepeval_results import entries_from_current_test_run, metric_entry
 from geouibench.harness import ConversationRecord, ConversationRunner, conversation_record

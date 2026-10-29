@@ -30,7 +30,7 @@ from typing import Any
 from dotenv import load_dotenv
 
 from geouibench.app import prepare_app
-from geouibench.apps import AppDir, load_app_dir
+from geouibench.appdir import AppDir, load_app_dir
 from geouibench.metrics import JUDGE_MODEL_NAME
 from geouibench.run_dir import DEEPEVAL_DIR
 from geouibench.runner import ensure_run_info

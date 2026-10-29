@@ -8,10 +8,10 @@ from pathlib import Path
 import pytest
 
 from geouibench import cli
-from geouibench.apps import load_app_dir
+from geouibench.appdir import load_app_dir
 from geouibench.run_dir import read_run_info
 from geouibench.synthetic import SyntheticStyle, contexts_from_goldens, generate, generate_command, prepare
-from geouibench.tests.test_apps import make_app_dir
+from geouibench.tests.test_appdir import make_app_dir
 
 STYLE = SyntheticStyle(
     scenario_context="users of a map",

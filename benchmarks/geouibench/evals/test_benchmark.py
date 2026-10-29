@@ -30,7 +30,7 @@ import pytest
 from deepeval.dataset import ConversationalGolden
 from dotenv import load_dotenv
 
-from geouibench.apps import load_app_dir
+from geouibench.appdir import load_app_dir
 from geouibench.datasets import goldens_for
 from geouibench.harness import ConversationRunner
 from geouibench.metrics import JUDGE_MODEL_NAME, judge_model

@@ -11,7 +11,7 @@ does the rest.
 """
 
 from geouibench.app import BenchmarkApp
-from geouibench.apps import AppDir, load_app_dir
+from geouibench.appdir import AppDir, load_app_dir
 from geouibench.datasets import Budgets
 from geouibench.synthetic import SyntheticStyle
 

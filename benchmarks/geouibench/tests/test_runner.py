@@ -11,13 +11,13 @@ from deepeval.test_case import ConversationalTestCase, Turn
 from pydantic_ai import Agent
 from pydantic_ai.models.test import TestModel
 
-from geouibench.apps import load_app_dir
+from geouibench.appdir import load_app_dir
 from geouibench.harness import ConversationRunner
 from geouibench.metrics import deterministic_only, gold_metrics
 from geouibench.run_dir import load_conversations, load_turns, read_run_info
 from geouibench.runner import ensure_run_info, run_golden
 from geouibench.tests._fake_app import FakeApp, FakeOutput, fake_url
-from geouibench.tests.test_apps import make_app_dir
+from geouibench.tests.test_appdir import make_app_dir
 
 GOLDEN = ConversationalGolden(
     name="g1",

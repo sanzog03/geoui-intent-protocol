@@ -1,7 +1,7 @@
 """The one seam between the utility and an application under test.
 
 An application is benchmarked from an *app directory* (see
-:mod:`geouibench.apps`) whose ``app.py`` exposes one object satisfying
+:mod:`geouibench.appdir`) whose ``app.py`` exposes one object satisfying
 :class:`BenchmarkApp`. Nothing else in the utility knows the application.
 """
 

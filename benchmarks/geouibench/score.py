@@ -20,7 +20,7 @@ from deepeval.evaluate.configs import AsyncConfig, DisplayConfig, ErrorConfig
 from deepeval.test_case import ConversationalTestCase, ToolCall, Turn
 
 from geouibench.app import BenchmarkApp
-from geouibench.apps import APP_FILE, load_app_dir
+from geouibench.appdir import APP_FILE, load_app_dir
 from geouibench.datasets import GoldenMeta
 from geouibench.deepeval_results import metric_entry, metric_entry_from_data
 from geouibench.harness import ConversationRecord

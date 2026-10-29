@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-from geouibench.apps import AppDir, AppDirError, load_app_dir
+from geouibench.appdir import AppDir, AppDirError, load_app_dir
 
 FAKE_APP_SRC = """
 from geouibench.tests._fake_app import FakeApp
