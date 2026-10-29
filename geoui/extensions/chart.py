@@ -5,7 +5,7 @@ Adds time-series statistical charting over an area-of-interest.
 Declared by URI: ``https://geoui.org/ext/chart/v1.0.0``
 Namespace prefix: ``chart:``
 
-Required fields when declared:
+Required fields when used:
   - ``chart:layer`` — id of the layer to chart.
 
 Optional fields:
@@ -21,6 +21,7 @@ from typing import Self
 from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from geoui.core import GeoIntent, TimeWindow
+from geoui.extensions.spec import ExtensionSpec
 
 URI = "https://geoui.org/ext/chart/v1.0.0"
 PREFIX = "chart"
@@ -29,10 +30,14 @@ PREFIX = "chart"
 class ChartFields(BaseModel):
     """Typed view of the ``chart:*`` fields on a GeoIntent."""
 
-    layer: str
-    area: list[float] | None = Field(default=None, min_length=4, max_length=4)
-    time: TimeWindow | None = None
-    autoload: bool = False
+    layer: str = Field(description="Id of the layer to chart.")
+    area: list[float] | None = Field(
+        default=None, min_length=4, max_length=4, description="Area of interest [x1, y1, x2, y2] in the viewport CRS."
+    )
+    time: TimeWindow | None = Field(
+        default=None, description="Chart time axis as a range {start, end}; never an instant."
+    )
+    autoload: bool = Field(default=False, description="Render the chart immediately on open.")
 
     model_config = ConfigDict(populate_by_name=True)
 
@@ -44,13 +49,14 @@ class ChartFields(BaseModel):
 
 
 def extract(intent: GeoIntent) -> ChartFields | None:
+    """Pull ``chart:*`` fields off an intent; None when none are present (declared or not)."""
     declared = URI in intent.geoui_extensions
     raw = intent.extension_fields(PREFIX)
 
-    if not declared:
-        if raw:
-            raise ValueError(f"GeoIntent has `{PREFIX}:*` fields but does not declare {URI} in geoui_extensions")
+    if not raw:
         return None
+    if not declared:
+        raise ValueError(f"GeoIntent has `{PREFIX}:*` fields but does not declare {URI} in geoui_extensions")
 
     stripped = {k.removeprefix(f"{PREFIX}:"): v for k, v in raw.items()}
     return ChartFields(**stripped)
@@ -72,3 +78,12 @@ def inject(intent: GeoIntent, fields: ChartFields) -> GeoIntent:
 
 def validate(intent: GeoIntent) -> None:
     extract(intent)
+
+
+SPEC = ExtensionSpec(
+    uri=URI,
+    prefix=PREFIX,
+    scope="intent",
+    fields=ChartFields,
+    summary="Open a time-series chart of one layer over an area of interest and a date range.",
+)

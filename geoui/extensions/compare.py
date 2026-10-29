@@ -5,7 +5,7 @@ Adds A/B comparison (side-by-side or overlay) to a GeoIntent.
 Declared by URI: ``https://geoui.org/ext/compare/v1.0.0``
 Namespace prefix: ``compare:``
 
-Required fields when declared:
+Required fields when used:
   - ``compare:layers`` — B-side layer stack.
 
 Optional fields:
@@ -22,6 +22,7 @@ from typing import Literal
 from pydantic import BaseModel, ConfigDict, Field
 
 from geoui.core import GeoIntent, LayerRef, TimeWindow
+from geoui.extensions.spec import ExtensionSpec
 
 URI = "https://geoui.org/ext/compare/v1.0.0"
 PREFIX = "compare"
@@ -33,11 +34,13 @@ CompareMode = Literal["swipe", "spy", "opacity"]
 class CompareFields(BaseModel):
     """Typed view of the ``compare:*`` fields on a GeoIntent."""
 
-    layers: list[LayerRef] = Field(..., min_length=1)
-    active_side: ActiveSide = "A"
-    time: TimeWindow | None = None
-    mode: CompareMode = "swipe"
-    value: int = Field(default=50, ge=0, le=100)
+    layers: list[LayerRef] = Field(
+        ..., min_length=1, description="The B-side layer stack (the A side is the root layers)."
+    )
+    active_side: ActiveSide = Field(default="A", description="Which side is active / in front.")
+    time: TimeWindow | None = Field(default=None, description="Time for the B side; defaults to the root time.")
+    mode: CompareMode = Field(default="swipe", description="swipe (split), spy (lens) or opacity (blend).")
+    value: int = Field(default=50, ge=0, le=100, description="Swiper position or opacity, 0–100.")
 
     model_config = ConfigDict(populate_by_name=True)
 
@@ -45,18 +48,18 @@ class CompareFields(BaseModel):
 def extract(intent: GeoIntent) -> CompareFields | None:
     """Pull ``compare:*`` fields off an intent.
 
-    Returns None if the extension is not declared and no ``compare:*``
-    fields are present. Raises ValueError if the document is malformed
-    (extension declared without required fields, or fields present
-    without declaration).
+    Returns None when no ``compare:*`` fields are present, whether or not
+    the extension is declared (declaring it only says the document may use
+    it). Raises ValueError if the document is malformed: fields present
+    without the declaration, or present but incomplete.
     """
     declared = URI in intent.geoui_extensions
     raw = intent.extension_fields(PREFIX)
 
-    if not declared:
-        if raw:
-            raise ValueError(f"GeoIntent has `{PREFIX}:*` fields but does not declare {URI} in geoui_extensions")
+    if not raw:
         return None
+    if not declared:
+        raise ValueError(f"GeoIntent has `{PREFIX}:*` fields but does not declare {URI} in geoui_extensions")
 
     stripped = {k.removeprefix(f"{PREFIX}:"): v for k, v in raw.items()}
     return CompareFields(**stripped)
@@ -81,9 +84,14 @@ def inject(intent: GeoIntent, fields: CompareFields) -> GeoIntent:
 
 
 def validate(intent: GeoIntent) -> None:
-    """Run compare-extension validation.
-
-    No-op if the extension is not declared. Raises ValueError if
-    declared and the document is malformed.
-    """
+    """Run compare-extension validation: raises ValueError if the document is malformed."""
     extract(intent)
+
+
+SPEC = ExtensionSpec(
+    uri=URI,
+    prefix=PREFIX,
+    scope="intent",
+    fields=CompareFields,
+    summary="Compare two layer stacks or two dates side by side (swipe, spy or opacity blend).",
+)

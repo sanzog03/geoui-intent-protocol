@@ -17,9 +17,10 @@ Optional fields per layer:
 
 from __future__ import annotations
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel, ConfigDict, Field
 
 from geoui.core import GeoIntent, LayerRef
+from geoui.extensions.spec import ExtensionSpec
 
 URI = "https://geoui.org/ext/raster-styling/v1.0.0"
 PREFIX = "raster-styling"
@@ -28,11 +29,11 @@ PREFIX = "raster-styling"
 class RasterStylingFields(BaseModel):
     """Typed view of the ``raster-styling:*`` fields on a LayerRef."""
 
-    palettes: list[str] | None = None
-    style: str | None = None
-    min: float | None = None
-    max: float | None = None
-    squash: bool = False
+    palettes: list[str] | None = Field(default=None, description="Palette ids to apply, in order.")
+    style: str | None = Field(default=None, description="Vector / raster style id.")
+    min: float | None = Field(default=None, description="Lower bound of the palette / data range.")
+    max: float | None = Field(default=None, description="Upper bound of the palette / data range.")
+    squash: bool = Field(default=False, description="Squash the palette to the min/max range.")
 
     model_config = ConfigDict(populate_by_name=True)
 
@@ -88,3 +89,12 @@ def validate(intent: GeoIntent) -> None:
                 )
             # Typed construction enforces field-type validity.
             extract(layer)
+
+
+SPEC = ExtensionSpec(
+    uri=URI,
+    prefix=PREFIX,
+    scope="layer",
+    fields=RasterStylingFields,
+    summary="Restyle a raster layer: palette, style, value range and squash. Fields live on each LayerRef.",
+)

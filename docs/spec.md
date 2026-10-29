@@ -76,9 +76,18 @@ A document declares the extensions it uses by listing their URIs in
   `time` to be a range).
 
 Validators combine the core schema with all declared extension schemas
-(`allOf`) and validate against the result. Documents that declare an
-extension MUST satisfy its constraints; documents that omit an extension
-MUST NOT use its fields.
+(`allOf`) and validate against the result. Declaring an extension says the
+document MAY use it: a document that uses an extension's fields MUST satisfy
+its constraints, a document that declares an extension and uses none of its
+fields is valid, and a document that omits an extension MUST NOT use its
+fields.
+
+A consumer (an application or the tool layer in front of it) SHOULD publish
+the extensions it supports and MAY pre-declare their URIs on the documents it
+receives, so that producers only fill the fields of the extensions they use;
+it MUST reject fields of extensions it does not support. The Worldview
+reference tools do this: `geo_ui_list_intent_extensions_tool` publishes the
+list, `geo_ui_render_intent_tool` pre-declares it.
 
 Example URIs (not yet hosted; placeholders for this spec):
 
