@@ -1,0 +1,109 @@
+{
+  "trace_id": "06c68bd4-726f-4608-b837-35b1091c0351",
+  "thread_id": "88abac9c-5d12-4358-83b3-df06b4ff6a1a",
+  "source": "simulated",
+  "started_at": "2026-10-29T04:39:10.567160+00:00",
+  "duration_s": 8.082179916091263,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 4758,
+      "output_tokens": 140,
+      "duration_s": 2.6977250000927597,
+      "offset_s": 0.004824500065296888,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 5022,
+      "output_tokens": 201,
+      "duration_s": 2.7290179999545217,
+      "offset_s": 3.047407500213012,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 5480,
+      "output_tokens": 104,
+      "duration_s": 1.9269060001242906,
+      "offset_s": 6.148413500050083,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "geo_ui_get_state_tool",
+      "args": {},
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-127.737,32.0,-110.263,42.6],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2025-09-15\",\"start\":null,\"end\":null},\"layers\":[{\"id\":\"MODIS_Aqua_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1.0},{\"id\":\"Coastlines_15m\",\"visible\":true,\"opacity\":1.0}],\"compare:mode\":\"swipe\",\"compare:value\":50,\"compare:active_side\":\"A\",\"compare:time\":{\"instant\":\"2025-09-14\"},\"compare:layers\":[{\"id\":\"MODIS_Aqua_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1},{\"id\":\"Coastlines_15m\",\"visible\":true,\"opacity\":1}]}}",
+      "duration_s": 0.33977799979038537,
+      "offset_s": 2.7048785001970828,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "viewport": {
+            "bbox": [
+              -127.737,
+              32.0,
+              -110.263,
+              42.6
+            ],
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2025-09-15"
+          },
+          "layers": [
+            {
+              "id": "MODIS_Terra_Aerosol_Optical_Depth_3km",
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "id": "Coastlines_15m",
+              "visible": true,
+              "opacity": 1.0
+            }
+          ],
+          "compare:mode": "swipe",
+          "compare:value": 50,
+          "compare:active_side": "A",
+          "compare:time": {
+            "instant": "2025-09-14"
+          },
+          "compare:layers": [
+            {
+              "id": "MODIS_Terra_Aerosol_Optical_Depth_3km",
+              "visible": true,
+              "opacity": 1.0
+            },
+            {
+              "id": "Coastlines_15m",
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        }
+      },
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-127.737,32.0,-110.263,42.6],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2025-09-15\",\"start\":null,\"end\":null},\"layers\":[{\"id\":\"MODIS_Terra_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1.0},{\"id\":\"Coastlines_15m\",\"visible\":true,\"opacity\":1.0}],\"compare:mode\":\"swipe\",\"compare:value\":50,\"compare:active_side\":\"A\",\"compare:time\":{\"instant\":\"2025-09-14\"},\"compare:layers\":[{\"id\":\"MODIS_Terra_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1},{\"id\":\"Coastlines_15m\",\"visible\":true,\"opacity\":1}]},\"settled\":true}",
+      "duration_s": 0.3662400001194328,
+      "offset_s": 5.779433500021696,
+      "error": null
+    }
+  ],
+  "other_spans": [],
+  "error": null,
+  "usage": {
+    "input_tokens": 15260,
+    "output_tokens": 445,
+    "total_tokens": 15705,
+    "requests": 3,
+    "cache_read_tokens": 11392,
+    "reasoning_tokens": 118,
+    "tool_calls": 2,
+    "cost_usd": 0.0149926
+  },
+  "usage_source": "pydantic_ai"
+}

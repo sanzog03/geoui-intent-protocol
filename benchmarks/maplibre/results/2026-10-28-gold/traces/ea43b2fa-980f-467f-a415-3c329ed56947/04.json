@@ -1,0 +1,99 @@
+{
+  "trace_id": "ec46745a-65f0-461e-b964-49a48cccadcb",
+  "thread_id": "ea43b2fa-980f-467f-a415-3c329ed56947",
+  "source": "simulated",
+  "started_at": "2026-10-29T04:40:04.820396+00:00",
+  "duration_s": 9.589963000034913,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 5000,
+      "output_tokens": 145,
+      "duration_s": 2.911428000079468,
+      "offset_s": 0.008010499877855182,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 5230,
+      "output_tokens": 254,
+      "duration_s": 3.388944999780506,
+      "offset_s": 3.24807250010781,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 5611,
+      "output_tokens": 140,
+      "duration_s": 2.5681880000047386,
+      "offset_s": 7.015529500087723,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "geo_ui_get_state_tool",
+      "args": {},
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-70.0,-23.0624,20.0,41.0806],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2023-06-18\",\"start\":null,\"end\":null},\"layers\":[{\"id\":\"MODIS_Aqua_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1.0}],\"compare:layers\":[{\"id\":\"MODIS_Aqua_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1}],\"compare:time\":{\"instant\":\"2023-06-11\"},\"compare:mode\":\"swipe\",\"compare:active_side\":\"A\",\"compare:value\":50}}",
+      "duration_s": 0.32326400000602007,
+      "offset_s": 2.9226035000756383,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "viewport": {
+            "bbox": [
+              -70,
+              -23.0624,
+              20,
+              41.0806
+            ],
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2023-06-18"
+          },
+          "layers": [
+            {
+              "id": "MODIS_Aqua_Aerosol_Optical_Depth_3km",
+              "visible": true,
+              "opacity": 0.6
+            }
+          ],
+          "compare:layers": [
+            {
+              "id": "MODIS_Aqua_Aerosol_Optical_Depth_3km",
+              "visible": true,
+              "opacity": 0.6
+            }
+          ],
+          "compare:time": {
+            "instant": "2023-06-11"
+          },
+          "compare:mode": "swipe",
+          "compare:active_side": "A",
+          "compare:value": 50
+        }
+      },
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-70.0,-23.0624,20.0,41.0806],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2023-06-18\",\"start\":null,\"end\":null},\"layers\":[{\"id\":\"MODIS_Aqua_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":0.6}],\"compare:layers\":[{\"id\":\"MODIS_Aqua_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":0.6}],\"compare:time\":{\"instant\":\"2023-06-11\"},\"compare:mode\":\"swipe\",\"compare:active_side\":\"A\",\"compare:value\":50},\"settled\":true}",
+      "duration_s": 0.3716969999950379,
+      "offset_s": 6.6411514999344945,
+      "error": null
+    }
+  ],
+  "other_spans": [],
+  "error": null,
+  "usage": {
+    "input_tokens": 15841,
+    "output_tokens": 539,
+    "total_tokens": 16380,
+    "requests": 3,
+    "cache_read_tokens": 13440,
+    "reasoning_tokens": 243,
+    "tool_calls": 2,
+    "cost_usd": 0.01409975
+  },
+  "usage_source": "pydantic_ai"
+}

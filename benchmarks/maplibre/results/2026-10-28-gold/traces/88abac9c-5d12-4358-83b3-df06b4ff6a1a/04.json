@@ -1,0 +1,115 @@
+{
+  "trace_id": "333504c4-f1f9-4f11-997a-7c5a2256a638",
+  "thread_id": "88abac9c-5d12-4358-83b3-df06b4ff6a1a",
+  "source": "simulated",
+  "started_at": "2026-10-29T04:39:21.054479+00:00",
+  "duration_s": 8.822825792012736,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 5682,
+      "output_tokens": 83,
+      "duration_s": 1.833189999917522,
+      "offset_s": 0.003175084013491869,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 5948,
+      "output_tokens": 297,
+      "duration_s": 4.115797000005841,
+      "offset_s": 2.1816130839288235,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 6514,
+      "output_tokens": 100,
+      "duration_s": 2.1638149998616427,
+      "offset_s": 6.654320084024221,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "geo_ui_get_state_tool",
+      "args": {},
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-127.737,32.0,-110.263,42.6],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2025-09-15\",\"start\":null,\"end\":null},\"layers\":[{\"id\":\"MODIS_Terra_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1.0},{\"id\":\"Coastlines_15m\",\"visible\":true,\"opacity\":1.0}],\"compare:mode\":\"swipe\",\"compare:value\":50,\"compare:active_side\":\"A\",\"compare:time\":{\"instant\":\"2025-09-14\"},\"compare:layers\":[{\"id\":\"MODIS_Terra_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1},{\"id\":\"Coastlines_15m\",\"visible\":true,\"opacity\":1}]}}",
+      "duration_s": 0.3386500000488013,
+      "offset_s": 1.8406100838910788,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "viewport": {
+            "bbox": [
+              -127.737,
+              32.0,
+              -110.263,
+              42.6
+            ],
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2025-09-15"
+          },
+          "layers": [
+            {
+              "id": "MODIS_Terra_Aerosol_Optical_Depth_3km",
+              "visible": true,
+              "opacity": 1,
+              "raster-styling:min": 0,
+              "raster-styling:max": 2,
+              "raster-styling:squash": true
+            },
+            {
+              "id": "Coastlines_15m",
+              "visible": true,
+              "opacity": 1
+            }
+          ],
+          "compare:mode": "swipe",
+          "compare:value": 50,
+          "compare:active_side": "A",
+          "compare:time": {
+            "instant": "2025-09-14"
+          },
+          "compare:layers": [
+            {
+              "id": "MODIS_Terra_Aerosol_Optical_Depth_3km",
+              "visible": true,
+              "opacity": 1,
+              "raster-styling:min": 0,
+              "raster-styling:max": 2,
+              "raster-styling:squash": true
+            },
+            {
+              "id": "Coastlines_15m",
+              "visible": true,
+              "opacity": 1
+            }
+          ]
+        }
+      },
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-127.737,32.0,-110.263,42.6],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2025-09-15\",\"start\":null,\"end\":null},\"layers\":[{\"id\":\"MODIS_Terra_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1.0,\"raster-styling:min\":0,\"raster-styling:max\":2,\"raster-styling:squash\":true},{\"id\":\"Coastlines_15m\",\"visible\":true,\"opacity\":1.0}],\"compare:mode\":\"swipe\",\"compare:value\":50,\"compare:active_side\":\"A\",\"compare:time\":{\"instant\":\"2025-09-14\"},\"compare:layers\":[{\"id\":\"MODIS_Terra_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1,\"raster-styling:min\":0,\"raster-styling:max\":2,\"raster-styling:squash\":true},{\"id\":\"Coastlines_15m\",\"visible\":true,\"opacity\":1}]},\"settled\":true}",
+      "duration_s": 0.3514560000039637,
+      "offset_s": 6.300798083888367,
+      "error": null
+    }
+  ],
+  "other_spans": [],
+  "error": null,
+  "usage": {
+    "input_tokens": 18144,
+    "output_tokens": 480,
+    "total_tokens": 18624,
+    "requests": 3,
+    "cache_read_tokens": 15488,
+    "reasoning_tokens": 101,
+    "tool_calls": 2,
+    "cost_usd": 0.0140784
+  },
+  "usage_source": "pydantic_ai"
+}

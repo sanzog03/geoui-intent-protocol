@@ -1,0 +1,86 @@
+{
+  "trace_id": "7b48c940-711e-45aa-b062-81537fb7baac",
+  "thread_id": "23700e8a-cda5-41e5-86f0-4c0171861a45",
+  "source": "simulated",
+  "started_at": "2026-10-29T04:37:10.562962+00:00",
+  "duration_s": 9.072009166935459,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 1721,
+      "output_tokens": 96,
+      "duration_s": 2.3369850001763552,
+      "offset_s": 0.005683916853740811,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 3324,
+      "output_tokens": 199,
+      "duration_s": 2.8992039998993278,
+      "offset_s": 3.0182789170648903,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 3568,
+      "output_tokens": 137,
+      "duration_s": 2.7918289999943227,
+      "offset_s": 6.27644691686146,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "geo_ui_list_intent_extensions_tool",
+      "args": {},
+      "output": "{\"extensions\":[{\"name\":\"compare\",\"uri\":\"https://geoui.org/ext/compare/v1.0.0\",\"scope\":\"intent\",\"summary\":\"Compare two layer stacks or two dates side by side (swipe, spy or opacity blend).\",\"keys\":[\"compare:layers\",\"compare:active_side\",\"compare:time\",\"compare:mode\",\"compare:value\"],\"required\":[\"compare:layers\"],\"fields_schema\":{\"$defs\":{\"LayerRef\":{\"additionalProperties\":true,\"description\":\"A reference to a renderable layer.\\n\\n`id` is application-defined — the conforming app must be able to\\nresolve it to a layer in its own catalogue. Per-layer rendering hints\\nbeyond the universal set (`visible`, `opacity`) belong in extensions\\nand are expressed as namespaced extra keys\\n(e.g. `\\\"raster-styling:palettes\\\": [...]`).\",\"properties\":{\"id\":{\"title\":\"Id\",\"type\":\"string\"},\"opacity\":{\"anyOf\":[{\"maximum\":1,\"minimum\":0,\"type\":\"number\"},{\"type\":\"null\"}],\"default\":null,\"title\":\"Opacity\"},\"visible\":{\"default\":true,\"title\":\"Visible\",\"type\":\"boolean\"}},\"required\":[\"id\"],\"title\":\"LayerRef\",\"type\":\"object\"},\"TimeWindow\":{\"description\":\"Time selection.\\n\\nEither a single `instant` OR a closed range `{start, end}` — the two\\nare mutually exclusive. All fields `None` is allowed and means\\n\\\"app default time.\\\"\",\"properties\":{\"end\":{\"anyOf\":[{\"type\":\"string\"},{\"format\":\"date\",\"type\":\"string\"},{\"format\":\"date-time\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null,\"title\":\"End\"},\"instant\":{\"anyOf\":[{\"type\":\"string\"},{\"format\":\"date\",\"type\":\"string\"},{\"format\":\"date-time\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null,\"title\":\"Instant\"},\"start\":{\"anyOf\":[{\"type\":\"string\"},{\"format\":\"date\",\"type\":\"string\"},{\"format\":\"date-time\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null,\"title\":\"Start\"}},\"title\":\"TimeWindow\",\"type\":\"object\"}},\"description\":\"Typed view of the ``compare:*`` fields on a GeoIntent.\",\"properties\":{\"active_side\":{\"default\":\"A\",\"description\":\"Which side is active / in front.\",\"enum\":[\"A\",\"B\"],\"title\":\"Active Side\",\"type\":\"string\"},\"layers\":{\"description\":\"The B-side lay…",
+      "duration_s": 0.6707470000255853,
+      "offset_s": 2.34536191704683,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "viewport": {
+            "bbox": [
+              -125,
+              24,
+              -66.5,
+              49.5
+            ],
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2025-09-15"
+          },
+          "layers": [
+            {
+              "id": "MODIS_Aqua_Aerosol_Optical_Depth_3km",
+              "visible": true,
+              "opacity": 1
+            }
+          ]
+        }
+      },
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-125.0,18.2432,-66.5,53.3473],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2025-09-15\",\"start\":null,\"end\":null},\"layers\":[{\"id\":\"MODIS_Aqua_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1.0}]},\"settled\":true}",
+      "duration_s": 0.3525000000372529,
+      "offset_s": 5.921680917032063,
+      "error": null
+    }
+  ],
+  "other_spans": [],
+  "error": null,
+  "usage": {
+    "input_tokens": 8613,
+    "output_tokens": 432,
+    "total_tokens": 9045,
+    "requests": 3,
+    "cache_read_tokens": 2432,
+    "reasoning_tokens": 207,
+    "tool_calls": 2,
+    "cost_usd": 0.01729035
+  },
+  "usage_source": "pydantic_ai"
+}

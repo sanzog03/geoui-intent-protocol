@@ -1,0 +1,26 @@
+{
+  "run_name": "2026-10-28-gold",
+  "app": "benchmarks/maplibre",
+  "reference_agent": "geoui",
+  "agent_kinds": [
+    "geoui"
+  ],
+  "datasets": {
+    "gold": "6b02f07597337c75d22c17990a4f4ac320d225aa6c7d1e85af28f505ba50424f"
+  },
+  "judge_model": "gpt-5.2",
+  "agent_model": null,
+  "created_at": "2026-10-29T04:37:08.877497+00:00",
+  "git_sha": "b5a50015f403a7fe9cacf989a871bba876ad4987",
+  "versions": {
+    "geouibench": "0.1.0",
+    "deepeval": "4.3.2",
+    "pydantic-ai": "2.63.0",
+    "geoui-protocol": "0.1.0"
+  },
+  "platform": "macOS-26.3-arm64-arm-64bit",
+  "extra": {
+    "smoke": false,
+    "cdp_endpoint": "http://localhost:9222"
+  }
+}

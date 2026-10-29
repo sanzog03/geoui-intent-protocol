@@ -1,0 +1,112 @@
+{
+  "trace_id": "8c70cb89-ff42-4c22-bb98-fa629ad4e812",
+  "thread_id": "50719442-134c-4142-95cc-2a94038519c4",
+  "source": "simulated",
+  "started_at": "2026-10-29T04:38:06.361748+00:00",
+  "duration_s": 12.828243375057355,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 1763,
+      "output_tokens": 115,
+      "duration_s": 2.8663669999223202,
+      "offset_s": 0.004905125126242638,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 3366,
+      "output_tokens": 178,
+      "duration_s": 2.863603999838233,
+      "offset_s": 3.390741125214845,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 3544,
+      "output_tokens": 330,
+      "duration_s": 4.171093000099063,
+      "offset_s": 6.601334125036374,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 3888,
+      "output_tokens": 89,
+      "duration_s": 1.6867329999804497,
+      "offset_s": 11.138134125154465,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "geo_ui_list_intent_extensions_tool",
+      "args": {},
+      "output": "{\"extensions\":[{\"name\":\"compare\",\"uri\":\"https://geoui.org/ext/compare/v1.0.0\",\"scope\":\"intent\",\"summary\":\"Compare two layer stacks or two dates side by side (swipe, spy or opacity blend).\",\"keys\":[\"compare:layers\",\"compare:active_side\",\"compare:time\",\"compare:mode\",\"compare:value\"],\"required\":[\"compare:layers\"],\"fields_schema\":{\"$defs\":{\"LayerRef\":{\"additionalProperties\":true,\"description\":\"A reference to a renderable layer.\\n\\n`id` is application-defined — the conforming app must be able to\\nresolve it to a layer in its own catalogue. Per-layer rendering hints\\nbeyond the universal set (`visible`, `opacity`) belong in extensions\\nand are expressed as namespaced extra keys\\n(e.g. `\\\"raster-styling:palettes\\\": [...]`).\",\"properties\":{\"id\":{\"title\":\"Id\",\"type\":\"string\"},\"opacity\":{\"anyOf\":[{\"maximum\":1,\"minimum\":0,\"type\":\"number\"},{\"type\":\"null\"}],\"default\":null,\"title\":\"Opacity\"},\"visible\":{\"default\":true,\"title\":\"Visible\",\"type\":\"boolean\"}},\"required\":[\"id\"],\"title\":\"LayerRef\",\"type\":\"object\"},\"TimeWindow\":{\"description\":\"Time selection.\\n\\nEither a single `instant` OR a closed range `{start, end}` — the two\\nare mutually exclusive. All fields `None` is allowed and means\\n\\\"app default time.\\\"\",\"properties\":{\"end\":{\"anyOf\":[{\"type\":\"string\"},{\"format\":\"date\",\"type\":\"string\"},{\"format\":\"date-time\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null,\"title\":\"End\"},\"instant\":{\"anyOf\":[{\"type\":\"string\"},{\"format\":\"date\",\"type\":\"string\"},{\"format\":\"date-time\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null,\"title\":\"Instant\"},\"start\":{\"anyOf\":[{\"type\":\"string\"},{\"format\":\"date\",\"type\":\"string\"},{\"format\":\"date-time\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null,\"title\":\"Start\"}},\"title\":\"TimeWindow\",\"type\":\"object\"}},\"description\":\"Typed view of the ``compare:*`` fields on a GeoIntent.\",\"properties\":{\"active_side\":{\"default\":\"A\",\"description\":\"Which side is active / in front.\",\"enum\":[\"A\",\"B\"],\"title\":\"Active Side\",\"type\":\"string\"},\"layers\":{\"description\":\"The B-side lay…",
+      "duration_s": 0.5140859999228269,
+      "offset_s": 2.8744871250819415,
+      "error": null
+    },
+    {
+      "name": "geo_ui_get_state_tool",
+      "args": {},
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-125.0,18.4289,-66.0,53.6911],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2025-09-15\",\"start\":null,\"end\":null},\"layers\":[{\"id\":\"MODIS_Terra_CorrectedReflectance_TrueColor\",\"visible\":true,\"opacity\":null},{\"id\":\"Coastlines_15m\",\"visible\":true,\"opacity\":null}]}}",
+      "duration_s": 0.3435370000079274,
+      "offset_s": 6.255547125125304,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "viewport": {
+            "bbox": [
+              -180,
+              -90,
+              180,
+              90
+            ],
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2025-08-01"
+          },
+          "layers": [
+            {
+              "id": "AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean",
+              "visible": true,
+              "opacity": 1
+            }
+          ],
+          "compare:layers": [
+            {
+              "id": "AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean",
+              "visible": true,
+              "opacity": 1
+            }
+          ],
+          "compare:mode": "swipe",
+          "compare:value": 50,
+          "compare:active_side": "A"
+        }
+      },
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-180.0,-90.0,180.0,90.0],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2025-08-01\",\"start\":null,\"end\":null},\"layers\":[{\"id\":\"AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean\",\"visible\":true,\"opacity\":1.0}],\"compare:layers\":[{\"id\":\"AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean\",\"visible\":true,\"opacity\":1}],\"compare:mode\":\"swipe\",\"compare:value\":50,\"compare:active_side\":\"A\"},\"settled\":true}",
+      "duration_s": 0.3608019999228418,
+      "offset_s": 10.775208125123754,
+      "error": null
+    }
+  ],
+  "other_spans": [],
+  "error": null,
+  "usage": {
+    "input_tokens": 12561,
+    "output_tokens": 712,
+    "total_tokens": 13273,
+    "requests": 4,
+    "cache_read_tokens": 6272,
+    "reasoning_tokens": 434,
+    "tool_calls": 3,
+    "cost_usd": 0.02207135
+  },
+  "usage_source": "pydantic_ai"
+}

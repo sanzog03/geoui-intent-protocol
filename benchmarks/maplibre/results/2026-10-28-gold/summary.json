@@ -1,0 +1,443 @@
+{
+  "run_name": "2026-10-28-gold",
+  "reference_agent": "geoui",
+  "rows": [
+    {
+      "golden": "core-1-single-render",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "23700e8a-cda5-41e5-86f0-4c0171861a45",
+      "turns": 1,
+      "error_turns": 0,
+      "tool_calls": 2,
+      "seconds": 9.072,
+      "input_tokens": 8613,
+      "output_tokens": 432,
+      "cache_read_tokens": 2432,
+      "reasoning_tokens": 207,
+      "total_tokens": 9045,
+      "cache_adjusted_tokens": 6856,
+      "requests": 3,
+      "cost_usd": 0.01729,
+      "final_url": "geoui+json:{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-125,18.2432,-66.5,53.3473],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2025-09-15\"},\"layers\":[{\"id\":\"MODIS_Aqua_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1}]}",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:MODIS_Aqua_Aerosol_Optical_Depth_3km', 'time']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "conversation completeness 1.00: The score is 1.0 because the LLM response fully met the user’s intentions: it rendered the specified layer \"MODIS_Aqua_Aerosol_Optical_Depth_3km\" for the date \"2025-09-15\", focused the map on the contiguous United States, and used the provided layer ID directly without any extra dataset discovery steps or confirmation questions."
+        },
+        "Tool efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "2 tool calls, 0 wasted ({'duplicate': 0, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 9.1 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 6856 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), meaning no assistant message (no quoted message content) is identified as irrelevant to any user message."
+        }
+      }
+    },
+    {
+      "golden": "core-2-date-change",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "cb041558-601f-49c9-b896-d8fe2dea21f1",
+      "turns": 2,
+      "error_turns": 0,
+      "tool_calls": 4,
+      "seconds": 14.127,
+      "input_tokens": 20233,
+      "output_tokens": 566,
+      "cache_read_tokens": 13184,
+      "reasoning_tokens": 183,
+      "total_tokens": 20799,
+      "cache_adjusted_tokens": 8933,
+      "requests": 6,
+      "cost_usd": 0.022567,
+      "final_url": "geoui+json:{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-89.2956,24,-78.2044,31.5],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2024-09-27\"},\"layers\":[{\"id\":\"VIIRS_SNPP_CorrectedReflectance_TrueColor\",\"visible\":true,\"opacity\":1}]}",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:VIIRS_SNPP_CorrectedReflectance_TrueColor', 'time']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "checkpoints 1.00 (reached [0]), conversation completeness 1.00: The score is 1.0 because the LLM response fully met the user’s intentions to visualize the \"VIIRS_SNPP_CorrectedReflectance_TrueColor\" layer on a map for \"2024-09-26\" focused on \"Florida\" without extra dataset discovery/confirmation, and then advance the map date by one day to \"2024-09-27\" while keeping the same layer and Florida viewport. No gaps were indicated."
+        },
+        "Tool efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "4 tool calls, 0 wasted ({'duplicate': 0, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 7.1 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 4466 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), meaning no assistant message (and no specific information within any assistant message) is identified as irrelevant to the user messages."
+        }
+      }
+    },
+    {
+      "golden": "core-3-pan",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "370d4dda-7c63-4915-9b83-42635d70c526",
+      "turns": 1,
+      "error_turns": 0,
+      "tool_calls": 3,
+      "seconds": 12.736,
+      "input_tokens": 12348,
+      "output_tokens": 606,
+      "cache_read_tokens": 6272,
+      "reasoning_tokens": 390,
+      "total_tokens": 12954,
+      "cache_adjusted_tokens": 7309,
+      "requests": 4,
+      "cost_usd": 0.020215,
+      "final_url": "geoui+json:{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-180,-79.6653,180,79.6653],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2022-08-19\"},\"layers\":[{\"id\":\"GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies\",\"visible\":true,\"opacity\":1}]}",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies', 'time']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "checkpoints 1.00 (reached [0]), conversation completeness 1.00: The score is 1.0 because the LLM response fully satisfies the user’s intention to \"Visualize/render the specified GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies layer on a map in a global view for the date 2022-08-19\" and does so \"without additional dataset discovery or confirmation prompts,\" with no missing requirements indicated."
+        },
+        "Tool efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "3 tool calls, 0 wasted ({'duplicate': 0, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 12.7 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 7309 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), so none of the assistant messages contain off-topic or unrelated information to the user messages."
+        }
+      }
+    },
+    {
+      "golden": "core-4-compare",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "50719442-134c-4142-95cc-2a94038519c4",
+      "turns": 1,
+      "error_turns": 0,
+      "tool_calls": 3,
+      "seconds": 12.828,
+      "input_tokens": 12561,
+      "output_tokens": 712,
+      "cache_read_tokens": 6272,
+      "reasoning_tokens": 434,
+      "total_tokens": 13273,
+      "cache_adjusted_tokens": 7628,
+      "requests": 4,
+      "cost_usd": 0.022071,
+      "final_url": "geoui+json:{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-180,-79.6653,180,79.6653],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2025-08-01\"},\"layers\":[{\"id\":\"AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean\",\"visible\":true,\"opacity\":1}],\"compare:layers\":[{\"id\":\"AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean\",\"visible\":true,\"opacity\":1}],\"compare:mode\":\"swipe\",\"compare:value\":50,\"compare:active_side\":\"A\"}",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean', 'time', 'compare', 'compare.mode', 'compare.layer:AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "conversation completeness 1.00: The score is 1.0 because the LLM response fully matches the User’s intention to \"Compare two specific map layers side-by-side for 2025-08-01 using global swipe compare mode with the slider centered at 50%, rendered directly without additional dataset discovery or confirmation requests\", and there are no cited gaps or missing requirements."
+        },
+        "Tool efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "3 tool calls, 0 wasted ({'duplicate': 0, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 12.8 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 7628 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), meaning none of the assistant messages contained any quoted irrelevant information."
+        }
+      }
+    },
+    {
+      "golden": "core-6-multilayer",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "7f0c72f3-c88d-4e43-ab9f-1d74c84ec5fc",
+      "turns": 1,
+      "error_turns": 0,
+      "tool_calls": 2,
+      "seconds": 8.81,
+      "input_tokens": 8781,
+      "output_tokens": 465,
+      "cache_read_tokens": 2816,
+      "reasoning_tokens": 230,
+      "total_tokens": 9246,
+      "cache_adjusted_tokens": 6712,
+      "requests": 3,
+      "cost_usd": 0.017442,
+      "final_url": "geoui+json:{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-180,-79.6653,180,79.6653],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2024-07-04\"},\"layers\":[{\"id\":\"MODIS_Aqua_CorrectedReflectance_TrueColor\",\"visible\":true,\"opacity\":1},{\"id\":\"Reference_Labels_15m\",\"visible\":true,\"opacity\":0.6},{\"id\":\"Reference_Features_15m\",\"visible\":true,\"opacity\":0.8}]}",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 1.0,
+          "reason": "matched ['layer:MODIS_Aqua_CorrectedReflectance_TrueColor', 'layer:Reference_Labels_15m', 'layer:Reference_Features_15m', 'time']; missed nothing"
+        },
+        "Completion": {
+          "score": 0.0,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "conversation completeness 0.00: The score is 0.0 because the User wanted the assistant to \"actually render/visualize the three specified layers in the map app (global view, date 2024-07-04, specific opacities)\" directly, but the LLM response only restated the request—\"Shown in a global view for 2024-07-04...\"—and did not provide any rendered map, link/embed, or concrete commands/instructions to generate the visualization, so the intended visualization was not delivered."
+        },
+        "Tool efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "2 tool calls, 0 wasted ({'duplicate': 0, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 8.8 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 6712 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), meaning no assistant message is quoted as irrelevant and no mismatched information is identified."
+        }
+      }
+    },
+    {
+      "golden": "workflow-a-wildfire",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "88abac9c-5d12-4358-83b3-df06b4ff6a1a",
+      "turns": 4,
+      "error_turns": 0,
+      "tool_calls": 9,
+      "seconds": 41.491,
+      "input_tokens": 58380,
+      "output_tokens": 2154,
+      "cache_read_tokens": 43520,
+      "reasoning_tokens": 881,
+      "total_tokens": 60534,
+      "cache_adjusted_tokens": 21366,
+      "requests": 13,
+      "cost_usd": 0.063777,
+      "final_url": "geoui+json:{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-127.737,32,-110.263,42.6],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2025-09-15\"},\"layers\":[{\"id\":\"MODIS_Terra_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1,\"raster-styling:min\":0,\"raster-styling:max\":2,\"raster-styling:squash\":true},{\"id\":\"Coastlines_15m\",\"visible\":true,\"opacity\":1}],\"compare:mode\":\"swipe\",\"compare:value\":50,\"compare:active_side\":\"A\",\"compare:time\":{\"instant\":\"2025-09-14\"},\"compare:layers\":[{\"id\":\"MODIS_Terra_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":1,\"raster-styling:min\":0,\"raster-styling:max\":2,\"raster-styling:squash\":true},{\"id\":\"Coastlines_15m\",\"visible\":true,\"opacity\":1}]}",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.8,
+          "reason": "matched ['layer:MODIS_Terra_Aerosol_Optical_Depth_3km', 'time', 'compare', 'compare.time', 'compare.mode', 'styling', 'styling.min', 'styling.max', 'styling.squash']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "checkpoints 1.00 (reached [0, 1, 2, 3]), conversation completeness 1.00: The score is 1.0 because the LLM response fully meets the User’s intentions: it visualizes the \"MODIS Aqua Aerosol Optical Depth 3km\" layer for \"2025-09-15\" over California, creates a swipe comparison between \"2025-09-15\" and \"2025-09-14\" over California, switches the swipe from Aqua to the \"MODIS Terra\" equivalent while keeping the same dates and region, and adjusts the color scale to emphasize high AOD by setting the display range to \"0–2\" while keeping the Terra swipe comparison active."
+        },
+        "Tool efficiency": {
+          "score": 0.6667,
+          "success": false,
+          "threshold": 0.7,
+          "reason": "9 tool calls, 3 wasted ({'duplicate': 3, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 10.4 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 5342 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies (\"Irrelevancies: []\"), so there are no assistant messages or specific information to quote as irrelevant."
+        }
+      }
+    },
+    {
+      "golden": "workflow-b-saharan-dust",
+      "agent": "geoui",
+      "dataset": "gold",
+      "session_id": "ea43b2fa-980f-467f-a415-3c329ed56947",
+      "turns": 4,
+      "error_turns": 0,
+      "tool_calls": 8,
+      "seconds": 32.336,
+      "input_tokens": 49685,
+      "output_tokens": 1710,
+      "cache_read_tokens": 36992,
+      "reasoning_tokens": 741,
+      "total_tokens": 51395,
+      "cache_adjusted_tokens": 18102,
+      "requests": 12,
+      "cost_usd": 0.052626,
+      "final_url": "geoui+json:{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-70,-23.0624,20,41.0806],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2023-06-18\"},\"layers\":[{\"id\":\"MODIS_Aqua_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":0.6}],\"compare:layers\":[{\"id\":\"MODIS_Aqua_Aerosol_Optical_Depth_3km\",\"visible\":true,\"opacity\":0.6}],\"compare:time\":{\"instant\":\"2023-06-11\"},\"compare:mode\":\"swipe\",\"compare:active_side\":\"A\",\"compare:value\":50}",
+      "metrics": {
+        "Success": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.8,
+          "reason": "matched ['layer:MODIS_Aqua_Aerosol_Optical_Depth_3km', 'time', 'compare', 'compare.time', 'compare.mode']; missed nothing"
+        },
+        "Completion": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "checkpoints 1.00 (reached [0, 1, 2, 3]), conversation completeness 1.00: The score is 1.0 because the LLM response fully satisfies the User’s intentions (mapping the MODIS_Aqua_Aerosol_Optical_Depth_3km layer for 2023-06-15 over the tropical Atlantic, advancing to 2023-06-18 in the same view, performing a swipe comparison between 2023-06-18 and 2023-06-11, and setting opacity to 0.6) with no noted missing steps or unmet requirements, as there are no reported issues (\"Incompletenesses: []\")."
+        },
+        "Tool efficiency": {
+          "score": 0.75,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "8 tool calls, 2 wasted ({'duplicate': 2, 'errored': 0, 'discovery': 0, 'error_turn': 0})"
+        },
+        "Time efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 8.1 s per turn against a budget of 60 s"
+        },
+        "Token efficiency": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.5,
+          "reason": "mean 4526 cache-adjusted tokens per turn against a budget of 20000"
+        },
+        "Turn Relevancy": {
+          "score": 1.0,
+          "success": true,
+          "threshold": 0.7,
+          "reason": "The score is 1.0 because there are no listed irrelevancies ([]), meaning none of the assistant messages contain information that is irrelevant to the user messages."
+        }
+      }
+    }
+  ],
+  "ratios": {},
+  "totals": [
+    {
+      "agent": "geoui",
+      "conversations": 7,
+      "turns": 14,
+      "error_turns": 0,
+      "tool_calls": 31,
+      "seconds": 131.4,
+      "total_tokens": 177246,
+      "cache_adjusted_tokens": 76906,
+      "cost_usd": 0.215988,
+      "pass_rate": {
+        "Success": 1.0,
+        "Completion": 0.8571,
+        "Tool efficiency": 0.8571,
+        "Time efficiency": 1.0,
+        "Token efficiency": 1.0,
+        "Turn Relevancy": 1.0
+      },
+      "mean_score": {
+        "Success": 1.0,
+        "Completion": 0.8571,
+        "Tool efficiency": 0.9167,
+        "Time efficiency": 1.0,
+        "Token efficiency": 1.0,
+        "Turn Relevancy": 1.0
+      }
+    }
+  ],
+  "metric_names": [
+    "Success",
+    "Completion",
+    "Tool efficiency",
+    "Time efficiency",
+    "Token efficiency",
+    "Turn Relevancy"
+  ]
+}

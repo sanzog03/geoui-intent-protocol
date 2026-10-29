@@ -1,0 +1,86 @@
+{
+  "trace_id": "56bc8dc5-d3b3-4a1a-bcb5-63b8327d0307",
+  "thread_id": "cb041558-601f-49c9-b896-d8fe2dea21f1",
+  "source": "simulated",
+  "started_at": "2026-10-29T04:37:36.751479+00:00",
+  "duration_s": 5.5447489998769015,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 3689,
+      "output_tokens": 56,
+      "duration_s": 1.5393530000001192,
+      "offset_s": 0.008786541875451803,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 3851,
+      "output_tokens": 93,
+      "duration_s": 1.763281000079587,
+      "offset_s": 1.8840105419512838,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 4097,
+      "output_tokens": 57,
+      "duration_s": 1.5344349998049438,
+      "offset_s": 4.0063945420552045,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "geo_ui_get_state_tool",
+      "args": {},
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-89.2956,24.0,-78.2044,31.5],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2024-09-26\",\"start\":null,\"end\":null},\"layers\":[{\"id\":\"VIIRS_SNPP_CorrectedReflectance_TrueColor\",\"visible\":true,\"opacity\":1.0}]}}",
+      "duration_s": 0.3297510000411421,
+      "offset_s": 1.5523545418400317,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "viewport": {
+            "bbox": [
+              -89.2956,
+              24.0,
+              -78.2044,
+              31.5
+            ],
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2024-09-27"
+          },
+          "layers": [
+            {
+              "id": "VIIRS_SNPP_CorrectedReflectance_TrueColor",
+              "visible": true,
+              "opacity": 1.0
+            }
+          ]
+        }
+      },
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[\"https://geoui.org/ext/compare/v1.0.0\",\"https://geoui.org/ext/raster-styling/v1.0.0\"],\"viewport\":{\"bbox\":[-89.2956,24.0,-78.2044,31.5],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2024-09-27\",\"start\":null,\"end\":null},\"layers\":[{\"id\":\"VIIRS_SNPP_CorrectedReflectance_TrueColor\",\"visible\":true,\"opacity\":1.0}]},\"settled\":true}",
+      "duration_s": 0.3536940000485629,
+      "offset_s": 3.6502365418709815,
+      "error": null
+    }
+  ],
+  "other_spans": [],
+  "error": null,
+  "usage": {
+    "input_tokens": 11637,
+    "output_tokens": 206,
+    "total_tokens": 11843,
+    "requests": 3,
+    "cache_read_tokens": 9344,
+    "reasoning_tokens": 34,
+    "tool_calls": 2,
+    "cost_usd": 0.00853195
+  },
+  "usage_source": "pydantic_ai"
+}
