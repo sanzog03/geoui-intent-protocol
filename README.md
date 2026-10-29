@@ -157,7 +157,8 @@ uv run python -m geouibench score benchmarks/worldview/results/2026-10-28-gold  
 
 Benchmarking another demo is an `app.py` plus a gold dataset in a new directory
 under `benchmarks/`; see `benchmarks/README.md` (the utility, the app contract,
-dataset format, metrics, how traces are captured) and
+dataset format, metrics, how traces are captured), `benchmarks/geouibench/README.md`
+(every utility and how to call it) and
 `benchmarks/worldview/README.md` (running, reading and verifying a Worldview run).
 `HANDOVER.md` has the operational detail, including the Playwright-over-CDP design
 and known gotchas.
