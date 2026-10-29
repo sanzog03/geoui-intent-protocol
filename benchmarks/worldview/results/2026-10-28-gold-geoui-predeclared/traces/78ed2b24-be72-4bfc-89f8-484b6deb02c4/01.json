@@ -1,0 +1,106 @@
+{
+  "trace_id": "34be66b7-3a2b-4481-ab57-2a375681ffcd",
+  "thread_id": "78ed2b24-be72-4bfc-89f8-484b6deb02c4",
+  "source": "simulated",
+  "started_at": "2026-10-29T02:48:59.286344+00:00",
+  "duration_s": 24.551549332914874,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10170,
+      "output_tokens": 323,
+      "duration_s": 4.783301000017673,
+      "offset_s": 4.788218624889851,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10487,
+      "output_tokens": 161,
+      "duration_s": 2.8251700000837445,
+      "offset_s": 9.579658624948934,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 11011,
+      "output_tokens": 1084,
+      "duration_s": 11.886992000043392,
+      "offset_s": 12.652603624854237,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "geoui_version": "1.0.0",
+          "viewport": {
+            "bbox": null,
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2025-08-01"
+          },
+          "layers": [
+            {
+              "id": "AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean",
+              "visible": true,
+              "opacity": 1
+            }
+          ],
+          "compare:layers": [
+            {
+              "id": "AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean",
+              "visible": true,
+              "opacity": 1
+            }
+          ],
+          "compare:active_side": "A",
+          "compare:mode": "swipe",
+          "compare:value": 50,
+          "compare:time": {
+            "instant": "2025-08-01"
+          }
+        }
+      },
+      "output": "{\"url\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\"}",
+      "duration_s": 0.0006460000295192003,
+      "offset_s": 9.574406625004485,
+      "error": null
+    },
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\n- Page Title: NASA Worldview\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-29T02-49-11-935Z.yml)",
+      "duration_s": 0.24162600003182888,
+      "offset_s": 12.408682625042275,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 31668,
+    "output_tokens": 1568,
+    "total_tokens": 33236,
+    "requests": 3,
+    "cache_read_tokens": 28800,
+    "reasoning_tokens": 163,
+    "tool_calls": 2,
+    "cost_usd": 0.032011
+  },
+  "usage_source": "pydantic_ai"
+}

@@ -1,0 +1,93 @@
+{
+  "trace_id": "5363b765-9ca4-4f71-9c81-2ccce07c7e03",
+  "thread_id": "16a4d720-35cf-4213-b89a-51b1d747a24f",
+  "source": "simulated",
+  "started_at": "2026-10-29T02:48:31.139350+00:00",
+  "duration_s": 22.982238915981725,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10128,
+      "output_tokens": 138,
+      "duration_s": 3.073902000207454,
+      "offset_s": 8.52727820794098,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10310,
+      "output_tokens": 91,
+      "duration_s": 2.1890950000379235,
+      "offset_s": 11.611783208092675,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10624,
+      "output_tokens": 694,
+      "duration_s": 8.895103999879211,
+      "offset_s": 14.077474208083004,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "geoui_version": "1.0.0",
+          "viewport": {
+            "bbox": null,
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2022-08-19"
+          },
+          "layers": [
+            {
+              "id": "GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies",
+              "visible": true,
+              "opacity": 1
+            }
+          ]
+        }
+      },
+      "output": "{\"url\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies(opacity=1),Coastlines_15m,Reference_Features_15m&t=2022-08-19&p=geographic\"}",
+      "duration_s": 0.000674000009894371,
+      "offset_s": 11.605681207962334,
+      "error": null
+    },
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies(opacity=1),Coastlines_15m,Reference_Features_15m&t=2022-08-19&p=geographic"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies(opacity=1),Coastlines_15m,Reference_Features_15m&t=2022-08-19&p=geographic');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies(opacity=1),Coastlines_15m,Reference_Features_15m&t=2022-08-19&p=geographic\n- Page Title: NASA Worldview\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-29T02-48-45-212Z.yml)",
+      "duration_s": 0.2699880001600832,
+      "offset_s": 13.804704207926989,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 31062,
+    "output_tokens": 923,
+    "total_tokens": 31985,
+    "requests": 3,
+    "cache_read_tokens": 27776,
+    "reasoning_tokens": 43,
+    "tool_calls": 2,
+    "cost_usd": 0.0235333
+  },
+  "usage_source": "pydantic_ai"
+}
