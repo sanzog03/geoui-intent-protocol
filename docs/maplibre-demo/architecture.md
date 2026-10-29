@@ -3,12 +3,12 @@
 The Worldview demo works because Worldview's state is a permalink: the GeoUI tools compute a URL and
 the agent navigates to it. Most visualisation apps have no such URL. The MapLibre demo shows the
 protocol working without one: a React app owns its state, the **`@geoui/react` SDK** attaches that
-state (read and write) to the protocol, and the **GeoUI MCP in `bridge/`** reaches the running page
+state (read and write) to the protocol, and the **GeoUI MCP in `demo/maplibre/`** (Python package `maplibre`) reaches the running page
 over Chrome DevTools Protocol (CDP) to list extensions, read state and render intents. The agent keeps
 the same three tools it has for Worldview, so `geouibench` scores it the same way.
 
-Pieces: [`sdk/geoui-react`](../../sdk/geoui-react) · [`demo/maplibre`](../../demo/maplibre) ·
-[`bridge/`](../../bridge) · [`benchmarks/maplibre`](../../benchmarks/maplibre) ·
+Pieces: [`sdk/geoui-react`](../../sdk/geoui-react) · [`demo/maplibre`](../../demo/maplibre) (the `maplibre`
+package, with the app under `maplibre_geo_application/`) · [`benchmarks/maplibre`](../../benchmarks/maplibre) ·
 [`schemas/`](../../schemas) (exported from pydantic by `scripts/export_schemas.py`).
 
 ## Component view
@@ -21,7 +21,7 @@ flowchart LR
         U[User] --> A["Agent<br/>(Claude Code via MCP stdio,<br/>or pydantic-ai in-process for the benchmark)"]
     end
 
-    subgraph Bridge["GeoUI MCP · bridge/ (geoui_bridge)"]
+    subgraph Bridge["GeoUI MCP · demo/maplibre (package maplibre)"]
         T["tools<br/>geo_ui_list_intent_extensions_tool<br/>geo_ui_get_state_tool<br/>geo_ui_render_intent_tool"]
         C["catalogue.py<br/>check_catalogue · prepare_intent<br/>(geoui.extensions specs + validators)"]
         S["cdp.py BridgeSession<br/>Playwright connect_over_cdp · page.evaluate"]
@@ -29,7 +29,7 @@ flowchart LR
     end
 
     subgraph Chromium["Chromium (demo/chromium.sh, --remote-debugging-port 9222)"]
-        subgraph Page["demo/maplibre page (Vite, React 19)"]
+        subgraph Page["maplibre_geo_application page (Vite, React 19)"]
             W["window.geoui<br/>describe() · getState() · render()"]
             R["@geoui/react Registry<br/>slots · compose · validate · apply · settle"]
             P["GeoUIProvider + attach hooks<br/>useGeoUIViewport / Time / Layers / Extension / LayerExtension"]
@@ -65,7 +65,7 @@ sequenceDiagram
     autonumber
     actor User
     participant Agent
-    participant MCP as GeoUI MCP (geoui_bridge)
+    participant MCP as GeoUI MCP (maplibre)
     participant CDP as Chromium (CDP)
     participant Bridge as window.geoui (SDK)
     participant Reg as Registry
@@ -120,12 +120,12 @@ Two things the sequence hides:
 ```mermaid
 flowchart TB
     subgraph Now["Now: Claude Code / benchmark"]
-        CC["Claude Code or pydantic-ai agent"] -- "stdio MCP" --> MCP1["geoui-bridge-mcp"] -- "CDP :9222" --> CH["Chromium (chromium.sh)"]
+        CC["Claude Code or pydantic-ai agent"] -- "stdio MCP" --> MCP1["maplibre-mcp"] -- "CDP :9222" --> CH["Chromium (chromium.sh)"]
     end
     subgraph Later["Later: browser extension (out of scope)"]
         EXT["Extension-hosted agent"] -- "content script, direct call" --> WG
     end
-    CH --> WG["window.geoui on the demo/maplibre page"]
+    CH --> WG["window.geoui on the maplibre_geo_application page"]
 ```
 
 The bridge finds the page by origin (`GEOUI_APP_URL`) and opens it in a new tab through the browser's

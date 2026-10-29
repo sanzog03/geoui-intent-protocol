@@ -2,8 +2,8 @@
 
 ``fixtures/bridge_contract.json`` is the golden tool contract (names, input
 schemas, descriptions); regenerate it deliberately with
-``uv run python scripts/dump_mcp_contract.py local --module geoui_bridge.mcp.server:mcp --golden
-bridge/geoui_bridge/tests/mcp/fixtures/bridge_contract.json --update-golden`` and review the diff.
+``uv run python scripts/dump_mcp_contract.py local --module maplibre.mcp.server:mcp --golden
+demo/maplibre/tests/mcp/fixtures/bridge_contract.json --update-golden`` and review the diff.
 The tool names are the Worldview server's, so an agent prompt works against either.
 """
 
@@ -14,7 +14,7 @@ import pytest
 from fastmcp import Client
 from fastmcp.exceptions import ToolError
 
-from geoui_bridge.mcp.server import create_server
+from maplibre.mcp.server import create_server
 
 from .._fake_session import FakeSession
 
@@ -86,5 +86,5 @@ async def test_stdio_smoke():
     """Spawn the console script over stdio and list its tools (no browser needed: the connection is lazy)."""
     from fastmcp.client.transports import StdioTransport
 
-    async with Client(StdioTransport("uv", ["run", "geoui-bridge-mcp"])) as client:
+    async with Client(StdioTransport("uv", ["run", "maplibre-mcp"])) as client:
         assert {t.name for t in await client.list_tools()} == GEOUI_TOOL_NAMES

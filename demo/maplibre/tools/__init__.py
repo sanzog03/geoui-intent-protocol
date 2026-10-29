@@ -11,10 +11,10 @@ same names, so logs and benchmarks compare across mechanisms:
   extensions it attached and the layers it can show.
 
 Nothing here is Worldview- or MapLibre-specific: the page's catalogue says
-what is supported, :mod:`geoui_bridge.catalogue` checks it against the
-library and pre-declares the URIs, and a :class:`~geoui_bridge.cdp.GeoUISession`
-carries the calls. ``geoui_bridge.mcp`` serves these over MCP;
-``geoui_bridge.tools.pai`` exposes them as a pydantic-ai toolset.
+what is supported, :mod:`maplibre.catalogue` checks it against the
+library and pre-declares the URIs, and a :class:`~maplibre.cdp.GeoUISession`
+carries the calls. ``maplibre.mcp`` serves these over MCP;
+``maplibre.tools.pai`` exposes them as a pydantic-ai toolset.
 """
 
 from __future__ import annotations
@@ -27,8 +27,8 @@ from typing import Any
 from pydantic import BaseModel, Field
 
 from geoui.core import GeoIntent
-from geoui_bridge.catalogue import Catalogue, IntentExtension, LayerEntry, check_catalogue, prepare_intent
-from geoui_bridge.cdp import BridgeConfig, GeoUISession, bridge, config_from_env
+from maplibre.catalogue import Catalogue, IntentExtension, LayerEntry, check_catalogue, prepare_intent
+from maplibre.cdp import BridgeConfig, GeoUISession, bridge, config_from_env
 
 #: Yields a session for one block of calls; ``default_session_factory`` opens a CDP connection per block.
 SessionFactory = Callable[[], AbstractAsyncContextManager[GeoUISession]]

@@ -1,7 +1,7 @@
 """Live round trip through a real Chromium and a real window.geoui page.
 
 Skipped unless ``PLAYWRIGHT_CDP_ENDPOINT`` answers and ``GEOUI_APP_URL`` is set
-(start the MapLibre demo with ``npm run dev -w demo/maplibre`` and Chromium with
+(start the MapLibre demo with ``npm run dev`` and Chromium with
 ``source demo/chromium.sh && ensure_chromium``).
 """
 
@@ -10,7 +10,7 @@ import os
 import httpx
 import pytest
 
-from geoui_bridge import BridgeError, bridge, config_from_env
+from maplibre import BridgeError, bridge, config_from_env
 
 pytestmark = pytest.mark.integration
 
@@ -54,7 +54,7 @@ async def test_state_persists_across_sessions_and_the_tab_survives_disconnect():
 
 
 async def test_unreachable_endpoint_is_a_bridge_error():
-    from geoui_bridge.cdp import BridgeConfig
+    from maplibre.cdp import BridgeConfig
 
     with pytest.raises(BridgeError, match="cannot attach"):
         async with bridge(BridgeConfig(cdp_endpoint="http://127.0.0.1:1")):

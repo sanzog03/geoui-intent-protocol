@@ -10,10 +10,10 @@ One notebook, three agents, selected by the ``AGENT`` environment variable:
   Playwright browser control, the baseline. It observes NASA Worldview via
   screenshots + an accessibility-tree snapshot and acts by clicking,
   typing and dragging against the live page.
-- ``maplibre``: the bridge's agent on the MapLibre demo (``demo/maplibre``,
-  an app with no URL state). Only the three GeoUI tools, served in-process
-  over CDP by ``geoui_bridge``; no plugin, no remote MCPs, no browser tools.
-  Needs the Vite dev server (``npm run dev -w demo/maplibre``).
+- ``maplibre``: the MapLibre demo's agent (``demo/maplibre``, an app with
+  no URL state). Only the three GeoUI tools, served in-process over CDP by
+  the ``maplibre`` package; no plugin, no remote MCPs, no browser tools.
+  Needs the Vite dev server (``npm run dev``).
 
 Same Chromium-on-CDP plumbing, same live tool-call trace, same
 session/reset controls and benchmark logging; the agent is where the
@@ -24,7 +24,7 @@ Run from the repo root (``demo/start.sh`` does all of this):
 
     ./demo/start.sh                                  # GeoUI treatment
     AGENT=vlm ./demo/start.sh                        # VLM baseline
-    AGENT=maplibre ./demo/start.sh                   # MapLibre demo (npm run dev -w demo/maplibre first)
+    AGENT=maplibre ./demo/start.sh                   # MapLibre demo (npm run dev first)
     AGENT=vlm uv run marimo edit demo/chat.py   # editor
 
 Requires `.env` with at minimum OPENAI_API_KEY and VECTOR_DB_TOOL_KEY
@@ -64,7 +64,7 @@ def _variant():
     if AGENT not in ("geoui", "vlm", "maplibre"):
         raise ValueError(f"AGENT must be 'geoui', 'vlm' or 'maplibre' (got {AGENT!r})")
     if AGENT == "maplibre":
-        from geoui_bridge.agents import build_maplibre_agent as _build_maplibre_agent
+        from maplibre.agents import build_maplibre_agent as _build_maplibre_agent
     else:
         _build_maplibre_agent = None
 
@@ -154,18 +154,18 @@ def _variant():
     The GeoUI protocol on an application with **no URL state**: the
     MapLibre + NASA GIBS demo (`demo/maplibre`) attaches its React state to
     the protocol with the `@geoui/react` SDK and exposes `window.geoui`.
-    The agent (`geoui_bridge.agents.build_maplibre_agent`) is a bare
+    The agent (`maplibre.agents.build_maplibre_agent`) is a bare
     pydantic-ai agent with only the three GeoUI tools
     (`geo_ui_list_intent_extensions_tool`, `geo_ui_get_state_tool`,
-    `geo_ui_render_intent_tool`), served in-process by `geoui_bridge`
-    over Chrome DevTools Protocol. No plugin, no discovery MCPs, no
+    `geo_ui_render_intent_tool`), served in-process by the `maplibre`
+    package over Chrome DevTools Protocol. No plugin, no discovery MCPs, no
     browser tools: the page's own catalogue tells the agent which layers
     and extensions exist.
 
     ### One-time setup
 
     ```bash
-    npm run dev -w demo/maplibre        # the app at http://127.0.0.1:5173 (GEOUI_APP_URL)
+    npm run dev        # the app at http://127.0.0.1:5173 (GEOUI_APP_URL)
     AGENT=maplibre ./demo/start.sh      # Chromium on CDP + this notebook
     ```
 
@@ -276,7 +276,7 @@ def _env(VARIANT, mo):
         env_status = mo.callout(
             mo.md(
                 f"**The MapLibre demo is not answering at `{app_url_problem}`.** "
-                "Start it with `npm run dev -w demo/maplibre` (or set `GEOUI_APP_URL`) and re-run."
+                "Start it with `npm run dev` (or set `GEOUI_APP_URL`) and re-run."
             ),
             kind="danger",
         )

@@ -9,9 +9,8 @@ resolution-markers = [
 
 [manifest]
 members = [
-    "geoui-bridge",
+    "geoui-demos",
     "geoui-protocol",
-    "geoui-worldview-demo",
     "geouibench",
 ]
 
@@ -1075,16 +1074,17 @@ wheels = [
 ]
 
 [[package]]
-name = "geoui-bridge"
+name = "geoui-demos"
 version = "0.1.0"
-source = { editable = "bridge" }
+source = { editable = "demo" }
 dependencies = [
     { name = "fastmcp" },
     { name = "geoui-protocol" },
     { name = "httpx" },
+    { name = "marimo" },
     { name = "playwright" },
-    { name = "pydantic" },
     { name = "pydantic-ai" },
+    { name = "python-dateutil" },
     { name = "python-dotenv" },
 ]
 
@@ -1093,9 +1093,10 @@ requires-dist = [
     { name = "fastmcp", specifier = ">=3.3,<4" },
     { name = "geoui-protocol", editable = "." },
     { name = "httpx", specifier = ">=0.27" },
+    { name = "marimo", specifier = ">=0.23.1,<0.24" },
     { name = "playwright", specifier = ">=1.64,<2" },
-    { name = "pydantic", specifier = ">=2.7" },
     { name = "pydantic-ai", specifier = ">=2.63,<3" },
+    { name = "python-dateutil", specifier = ">=2.8" },
     { name = "python-dotenv", specifier = ">=1.0" },
 ]
 
@@ -1109,8 +1110,7 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "geoui-bridge" },
-    { name = "geoui-worldview-demo" },
+    { name = "geoui-demos" },
     { name = "geouibench" },
     { name = "pre-commit" },
     { name = "pytest" },
@@ -1124,39 +1124,13 @@ requires-dist = [{ name = "pydantic", specifier = ">=2.7" }]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "geoui-bridge", editable = "bridge" },
-    { name = "geoui-worldview-demo", editable = "demo" },
+    { name = "geoui-demos", editable = "demo" },
     { name = "geouibench", editable = "benchmarks" },
     { name = "pre-commit", specifier = ">=4.2" },
     { name = "pytest", specifier = ">=9.0" },
     { name = "pytest-asyncio", specifier = ">=1.3" },
     { name = "pytest-cov", specifier = ">=7.0" },
     { name = "ruff", specifier = ">=0.14" },
-]
-
-[[package]]
-name = "geoui-worldview-demo"
-version = "0.1.0"
-source = { editable = "demo" }
-dependencies = [
-    { name = "fastmcp" },
-    { name = "geoui-protocol" },
-    { name = "httpx" },
-    { name = "marimo" },
-    { name = "pydantic-ai" },
-    { name = "python-dateutil" },
-    { name = "python-dotenv" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "fastmcp", specifier = ">=3.3,<4" },
-    { name = "geoui-protocol", editable = "." },
-    { name = "httpx", specifier = ">=0.27" },
-    { name = "marimo", specifier = ">=0.23.1,<0.24" },
-    { name = "pydantic-ai", specifier = ">=2.63,<3" },
-    { name = "python-dateutil", specifier = ">=2.8" },
-    { name = "python-dotenv", specifier = ">=1.0" },
 ]
 
 [[package]]

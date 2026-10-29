@@ -1,7 +1,7 @@
 [project]
-name = "geoui-worldview-demo"
+name = "geoui-demos"
 version = "0.1.0"
-description = "NASA Worldview reference adapter, MCP server, agents and chat demo for the GeoUI Intent Protocol"
+description = "The two demos of the GeoUI Intent Protocol: NASA Worldview (adapter, MCP server, agents) and MapLibre (GeoUI MCP over CDP, agent; the React app lives beside it) plus the chat notebook"
 requires-python = ">=3.12"
 dependencies = [
     "geoui-protocol",
@@ -10,12 +10,15 @@ dependencies = [
     "pydantic-ai>=2.63,<3",
     "httpx>=0.27",
     "python-dotenv>=1.0",
+    # maplibre: connect_over_cdp only; the driver ships in the wheel, no browser download is needed
+    "playwright>=1.64,<2",
     # marimo 0.25.x frontend rejects its own chat requests (messages[0].metadata); 0.23 is what the poster runs used
     "marimo>=0.23.1,<0.24",
 ]
 
 [project.scripts]
 worldview-mcp = "worldview.mcp.server:main"
+maplibre-mcp = "maplibre.mcp.server:main"
 
 [tool.uv.sources]
 geoui-protocol = { workspace = true }
@@ -25,7 +28,8 @@ requires = ["setuptools>=77.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
-include = ["worldview*"]
-exclude = ["worldview.tests*"]
-# the vendored plugin / skill trees under agents/artifact are data, not namespace packages
+include = ["worldview*", "maplibre*"]
+exclude = ["worldview.tests*", "maplibre.tests*"]
+# the vendored plugin / skill trees under worldview/agents/artifact and the React app under
+# maplibre/maplibre_geo_application are data, not namespace packages
 namespaces = false

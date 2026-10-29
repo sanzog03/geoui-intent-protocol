@@ -11,5 +11,5 @@ library on purpose:
 - ``worldview.agents``  — the IESO GeoUI (treatment) and VLM (baseline)
   agents, MCP warm-up and the benchmark logger.
 
-Installed editable as the ``geoui-worldview-demo`` uv workspace member.
+Installed editable as the ``geoui-demos`` uv workspace member.
 """

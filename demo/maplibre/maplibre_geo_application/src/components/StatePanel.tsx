@@ -14,7 +14,7 @@ export function StatePanel() {
         SDK {catalogue.version} · protocol {catalogue.protocol} · extensions: {catalogue.extensions.map((e) => e.name).join(", ") || "none"} · {catalogue.layers.length} layers
       </p>
       <p className="muted">
-        Drive it from Python: <code>uv run geoui-bridge-mcp</code> with <code>GEOUI_APP_URL={location.origin}</code>, or from the console: <code>await geoui.render({"{"}layers: [{"{"}id: "Coastlines_15m"{"}"}]{"}"})</code>.
+        Drive it from Python: <code>uv run maplibre-mcp</code> with <code>GEOUI_APP_URL={location.origin}</code>, or from the console: <code>await geoui.render({"{"}layers: [{"{"}id: "Coastlines_15m"{"}"}]{"}"})</code>.
       </p>
     </div>
   );

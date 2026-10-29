@@ -4,14 +4,14 @@ import pytest
 from pydantic_ai.messages import ModelMessage, ModelResponse, TextPart, ToolCallPart
 from pydantic_ai.models.function import AgentInfo, FunctionModel
 
-from geoui_bridge.agents import (
+from maplibre.agents import (
     AGENT_NAME,
     SYSTEM_PROMPT,
     MaplibreAgentOutput,
     build_maplibre_agent,
     maplibre_config,
 )
-from geoui_bridge.cdp import BridgeConfig
+from maplibre.cdp import BridgeConfig
 
 from ._fake_session import FakeSession
 
@@ -58,11 +58,7 @@ async def test_scripted_conversation_renders_through_the_page():
             }
             return ModelResponse(parts=[ToolCallPart("geo_ui_render_intent_tool", {"intent": intent})])
         return ModelResponse(
-            parts=[
-                ToolCallPart(
-                    "final_result", {"result": "Showing Layer A on 2025-09-15 over California."}
-                )
-            ]
+            parts=[ToolCallPart("final_result", {"result": "Showing Layer A on 2025-09-15 over California."})]
         )
 
     result = await agent.run("Show layer A over California on 2025-09-15.", model=FunctionModel(scripted))

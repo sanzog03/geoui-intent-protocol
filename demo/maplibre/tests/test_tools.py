@@ -4,8 +4,8 @@ import pytest
 
 from geoui import GeoIntent
 from geoui.extensions import compare, raster_styling
-from geoui_bridge import BridgeError
-from geoui_bridge.tools import get_state, intent_payload, list_intent_extensions, render_intent
+from maplibre import BridgeError
+from maplibre.tools import get_state, intent_payload, list_intent_extensions, render_intent
 
 from ._fake_session import FakeSession
 

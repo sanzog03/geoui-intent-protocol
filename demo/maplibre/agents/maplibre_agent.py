@@ -16,7 +16,7 @@ text removes the forced choice.
 Smoke test (one LLM call; ``OPENAI_API_KEY`` from ``.env``, the app at
 ``GEOUI_APP_URL``, Chromium on ``PLAYWRIGHT_CDP_ENDPOINT``)::
 
-    uv run python -m geoui_bridge.agents.maplibre_agent "Show MODIS Aqua AOD over California on 2025-09-15"
+    uv run python -m maplibre.agents.maplibre_agent "Show MODIS Aqua AOD over California on 2025-09-15"
 """
 
 from __future__ import annotations
@@ -30,9 +30,9 @@ from pydantic import BaseModel, Field
 from pydantic_ai import Agent, ModelRetry
 from pydantic_ai.capabilities import AbstractCapability, Thinking
 
-from geoui_bridge.cdp import BridgeConfig, config_from_env
-from geoui_bridge.tools import SessionFactory
-from geoui_bridge.tools.pai import make_geoui_toolset
+from maplibre.cdp import BridgeConfig, config_from_env
+from maplibre.tools import SessionFactory
+from maplibre.tools.pai import make_geoui_toolset
 
 AGENT_NAME = "maplibre_geoui_agent"
 MODEL_NAME = (

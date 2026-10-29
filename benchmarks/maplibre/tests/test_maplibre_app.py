@@ -6,10 +6,10 @@ from pathlib import Path
 import pytest
 
 from geoui import GeoIntent
-from geoui_bridge.tests._fake_session import FakeSession
 from geouibench import BenchmarkApp, load_app_dir
 from geouibench.app import snapshot_app
 from geouibench.state import ExpectedState, compare_state
+from maplibre.tests._fake_session import FakeSession
 
 APP_DIR = load_app_dir(Path(__file__).resolve().parent.parent)
 MaplibreApp = type(APP_DIR.app)

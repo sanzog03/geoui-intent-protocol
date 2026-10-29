@@ -8,8 +8,8 @@ import pytest
 from pydantic_ai import ModelRetry
 
 from geoui.core import GeoIntent
-from geoui_bridge.tools import GET_STATE_DOC, LIST_INTENT_EXTENSIONS_DOC, RENDER_INTENT_DOC
-from geoui_bridge.tools.pai import make_geoui_toolset
+from maplibre.tools import GET_STATE_DOC, LIST_INTENT_EXTENSIONS_DOC, RENDER_INTENT_DOC
+from maplibre.tools.pai import make_geoui_toolset
 
 from ._fake_session import FakeSession
 

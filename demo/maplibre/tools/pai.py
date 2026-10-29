@@ -1,11 +1,11 @@
 """The three GeoUI tools as a pydantic-ai ``FunctionToolset`` (in-process, no MCP server).
 
-Same names, descriptions and parameters as ``geoui_bridge.mcp`` so logs stay
+Same names, descriptions and parameters as ``maplibre.mcp`` so logs stay
 comparable across both paths. A refused intent (unsupported extension,
 unknown layer, bad CRS, incomplete extension fields, or the page saying no)
 is raised as :class:`pydantic_ai.ModelRetry` so the model gets the message
 back as a retry prompt instead of the turn aborting; a broken bridge
-(:class:`~geoui_bridge.cdp.BridgeError`) propagates, because the model cannot fix it.
+(:class:`~maplibre.cdp.BridgeError`) propagates, because the model cannot fix it.
 """
 
 from __future__ import annotations
@@ -18,8 +18,8 @@ from pydantic_ai.messages import ModelMessage
 from pydantic_ai.toolsets import FunctionToolset
 
 from geoui.core import GeoIntent
-from geoui_bridge.cdp import BridgeConfig
-from geoui_bridge.tools import (
+from maplibre.cdp import BridgeConfig
+from maplibre.tools import (
     GET_STATE_DOC,
     INTENT_FIELD_DESCRIPTION,
     LIST_INTENT_EXTENSIONS_DOC,

@@ -40,7 +40,9 @@ def test_nothing_asks_for_chart_or_names_worldview():
 
 
 def test_every_layer_id_is_in_the_demo_catalogue():
-    catalogue = (APP_DIR.path.parents[1] / "demo" / "maplibre" / "src" / "layers.ts").read_text()
+    catalogue = (
+        APP_DIR.path.parents[1] / "demo" / "maplibre" / "maplibre_geo_application" / "src" / "layers.ts"
+    ).read_text()
     for golden, meta in validate_dataset(GOLD_DATASET, agent_kinds=KINDS):
         ids = set(meta.expected_state.layers or {})
         for cp in meta.checkpoints:
@@ -48,7 +50,9 @@ def test_every_layer_id_is_in_the_demo_catalogue():
         if meta.expected_state.compare and meta.expected_state.compare.layers:
             ids |= set(meta.expected_state.compare.layers)
         for layer_id in ids:
-            assert f'id: "{layer_id}"' in catalogue, f"{golden.name}: {layer_id} is not in demo/maplibre/src/layers.ts"
+            assert f'id: "{layer_id}"' in catalogue, (
+                f"{golden.name}: {layer_id} is not in demo/maplibre/maplibre_geo_application/src/layers.ts"
+            )
 
 
 def test_goldens_for_the_agent_have_an_opening_turn():

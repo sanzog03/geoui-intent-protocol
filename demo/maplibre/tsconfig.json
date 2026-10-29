@@ -1,8 +1,0 @@
-{
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "paths": { "@geoui/react": ["../../sdk/geoui-react/src/index.ts"] },
-    "noEmit": true
-  },
-  "include": ["src", "vite.config.ts"]
-}

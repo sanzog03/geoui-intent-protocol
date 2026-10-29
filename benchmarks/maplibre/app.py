@@ -1,7 +1,7 @@
 """The MapLibre demo bound to geouibench: one agent, the state read from the page.
 
 The demo (``demo/maplibre``) keeps nothing in the URL, so there is no URL to
-observe. The agent (``geoui_bridge.agents.build_maplibre_agent``) drives the
+observe. The agent (``maplibre.agents.build_maplibre_agent``) drives the
 page through the CDP bridge, and after each turn :meth:`MaplibreApp.snapshot`
 reads ``window.geoui.getState()`` through the same bridge and stores the
 GeoIntent itself as the turn's handle (``geoui+json:<json>``), which
@@ -11,7 +11,7 @@ chart extension) and with the opener for this app only.
 
 ``python -m geouibench run benchmarks/maplibre gold`` loads ``APP`` from here;
 ``prepare()`` brings up Chromium and checks the demo is being served at
-``GEOUI_APP_URL`` (``npm run dev -w demo/maplibre``).
+``GEOUI_APP_URL`` (``npm run dev``).
 """
 
 from __future__ import annotations
@@ -28,11 +28,11 @@ from pydantic_ai import Agent
 from pydantic_ai.capabilities import AbstractCapability
 
 from geoui import GeoIntent
-from geoui_bridge import BridgeConfig, BridgeError, bridge
-from geoui_bridge.agents import build_maplibre_agent
-from geoui_bridge.tools import SessionFactory
 from geouibench import Budgets, SyntheticStyle
 from geouibench.app import UIState
+from maplibre import BridgeConfig, BridgeError, bridge
+from maplibre.agents import build_maplibre_agent
+from maplibre.tools import SessionFactory
 
 REPO_DIR = Path(__file__).resolve().parents[2]
 CHROMIUM_SH = REPO_DIR / "demo" / "chromium.sh"
@@ -105,9 +105,7 @@ class MaplibreApp:
         try:
             httpx.get(url, timeout=5.0).raise_for_status()
         except httpx.HTTPError as exc:
-            raise RuntimeError(
-                f"the MapLibre demo is not answering at {url} ({exc}); start it: npm run dev -w demo/maplibre"
-            ) from exc
+            raise RuntimeError(f"the MapLibre demo is not answering at {url} ({exc}); start it: npm run dev") from exc
         return {"PLAYWRIGHT_CDP_ENDPOINT": endpoint, "GEOUI_APP_URL": url}
 
     def build_agent(

@@ -7,8 +7,8 @@ import pytest
 
 from geoui import GeoIntent
 from geoui.extensions import chart, compare, raster_styling
-from geoui_bridge import BridgeError, Catalogue, check_catalogue, prepare_intent
-from geoui_bridge.cdp import BridgeConfig, config_from_env
+from maplibre import BridgeError, Catalogue, check_catalogue, prepare_intent
+from maplibre.cdp import BridgeConfig, config_from_env
 
 ROOT = Path(__file__).resolve().parents[3]
 SCHEMAS = ROOT / "schemas" / "extensions"

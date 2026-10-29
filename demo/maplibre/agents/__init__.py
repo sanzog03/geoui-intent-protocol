@@ -1,6 +1,6 @@
 """Agents that drive a ``window.geoui`` page through the bridge's tools (see ``maplibre_agent``)."""
 
-from geoui_bridge.agents.maplibre_agent import (
+from maplibre.agents.maplibre_agent import (
     AGENT_NAME,
     MODEL_NAME,
     SYSTEM_PROMPT,

@@ -21,25 +21,22 @@ dependencies = [
 Repository = "https://github.com/NASA-IMPACT/geoui-intent-protocol"
 
 [tool.uv.workspace]
-members = ["demo", "benchmarks", "bridge"]
+members = ["demo", "benchmarks"]
 
 [tool.uv.sources]
-# The Worldview demo (adapter, tools, MCP server, agents) is a sibling project; the dev
-# group installs it editable so `uv run` sees `worldview` the same way it sees `geoui`.
-geoui-worldview-demo = { workspace = true }
+# The two demos are one sibling project: `worldview` (adapter, tools, MCP server, agents)
+# and `maplibre` (the GeoUI MCP over CDP and its agent; the React app sits beside it). The
+# dev group installs it editable so `uv run` sees both the same way it sees `geoui`.
+geoui-demos = { workspace = true }
 # The benchmark utility (deepeval) is the third member; only the dev group pulls it
 # in, so the library and the demo stay deepeval-free. App bindings under
 # benchmarks/<app>/ are plain directories the utility loads by path, not packages.
 geouibench = { workspace = true }
-# The CDP bridge (GeoUI MCP for any window.geoui page) is the fourth member; it needs
-# playwright, which only it declares.
-geoui-bridge = { workspace = true }
 
 [dependency-groups]
 dev = [
-    "geoui-worldview-demo",
+    "geoui-demos",
     "geouibench",
-    "geoui-bridge",
     "pytest>=9.0",
     "pytest-asyncio>=1.3",
     "pytest-cov>=7.0",
@@ -53,7 +50,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["geoui*"]
-exclude = ["tests*", "demo*", "benchmarks*", "bridge*", "docs*", "scripts*", "worldview*", "sdk*", "schemas*", "node_modules*"]
+exclude = ["tests*", "demo*", "benchmarks*", "docs*", "scripts*", "worldview*", "sdk*", "schemas*", "node_modules*"]
 
 [tool.setuptools.package-data]
 geoui = ["py.typed"]
@@ -66,13 +63,13 @@ testpaths = [
     "benchmarks/geouibench/tests",
     "benchmarks/worldview/tests",
     "benchmarks/maplibre/tests",
-    "bridge/geoui_bridge/tests",
+    "demo/maplibre/tests",
 ]
 # deepeval registers a pytest plugin that would load into every run; `deepeval test run`
 # re-enables it explicitly, so the unit suite stays free of it.
 addopts = ["-ra", "--strict-markers", "--strict-config", "-p", "no:deepeval"]
 markers = [
-    "agents: needs the geoui-worldview-demo project (pydantic-ai, vendored plugin)",
+    "agents: needs the geoui-demos project (pydantic-ai, vendored plugin)",
     "integration: spawns a subprocess or touches the network",
 ]
 
@@ -88,7 +85,7 @@ quote-style = "double"
 
 [tool.ruff.lint.isort]
 # the three workspace packages are first-party wherever they are imported from
-known-first-party = ["geoui", "worldview", "geouibench", "geoui_bridge"]
+known-first-party = ["geoui", "worldview", "geouibench", "maplibre"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = ["F841"]

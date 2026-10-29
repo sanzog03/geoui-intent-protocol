@@ -25,7 +25,7 @@
 #   WORLDVIEW_CHROMIUM_PROFILE  user-data-dir (default /tmp/worldview-chromium)
 #   MARIMO_MODE                 "run" (default) or "edit"
 #   AGENT                       "geoui" (default), "vlm" or "maplibre" — which agent
-#   GEOUI_APP_URL               maplibre only: where `npm run dev -w demo/maplibre`
+#   GEOUI_APP_URL               maplibre only: where `npm run dev`
 #                               serves the app (default http://127.0.0.1:5173)
 #                               demo/chat.py runs (treatment vs baseline)
 #
@@ -73,10 +73,10 @@ export AGENT   # demo/chat.py reads it to pick the agent
 
 if [[ "$AGENT" == "maplibre" ]]; then
     # The MapLibre demo has no plugin and no remote MCPs; it needs the Vite dev
-    # server (npm run dev -w demo/maplibre) so the agent has a page to drive.
+    # server (npm run dev) so the agent has a page to drive.
     export GEOUI_APP_URL="${GEOUI_APP_URL:-http://127.0.0.1:5173}"
     if ! curl -fs -o /dev/null "$GEOUI_APP_URL"; then
-        echo "Error: the MapLibre demo is not answering at $GEOUI_APP_URL. Start it first: npm run dev -w demo/maplibre" >&2
+        echo "Error: the MapLibre demo is not answering at $GEOUI_APP_URL. Start it first: npm run dev" >&2
         exit 2
     fi
     echo "MapLibre demo at $GEOUI_APP_URL"

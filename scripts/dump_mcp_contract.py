@@ -21,9 +21,9 @@ Examples::
     # rewrite the golden from the in-process server (deliberate contract change; review the diff)
     uv run python scripts/dump_mcp_contract.py local --update-golden
 
-    # the CDP-bridge server (geoui_bridge) and its own golden
-    uv run python scripts/dump_mcp_contract.py local --module geoui_bridge.mcp.server:mcp \
-        --golden bridge/geoui_bridge/tests/mcp/fixtures/bridge_contract.json --update-golden
+    # the CDP-bridge server (maplibre) and its own golden
+    uv run python scripts/dump_mcp_contract.py local --module maplibre.mcp.server:mcp \
+        --golden demo/maplibre/tests/mcp/fixtures/bridge_contract.json --update-golden
 """
 
 from __future__ import annotations

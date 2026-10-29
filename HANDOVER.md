@@ -64,21 +64,20 @@ two reference agents, a marimo chat demo, and the head-to-head benchmark.
 | `geoui/extensions/spec.py` | `ExtensionSpec` (uri, prefix, scope, fields, summary; `describe()`), `used_prefixes`, `declare`: what a consumer needs to advertise and pre-declare extensions. | pydantic |
 | `schemas/`, `scripts/export_schemas.py`, `tests/test_schemas.py` | The protocol's JSON Schemas exported from pydantic (core + one `describe()` per extension), committed and drift-checked. The TypeScript SDK embeds them. | — |
 | `sdk/geoui-react/` | **`@geoui/react`**: `registry.ts` (slots, `compose`, `validate` with the same wording as `prepare_intent`, `apply` with replace semantics, `settle`), `bridge.ts` (`window.geoui`), `provider.tsx` (`GeoUIProvider`, `useGeoUIState`, `useGeoUIBridge`), `hooks.ts` (the attach hooks), `generated/` (types + schema literals from `scripts/gen-types.ts`). vitest + jsdom tests drive `window.geoui` from outside React. | react |
-| `demo/maplibre/` | React + MapLibre + GIBS app on the SDK: `App.tsx` owns the state and attaches it; `layers.ts` is the catalogue (`describe().layers`); `components/MapView.tsx` fits itself from a fit request (the primary map is uncontrolled). | @geoui/react, react-map-gl |
-| `bridge/geoui_bridge/` | **The GeoUI MCP over CDP.** `cdp.py` (`BridgeSession`: `connect_over_cdp`, page by origin, tab opened via the browser's `/json/new`), `catalogue.py` (`check_catalogue` against `geoui.extensions.ALL`, `prepare_intent`), `tools/` (docs, models, operations; `pai.py` toolset with `ModelRetry`), `mcp/server.py` (`create_server`, one lazy reconnecting session, `geoui-bridge-mcp`), `agents/maplibre_agent.py` (bare agent, three tools, short prompt). Tests use `tests/_fake_session.py`; the contract golden is `tests/mcp/fixtures/bridge_contract.json`. | geoui, playwright, fastmcp, pydantic-ai |
-| `bridge/pyproject.toml` | The fourth workspace member, `geoui-bridge`; the only one that declares playwright. Not nested under `demo/` because uv refuses a member inside another member's directory. | — |
-| `benchmarks/maplibre/` | The MapLibre app directory: `app.py` (`MaplibreApp`: `output_url` is always `None`, `snapshot()` reads the page state as `geoui+json:<json>`, `observe()` parses it), the gold set minus chart with the geoui opener only, tests, `results/`. | geouibench, geoui-bridge |
+| `demo/maplibre/maplibre_geo_application/` | React + MapLibre + GIBS app on the SDK: `App.tsx` owns the state and attaches it; `layers.ts` is the catalogue (`describe().layers`); `components/MapView.tsx` fits itself from a fit request (the primary map is uncontrolled). | @geoui/react, react-map-gl |
+| `demo/maplibre/` | **The MapLibre demo's Python side: the GeoUI MCP over CDP and its agent** (import `maplibre`, same `geoui-demos` member as `worldview`). `cdp.py` (`BridgeSession`: `connect_over_cdp`, page by origin, tab opened via the browser's `/json/new`), `catalogue.py` (`check_catalogue` against `geoui.extensions.ALL`, `prepare_intent`), `tools/` (docs, models, operations; `pai.py` toolset with `ModelRetry`), `mcp/server.py` (`create_server`, one lazy reconnecting session, `maplibre-mcp`), `agents/maplibre_agent.py` (bare agent, three tools, short prompt). Tests use `tests/_fake_session.py`; the contract golden is `tests/mcp/fixtures/bridge_contract.json`. | geoui, playwright, fastmcp, pydantic-ai |
+| `benchmarks/maplibre/` | The MapLibre app directory: `app.py` (`MaplibreApp`: `output_url` is always `None`, `snapshot()` reads the page state as `geoui+json:<json>`, `observe()` parses it), the gold set minus chart with the geoui opener only, tests, `results/`. | geouibench, demo |
 | `docs/maplibre-demo/architecture.md` | Component / sequence / deployment diagrams (Mermaid) of the whole path and a Worldview-vs-MapLibre table. | — |
-| `package.json`, `tsconfig.base.json`, `eslint.config.js` | npm workspaces (`sdk/geoui-react`, `demo/maplibre`); `npm test`, `npm run build`, `npm run lint`, `npm run gen:types`. | node |
-| `demo/pyproject.toml` | The `geoui-worldview-demo` project: a uv workspace member that depends on `geoui-protocol` and owns the heavy dependencies (pydantic-ai, fastmcp, marimo). The root dev group installs it editable. | — |
+| `package.json`, `tsconfig.base.json`, `eslint.config.js` | npm workspaces (`sdk/geoui-react`, `demo/maplibre/maplibre_geo_application`); `npm test`, `npm run build`, `npm run lint`, `npm run gen:types`. | node |
+| `demo/pyproject.toml` | The `geoui-demos` project (packages `worldview` and `maplibre`): a uv workspace member that depends on `geoui-protocol` and owns the heavy dependencies (pydantic-ai, fastmcp, marimo, playwright). One member for both demos because uv refuses a member nested inside another member's directory. The root dev group installs it editable. | — |
 | `benchmarks/pyproject.toml` | The third workspace member, `geouibench` (owns deepeval). The root dev group installs it editable; the demo never depends on it. App directories under `benchmarks/` are not members. | — |
 | `tests/` | `test_core.py` and `test_benchmark_results.py` (library and repo-level; the latter scans every committed benchmark artifact for absolute paths). | — |
 | `demo/worldview/tests/` | `adapter/` (permalink, assembly, round trip); `mcp/test_server.py` (contract vs golden, calls, stdio smoke); `agents/test_plugin.py` (loader), `agents/test_pai_tools.py` (toolset parity) and `agents/test_agent_surface.py` (model-visible surface golden, plus a no-akd check). Collected by the root `pytest` via `testpaths`. | — |
 
 **Layering rule:** `geoui` imports only pydantic and never `worldview` or
-`geoui_bridge`. `geoui_bridge` imports `geoui`, playwright, fastmcp and
-pydantic-ai, never `worldview`; `demo/maplibre` imports only `@geoui/react`;
-`benchmarks/maplibre/app.py` imports `geouibench` and `geoui_bridge`.
+`maplibre`. `maplibre` imports `geoui`, playwright, fastmcp and
+pydantic-ai, never `worldview`; the React app imports only `@geoui/react`;
+`benchmarks/maplibre/app.py` imports `geouibench` and `maplibre`.
 `worldview.adapter` adds dateutil; `worldview.tools` the adapter;
 `worldview.mcp` fastmcp; `worldview.tools.pai`, `worldview.plugin` and
 `worldview.agents` pydantic-ai. The benchmark sits on top: `geoui` ←
@@ -251,7 +250,7 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
 ```
 
 **The MapLibre path (since October 28, 2026).** The same six metrics on an
-application with no URL: `geoui_bridge.agents.build_maplibre_agent` is a bare
+application with no URL: `maplibre.agents.build_maplibre_agent` is a bare
 agent with only the three GeoUI tools (in-process toolset over a per-call CDP
 session; no skill, discovery MCPs or browser tools), and
 `benchmarks/maplibre/app.py` uses the `snapshot()` hook to read
@@ -431,9 +430,9 @@ compare / opacity (B). The first full run is `benchmarks/maplibre/results/`.
 5. `uv run python -m geouibench run benchmarks/worldview gold --smoke --run-id smoke`,
    read `benchmarks/worldview/results/smoke/summary.md`, then re-score it with
    `uv run python -m geouibench score benchmarks/worldview/results/smoke`.
-6. `npm install && npm test`, then `npm run dev -w demo/maplibre`,
-   `GEOUI_APP_URL=http://127.0.0.1:5173 uv run geoui-bridge-mcp` from Claude
-   Code (or `uv run python -m geoui_bridge.agents.maplibre_agent "..."`), and
+6. `npm install && npm test`, then `npm run dev`,
+   `GEOUI_APP_URL=http://127.0.0.1:5173 uv run maplibre-mcp` from Claude
+   Code (or `uv run python -m maplibre.agents.maplibre_agent "..."`), and
    `uv run python -m geouibench run benchmarks/maplibre gold --smoke --run-id smoke`.
    Read `docs/maplibre-demo/architecture.md` first.
 7. Pick up §7 and the README roadmap: more scenarios and runs, the

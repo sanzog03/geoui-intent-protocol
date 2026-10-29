@@ -19,7 +19,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from geoui.core import GeoIntent
 from geoui.extensions import ALL, ExtensionSpec, chart, compare, declare, raster_styling, used_prefixes
-from geoui_bridge.cdp import BridgeError
+from maplibre.cdp import BridgeError
 
 DEFAULT_CRS = "EPSG:4326"
 

@@ -2,9 +2,9 @@
 
 The second app directory for `geouibench`: the same six metrics and the same gold scenarios as
 [`../worldview`](../worldview) (minus the chart ones, which the demo does not attach), run against
-the [MapLibre demo](../../demo/maplibre) through the [CDP bridge](../../bridge).
+the [MapLibre demo](../../demo/maplibre) through its GeoUI MCP over CDP (the `maplibre` package in the same directory).
 
-- **geoui** — `geoui_bridge.agents.build_maplibre_agent`: a bare pydantic-ai agent with only the three
+- **geoui** — `maplibre.agents.build_maplibre_agent`: a bare pydantic-ai agent with only the three
   GeoUI tools. No skill, no discovery MCPs, no browser tools; the page's catalogue
   (`geo_ui_list_intent_extensions_tool`) is all it knows about the application.
 
@@ -26,7 +26,7 @@ benchmarks/maplibre/
 ## Running
 
 ```bash
-npm run dev -w demo/maplibre &                      # the app at http://127.0.0.1:5173 (GEOUI_APP_URL to override)
+npm run dev &                      # the app at http://127.0.0.1:5173 (GEOUI_APP_URL to override)
 uv run python -m geouibench run benchmarks/maplibre gold --smoke --run-id smoke   # one golden, quick
 uv run python -m geouibench run benchmarks/maplibre gold --run-id 2026-10-29-gold
 uv run python -m geouibench summarize benchmarks/maplibre 2026-10-29-gold

@@ -9,8 +9,8 @@ lifetime and reconnects if the browser went away.
 
 Run locally::
 
-    geoui-bridge-mcp                      # stdio (default)
-    geoui-bridge-mcp --transport http --port 8001
+    maplibre-mcp                      # stdio (default)
+    maplibre-mcp --transport http --port 8001
 
 or register it in Claude Code's ``.mcp.json`` as a stdio server.
 """
@@ -26,9 +26,9 @@ from typing import Any
 from fastmcp import FastMCP
 
 from geoui.core import GeoIntent
-from geoui_bridge import tools
-from geoui_bridge.cdp import BridgeConfig, BridgeSession, GeoUISession, config_from_env
-from geoui_bridge.mcp._describe import describe
+from maplibre import tools
+from maplibre.cdp import BridgeConfig, BridgeSession, GeoUISession, config_from_env
+from maplibre.mcp._describe import describe
 
 
 class SessionHolder:
