@@ -1,0 +1,7 @@
+{
+  "name": "geoui-maplibre-demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "MapLibre + NASA GIBS demo app with the @geoui/react adapter attached (placeholder; filled in by the app task)",
+  "type": "module"
+}

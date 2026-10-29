@@ -49,7 +49,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["geoui*"]
-exclude = ["tests*", "demo*", "benchmarks*", "docs*", "scripts*", "worldview*"]
+exclude = ["tests*", "demo*", "benchmarks*", "docs*", "scripts*", "worldview*", "sdk*", "schemas*", "node_modules*"]
 
 [tool.setuptools.package-data]
 geoui = ["py.typed"]
@@ -74,7 +74,7 @@ markers = [
 target-version = "py312"
 line-length = 120
 # vendored plugin submodule and skills are not ours to lint or reformat
-extend-exclude = ["demo/worldview/agents/artifact", "*.md"]
+extend-exclude = ["demo/worldview/agents/artifact", "*.md", "node_modules"]
 
 [tool.ruff.format]
 line-ending = "lf"
