@@ -1,0 +1,635 @@
+{
+  "geo_ui_get_state_tool": {
+    "name": "geo_ui_get_state_tool",
+    "description": "Read the current application state as a GeoIntent.\n\nUse this to observe what is on screen — typically when continuing an\niterative analysis: read current state, decide what to change, emit a\nnew GeoIntent via geo_ui_render_intent_tool. The user may have changed\nthe view by hand since your last render.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the application state.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {},
+      "type": "object"
+    },
+    "outputSchema": {
+      "description": "Output for ``geo_ui_get_state_tool``.",
+      "properties": {
+        "intent": {
+          "additionalProperties": true,
+          "description": "GeoIntent describing the application state.",
+          "properties": {
+            "geoui_version": {
+              "default": "1.0.0",
+              "type": "string"
+            },
+            "geoui_extensions": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "viewport": {
+              "description": "Spatial viewport.\n\n`bbox` is interpreted in `crs`. For the geographic default\n(`EPSG:4326`), `bbox` is `[west, south, east, north]` in degrees.\nFor projected CRSs, the values are projected coordinates.\n`bbox=None` means \"app default extent.\"",
+              "properties": {
+                "bbox": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "type": "number"
+                      },
+                      "maxItems": 4,
+                      "minItems": 4,
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null
+                },
+                "crs": {
+                  "default": "EPSG:4326",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "time": {
+              "anyOf": [
+                {
+                  "description": "Time selection.\n\nEither a single `instant` OR a closed range `{start, end}` — the two\nare mutually exclusive. All fields `None` is allowed and means\n\"app default time.\"",
+                  "properties": {
+                    "instant": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    },
+                    "start": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    },
+                    "end": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    }
+                  },
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "layers": {
+              "items": {
+                "additionalProperties": true,
+                "description": "A reference to a renderable layer.\n\n`id` is application-defined — the conforming app must be able to\nresolve it to a layer in its own catalogue. Per-layer rendering hints\nbeyond the universal set (`visible`, `opacity`) belong in extensions\nand are expressed as namespaced extra keys\n(e.g. `\"raster-styling:palettes\": [...]`).",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "visible": {
+                    "default": true,
+                    "type": "boolean"
+                  },
+                  "opacity": {
+                    "anyOf": [
+                      {
+                        "maximum": 1.0,
+                        "minimum": 0.0,
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "intent"
+      ],
+      "type": "object"
+    },
+    "akd_description": "Read the current application state as a GeoIntent.\n\nUse this to observe what is on screen — typically when continuing an\niterative analysis: read current state, decide what to change, emit a\nnew GeoIntent via geo_ui_render_intent_tool. The user may have changed\nthe view by hand since your last render.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the application state.",
+    "akd_params": []
+  },
+  "geo_ui_list_intent_extensions_tool": {
+    "name": "geo_ui_list_intent_extensions_tool",
+    "description": "List the intent extensions and the layers this application supports.\n\nCall this first in a conversation. Each extension entry names it\n(compare, raster-styling, ...), says where its fields live (`scope`:\n\"intent\" = namespaced keys on the GeoIntent root, \"layer\" = namespaced\nkeys on each LayerRef), gives a one-line summary of when to use it, its\nnamespaced `keys`, which of them are `required`, and the JSON schema of\nits fields. `layers` lists the layer ids the application can show, with\ntitles and temporal coverage; a GeoIntent may only reference those ids.\n\nDecide which extensions the user's request needs, then fill only their\nnamespaced fields in the GeoIntent you pass to geo_ui_render_intent_tool.\nSupported extensions are pre-declared by that tool, so never write\n`geoui_extensions` yourself; fields of an unsupported extension and\nunknown layer ids are rejected.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **extensions**: The supported intent extensions, in the order the application lists them.\n- **layers**: The layers the application can show; GeoIntent layer ids must come from here.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {},
+      "type": "object"
+    },
+    "outputSchema": {
+      "description": "Output for ``geo_ui_list_intent_extensions_tool``.",
+      "properties": {
+        "extensions": {
+          "description": "The supported intent extensions, in the order the application lists them.",
+          "items": {
+            "description": "One supported extension, as ``ExtensionSpec.describe()`` lays it out.",
+            "properties": {
+              "name": {
+                "description": "The namespace prefix, e.g. compare.",
+                "type": "string"
+              },
+              "uri": {
+                "description": "The extension's canonical, versioned URI.",
+                "type": "string"
+              },
+              "scope": {
+                "description": "\"intent\": keys on the GeoIntent root; \"layer\": keys on each LayerRef.",
+                "type": "string"
+              },
+              "summary": {
+                "description": "When to use it, in one line.",
+                "type": "string"
+              },
+              "keys": {
+                "description": "The namespaced keys, e.g. compare:layers.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "required": {
+                "description": "Keys that must be present once the extension is used.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "fields_schema": {
+                "additionalProperties": true,
+                "description": "JSON schema of the fields (without the prefix).",
+                "type": "object"
+              }
+            },
+            "required": [
+              "name",
+              "uri",
+              "scope",
+              "summary",
+              "keys",
+              "required",
+              "fields_schema"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "layers": {
+          "description": "The layers the application can show; GeoIntent layer ids must come from here.",
+          "items": {
+            "description": "One layer the application can show; ``id`` is what a GeoIntent's ``layers[].id`` must use.",
+            "properties": {
+              "id": {
+                "description": "Layer id as the application resolves it.",
+                "type": "string"
+              },
+              "title": {
+                "description": "Human-readable name.",
+                "type": "string"
+              },
+              "time": {
+                "anyOf": [
+                  {
+                    "properties": {
+                      "start": {
+                        "description": "First available date (ISO).",
+                        "type": "string"
+                      },
+                      "end": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null,
+                        "description": "Last available date, or null when ongoing."
+                      },
+                      "period": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null,
+                        "description": "ISO 8601 duration between steps, e.g. P1D."
+                      }
+                    },
+                    "required": [
+                      "start"
+                    ],
+                    "type": "object"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "default": null,
+                "description": "Temporal coverage, when the layer is time-varying."
+              }
+            },
+            "required": [
+              "id",
+              "title"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "extensions"
+      ],
+      "type": "object"
+    },
+    "akd_description": "List the intent extensions and the layers this application supports.\n\nCall this first in a conversation. Each extension entry names it\n(compare, raster-styling, ...), says where its fields live (`scope`:\n\"intent\" = namespaced keys on the GeoIntent root, \"layer\" = namespaced\nkeys on each LayerRef), gives a one-line summary of when to use it, its\nnamespaced `keys`, which of them are `required`, and the JSON schema of\nits fields. `layers` lists the layer ids the application can show, with\ntitles and temporal coverage; a GeoIntent may only reference those ids.\n\nDecide which extensions the user's request needs, then fill only their\nnamespaced fields in the GeoIntent you pass to geo_ui_render_intent_tool.\nSupported extensions are pre-declared by that tool, so never write\n`geoui_extensions` yourself; fields of an unsupported extension and\nunknown layer ids are rejected.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **extensions**: The supported intent extensions, in the order the application lists them.\n- **layers**: The layers the application can show; GeoIntent layer ids must come from here.",
+    "akd_params": []
+  },
+  "geo_ui_render_intent_tool": {
+    "name": "geo_ui_render_intent_tool",
+    "description": "Render a GeoIntent in the open map application.\n\nUse this tool to materialise the agent's intended application state\n(expressed as a GeoIntent) on screen. The agent reasons in GeoIntent\nterms, not in the application's own controls. Rendering REPLACES the\nwhole state: fields you leave out return to the application's defaults\n(compare off, styling cleared, default time and extent), so read the\nstate first and resend what must stay. Returns the state the\napplication settled on.\n\nINPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the desired application state. Core fields: viewport (bbox [west, south, east, north] in degrees, crs EPSG:4326), time (instant, ISO date), layers (id + visible + opacity). Extensions and the layer catalogue come from the application: call geo_ui_list_intent_extensions_tool first. Supported extensions are pre-declared by this tool: do not write `geoui_extensions`; just add the namespaced fields the request needs. Fields of an unsupported extension and unknown layer ids are rejected. Rendering replaces the whole state.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the application state.\n- **settled**: True when the application confirmed the state was applied on screen; false when it timed out waiting.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {
+        "intent": {
+          "additionalProperties": true,
+          "description": "The GeoUI Protocol root.\n\nCarries the minimal cross-application contract: viewport, time,\nlayers. Extension fields are namespaced (e.g. `\"compare:layers\"`)\nand live as extra keys; their semantics are defined by the schemas\npointed to by `geoui_extensions`.",
+          "properties": {
+            "geoui_version": {
+              "default": "1.0.0",
+              "type": "string"
+            },
+            "geoui_extensions": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "viewport": {
+              "description": "Spatial viewport.\n\n`bbox` is interpreted in `crs`. For the geographic default\n(`EPSG:4326`), `bbox` is `[west, south, east, north]` in degrees.\nFor projected CRSs, the values are projected coordinates.\n`bbox=None` means \"app default extent.\"",
+              "properties": {
+                "bbox": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "type": "number"
+                      },
+                      "maxItems": 4,
+                      "minItems": 4,
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null
+                },
+                "crs": {
+                  "default": "EPSG:4326",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "time": {
+              "anyOf": [
+                {
+                  "description": "Time selection.\n\nEither a single `instant` OR a closed range `{start, end}` — the two\nare mutually exclusive. All fields `None` is allowed and means\n\"app default time.\"",
+                  "properties": {
+                    "instant": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    },
+                    "start": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    },
+                    "end": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    }
+                  },
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "layers": {
+              "items": {
+                "additionalProperties": true,
+                "description": "A reference to a renderable layer.\n\n`id` is application-defined — the conforming app must be able to\nresolve it to a layer in its own catalogue. Per-layer rendering hints\nbeyond the universal set (`visible`, `opacity`) belong in extensions\nand are expressed as namespaced extra keys\n(e.g. `\"raster-styling:palettes\": [...]`).",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "visible": {
+                    "default": true,
+                    "type": "boolean"
+                  },
+                  "opacity": {
+                    "anyOf": [
+                      {
+                        "maximum": 1.0,
+                        "minimum": 0.0,
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        }
+      },
+      "required": [
+        "intent"
+      ],
+      "type": "object"
+    },
+    "outputSchema": {
+      "description": "Output for ``geo_ui_render_intent_tool``.",
+      "properties": {
+        "intent": {
+          "additionalProperties": true,
+          "description": "GeoIntent describing the application state.",
+          "properties": {
+            "geoui_version": {
+              "default": "1.0.0",
+              "type": "string"
+            },
+            "geoui_extensions": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            "viewport": {
+              "description": "Spatial viewport.\n\n`bbox` is interpreted in `crs`. For the geographic default\n(`EPSG:4326`), `bbox` is `[west, south, east, north]` in degrees.\nFor projected CRSs, the values are projected coordinates.\n`bbox=None` means \"app default extent.\"",
+              "properties": {
+                "bbox": {
+                  "anyOf": [
+                    {
+                      "items": {
+                        "type": "number"
+                      },
+                      "maxItems": 4,
+                      "minItems": 4,
+                      "type": "array"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "default": null
+                },
+                "crs": {
+                  "default": "EPSG:4326",
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            },
+            "time": {
+              "anyOf": [
+                {
+                  "description": "Time selection.\n\nEither a single `instant` OR a closed range `{start, end}` — the two\nare mutually exclusive. All fields `None` is allowed and means\n\"app default time.\"",
+                  "properties": {
+                    "instant": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    },
+                    "start": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    },
+                    "end": {
+                      "anyOf": [
+                        {
+                          "type": "string"
+                        },
+                        {
+                          "format": "date",
+                          "type": "string"
+                        },
+                        {
+                          "format": "date-time",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "default": null
+                    }
+                  },
+                  "type": "object"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "default": null
+            },
+            "layers": {
+              "items": {
+                "additionalProperties": true,
+                "description": "A reference to a renderable layer.\n\n`id` is application-defined — the conforming app must be able to\nresolve it to a layer in its own catalogue. Per-layer rendering hints\nbeyond the universal set (`visible`, `opacity`) belong in extensions\nand are expressed as namespaced extra keys\n(e.g. `\"raster-styling:palettes\": [...]`).",
+                "properties": {
+                  "id": {
+                    "type": "string"
+                  },
+                  "visible": {
+                    "default": true,
+                    "type": "boolean"
+                  },
+                  "opacity": {
+                    "anyOf": [
+                      {
+                        "maximum": 1.0,
+                        "minimum": 0.0,
+                        "type": "number"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null
+                  }
+                },
+                "required": [
+                  "id"
+                ],
+                "type": "object"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
+        "settled": {
+          "default": true,
+          "description": "True when the application confirmed the state was applied on screen; false when it timed out waiting.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "intent"
+      ],
+      "type": "object"
+    },
+    "akd_description": "Render a GeoIntent in the open map application.\n\nUse this tool to materialise the agent's intended application state\n(expressed as a GeoIntent) on screen. The agent reasons in GeoIntent\nterms, not in the application's own controls. Rendering REPLACES the\nwhole state: fields you leave out return to the application's defaults\n(compare off, styling cleared, default time and extent), so read the\nstate first and resend what must stay. Returns the state the\napplication settled on.\n\nINPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the desired application state. Core fields: viewport (bbox [west, south, east, north] in degrees, crs EPSG:4326), time (instant, ISO date), layers (id + visible + opacity). Extensions and the layer catalogue come from the application: call geo_ui_list_intent_extensions_tool first. Supported extensions are pre-declared by this tool: do not write `geoui_extensions`; just add the namespaced fields the request needs. Fields of an unsupported extension and unknown layer ids are rejected. Rendering replaces the whole state.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the application state.\n- **settled**: True when the application confirmed the state was applied on screen; false when it timed out waiting.",
+    "akd_params": [
+      "intent"
+    ]
+  }
+}

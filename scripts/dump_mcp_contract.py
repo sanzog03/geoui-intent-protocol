@@ -20,6 +20,10 @@ Examples::
 
     # rewrite the golden from the in-process server (deliberate contract change; review the diff)
     uv run python scripts/dump_mcp_contract.py local --update-golden
+
+    # the CDP-bridge server (geoui_bridge) and its own golden
+    uv run python scripts/dump_mcp_contract.py local --module geoui_bridge.mcp.server:mcp \
+        --golden bridge/geoui_bridge/tests/mcp/fixtures/bridge_contract.json --update-golden
 """
 
 from __future__ import annotations
@@ -33,12 +37,20 @@ from pathlib import Path
 
 from fastmcp import Client
 
+DEFAULT_MODULE = "worldview.mcp.server:mcp"
 
-async def dump(target: str, only: str | None) -> dict:
+
+def load_server(spec: str):
+    """``package.module:attr`` → the FastMCP instance."""
+    import importlib
+
+    module_name, _, attr = spec.partition(":")
+    return getattr(importlib.import_module(module_name), attr or "mcp")
+
+
+async def dump(target: str, only: str | None, module: str = DEFAULT_MODULE) -> dict:
     if target == "local":
-        from worldview.mcp.server import mcp
-
-        transport = mcp
+        transport = load_server(module)
     elif target.startswith("http"):
         from fastmcp.client.transports import StreamableHttpTransport
 
@@ -64,13 +76,14 @@ async def dump(target: str, only: str | None) -> dict:
     }
 
 
-GOLDEN = Path(__file__).resolve().parents[1] / "demo" / "worldview" / "tests" / "mcp" / "fixtures" / "akd_contract.json"
+ROOT = Path(__file__).resolve().parents[1]
+GOLDEN = ROOT / "demo" / "worldview" / "tests" / "mcp" / "fixtures" / "akd_contract.json"
 
 
-def update_golden(contract: dict) -> None:
+def update_golden(contract: dict, golden_path: Path = GOLDEN) -> None:
     """Rewrite the contract fixture, keeping its akd-era keys: ``akd_description`` mirrors ``description``
     and ``akd_params`` lists the input parameter names; the akd ``_response`` output key stays absent."""
-    golden = json.loads(GOLDEN.read_text()) if GOLDEN.exists() else {}
+    golden = json.loads(golden_path.read_text()) if golden_path.exists() else {}
     for name, tool in contract.items():
         entry = golden.get(name, {})
         entry.update(tool)
@@ -80,8 +93,9 @@ def update_golden(contract: dict) -> None:
     for name in list(golden):
         if name not in contract:
             del golden[name]
-    GOLDEN.write_text(json.dumps(golden, indent=2, ensure_ascii=False) + "\n")
-    print(f"wrote {GOLDEN}")
+    golden_path.parent.mkdir(parents=True, exist_ok=True)
+    golden_path.write_text(json.dumps(golden, indent=2, ensure_ascii=False) + "\n")
+    print(f"wrote {golden_path}")
 
 
 def main(argv: list[str] | None = None) -> None:
@@ -89,10 +103,12 @@ def main(argv: list[str] | None = None) -> None:
     parser.add_argument("target", help="'local' (in-process), an http(s) URL, or a server .py path (stdio)")
     parser.add_argument("--only", help="keep only tools whose name starts with this prefix")
     parser.add_argument("--update-golden", action="store_true", help="rewrite the test fixture from this contract")
+    parser.add_argument("--module", default=DEFAULT_MODULE, help="for 'local': the FastMCP instance as module:attr")
+    parser.add_argument("--golden", type=Path, default=GOLDEN, help="the fixture --update-golden rewrites")
     args = parser.parse_args(argv)
-    contract = asyncio.run(dump(args.target, args.only or ("geo_ui_" if args.update_golden else None)))
+    contract = asyncio.run(dump(args.target, args.only or ("geo_ui_" if args.update_golden else None), args.module))
     if args.update_golden:
-        update_golden(contract)
+        update_golden(contract, args.golden)
         return
     json.dump(contract, sys.stdout, indent=2, ensure_ascii=False)
     print()
