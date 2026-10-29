@@ -8,6 +8,7 @@ dependencies = [
     "pydantic>=2.7",
     # connect_over_cdp only: the driver ships in the wheel, no browser download is needed
     "playwright>=1.64,<2",
+    "httpx>=0.27",
     "fastmcp>=3.3,<4",
     "pydantic-ai>=2.63,<3",
     "python-dotenv>=1.0",

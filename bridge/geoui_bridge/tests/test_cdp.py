@@ -44,6 +44,15 @@ async def test_describe_get_state_render_round_trip():
             await session.render({"layers": [{"id": "definitely-not-a-layer"}], "chart:layer": "x"})
 
 
+@needs_browser
+async def test_state_persists_across_sessions_and_the_tab_survives_disconnect():
+    async with bridge(CONFIG) as session:
+        before = await session.get_state()
+        await session.render({**before, "time": {"instant": "2024-07-04"}})
+    async with bridge(CONFIG) as session:  # a new connection finds the same tab with the same state
+        assert (await session.get_state())["time"]["instant"] == "2024-07-04"
+
+
 async def test_unreachable_endpoint_is_a_bridge_error():
     from geoui_bridge.cdp import BridgeConfig
 

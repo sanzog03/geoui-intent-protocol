@@ -12,12 +12,16 @@ to the agent.
 
 from __future__ import annotations
 
+import asyncio
 import os
+import time
 from collections.abc import AsyncIterator, Mapping
 from contextlib import asynccontextmanager
 from dataclasses import dataclass
 from typing import Any, Protocol, runtime_checkable
 from urllib.parse import urlsplit
+
+import httpx
 
 DEFAULT_CDP_ENDPOINT = "http://localhost:9222"
 
@@ -99,40 +103,56 @@ class BridgeSession:
         if playwright is not None:
             await playwright.stop()
 
-    async def page(self) -> Any:
-        """The page to drive: at ``app_url``'s origin if ready, else any ready page, else a new tab at ``app_url``."""
+    async def _ready_page(self, origin: str | None) -> Any:
+        """A page whose ``window.geoui`` is ready, restricted to ``origin`` when given."""
         from playwright.async_api import Error
 
-        if self._browser is None:
-            raise BridgeError("session is not open")
-        ready_pages = []
         for context in self._browser.contexts:
             for page in context.pages:
+                if origin is not None and not page.url.startswith(origin):
+                    continue
                 try:
                     if await page.evaluate(READY_EXPR):
-                        ready_pages.append(page)
+                        return page
                 except Error:
                     continue  # closed or navigating
-        if self.config.app_url:
-            origin = _origin(self.config.app_url)
-            for page in ready_pages:
-                if page.url.startswith(origin):
-                    return page
-        if ready_pages:
-            return ready_pages[0]
+        return None
+
+    async def page(self) -> Any:
+        """The page to drive.
+
+        With ``app_url`` set: a ready page at that origin, or a new tab opened
+        at ``app_url`` (through the browser's own CDP endpoint, so the tab
+        belongs to the browser and outlives this connection; pages a Playwright
+        connection creates are closed when it disconnects). Without
+        ``app_url``: any page whose ``window.geoui`` is ready.
+        """
+        if self._browser is None:
+            raise BridgeError("session is not open")
+        origin = _origin(self.config.app_url) if self.config.app_url else None
+        page = await self._ready_page(origin)
+        if page is not None:
+            return page
         if not self.config.app_url:
             raise BridgeError("no open page exposes window.geoui and GEOUI_APP_URL is not set, so none can be opened")
-        context = self._browser.contexts[0] if self._browser.contexts else await self._browser.new_context()
-        page = await context.new_page()
+        await self._open_tab(self.config.app_url)
+        deadline = time.monotonic() + self.config.ready_timeout_s
+        while time.monotonic() < deadline:
+            page = await self._ready_page(origin)
+            if page is not None:
+                return page
+            await asyncio.sleep(0.1)
+        raise BridgeError(
+            f"opened {self.config.app_url} but no page there exposed a ready window.geoui within "
+            f"{self.config.ready_timeout_s:g}s (is the app running at that URL?)"
+        )
+
+    async def _open_tab(self, url: str) -> None:
         try:
-            await page.goto(self.config.app_url)
-            await page.wait_for_function(READY_EXPR, timeout=self.config.ready_timeout_s * 1000)
-        except Error as exc:
-            raise BridgeError(
-                f"opened {self.config.app_url} but window.geoui did not become ready within "
-                f"{self.config.ready_timeout_s:g}s: {exc.message.splitlines()[0]}"
-            ) from exc
-        return page
+            async with httpx.AsyncClient(base_url=self.config.cdp_endpoint, timeout=10.0) as client:
+                (await client.put(f"/json/new?{url}")).raise_for_status()
+        except httpx.HTTPError as exc:
+            raise BridgeError(f"could not open a tab at {url} through {self.config.cdp_endpoint}: {exc}") from exc
 
     async def evaluate(self, expression: str, arg: Any = None) -> Any:
         from playwright.async_api import Error
