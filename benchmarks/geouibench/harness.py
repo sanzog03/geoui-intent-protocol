@@ -25,7 +25,7 @@ from pydantic import BaseModel, Field
 from pydantic_ai import Agent
 from pydantic_ai.usage import UsageLimits
 
-from geouibench.app import BenchmarkApp
+from geouibench.app import BenchmarkApp, snapshot_app
 from geouibench.records import (
     ErrorRecord,
     OutputKind,
@@ -79,12 +79,12 @@ def output_text(output: Any) -> str:
 
 
 def classify_output(app: BenchmarkApp, run: TracedRun) -> tuple[OutputKind, str | None, str]:
-    """``(output_kind, final_url, content)`` for one turn: structured when the output carries a URL field."""
+    """``(output_kind, final_url, content)`` for one turn: structured when the output carries a URL or a result field."""
     if run.error is not None:
         return "error", None, f"[{type(run.error).__name__}] {run.error}"
     output = run.result.output
     url = app.output_url(output)  # from the structured field, or from the text when the app can find one
-    structured = bool(getattr(output, "url", None))
+    structured = bool(getattr(output, "url", None)) or isinstance(getattr(output, "result", None), str)
     return ("structured" if structured else "text"), url, output_text(output)
 
 
@@ -173,6 +173,8 @@ class ConversationRunner:
         trace_rel = default_trace_relpath(thread_id, turn_index)
         save_trace(run.trace, self.run_dir / trace_rel)
         output_kind, final_url, content = classify_output(self.app, run)
+        if run.error is None and final_url is None:  # page-state apps: read the handle from the live application
+            final_url = await snapshot_app(self.app, self.cdp_endpoint)
         # an errored run has no RunUsage; the spans still know what the turn cost
         usage = usage_from_run_usage(run.result.usage) if run.result is not None else run.trace.usage_from_spans()
         tool_names = run.trace.tool_names

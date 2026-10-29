@@ -89,9 +89,10 @@ class BenchmarkApp(Protocol):
     budgets: Budgets                            # seconds and cache-adjusted tokens per turn, same for every kind
     def build_agent(self, kind, *, cdp_endpoint, extra_capabilities) -> Agent   # the utility passes tracing here
     def chatbot_role(self, kind) -> str         # for deepeval's conversational metrics
-    def output_url(self, output) -> str | None  # the app URL in a turn's output; None for a text-only turn
-    def observe(self, url) -> UIState           # what the app shows at that URL (hidden layers dropped)
+    def output_url(self, output) -> str | None  # a handle for the turn's end state: the app URL for URL-state apps
+    def observe(self, url) -> UIState           # what the app shows at that handle (hidden layers dropped)
     # optional: def prepare(self) -> Mapping[str, str]
+    # optional: async def snapshot(self, cdp_endpoint) -> str | None   # page-state apps: the handle read from the live app
 ```
 
 `observe` is the only place an application's URL grammar is parsed. Every agent

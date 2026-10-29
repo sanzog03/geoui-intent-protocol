@@ -1,7 +1,9 @@
 """The app seam is a runtime-checkable Protocol: a minimal object satisfies it."""
 
+import asyncio
+
 from geouibench import BenchmarkApp
-from geouibench.app import prepare_app
+from geouibench.app import prepare_app, snapshot_app
 from geouibench.datasets import Budgets
 
 
@@ -44,3 +46,13 @@ def test_prepare_hook_is_optional():
             return {"X": "1"}
 
     assert prepare_app(WithPrepare()) == {"X": "1"}
+
+
+def test_snapshot_hook_is_optional():
+    assert asyncio.run(snapshot_app(_MinimalApp(), None)) is None
+
+    class WithSnapshot(_MinimalApp):
+        async def snapshot(self, cdp_endpoint):
+            return f"state@{cdp_endpoint}"
+
+    assert asyncio.run(snapshot_app(WithSnapshot(), "http://cdp:9222")) == "state@http://cdp:9222"

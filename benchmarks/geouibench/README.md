@@ -50,14 +50,18 @@ class MyApp:                                   # satisfies BenchmarkApp (a runti
 
     def build_agent(self, kind, *, cdp_endpoint, extra_capabilities): ...  # pydantic-ai Agent; pass extra_capabilities through
     def chatbot_role(self, kind) -> str: ...
-    def output_url(self, output) -> str | None: ...
-    def observe(self, url) -> UIState: ...     # GeoIntent of what the URL shows; ValueError if unparseable
+    def output_url(self, output) -> str | None: ...   # a handle for the turn's end state (a URL for URL-state apps)
+    def observe(self, url) -> UIState: ...     # GeoIntent of what the handle shows; ValueError if unreadable
     def prepare(self) -> dict[str, str]: ...   # optional: setup before a run, returns env for the benchmark processes
+    async def snapshot(self, cdp_endpoint) -> str | None: ...  # optional: page-state apps read the handle from the live app
 
 APP = MyApp()
 ```
 
-`prepare_app(app)` runs the hook when present and returns `{}` otherwise.
+`prepare_app(app)` runs the hook when present and returns `{}` otherwise; `snapshot_app(app, cdp_endpoint)`
+does the same for `snapshot`, and the runner calls it after every non-error turn whose `output_url` was `None`.
+Scoring runs offline from the stored handles, so a snapshot must carry everything `observe` needs
+(the MapLibre app returns the GeoIntent itself as `geoui+json:<json>`).
 
 ### `appdir.py` — app directories
 

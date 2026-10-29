@@ -43,6 +43,14 @@ class BenchmarkApp(Protocol):
     browser, warm remote services, check prerequisites); the mapping it
     returns is added to the environment of the benchmark processes. Apps
     without setup simply omit it.
+
+    Apps whose state does not live in a URL define
+    ``async snapshot(self, cdp_endpoint: str | None) -> str | None`` instead of
+    returning anything from ``output_url``: the runner calls it after every
+    turn that ended without a handle, and whatever string it returns (for
+    example the state itself, serialised) is stored as the turn's handle and
+    later passed to ``observe``. Scoring runs offline from the stored handles,
+    so a handle must carry everything ``observe`` needs.
     """
 
     name: str
@@ -72,11 +80,16 @@ class BenchmarkApp(Protocol):
         ...
 
     def output_url(self, output: Any) -> str | None:
-        """The application URL in a structured output, or ``None`` for a text-only turn."""
+        """A handle for the state the turn ended in, or ``None``.
+
+        For URL-state applications: the URL in a structured output (or found
+        in the text). It is any string ``observe`` can read back; apps whose
+        state is not in a URL return ``None`` here and define ``snapshot``.
+        """
         ...
 
     def observe(self, url: str) -> UIState:
-        """What the application shows at ``url`` (hidden layers dropped). Raises ``ValueError`` if unparseable."""
+        """What the application shows at the handle ``url`` (hidden layers dropped). Raises ``ValueError`` if unreadable."""
         ...
 
 
@@ -89,4 +102,12 @@ def prepare_app(app: BenchmarkApp) -> dict[str, str]:
     return dict(env or {})
 
 
-__all__ = ["BenchmarkApp", "UIState", "prepare_app"]
+async def snapshot_app(app: BenchmarkApp, cdp_endpoint: str | None) -> str | None:
+    """Run the app's optional ``snapshot()`` hook; ``None`` when the app has none (or saw no state)."""
+    hook = getattr(app, "snapshot", None)
+    if hook is None:
+        return None
+    return await hook(cdp_endpoint)
+
+
+__all__ = ["BenchmarkApp", "UIState", "prepare_app", "snapshot_app"]

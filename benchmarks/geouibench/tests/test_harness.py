@@ -8,6 +8,7 @@ import json
 import httpx
 import pytest
 from deepeval.test_case import ConversationalTestCase, Turn
+from pydantic import BaseModel
 from pydantic_ai import Agent
 from pydantic_ai.models.test import TestModel
 from pydantic_ai.toolsets import FunctionToolset
@@ -225,9 +226,58 @@ def test_reset_browser_tab_opens_new_then_closes_others():
     assert seen == ["PUT /json/new?about:blank", "GET /json/list?", "GET /json/close/OLD1?"]
 
 
+def test_snapshot_fills_the_handle_for_page_state_apps(tmp_path):
+    """An app whose state is not in a URL returns None from output_url and a handle from snapshot()."""
+
+    class SnapshotApp(FakeApp):
+        def __init__(self):
+            super().__init__(_text_agent)
+            self.snapshots: list[str | None] = []
+
+        def output_url(self, output):
+            return None
+
+        async def snapshot(self, cdp_endpoint):
+            self.snapshots.append(cdp_endpoint)
+            return fake_url("A", t="2025-09-15")
+
+    app = SnapshotApp()
+    runner = ConversationRunner(
+        app,
+        "x",
+        run_dir=tmp_path / "run",
+        cdp_endpoint="http://cdp:9222",
+        dataset="gold",
+        run_name="r1",
+        reset_browser=None,
+    )
+    runner.start_golden("g1")
+    turn = asyncio.run(runner("render A", [], "t"))
+    assert app.snapshots == ["http://cdp:9222"]
+    assert turn.metadata["output_kind"] == "text" and turn.metadata["final_url"] == fake_url("A", t="2025-09-15")
+    rows = load_records(tmp_path / "run" / "turns.jsonl", TurnRecord)
+    assert rows[0].final_url == fake_url("A", t="2025-09-15")
+    tc = ConversationalTestCase(
+        turns=[Turn(role="user", content="render A"), turn],
+        metadata={"expected_state": {"layers": {"A": None}, "time": "2025-09-15"}},
+    )
+    assert SuccessMetric(app).measure(tc) == 1.0  # judged from the snapshot handle, offline
+
+
 def test_classify_and_output_text():
     assert output_text(FakeOutput(result="r", url="u")) == "r"
     assert output_text("plain") == "plain"
+
+    class ResultOnly(BaseModel):
+        result: str
+
+    class _ResultRun:
+        error = None
+
+        class result:
+            output = ResultOnly(result="shown")
+
+    assert classify_output(FakeApp(), _ResultRun()) == ("structured", None, "shown")
 
     class _Run:
         error = None
