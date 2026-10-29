@@ -99,11 +99,15 @@ Claude Code / Claude Desktop `.mcp.json` entry for a local server:
 { "mcpServers": { "geoui": { "command": "uv", "args": ["run", "--directory", "/path/to/geoui_intent_protocol", "worldview-mcp"] } } }
 ```
 
-The server exposes exactly the two protocol tools with the same names, input
-schemas and descriptions as the original akd-ext deployment
-(`https://sudden-gold-carp-feature-geoui-mcp-tools.fastmcp.app/mcp`), so it is a
-drop-in replacement. `demo/worldview/tests/mcp/` asserts that contract against
-a golden fixture. `fastmcp.json` at the repo root points FastMCP Cloud (or
+The server exposes the two protocol tools, `geo_ui_render_intent_tool` and
+`geo_ui_get_state_tool`, with the same names and shapes as the original akd-ext
+deployment (`https://sudden-gold-carp-feature-geoui-mcp-tools.fastmcp.app/mcp`),
+plus `geo_ui_list_intent_extensions_tool`, the deployment's extension catalogue.
+Extensions are pre-declared: the render tool lists the adapter's supported
+extensions in its description, adds their URIs to every incoming intent and
+refuses fields of any other namespace, so an agent only decides which
+extensions a request needs and fills their fields. `demo/worldview/tests/mcp/`
+asserts that contract against a golden fixture. `fastmcp.json` at the repo root points FastMCP Cloud (or
 `fastmcp run`) at `demo/worldview/mcp/server.py:mcp`.
 
 The Claude Code plugin that consumes this server is `worldview-assistant` from

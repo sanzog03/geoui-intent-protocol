@@ -26,8 +26,11 @@ from worldview.tools import (
     EMBED_MODE_DESCRIPTION,
     GET_STATE_DOC,
     INTENT_FIELD_DESCRIPTION,
+    LIST_INTENT_EXTENSIONS_DOC,
     RENDER_INTENT_DOC,
     URL_IN_DESCRIPTION,
+    list_intent_extensions,
+    prepare_intent,
 )
 
 PERMALINK_DOC = (
@@ -47,7 +50,7 @@ async def geo_ui_render_intent_tool(
     embed_mode: Annotated[bool, Field(description=EMBED_MODE_DESCRIPTION)] = False,
 ) -> dict[str, str]:
     try:
-        return {"url": intent_to_url(intent, embed_mode=embed_mode)}
+        return {"url": intent_to_url(prepare_intent(intent), embed_mode=embed_mode)}
     except ValueError as e:
         raise ModelRetry(str(e)) from e
 
@@ -58,6 +61,11 @@ async def geo_ui_get_state_tool(url: Annotated[str, Field(description=URL_IN_DES
         return {"intent": url_to_intent(url).model_dump(by_alias=True, exclude_none=True)}
     except ValueError as e:
         raise ModelRetry(str(e)) from e
+
+
+@geoui_toolset.tool_plain(name="geo_ui_list_intent_extensions_tool", description=LIST_INTENT_EXTENSIONS_DOC)
+async def geo_ui_list_intent_extensions_tool() -> dict[str, object]:
+    return {"extensions": [e.model_dump() for e in list_intent_extensions()]}
 
 
 @permalink_toolset.tool_plain(name="worldview_permalink_tool", description=PERMALINK_DOC)
@@ -71,6 +79,7 @@ async def worldview_permalink_tool(params: WorldviewPermalinkInputSchema) -> dic
 __all__ = [
     "PERMALINK_DOC",
     "geo_ui_get_state_tool",
+    "geo_ui_list_intent_extensions_tool",
     "geo_ui_render_intent_tool",
     "geoui_toolset",
     "permalink_toolset",

@@ -176,7 +176,7 @@
           "properties": {
             "intent": {
               "$ref": "#/$defs/GeoIntent",
-              "description": "GeoIntent describing the desired application state. Core fields: viewport (bbox + crs), time (instant), layers (id + visible + opacity). Use extensions by adding their URI to `geoui_extensions` and including the corresponding namespaced fields: geoui:compare/v1.0.0 → compare:layers, compare:time, compare:mode, compare:value, compare:active_side; geoui:chart/v1.0.0 → chart:layer, chart:area, chart:time, chart:autoload; geoui:raster-styling/v1.0.0 → on each LayerRef: raster-styling:palettes, raster-styling:min, raster-styling:max, raster-styling:squash, raster-styling:style."
+              "description": "GeoIntent describing the desired application state. Core fields: viewport (bbox + crs), time (instant), layers (id + visible + opacity). Extensions are pre-declared by this tool: do not write `geoui_extensions`; just add the namespaced fields of the extensions the request needs. Supported: compare → compare:layers, compare:active_side, compare:time, compare:mode, compare:value; chart → chart:layer, chart:area, chart:time, chart:autoload; raster-styling → on each LayerRef: raster-styling:palettes, raster-styling:style, raster-styling:min, raster-styling:max, raster-styling:squash. Call geo_ui_list_intent_extensions_tool for their field types."
             },
             "embed_mode": {
               "default": false,
@@ -204,6 +204,15 @@
           "required": [
             "url"
           ],
+          "type": "object"
+        }
+      },
+      "geo_ui_list_intent_extensions_tool": {
+        "toolset": "geoui",
+        "description": "List the intent extensions this Worldview deployment supports.\n\nEach entry names an extension (compare, chart, raster-styling, ...), says\nwhere its fields live (`scope`: \"intent\" = namespaced keys on the GeoIntent\nroot, \"layer\" = namespaced keys on each LayerRef), gives a one-line\nsummary of when to use it, its namespaced `keys`, which of them are\n`required`, and the JSON schema of its fields.\n\nDecide which extensions the user's request needs, then fill only their\nnamespaced fields in the GeoIntent you pass to geo_ui_render_intent_tool.\nSupported extensions are pre-declared by that tool, so never write\n`geoui_extensions` yourself; fields of an unsupported extension are\nrejected.",
+        "parameters": {
+          "additionalProperties": false,
+          "properties": {},
           "type": "object"
         }
       },

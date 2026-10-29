@@ -1,7 +1,7 @@
 {
   "geo_ui_render_intent_tool": {
     "name": "geo_ui_render_intent_tool",
-    "description": "Render a GeoIntent as a NASA Worldview permalink URL.\n\nUse this tool to materialise the agent's intended application state\n(expressed as a GeoIntent) into a URL the user can open. The agent\nreasons in GeoIntent terms, not Worldview-specific URL params.\n\nINPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the desired application state. Core fields: viewport (bbox + crs), time (instant), layers (id + visible + opacity). Use extensions by adding their URI to `geoui_extensions` and including the corresponding namespaced fields: geoui:compare/v1.0.0 → compare:layers, compare:time, compare:mode, compare:value, compare:active_side; geoui:chart/v1.0.0 → chart:layer, chart:area, chart:time, chart:autoload; geoui:raster-styling/v1.0.0 → on each LayerRef: raster-styling:palettes, raster-styling:min, raster-styling:max, raster-styling:squash, raster-styling:style.\n- **embed_mode**: If True, opens Worldview in embed mode (em=true): minimal chrome intended for iframes, with most UI controls hidden. Default False opens the full interactive Worldview app.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **url**: Worldview permalink URL that opens the map at the requested state.",
+    "description": "Render a GeoIntent as a NASA Worldview permalink URL.\n\nUse this tool to materialise the agent's intended application state\n(expressed as a GeoIntent) into a URL the user can open. The agent\nreasons in GeoIntent terms, not Worldview-specific URL params.\n\nINPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the desired application state. Core fields: viewport (bbox + crs), time (instant), layers (id + visible + opacity). Extensions are pre-declared by this tool: do not write `geoui_extensions`; just add the namespaced fields of the extensions the request needs. Supported: compare → compare:layers, compare:active_side, compare:time, compare:mode, compare:value; chart → chart:layer, chart:area, chart:time, chart:autoload; raster-styling → on each LayerRef: raster-styling:palettes, raster-styling:style, raster-styling:min, raster-styling:max, raster-styling:squash. Call geo_ui_list_intent_extensions_tool for their field types.\n- **embed_mode**: If True, opens Worldview in embed mode (em=true): minimal chrome intended for iframes, with most UI controls hidden. Default False opens the full interactive Worldview app.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **url**: Worldview permalink URL that opens the map at the requested state.",
     "inputSchema": {
       "additionalProperties": false,
       "properties": {
@@ -168,20 +168,14 @@
         "url": {
           "description": "Worldview permalink URL that opens the map at the requested state.",
           "type": "string"
-        },
-        "_response": {
-          "description": "Private response field that points to the actual output text as per agent usage.\n\nSubclasses can specify which field to use by setting the __response_field__ class attribute.\nExample:\n    class MyOutputSchema(OutputSchema):\n        __response_field__ = \"output\"\n        output: str = Field(...)",
-          "readOnly": true,
-          "type": "string"
         }
       },
       "required": [
-        "url",
-        "_response"
+        "url"
       ],
       "type": "object"
     },
-    "akd_description": "Render a GeoIntent as a NASA Worldview permalink URL.\n\nUse this tool to materialise the agent's intended application state\n(expressed as a GeoIntent) into a URL the user can open. The agent\nreasons in GeoIntent terms, not Worldview-specific URL params.\n\nINPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the desired application state. Core fields: viewport (bbox + crs), time (instant), layers (id + visible + opacity). Use extensions by adding their URI to `geoui_extensions` and including the corresponding namespaced fields: geoui:compare/v1.0.0 → compare:layers, compare:time, compare:mode, compare:value, compare:active_side; geoui:chart/v1.0.0 → chart:layer, chart:area, chart:time, chart:autoload; geoui:raster-styling/v1.0.0 → on each LayerRef: raster-styling:palettes, raster-styling:min, raster-styling:max, raster-styling:squash, raster-styling:style.\n- **embed_mode**: If True, opens Worldview in embed mode (em=true): minimal chrome intended for iframes, with most UI controls hidden. Default False opens the full interactive Worldview app.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **url**: Worldview permalink URL that opens the map at the requested state.",
+    "akd_description": "Render a GeoIntent as a NASA Worldview permalink URL.\n\nUse this tool to materialise the agent's intended application state\n(expressed as a GeoIntent) into a URL the user can open. The agent\nreasons in GeoIntent terms, not Worldview-specific URL params.\n\nINPUT FIELD DESCRIPTIONS:\n- **intent**: GeoIntent describing the desired application state. Core fields: viewport (bbox + crs), time (instant), layers (id + visible + opacity). Extensions are pre-declared by this tool: do not write `geoui_extensions`; just add the namespaced fields of the extensions the request needs. Supported: compare → compare:layers, compare:active_side, compare:time, compare:mode, compare:value; chart → chart:layer, chart:area, chart:time, chart:autoload; raster-styling → on each LayerRef: raster-styling:palettes, raster-styling:style, raster-styling:min, raster-styling:max, raster-styling:squash. Call geo_ui_list_intent_extensions_tool for their field types.\n- **embed_mode**: If True, opens Worldview in embed mode (em=true): minimal chrome intended for iframes, with most UI controls hidden. Default False opens the full interactive Worldview app.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **url**: Worldview permalink URL that opens the map at the requested state.",
     "akd_params": [
       "intent",
       "embed_mode"
@@ -351,16 +345,10 @@
             }
           },
           "type": "object"
-        },
-        "_response": {
-          "description": "Private response field that points to the actual output text as per agent usage.\n\nSubclasses can specify which field to use by setting the __response_field__ class attribute.\nExample:\n    class MyOutputSchema(OutputSchema):\n        __response_field__ = \"output\"\n        output: str = Field(...)",
-          "readOnly": true,
-          "type": "string"
         }
       },
       "required": [
-        "intent",
-        "_response"
+        "intent"
       ],
       "type": "object"
     },
@@ -368,5 +356,79 @@
     "akd_params": [
       "url"
     ]
+  },
+  "geo_ui_list_intent_extensions_tool": {
+    "name": "geo_ui_list_intent_extensions_tool",
+    "description": "List the intent extensions this Worldview deployment supports.\n\nEach entry names an extension (compare, chart, raster-styling, ...), says\nwhere its fields live (`scope`: \"intent\" = namespaced keys on the GeoIntent\nroot, \"layer\" = namespaced keys on each LayerRef), gives a one-line\nsummary of when to use it, its namespaced `keys`, which of them are\n`required`, and the JSON schema of its fields.\n\nDecide which extensions the user's request needs, then fill only their\nnamespaced fields in the GeoIntent you pass to geo_ui_render_intent_tool.\nSupported extensions are pre-declared by that tool, so never write\n`geoui_extensions` yourself; fields of an unsupported extension are\nrejected.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **extensions**: The supported intent extensions, in the order the deployment lists them.",
+    "inputSchema": {
+      "additionalProperties": false,
+      "properties": {},
+      "type": "object"
+    },
+    "outputSchema": {
+      "description": "Output for ``GeoUIListIntentExtensionsTool``.",
+      "properties": {
+        "extensions": {
+          "description": "The supported intent extensions, in the order the deployment lists them.",
+          "items": {
+            "description": "One supported extension, as ``ExtensionSpec.describe()`` lays it out.",
+            "properties": {
+              "name": {
+                "description": "The namespace prefix, e.g. compare.",
+                "type": "string"
+              },
+              "uri": {
+                "description": "The extension's canonical, versioned URI.",
+                "type": "string"
+              },
+              "scope": {
+                "description": "\"intent\": keys on the GeoIntent root; \"layer\": keys on each LayerRef.",
+                "type": "string"
+              },
+              "summary": {
+                "description": "When to use it, in one line.",
+                "type": "string"
+              },
+              "keys": {
+                "description": "The namespaced keys, e.g. compare:layers.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "required": {
+                "description": "Keys that must be present once the extension is used.",
+                "items": {
+                  "type": "string"
+                },
+                "type": "array"
+              },
+              "fields_schema": {
+                "additionalProperties": true,
+                "description": "JSON schema of the fields (without the prefix).",
+                "type": "object"
+              }
+            },
+            "required": [
+              "name",
+              "uri",
+              "scope",
+              "summary",
+              "keys",
+              "required",
+              "fields_schema"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "extensions"
+      ],
+      "type": "object"
+    },
+    "akd_description": "List the intent extensions this Worldview deployment supports.\n\nEach entry names an extension (compare, chart, raster-styling, ...), says\nwhere its fields live (`scope`: \"intent\" = namespaced keys on the GeoIntent\nroot, \"layer\" = namespaced keys on each LayerRef), gives a one-line\nsummary of when to use it, its namespaced `keys`, which of them are\n`required`, and the JSON schema of its fields.\n\nDecide which extensions the user's request needs, then fill only their\nnamespaced fields in the GeoIntent you pass to geo_ui_render_intent_tool.\nSupported extensions are pre-declared by that tool, so never write\n`geoui_extensions` yourself; fields of an unsupported extension are\nrejected.\n\nOUTPUT FIELD DESCRIPTIONS:\n- **extensions**: The supported intent extensions, in the order the deployment lists them.",
+    "akd_params": []
   }
 }

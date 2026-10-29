@@ -15,8 +15,11 @@ Examples::
     MCP_BEARER_TOKEN=... uv run python scripts/dump_mcp_contract.py \
         https://sudden-gold-carp-feature-geoui-mcp-tools.fastmcp.app/mcp
 
-    # only the two protocol tools, then diff against the golden
+    # only the protocol tools, then diff against the golden
     uv run python scripts/dump_mcp_contract.py local --only geo_ui_ > /tmp/ours.json
+
+    # rewrite the golden from the in-process server (deliberate contract change; review the diff)
+    uv run python scripts/dump_mcp_contract.py local --update-golden
 """
 
 from __future__ import annotations
@@ -26,6 +29,7 @@ import asyncio
 import json
 import os
 import sys
+from pathlib import Path
 
 from fastmcp import Client
 
@@ -60,12 +64,37 @@ async def dump(target: str, only: str | None) -> dict:
     }
 
 
+GOLDEN = Path(__file__).resolve().parents[1] / "demo" / "worldview" / "tests" / "mcp" / "fixtures" / "akd_contract.json"
+
+
+def update_golden(contract: dict) -> None:
+    """Rewrite the contract fixture, keeping its akd-era keys: ``akd_description`` mirrors ``description``
+    and ``akd_params`` lists the input parameter names; the akd ``_response`` output key stays absent."""
+    golden = json.loads(GOLDEN.read_text()) if GOLDEN.exists() else {}
+    for name, tool in contract.items():
+        entry = golden.get(name, {})
+        entry.update(tool)
+        entry["akd_description"] = tool["description"]
+        entry["akd_params"] = list((tool["inputSchema"] or {}).get("properties", {}))
+        golden[name] = entry
+    for name in list(golden):
+        if name not in contract:
+            del golden[name]
+    GOLDEN.write_text(json.dumps(golden, indent=2, ensure_ascii=False) + "\n")
+    print(f"wrote {GOLDEN}")
+
+
 def main(argv: list[str] | None = None) -> None:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("target", help="'local' (in-process), an http(s) URL, or a server .py path (stdio)")
     parser.add_argument("--only", help="keep only tools whose name starts with this prefix")
+    parser.add_argument("--update-golden", action="store_true", help="rewrite the test fixture from this contract")
     args = parser.parse_args(argv)
-    json.dump(asyncio.run(dump(args.target, args.only)), sys.stdout, indent=2, ensure_ascii=False)
+    contract = asyncio.run(dump(args.target, args.only or ("geo_ui_" if args.update_golden else None)))
+    if args.update_golden:
+        update_golden(contract)
+        return
+    json.dump(contract, sys.stdout, indent=2, ensure_ascii=False)
     print()
 
 

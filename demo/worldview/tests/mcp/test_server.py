@@ -2,9 +2,15 @@
 
 The golden fixture ``fixtures/akd_contract.json`` was captured from the
 akd-ext implementation (the one deployed on FastMCP Cloud) with an in-process
-``fastmcp.Client``. The standalone server must expose the same tool names,
-input schemas and descriptions. The one intentional delta: the akd
-``OutputSchema`` leaked an empty ``_response`` key, which is dropped here.
+``fastmcp.Client``, then revised on 2026-10-28 when extensions became
+pre-declared: the render tool's ``intent`` description is now generated from
+the adapter's supported extensions and ``geo_ui_list_intent_extensions_tool``
+was added. The standalone server must match the fixture's tool names, input
+schemas and descriptions; regenerate it deliberately with
+``uv run python scripts/dump_mcp_contract.py local --update-golden`` and
+review the diff. (akd's ``OutputSchema`` leaked an empty ``_response`` key;
+the fixture no longer carries it, and the output-schema test still tolerates
+a golden that does.)
 """
 
 import json
@@ -19,15 +25,18 @@ from worldview.mcp._describe import describe
 from worldview.mcp.server import mcp
 from worldview.tools import (
     GET_STATE_DOC,
+    LIST_INTENT_EXTENSIONS_DOC,
     RENDER_INTENT_DOC,
     GeoUIGetStateRequest,
     GeoUIGetStateResult,
+    GeoUIListIntentExtensionsRequest,
+    GeoUIListIntentExtensionsResult,
     GeoUIRenderIntentRequest,
     GeoUIRenderIntentResult,
 )
 
 GOLDEN = json.loads((Path(__file__).parent / "fixtures" / "akd_contract.json").read_text())
-GEOUI_TOOL_NAMES = {"geo_ui_render_intent_tool", "geo_ui_get_state_tool"}
+GEOUI_TOOL_NAMES = {"geo_ui_render_intent_tool", "geo_ui_get_state_tool", "geo_ui_list_intent_extensions_tool"}
 
 SIMPLE_INTENT = {
     "viewport": {"bbox": [-125, 32, -114, 42], "crs": "EPSG:4326"},
@@ -43,7 +52,7 @@ async def tools_by_name():
 
 
 class TestContract:
-    async def test_exposes_exactly_the_two_protocol_tools(self, tools_by_name):
+    async def test_exposes_exactly_the_protocol_tools(self, tools_by_name):
         assert set(tools_by_name) == GEOUI_TOOL_NAMES
 
     @pytest.mark.parametrize("name", sorted(GEOUI_TOOL_NAMES))
@@ -69,6 +78,10 @@ class TestContract:
             describe(GET_STATE_DOC, GeoUIGetStateRequest, GeoUIGetStateResult)
             == (GOLDEN["geo_ui_get_state_tool"]["akd_description"])
         )
+        assert (
+            describe(LIST_INTENT_EXTENSIONS_DOC, GeoUIListIntentExtensionsRequest, GeoUIListIntentExtensionsResult)
+            == (GOLDEN["geo_ui_list_intent_extensions_tool"]["akd_description"])
+        )
 
 
 class TestCalls:
@@ -92,6 +105,25 @@ class TestCalls:
                 "geo_ui_render_intent_tool", {"intent": SIMPLE_INTENT, "embed_mode": True}
             )
         assert "em=true" in rendered.structured_content["url"]
+
+    async def test_compare_fields_render_without_a_declaration(self):
+        with_compare = {**SIMPLE_INTENT, "compare:layers": [{"id": "MODIS_Terra_Aerosol"}], "compare:mode": "spy"}
+        async with Client(mcp) as client:
+            rendered = await client.call_tool("geo_ui_render_intent_tool", {"intent": with_compare})
+        assert "cm=spy" in rendered.structured_content["url"]
+
+    async def test_unsupported_extension_is_a_tool_error(self):
+        foreign = {**SIMPLE_INTENT, "elevation:exaggeration": 2}
+        async with Client(mcp) as client:
+            with pytest.raises(ToolError, match="not available in this deployment"):
+                await client.call_tool("geo_ui_render_intent_tool", {"intent": foreign})
+
+    async def test_list_intent_extensions_returns_the_catalogue(self):
+        async with Client(mcp) as client:
+            listed = await client.call_tool("geo_ui_list_intent_extensions_tool", {})
+        names = [e["name"] for e in listed.structured_content["extensions"]]
+        assert names == ["compare", "chart", "raster-styling"]
+        assert listed.structured_content["extensions"][1]["required"] == ["chart:layer"]
 
     async def test_invalid_crs_is_a_tool_error(self):
         bad = {**SIMPLE_INTENT, "viewport": {"bbox": [0, 0, 1, 1], "crs": "EPSG:9999"}}

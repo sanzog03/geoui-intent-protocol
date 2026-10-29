@@ -63,6 +63,7 @@ def test_variants_differ_only_where_intended():
     assert set(geoui["local_tools"]) == {
         "geo_ui_render_intent_tool",
         "geo_ui_get_state_tool",
+        "geo_ui_list_intent_extensions_tool",
         "worldview_permalink_tool",
         "list_references",
         "read_reference",

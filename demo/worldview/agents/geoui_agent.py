@@ -5,7 +5,7 @@ The skill's ``SKILL.md`` is the system prompt verbatim. It prescribes the
 GeoUI protocol tools for every visualisation change and allows exactly two
 browser tools, ``browser_navigate`` (open the rendered URL) and
 ``browser_evaluate`` (read ``window.location.href`` back). No screenshots,
-no clicks. The two protocol tools and ``worldview_permalink_tool`` run
+no clicks. The protocol tools and ``worldview_permalink_tool`` run
 in-process (``worldview.tools.pai``); every other tool is a remote MCP from
 the plugin's ``.mcp.json``.
 

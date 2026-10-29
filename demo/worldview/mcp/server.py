@@ -1,8 +1,10 @@
 """FastMCP server for the GeoUI Intent Protocol (Worldview reference adapter).
 
-Exposes exactly the two protocol tools, ``geo_ui_render_intent_tool`` and
-``geo_ui_get_state_tool``, with the same names, input schemas and
-descriptions as the original akd-ext deployment.
+Exposes the protocol tools ``geo_ui_render_intent_tool`` and
+``geo_ui_get_state_tool`` (names and shapes as the original akd-ext
+deployment, with the intent description now generated from the adapter's
+supported extensions) plus ``geo_ui_list_intent_extensions_tool``, the
+deployment's extension catalogue.
 
 Run locally::
 
@@ -34,6 +36,13 @@ mcp.tool(
     tools.geo_ui_get_state_tool,
     name="geo_ui_get_state_tool",
     description=describe(tools.GET_STATE_DOC, tools.GeoUIGetStateRequest, tools.GeoUIGetStateResult),
+)
+mcp.tool(
+    tools.geo_ui_list_intent_extensions_tool,
+    name="geo_ui_list_intent_extensions_tool",
+    description=describe(
+        tools.LIST_INTENT_EXTENSIONS_DOC, tools.GeoUIListIntentExtensionsRequest, tools.GeoUIListIntentExtensionsResult
+    ),
 )
 
 

@@ -21,7 +21,11 @@ GOLDEN = json.loads((Path(__file__).parents[1] / "mcp" / "fixtures" / "akd_contr
 
 
 def test_tool_names_match_mcp_names():
-    assert list(geoui_toolset.tools) == ["geo_ui_render_intent_tool", "geo_ui_get_state_tool"]
+    assert list(geoui_toolset.tools) == [
+        "geo_ui_render_intent_tool",
+        "geo_ui_get_state_tool",
+        "geo_ui_list_intent_extensions_tool",
+    ]
     assert list(permalink_toolset.tools) == ["worldview_permalink_tool"]
 
 
@@ -63,9 +67,10 @@ async def test_round_trip_through_the_toolset():
     assert any(layer["id"] == "MODIS_Aqua_Aerosol" for layer in parsed["intent"]["layers"])
 
 
-async def test_protocol_errors_are_retryable_by_the_model():
+async def test_undeclared_extension_fields_render_because_the_tool_pre_declares():
     """``compare:*`` fields without the extension URI was the top logged agent
-    error in the poster runs; it must come back as a retry prompt."""
+    error in the poster runs and a retry in every compare/chart gold conversation;
+    the tool now declares the supported extensions itself."""
     undeclared = GeoIntent.model_validate(
         {
             "viewport": {"bbox": [-125, 32, -114, 42]},
@@ -76,8 +81,28 @@ async def test_protocol_errors_are_retryable_by_the_model():
             "compare:mode": "swipe",
         }
     )
-    with pytest.raises(ModelRetry, match="geoui_extensions"):
-        await geoui_toolset.tools["geo_ui_render_intent_tool"].function(undeclared)
+    out = await geoui_toolset.tools["geo_ui_render_intent_tool"].function(undeclared)
+    assert "t1=2025-09-14" in out["url"] and "cm=swipe" in out["url"]
+
+
+async def test_protocol_errors_are_retryable_by_the_model():
+    """An unsupported extension and an incomplete one come back as retry prompts."""
+    unsupported = GeoIntent.model_validate({"layers": [{"id": "A"}], "elevation:exaggeration": 2})
+    with pytest.raises(ModelRetry, match="not available in this deployment"):
+        await geoui_toolset.tools["geo_ui_render_intent_tool"].function(unsupported)
+    incomplete = GeoIntent.model_validate({"layers": [{"id": "A"}], "compare:mode": "spy"})
+    with pytest.raises(ModelRetry, match="layers"):
+        await geoui_toolset.tools["geo_ui_render_intent_tool"].function(incomplete)
+
+
+async def test_list_intent_extensions_matches_the_adapter():
+    from worldview.adapter import SUPPORTED_EXTENSIONS
+
+    out = await geoui_toolset.tools["geo_ui_list_intent_extensions_tool"].function()
+    assert [e["name"] for e in out["extensions"]] == [s.prefix for s in SUPPORTED_EXTENSIONS]
+    compare = out["extensions"][0]
+    assert compare["required"] == ["compare:layers"] and compare["scope"] == "intent"
+    assert "properties" in compare["fields_schema"]
 
 
 async def test_bad_url_is_retryable_by_the_model():

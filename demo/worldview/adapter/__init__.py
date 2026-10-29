@@ -7,6 +7,7 @@ fields onto Worldview's existing permalink grammar.
 
 from worldview.adapter.mapping import (
     CRS_TO_WORLDVIEW_PROJECTION,
+    SUPPORTED_EXTENSIONS,
     WORLDVIEW_PROJECTION_TO_CRS,
     intent_to_permalink_input,
     intent_to_url,
@@ -26,6 +27,7 @@ __all__ = [
     "BASE_LAYERS",
     "CRS_TO_WORLDVIEW_PROJECTION",
     "DEFAULT_BASE_URL",
+    "SUPPORTED_EXTENSIONS",
     "WORLDVIEW_PROJECTION_TO_CRS",
     "LayerSpec",
     "WorldviewPermalinkInputSchema",

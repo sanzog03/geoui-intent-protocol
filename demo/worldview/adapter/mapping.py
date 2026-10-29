@@ -15,7 +15,7 @@ Public API:
 from __future__ import annotations
 
 from geoui.core import GeoIntent, LayerRef, TimeWindow, Viewport
-from geoui.extensions import chart, compare, raster_styling
+from geoui.extensions import ExtensionSpec, chart, compare, raster_styling
 from worldview.adapter.permalink import (
     DEFAULT_BASE_URL,
     LayerSpec,
@@ -32,6 +32,11 @@ CRS_TO_WORLDVIEW_PROJECTION: dict[str, str] = {
     "EPSG:3031": "antarctic",
 }
 WORLDVIEW_PROJECTION_TO_CRS: dict[str, str] = {v: k for k, v in CRS_TO_WORLDVIEW_PROJECTION.items()}
+
+#: The extensions this adapter renders and reads back. The tool layer advertises
+#: exactly this list to agents, pre-declares its URIs on incoming intents and
+#: refuses namespaces outside it; drop an entry here to withdraw a capability.
+SUPPORTED_EXTENSIONS: tuple[ExtensionSpec, ...] = (compare.SPEC, chart.SPEC, raster_styling.SPEC)
 
 
 def _layer_ref_to_layer_spec(layer: LayerRef) -> LayerSpec:

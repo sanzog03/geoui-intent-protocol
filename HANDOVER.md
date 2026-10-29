@@ -41,10 +41,10 @@ two reference agents, a marimo chat demo, and the head-to-head benchmark.
 | `demo/worldview/adapter/permalink.py` | Worldview-native side: `LayerSpec`, `WorldviewPermalinkInputSchema`, `build_url`. Copied from akd-ext's permalink tool with the akd `BaseTool` class removed; `build_url` is now a module function. | pydantic, dateutil |
 | `demo/worldview/adapter/url_parser.py` | Inverse of `build_url`. Hand-written layer-grammar parser. | — |
 | `demo/worldview/adapter/mapping.py` | The **only** module that knows GeoIntent ⇄ Worldview. `intent_to_permalink_input` / `permalink_input_to_intent`, wrappers `intent_to_url` / `url_to_intent`. | — |
-| `demo/worldview/tools/__init__.py` | The two operations as async functions, request/response models, and the agent-facing docstrings and field descriptions (single source of truth for all three tool surfaces). | adapter |
+| `demo/worldview/tools/__init__.py` | The three operations as async functions (render, get-state, `geo_ui_list_intent_extensions_tool`), request/response models, the agent-facing docstrings, and `prepare_intent` (pre-declares the adapter's `SUPPORTED_EXTENSIONS` on every intent, refuses other namespaces). The intent field description and the catalogue are generated from that list. Single source of truth for all three tool surfaces. | adapter |
 | `demo/worldview/mcp/_describe.py` | Rebuilds akd's `INPUT/OUTPUT FIELD DESCRIPTIONS` description suffix so the MCP contract matches the original deployment. | — |
-| `demo/worldview/mcp/server.py` | `FastMCP("geoui")` with the two tools; `main()` is the `worldview-mcp` CLI. Absolute `worldview.*` imports only: FastMCP loads this file standalone. | fastmcp |
-| `demo/worldview/tools/pai.py` | pydantic-ai toolsets: `geoui_toolset` (the two protocol tools, same names/descriptions as the MCP server, real parameter descriptions) and `permalink_toolset` (`worldview_permalink_tool` over `build_url`). Protocol `ValueError`s become `ModelRetry` so the model gets a retry. | pydantic-ai |
+| `demo/worldview/mcp/server.py` | `FastMCP("geoui")` with the three tools; `main()` is the `worldview-mcp` CLI. Absolute `worldview.*` imports only: FastMCP loads this file standalone. | fastmcp |
+| `demo/worldview/tools/pai.py` | pydantic-ai toolsets: `geoui_toolset` (the three protocol tools, same names/descriptions as the MCP server, real parameter descriptions) and `permalink_toolset` (`worldview_permalink_tool` over `build_url`). Protocol `ValueError`s become `ModelRetry` so the model gets a retry. | pydantic-ai |
 | `demo/worldview/plugin.py` | Claude Code plugin loader: `load_skill` (SKILL.md body = system prompt, frontmatter stripped), `reference_toolset` (`list_references` / `read_reference` over the skill's `references/`), `load_mcp_config` (`.mcp.json` → pydantic-ai MCP servers, `${user_config.*}` filled from env, keyless servers dropped with a warning), `remote_capabilities`, `playwright_server` (`--cdp-endpoint` appended). | pydantic-ai |
 | `demo/worldview/agents/_common.py` | `AgentSpec` + `build_agent` (bare `pydantic_ai.Agent`, output type `[<Structured>, TextOutput]`, output validator for empty result/url), `standard_capabilities` (remote MCPs + narrowed Playwright + `Thinking(effort="medium")`), the two browser allow-lists, `TextOutput`, `run_smoke`. The Playwright/CDP design note lives here. | pydantic-ai, `plugin` |
 | `demo/worldview/agents/geoui_agent.py` | `geoui_spec` / `build_geoui_agent` (treatment): the `worldview-assistant` skill as system prompt, `geoui_toolset` + `permalink_toolset` + references, `GEOUI_BROWSER_TOOLS`, `GeoUIAgentOutput`. | `_common` |
@@ -326,6 +326,28 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
   (`benchmarks/geouibench/evals/test_benchmark.py`) is outside `testpaths` and
   skips itself unless BENCHMARK_APP and BENCHMARK_RUN are set; two runs must
   never share the Chromium tab.
+- **Extensions are pre-declared by the tools (since October 28, 2026).**
+  Before, the model had to list an extension's URI in `geoui_extensions`
+  *and* fill its `compare:*` / `chart:*` / `raster-styling:*` fields; it
+  forgot the URI on the first attempt in four of eight gold conversations
+  (one retry each) and the poster-era akd tools aborted the turn on it. Now
+  `worldview.adapter.SUPPORTED_EXTENSIONS` is the one list: the tool layer
+  pre-declares those URIs on every intent, refuses other namespaces, and
+  generates the intent description and `geo_ui_list_intent_extensions_tool`
+  from it (drop an entry to withdraw a capability). `geoui.extensions` treats
+  a declared-but-unused extension as valid (`extract` returns None), so
+  pre-declaration is protocol-conforming (`docs/spec.md`, Extension
+  mechanics). Two goldens changed deliberately: the MCP contract fixture
+  (regenerate with `scripts/dump_mcp_contract.py local --update-golden`)
+  and the agent surface. The hosted akd-ext server no longer matches the
+  contract; it was due to be replaced anyway (§5). **Skill follow-up in
+  akd-plugins:** `SKILL.md` and
+  `references/tools/geo_ui_render_intent_tool/index.md` still say
+  "declare the URI AND fill the fields" and that undeclared fields are
+  rejected; replace with "call `geo_ui_list_intent_extensions_tool` to see
+  the supported extensions, then fill only their namespaced fields; never
+  write `geoui_extensions`". Runs before this change are not
+  token-comparable on compare / chart scenarios (one fewer LLM request).
 - **Playwright MCP is `@playwright/mcp@latest`** in the plugin's `.mcp.json`;
   `run.json` does not pin it. Pin it in the plugin if runs must be
   byte-for-byte reproducible.
