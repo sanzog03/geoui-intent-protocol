@@ -17,7 +17,7 @@ export type SlotKind = "viewport" | "time" | "layers" | "extension" | "layerExte
 export interface Slot {
   kind: SlotKind;
   /** Required for the two extension kinds. */
-  spec?: ExtensionSpec;
+  spec?: ExtensionSpec<unknown>;
   get(): unknown;
   set(value: unknown): void;
 }
@@ -47,15 +47,22 @@ export interface RegistryOptions {
 
 export interface Registry {
   attach(slot: Slot): () => void;
+  /** Replace the options (the provider calls this when its props change). */
+  configure(options: RegistryOptions): void;
   compose(): GeoIntent;
   describe(): Catalogue;
   validate(intent: unknown): ValidateResult;
-  apply(intent: GeoIntent): void;
+  /** Write the intent into every slot. Returns false when no slot value changed (nothing will commit). */
+  apply(intent: GeoIntent): boolean;
   settle(timeoutMs: number): Promise<boolean>;
   render(intent: unknown, settleTimeoutMs?: number): Promise<RenderResult>;
   markReady(): void;
   markSettled(): void;
   readonly ready: boolean;
+  /** Notified after every commit (and every attach/detach); for useSyncExternalStore. */
+  subscribe(listener: () => void): () => void;
+  /** `compose()` cached until the next commit, so React can compare snapshots by identity. */
+  snapshot(): GeoIntent;
 }
 
 export const DEFAULT_SETTLE_TIMEOUT_MS = 2000;
@@ -105,10 +112,24 @@ function coreLayer(layer: Record<string, unknown>): LayerRef {
   return { id: String(layer.id), visible: (layer.visible as boolean | undefined) ?? true, opacity: (layer.opacity as number | null | undefined) ?? null };
 }
 
-export function createRegistry(options: RegistryOptions = {}): Registry {
+const same = (a: unknown, b: unknown) => JSON.stringify(a ?? null) === JSON.stringify(b ?? null);
+
+export function createRegistry(initial: RegistryOptions = {}): Registry {
+  let options: RegistryOptions = { ...initial };
   const slots: Slot[] = [];
   let ready = false;
   let waiters: Array<(settled: boolean) => void> = [];
+  const listeners = new Set<() => void>();
+  let cached: GeoIntent | null = null;
+
+  // Recompose and notify only when the result differs: hooks call markSettled after every commit,
+  // including the commits this notification causes, so this must be idempotent.
+  const invalidate = () => {
+    const fresh = compose();
+    if (cached !== null && same(cached, fresh)) return;
+    cached = fresh;
+    for (const listener of listeners) listener();
+  };
 
   const extensionSlots = () => slots.filter((s) => s.kind === "extension" || s.kind === "layerExtension") as Array<Slot & { spec: ExtensionSpec }>;
   const specs = (): ExtensionSpec[] => {
@@ -172,7 +193,8 @@ export function createRegistry(options: RegistryOptions = {}): Registry {
     }
 
     const viewport = normalizeViewport(input.viewport);
-    if (viewport.crs !== DEFAULT_CRS) return fail("unsupported_value", messages.unsupportedCrs(viewport.crs));
+    const crs = viewport.crs ?? DEFAULT_CRS;
+    if (crs !== DEFAULT_CRS) return fail("unsupported_value", messages.unsupportedCrs(crs));
 
     if (options.layers?.length) {
       const known = options.layers.map((l) => l.id);
@@ -192,35 +214,39 @@ export function createRegistry(options: RegistryOptions = {}): Registry {
     return { ok: true, intent };
   };
 
-  const apply = (intent: GeoIntent): void => {
-    const layers = ((intent.layers as unknown[] | undefined) ?? []).filter(isObject);
-    for (const s of slots) {
-      switch (s.kind) {
-        case "viewport":
-          s.set(normalizeViewport(intent.viewport));
-          break;
-        case "time":
-          s.set(normalizeTime(intent.time));
-          break;
-        case "layers":
-          s.set(layers.map(coreLayer));
-          break;
-        case "extension": {
-          const fields = prefixed(intent as Record<string, unknown>, s.spec!.name);
-          s.set(Object.keys(fields).length ? fields : null);
-          break;
+  const nextValue = (s: Slot, intent: GeoIntent, layers: Record<string, unknown>[]): unknown => {
+    switch (s.kind) {
+      case "viewport":
+        return normalizeViewport(intent.viewport);
+      case "time":
+        return normalizeTime(intent.time);
+      case "layers":
+        return layers.map(coreLayer);
+      case "extension": {
+        const fields = prefixed(intent as Record<string, unknown>, s.spec!.name);
+        return Object.keys(fields).length ? fields : null;
+      }
+      case "layerExtension": {
+        const byId: Record<string, Record<string, unknown>> = {};
+        for (const layer of layers) {
+          const fields = prefixed(layer, s.spec!.name);
+          if (Object.keys(fields).length) byId[String(layer.id)] = fields;
         }
-        case "layerExtension": {
-          const byId: Record<string, Record<string, unknown>> = {};
-          for (const layer of layers) {
-            const fields = prefixed(layer, s.spec!.name);
-            if (Object.keys(fields).length) byId[String(layer.id)] = fields;
-          }
-          s.set(byId);
-          break;
-        }
+        return byId;
       }
     }
+  };
+
+  const apply = (intent: GeoIntent): boolean => {
+    const layers = ((intent.layers as unknown[] | undefined) ?? []).filter(isObject);
+    let changed = false;
+    for (const s of slots) {
+      const value = nextValue(s, intent, layers);
+      if (same(s.get(), value)) continue; // no write: React would not re-render anyway
+      changed = true;
+      s.set(value);
+    }
+    return changed;
   };
 
   const settle = (timeoutMs: number): Promise<boolean> =>
@@ -240,6 +266,7 @@ export function createRegistry(options: RegistryOptions = {}): Registry {
     const pending = waiters;
     waiters = [];
     for (const w of pending) w(true);
+    invalidate();
   };
 
   const render = async (input: unknown, settleTimeoutMs = DEFAULT_SETTLE_TIMEOUT_MS): Promise<RenderResult> => {
@@ -247,7 +274,8 @@ export function createRegistry(options: RegistryOptions = {}): Registry {
     const checked = validate(input);
     if (!checked.ok) return checked;
     const settling = settle(settleTimeoutMs);
-    apply(checked.intent);
+    const changed = apply(checked.intent);
+    if (!changed) markSettled(); // nothing will commit; the state already matches
     const settled = await settling;
     return { ok: true, state: compose(), settled };
   };
@@ -255,10 +283,22 @@ export function createRegistry(options: RegistryOptions = {}): Registry {
   return {
     attach(slotToAdd) {
       slots.push(slotToAdd);
+      invalidate();
       return () => {
         const i = slots.indexOf(slotToAdd);
         if (i >= 0) slots.splice(i, 1);
+        invalidate();
       };
+    },
+    subscribe(listener) {
+      listeners.add(listener);
+      return () => {
+        listeners.delete(listener);
+      };
+    },
+    snapshot: () => (cached ??= compose()),
+    configure: (next) => {
+      options = { ...next };
     },
     compose,
     describe: () => ({ version: SDK_VERSION, protocol: PROTOCOL_VERSION, extensions: specs(), layers: options.layers ?? [] }),

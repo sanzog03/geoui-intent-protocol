@@ -14,4 +14,6 @@ export {
   type SlotKind,
   type ValidateResult,
 } from "./registry";
+export { GeoUIProvider, useGeoUIBridge, useGeoUIRegistry, useGeoUIState, type GeoUIProviderProps } from "./provider";
+export { useGeoUIExtension, useGeoUILayerExtension, useGeoUILayers, useGeoUITime, useGeoUIViewport } from "./hooks";
 export { PROTOCOL_VERSION, SDK_VERSION } from "./version";

@@ -7,7 +7,7 @@ import type { ChartFields, CompareFields, RasterStylingFields } from "./generate
 import { CHART_SPEC, COMPARE_SPEC, RASTER_STYLING_SPEC } from "./generated/schemas";
 
 /** One extension: its URI, key prefix, where its fields live, and their JSON Schema. `F` is the fields' TypeScript shape. */
-export interface ExtensionSpec<F = Record<string, unknown>> {
+export interface ExtensionSpec<F = unknown> {
   readonly name: string;
   readonly uri: string;
   /** "intent": namespaced keys on the GeoIntent root; "layer": namespaced keys on each LayerRef. */

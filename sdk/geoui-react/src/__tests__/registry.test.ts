@@ -182,11 +182,18 @@ describe("render", () => {
     });
   });
 
-  it("reports settled:false after the timeout when nothing commits", async () => {
+  it("reports settled:false after the timeout when a change never commits", async () => {
+    const r = createRegistry();
+    app(r);
+    const out = await r.render({ layers: [{ id: "A" }] }, 10);
+    expect(out).toMatchObject({ ok: true, settled: false });
+  });
+
+  it("settles immediately when the intent changes nothing", async () => {
     const r = createRegistry();
     app(r);
     const out = await r.render({ layers: [] }, 10);
-    expect(out).toMatchObject({ ok: true, settled: false });
+    expect(out).toMatchObject({ ok: true, settled: true });
   });
 
   it("never throws: validation failures come back as results", async () => {
