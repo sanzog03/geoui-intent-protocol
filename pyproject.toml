@@ -21,7 +21,7 @@ dependencies = [
 Repository = "https://github.com/NASA-IMPACT/geoui-intent-protocol"
 
 [tool.uv.workspace]
-members = ["demo", "benchmarks"]
+members = ["demo", "benchmarks", "bridge"]
 
 [tool.uv.sources]
 # The Worldview demo (adapter, tools, MCP server, agents) is a sibling project; the dev
@@ -31,11 +31,15 @@ geoui-worldview-demo = { workspace = true }
 # in, so the library and the demo stay deepeval-free. App bindings under
 # benchmarks/<app>/ are plain directories the utility loads by path, not packages.
 geouibench = { workspace = true }
+# The CDP bridge (GeoUI MCP for any window.geoui page) is the fourth member; it needs
+# playwright, which only it declares.
+geoui-bridge = { workspace = true }
 
 [dependency-groups]
 dev = [
     "geoui-worldview-demo",
     "geouibench",
+    "geoui-bridge",
     "pytest>=9.0",
     "pytest-asyncio>=1.3",
     "pytest-cov>=7.0",
@@ -49,7 +53,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.packages.find]
 include = ["geoui*"]
-exclude = ["tests*", "demo*", "benchmarks*", "docs*", "scripts*", "worldview*", "sdk*", "schemas*", "node_modules*"]
+exclude = ["tests*", "demo*", "benchmarks*", "bridge*", "docs*", "scripts*", "worldview*", "sdk*", "schemas*", "node_modules*"]
 
 [tool.setuptools.package-data]
 geoui = ["py.typed"]
@@ -61,6 +65,7 @@ testpaths = [
     "demo/worldview/tests",
     "benchmarks/geouibench/tests",
     "benchmarks/worldview/tests",
+    "bridge/geoui_bridge/tests",
 ]
 # deepeval registers a pytest plugin that would load into every run; `deepeval test run`
 # re-enables it explicitly, so the unit suite stays free of it.
@@ -82,7 +87,7 @@ quote-style = "double"
 
 [tool.ruff.lint.isort]
 # the three workspace packages are first-party wherever they are imported from
-known-first-party = ["geoui", "worldview", "geouibench"]
+known-first-party = ["geoui", "worldview", "geouibench", "geoui_bridge"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = ["F841"]
