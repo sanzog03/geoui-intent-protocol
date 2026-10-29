@@ -7,7 +7,7 @@
       "characteristics": "Terse, knows Worldview well, states exactly what they want and expects it done without questions. Never invents extra requests."
     },
     "additional_metadata": {
-      "source": "benchmarks/manual/prompts.md#1-single-shot-initial-render-baseline",
+      "source": "benchmarks/worldview_legacy/prompts.md#1-single-shot-initial-render-baseline",
       "fully_specified": true,
       "openers": {
         "geoui": "I want to visualize the layer `MODIS_Aqua_Aerosol_Optical_Depth_3km` on Worldview for 2025-09-15, focused on the contiguous US. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm.",
@@ -29,7 +29,7 @@
       "characteristics": "Brief and precise. Follows the listed steps in order, one per message, never skips a step and never adds requests that are not listed."
     },
     "additional_metadata": {
-      "source": "benchmarks/manual/prompts.md#2-refining-change-date-only",
+      "source": "benchmarks/worldview_legacy/prompts.md#2-refining-change-date-only",
       "fully_specified": true,
       "openers": {
         "geoui": "I want to visualize the layer `VIIRS_SNPP_CorrectedReflectance_TrueColor` on Worldview for 2024-09-26, focused on Florida. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm.",
@@ -54,7 +54,7 @@
       "characteristics": "Brief and precise. Follows the listed steps in order, one per message, never skips a step and never adds requests that are not listed."
     },
     "additional_metadata": {
-      "source": "benchmarks/manual/prompts.md#3-refining-pan-to-a-place-by-name",
+      "source": "benchmarks/worldview_legacy/prompts.md#3-refining-pan-to-a-place-by-name",
       "fully_specified": true,
       "openers": {
         "geoui": "I want to visualize the layer `GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies` on Worldview for 2022-08-19 on a global view. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm.",
@@ -79,7 +79,7 @@
       "characteristics": "Terse, knows Worldview well, states exactly what they want and expects it done without questions. Never invents extra requests."
     },
     "additional_metadata": {
-      "source": "benchmarks/manual/prompts.md#4-comparison-mode-ab-swipe",
+      "source": "benchmarks/worldview_legacy/prompts.md#4-comparison-mode-ab-swipe",
       "fully_specified": true,
       "openers": {
         "geoui": "I want to compare two layers side-by-side on Worldview for 2025-08-01: `AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean` as the A-side and `AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean` as the B-side, on a global view, using swipe compare mode with the slider at 50%. I've already identified both exact layer IDs — please render this directly without further dataset discovery or asking me to confirm.",
@@ -102,7 +102,7 @@
       "characteristics": "Terse, knows Worldview well, states exactly what they want and expects it done without questions. Never invents extra requests."
     },
     "additional_metadata": {
-      "source": "benchmarks/manual/prompts.md#5-charting-time-series",
+      "source": "benchmarks/worldview_legacy/prompts.md#5-charting-time-series",
       "fully_specified": true,
       "openers": {
         "geoui": "I want to visualize the layer `MOD13Q1_NDVI_16Day` on Worldview for 2024-07-15 over the western US, and also enable Worldview's chart panel showing a time series of that same layer over the same area from 2024-04-01 through 2024-10-31, autoloaded. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm.",
@@ -125,7 +125,7 @@
       "characteristics": "Terse, knows Worldview well, states exactly what they want and expects it done without questions. Never invents extra requests."
     },
     "additional_metadata": {
-      "source": "benchmarks/manual/prompts.md#6-multi-layer-overlay",
+      "source": "benchmarks/worldview_legacy/prompts.md#6-multi-layer-overlay",
       "fully_specified": true,
       "openers": {
         "geoui": "I want to visualize three layers stacked together on Worldview for 2024-07-04 on a global view: `MODIS_Aqua_CorrectedReflectance_TrueColor` at full opacity as the base, `Reference_Labels_15m` at 60% opacity, and `Reference_Features_15m` at 80% opacity. I've already identified all three exact layer IDs — please render this directly without further dataset discovery or asking me to confirm.",
@@ -151,7 +151,7 @@
       "characteristics": "A focused analyst. Follows the listed steps in order, one per message, waits for each to be applied, never skips a step and never adds requests that are not listed. Quotes exact layer ids and dates when given."
     },
     "additional_metadata": {
-      "source": "benchmarks/manual/workflows.md#workflow-a-california-wildfire-smoke-tracking",
+      "source": "benchmarks/worldview_legacy/workflows.md#workflow-a-california-wildfire-smoke-tracking",
       "fully_specified": true,
       "openers": {
         "geoui": "I want to visualize the layer `MODIS_Aqua_Aerosol_Optical_Depth_3km` on Worldview for 2025-09-15, focused on California. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm.",
@@ -183,7 +183,7 @@
       "characteristics": "A focused analyst. Follows the listed steps in order, one per message, waits for each to be applied, never skips a step and never adds requests that are not listed. Quotes exact layer ids and dates when given."
     },
     "additional_metadata": {
-      "source": "benchmarks/manual/workflows.md#workflow-b-saharan-dust-transport-over-the-atlantic",
+      "source": "benchmarks/worldview_legacy/workflows.md#workflow-b-saharan-dust-transport-over-the-atlantic",
       "fully_specified": true,
       "openers": {
         "geoui": "I want to visualize the layer `MODIS_Aqua_Aerosol_Optical_Depth_3km` on Worldview for 2023-06-15, focused on the tropical Atlantic. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm.",

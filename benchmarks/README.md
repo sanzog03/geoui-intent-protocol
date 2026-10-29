@@ -4,7 +4,7 @@
 benchmarks/
 ├── pyproject.toml     the one benchmark workspace member: `geouibench` (owns deepeval)
 ├── geouibench/        the utility: no application named anywhere inside it (API reference in its README)
-├── manual/            the earlier notebook-driven procedure and the frozen poster logs
+├── worldview_legacy/  the earlier Worldview notebook-driven procedure and the frozen poster logs
 └── worldview/         the first app directory: NASA Worldview, GeoUI agent vs VLM baseline
 ```
 

@@ -26,9 +26,9 @@ node_modules/
 *.png
 !docs/poster/figs/*.png
 
-# live benchmark logs (frozen results live under benchmarks/manual/results/)
-benchmarks/manual/runs.jsonl
-benchmarks/manual/errors.jsonl
+# live benchmark logs (frozen results live under benchmarks/worldview_legacy/results/)
+benchmarks/worldview_legacy/runs.jsonl
+benchmarks/worldview_legacy/errors.jsonl
 
 # deepeval scratch (results are committed per run under benchmarks/worldview/results/)
 .deepeval/

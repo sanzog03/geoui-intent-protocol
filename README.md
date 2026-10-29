@@ -38,7 +38,7 @@ carries everything application-specific.
 | `tests/` | Library tests (`test_core.py`) and repo-level checks | — |
 | `benchmarks/geouibench/` | `geouibench`: the benchmark utility (simulated multi-turn user, per-turn traces, six metrics, synthetic goldens, offline re-scoring, cross-agent summary, `python -m geouibench` CLI); names no application | deepeval, pydantic-ai |
 | `benchmarks/worldview/` | The Worldview app directory for `geouibench`: `app.py` (both agents, state read-back, prepare hook), gold + synthetic datasets, committed results per run | geouibench, demo |
-| `benchmarks/manual/` | The earlier notebook-driven procedure: prompt suite, workflow scripts, frozen poster run logs | — |
+| `benchmarks/worldview_legacy/` | The earlier notebook-driven procedure: prompt suite, workflow scripts, frozen poster run logs | — |
 | `docs/spec.md` | GeoUI Protocol v1.0.0 specification | — |
 | `docs/poster/` | Poster narrative, abstract, interaction diagrams, results chart | — |
 | `scripts/dump_mcp_contract.py` | Print any MCP server's tool contract as JSON, for diffing | fastmcp |
@@ -134,9 +134,9 @@ cp .env.example .env            # OPENAI_API_KEY, then the MCP keys you have
 AGENT=vlm ./demo/start.sh       # VLM + browser-control baseline
 ```
 
-Each chat turn appends a record to `benchmarks/manual/runs.jsonl` (errors to
-`benchmarks/manual/errors.jsonl`); that notebook-driven procedure, its prompt
-suite and the frozen poster logs live under `benchmarks/manual/`.
+Each chat turn appends a record to `benchmarks/worldview_legacy/runs.jsonl` (errors to
+`benchmarks/worldview_legacy/errors.jsonl`); that notebook-driven procedure, its prompt
+suite and the frozen poster logs live under `benchmarks/worldview_legacy/`.
 
 ## Benchmark
 

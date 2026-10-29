@@ -58,8 +58,8 @@ two reference agents, a marimo chat demo, and the head-to-head benchmark.
 | `demo/chat.py` | One marimo multi-turn chat app for both agents; `AGENT=geoui` (default) or `vlm` picks the factory, intro text, example prompts and benchmark-log label. Carries pydantic-ai `message_history` across turns; attaches Playwright per turn via CDP. | marimo |
 | `benchmarks/geouibench/` | **The benchmark utility, mechanism-neutral; names no application.** `app.py` (`BenchmarkApp` protocol, `UIState`, `prepare_app`), `appdir.py` (app directories: load `app.py` by path, resolve datasets by name), `state.py` (expected vs observed UI state), `datasets.py` (goldens + metadata, per-agent openers, dataset hash), `records.py` (TurnRecord/ErrorRecord rows), `tracing.py` (deepeval pydantic-ai instrumentation as a capability, `traced_turn`, `TurnTrace`), `harness.py` (`ConversationRunner.respond`, the simulator callback; CDP tab reset; transcripts), `metrics.py` (the six metrics + `state_reached_controller`), `runner.py` (`run_golden`: simulate → assert_test → record; `ensure_run_info`), `evals/test_benchmark.py` (the one deepeval suite, driven by `BENCHMARK_APP`), `synthetic.py` (`SyntheticStyle`, `generate` around `deepeval generate`), `score.py` (offline re-score from traces), `summary.py` / `summarize.py` (rows, ratios, totals, markdown), `run_dir.py` (run.json, path scrubbing), `cli.py` (`python -m geouibench run\|score\|summarize\|synthetic\|datasets`). Tests under `geouibench/tests/` with a `FakeApp` on `TestModel` and a stand-in simulator. | deepeval, pydantic-ai |
 | `benchmarks/worldview/` | **The Worldview app directory** (no package, no pyproject). `app.py` (`APP = WorldviewApp()`: both factories, `observe(url)`, discovery tools, roles, `DEFAULT_BUDGETS`, `prepare()` = plugin check + `demo/chromium.sh` + MCP warm-up, `SYNTHETIC_STYLE`), `datasets/gold_dataset.json` (Core 1–6 + workflows A/B with openers, expected state, checkpoints), `datasets/synthetic_queries.json`, `tests/`, `results/<run-id>/` (committed runs). | geouibench, demo |
-| `benchmarks/manual/prompts.md`, `benchmarks/manual/workflows.md` | Prompt suite (Core 6 + Optional 4) and 5-turn scenario scripts (A: CA wildfire smoke; B: Saharan dust; C: Lake Erie bloom). | — |
-| `benchmarks/manual/results/poster-2026-05/` | Frozen `runs.jsonl` (51 rows) and `errors.jsonl` (22 rows) behind the poster. Absolute paths in tracebacks were replaced (`<worktree>` for the source checkout, `<python>` for the interpreter install). | — |
+| `benchmarks/worldview_legacy/prompts.md`, `benchmarks/worldview_legacy/workflows.md` | Prompt suite (Core 6 + Optional 4) and 5-turn scenario scripts (A: CA wildfire smoke; B: Saharan dust; C: Lake Erie bloom). | — |
+| `benchmarks/worldview_legacy/results/poster-2026-05/` | Frozen `runs.jsonl` (51 rows) and `errors.jsonl` (22 rows) behind the poster. Absolute paths in tracebacks were replaced (`<worktree>` for the source checkout, `<python>` for the interpreter install). | — |
 | `scripts/dump_mcp_contract.py` | Dump any server's tool contract as JSON. | fastmcp |
 | `demo/pyproject.toml` | The `geoui-worldview-demo` project: a uv workspace member that depends on `geoui-protocol` and owns the heavy dependencies (pydantic-ai, fastmcp, marimo). The root dev group installs it editable. | — |
 | `benchmarks/pyproject.toml` | The third workspace member, `geouibench` (owns deepeval). The root dev group installs it editable; the demo never depends on it. App directories under `benchmarks/` are not members. | — |
@@ -221,7 +221,7 @@ expected, bbox excluded), **Completion** (checkpoints + deepeval
 both agents), **Turn relevancy** (deepeval). `python -m geouibench score <run>`
 recomputes the deterministic four from the committed traces without an agent;
 `summary.md` has the VLM ÷ GeoUI ratios. The notebook procedure, its prompt
-suite and the frozen poster logs stayed under `benchmarks/manual/`; the
+suite and the frozen poster logs stayed under `benchmarks/worldview_legacy/`; the
 notebook still logs there and knows nothing about deepeval.
 
 **Run:**
@@ -337,7 +337,7 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
 - **Chart `time` must be a range**; root/compare `time` must be an instant.
 - **Workflow C** needs the chlorophyll GIBS layer id looked up before it runs.
 - **Benchmark log default path changed** from "worktree root derived from the
-  module's location" to `Path.cwd()/benchmarks/manual/`. Always launch from the repo
+  module's location" to `Path.cwd()/benchmarks/worldview_legacy/`. Always launch from the repo
   root, or set the env overrides.
 - **Not in this repo:** the old `ieso_w_geoui` shim modules, the
   poster-era prompts that lived in `geoui_agent.py` / `vlm_agent.py` (git

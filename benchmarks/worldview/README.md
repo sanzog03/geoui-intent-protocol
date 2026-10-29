@@ -11,7 +11,7 @@ Both run the **same goldens** and are scored by the **same six metrics** (succes
 completion, tool / time / token efficiency, turn relevancy; see
 [`../README.md`](../README.md)). deepeval's `ConversationSimulator` plays the user:
 the first turn of each gold scenario is the verbatim prompt from
-`benchmarks/manual/prompts.md` (layer id wording for geoui, searchable-name wording
+`benchmarks/worldview_legacy/prompts.md` (layer id wording for geoui, searchable-name wording
 for vlm, as that suite does on purpose), and the simulated user improvises the
 follow-up steps from the scenario text.
 
@@ -24,7 +24,7 @@ benchmarks/worldview/
 ├── app.py                      WorldviewApp (APP): both agent factories, output→URL, observe(url), discovery
 │                               tools, DEFAULT_BUDGETS, prepare() (Chromium + MCP warm-up), SYNTHETIC_STYLE
 ├── datasets/
-│   ├── gold_dataset.json       Core 1–6 + workflows A/B codified from benchmarks/manual/, with expected state
+│   ├── gold_dataset.json       Core 1–6 + workflows A/B codified from benchmarks/worldview_legacy/, with expected state
 │   └── synthetic_queries.json  generated from the gold set with `geouibench synthetic` (see below)
 ├── tests/                      offline tests (observe on live VLM URLs, dataset validity, log-row superset)
 └── results/<run-id>/           one folder per run, committed
@@ -86,8 +86,8 @@ is directly comparable.
 
 ## Datasets
 
-**Gold** (`datasets/gold_dataset.json`) codifies `benchmarks/manual/prompts.md` Core 1–6
-and `benchmarks/manual/workflows.md` A (with the Terra swap as step 3) and B. Each
+**Gold** (`datasets/gold_dataset.json`) codifies `benchmarks/worldview_legacy/prompts.md` Core 1–6
+and `benchmarks/worldview_legacy/workflows.md` A (with the Terra swap as step 3) and B. Each
 golden carries both openers, the ordered follow-up steps in its `scenario`, an
 `expected_state`, `checkpoints` for the five-turn workflows, and `max_user_simulations`
 (0 for single-shot prompts). Edit the JSON to change what runs; the unit tests

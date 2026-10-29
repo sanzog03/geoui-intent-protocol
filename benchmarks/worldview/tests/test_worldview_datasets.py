@@ -34,7 +34,7 @@ def test_gold_dataset_validates_and_is_fully_specified():
         assert meta.fully_specified, golden.name
         assert meta.openers and set(meta.openers) == set(KINDS), golden.name
         assert golden.expected_outcome and golden.persona and golden.persona.characteristics, golden.name
-        assert (meta.source or "").startswith("benchmarks/manual/"), golden.name
+        assert (meta.source or "").startswith("benchmarks/worldview_legacy/"), golden.name
 
 
 def test_gold_openers_follow_the_prompts_md_convention():

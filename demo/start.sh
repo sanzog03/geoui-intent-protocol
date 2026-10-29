@@ -62,7 +62,7 @@ source "$SCRIPT_DIR/chromium.sh"
 ensure_chromium || exit 1
 
 # Run marimo from the repo root (one level up from this script) so the
-# benchmark logger writes to <repo>/benchmarks/manual/ and `uv run` picks up the
+# benchmark logger writes to <repo>/benchmarks/worldview_legacy/ and `uv run` picks up the
 # project environment.
 cd "$SCRIPT_DIR/.."
 if [[ -z "${WORLDVIEW_PLUGIN_DIR:-}" && ! -f demo/worldview/agents/artifact/worldview/geoui/akd-plugins/plugins/worldview-assistant/.mcp.json ]]; then

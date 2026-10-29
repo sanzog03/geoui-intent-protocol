@@ -5,7 +5,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-MANUAL = ROOT / "benchmarks" / "manual" / "results" / "poster-2026-05"
+MANUAL = ROOT / "benchmarks" / "worldview_legacy" / "results" / "poster-2026-05"
 RUNS = ROOT / "benchmarks" / "worldview" / "results"
 
 

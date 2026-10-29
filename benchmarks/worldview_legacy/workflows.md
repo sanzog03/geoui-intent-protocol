@@ -1,7 +1,7 @@
 # Benchmark Workflows — GeoUI Protocol vs. VLM Baseline
 
 > **Manual procedure.** This file drives the notebook-based benchmark under
-> `benchmarks/manual/`. The re-runnable deepeval benchmark codifies these
+> `benchmarks/worldview_legacy/`. The re-runnable deepeval benchmark codifies these
 > scenarios in `benchmarks/worldview/datasets/gold_dataset.json`; edit that
 > file to change what the automated runs do.
 

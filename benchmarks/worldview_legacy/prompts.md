@@ -1,7 +1,7 @@
 # Benchmark prompt suite — GeoUI vs VLM-baseline
 
 > **Manual procedure.** This file drives the notebook-based benchmark under
-> `benchmarks/manual/`. The re-runnable deepeval benchmark codifies these
+> `benchmarks/worldview_legacy/`. The re-runnable deepeval benchmark codifies these
 > scenarios in `benchmarks/worldview/datasets/gold_dataset.json`; edit that
 > file to change what the automated runs do.
 

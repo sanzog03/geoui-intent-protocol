@@ -20,7 +20,7 @@ WorldviewApp = type(APP_DIR.app)
 AOD = "MODIS_Aqua_Aerosol_Optical_Depth_3km"
 
 # Read back from ``window.location.href`` by the VLM agent in the poster run
-# (benchmarks/manual/results/poster-2026-05/runs.jsonl): hidden layers, ``lg``,
+# (benchmarks/worldview_legacy/results/poster-2026-05/runs.jsonl): hidden layers, ``lg``,
 # ``s``, and a timestamp inside ``t``.
 LIVE_VLM_URL = (
     "https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),Reference_Features_15m(hidden),"

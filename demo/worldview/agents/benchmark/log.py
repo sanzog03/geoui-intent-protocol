@@ -23,7 +23,7 @@ OutputKind = Literal["structured", "text", "error"]
 
 
 def _default_log_path() -> Path:
-    """Resolve ``benchmarks/manual/runs.jsonl`` under the current working directory.
+    """Resolve ``benchmarks/worldview_legacy/runs.jsonl`` under the current working directory.
 
     ``BENCHMARK_LOG_PATH`` env var overrides. Falls back to
     the current working directory
@@ -32,11 +32,11 @@ def _default_log_path() -> Path:
     override = os.environ.get("BENCHMARK_LOG_PATH")
     if override:
         return Path(override).expanduser().resolve()
-    return Path.cwd() / "benchmarks" / "manual" / "runs.jsonl"
+    return Path.cwd() / "benchmarks" / "worldview_legacy" / "runs.jsonl"
 
 
 def _default_error_log_path() -> Path:
-    """Resolve ``benchmarks/manual/errors.jsonl`` under the current working directory.
+    """Resolve ``benchmarks/worldview_legacy/errors.jsonl`` under the current working directory.
 
     Sibling to :func:`_default_log_path`; overridable via
     ``BENCHMARK_ERROR_LOG_PATH``. The error log stores per-error
@@ -46,7 +46,7 @@ def _default_error_log_path() -> Path:
     override = os.environ.get("BENCHMARK_ERROR_LOG_PATH")
     if override:
         return Path(override).expanduser().resolve()
-    return Path.cwd() / "benchmarks" / "manual" / "errors.jsonl"
+    return Path.cwd() / "benchmarks" / "worldview_legacy" / "errors.jsonl"
 
 
 DEFAULT_LOG_PATH: Path = _default_log_path()
