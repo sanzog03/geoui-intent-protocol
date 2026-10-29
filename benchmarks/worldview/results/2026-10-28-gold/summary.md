@@ -1,6 +1,6 @@
 # Benchmark summary — 2026-10-28-gold
 
-Reference agent for ratios: `geoui`. Scores are deepeval metric scores (pass ✓ / fail ✗ at the metric's threshold); tokens are cache-adjusted per prompts.md (input − cache_read + 0.1·cache_read + output).
+Reference agent for ratios: `geoui`. Scores are deepeval metric scores (pass ✓ / fail ✗ at the metric's threshold); tokens are cache-adjusted (input − cache_read + 0.1·cache_read + output).
 
 | scenario | agent | Success | Completion | Tool eff | Time eff | Token eff | Relevancy | turns | tool calls | s | tokens | cost $ |
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
