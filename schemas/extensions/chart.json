@@ -1,0 +1,135 @@
+{
+  "fields_schema": {
+    "$defs": {
+      "TimeWindow": {
+        "description": "Time selection.\n\nEither a single `instant` OR a closed range `{start, end}` — the two\nare mutually exclusive. All fields `None` is allowed and means\n\"app default time.\"",
+        "properties": {
+          "end": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "End"
+          },
+          "instant": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Instant"
+          },
+          "start": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "format": "date",
+                "type": "string"
+              },
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "default": null,
+            "title": "Start"
+          }
+        },
+        "title": "TimeWindow",
+        "type": "object"
+      }
+    },
+    "description": "Typed view of the ``chart:*`` fields on a GeoIntent.",
+    "properties": {
+      "area": {
+        "anyOf": [
+          {
+            "items": {
+              "type": "number"
+            },
+            "maxItems": 4,
+            "minItems": 4,
+            "type": "array"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Area of interest [x1, y1, x2, y2] in the viewport CRS.",
+        "title": "Area"
+      },
+      "autoload": {
+        "default": false,
+        "description": "Render the chart immediately on open.",
+        "title": "Autoload",
+        "type": "boolean"
+      },
+      "layer": {
+        "description": "Id of the layer to chart.",
+        "title": "Layer",
+        "type": "string"
+      },
+      "time": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/TimeWindow"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Chart time axis as a range {start, end}; never an instant."
+      }
+    },
+    "required": [
+      "layer"
+    ],
+    "title": "ChartFields",
+    "type": "object"
+  },
+  "keys": [
+    "chart:layer",
+    "chart:area",
+    "chart:time",
+    "chart:autoload"
+  ],
+  "name": "chart",
+  "required": [
+    "chart:layer"
+  ],
+  "scope": "intent",
+  "summary": "Open a time-series chart of one layer over an area of interest and a date range.",
+  "uri": "https://geoui.org/ext/chart/v1.0.0"
+}

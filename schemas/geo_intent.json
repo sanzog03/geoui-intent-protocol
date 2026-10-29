@@ -1,0 +1,173 @@
+{
+  "$defs": {
+    "LayerRef": {
+      "additionalProperties": true,
+      "description": "A reference to a renderable layer.\n\n`id` is application-defined — the conforming app must be able to\nresolve it to a layer in its own catalogue. Per-layer rendering hints\nbeyond the universal set (`visible`, `opacity`) belong in extensions\nand are expressed as namespaced extra keys\n(e.g. `\"raster-styling:palettes\": [...]`).",
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "opacity": {
+          "anyOf": [
+            {
+              "maximum": 1.0,
+              "minimum": 0.0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Opacity"
+        },
+        "visible": {
+          "default": true,
+          "title": "Visible",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "title": "LayerRef",
+      "type": "object"
+    },
+    "TimeWindow": {
+      "description": "Time selection.\n\nEither a single `instant` OR a closed range `{start, end}` — the two\nare mutually exclusive. All fields `None` is allowed and means\n\"app default time.\"",
+      "properties": {
+        "end": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End"
+        },
+        "instant": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Instant"
+        },
+        "start": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start"
+        }
+      },
+      "title": "TimeWindow",
+      "type": "object"
+    },
+    "Viewport": {
+      "description": "Spatial viewport.\n\n`bbox` is interpreted in `crs`. For the geographic default\n(`EPSG:4326`), `bbox` is `[west, south, east, north]` in degrees.\nFor projected CRSs, the values are projected coordinates.\n`bbox=None` means \"app default extent.\"",
+      "properties": {
+        "bbox": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "number"
+              },
+              "maxItems": 4,
+              "minItems": 4,
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Bbox"
+        },
+        "crs": {
+          "default": "EPSG:4326",
+          "title": "Crs",
+          "type": "string"
+        }
+      },
+      "title": "Viewport",
+      "type": "object"
+    }
+  },
+  "additionalProperties": true,
+  "description": "The GeoUI Protocol root.\n\nCarries the minimal cross-application contract: viewport, time,\nlayers. Extension fields are namespaced (e.g. `\"compare:layers\"`)\nand live as extra keys; their semantics are defined by the schemas\npointed to by `geoui_extensions`.",
+  "properties": {
+    "geoui_extensions": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Geoui Extensions",
+      "type": "array"
+    },
+    "geoui_version": {
+      "default": "1.0.0",
+      "title": "Geoui Version",
+      "type": "string"
+    },
+    "layers": {
+      "items": {
+        "$ref": "#/$defs/LayerRef"
+      },
+      "title": "Layers",
+      "type": "array"
+    },
+    "time": {
+      "anyOf": [
+        {
+          "$ref": "#/$defs/TimeWindow"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null
+    },
+    "viewport": {
+      "$ref": "#/$defs/Viewport"
+    }
+  },
+  "title": "GeoIntent",
+  "type": "object"
+}

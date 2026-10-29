@@ -1,0 +1,82 @@
+{
+  "fields_schema": {
+    "description": "Typed view of the ``raster-styling:*`` fields on a LayerRef.",
+    "properties": {
+      "max": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Upper bound of the palette / data range.",
+        "title": "Max"
+      },
+      "min": {
+        "anyOf": [
+          {
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Lower bound of the palette / data range.",
+        "title": "Min"
+      },
+      "palettes": {
+        "anyOf": [
+          {
+            "items": {
+              "type": "string"
+            },
+            "type": "array"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Palette ids to apply, in order.",
+        "title": "Palettes"
+      },
+      "squash": {
+        "default": false,
+        "description": "Squash the palette to the min/max range.",
+        "title": "Squash",
+        "type": "boolean"
+      },
+      "style": {
+        "anyOf": [
+          {
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ],
+        "default": null,
+        "description": "Vector / raster style id.",
+        "title": "Style"
+      }
+    },
+    "title": "RasterStylingFields",
+    "type": "object"
+  },
+  "keys": [
+    "raster-styling:palettes",
+    "raster-styling:style",
+    "raster-styling:min",
+    "raster-styling:max",
+    "raster-styling:squash"
+  ],
+  "name": "raster-styling",
+  "required": [],
+  "scope": "layer",
+  "summary": "Restyle a raster layer: palette, style, value range and squash. Fields live on each LayerRef.",
+  "uri": "https://geoui.org/ext/raster-styling/v1.0.0"
+}
