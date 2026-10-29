@@ -240,6 +240,22 @@ uv run python -m worldview.agents.warm_mcps    # lists the enabled remote server
 
 ## 7. Gotchas, known issues, open TODOs
 
+- **CDP bridge spike (October 28, 2026): GO.** A Python process can drive a
+  page that exposes `window.geoui` over Chrome DevTools Protocol with
+  Playwright-python 1.64 (`chromium.connect_over_cdp`, no browser download:
+  the driver ships in the wheel) against the Chromium from `demo/chromium.sh`.
+  Measured on this Mac: first connect ~400 ms (driver start), warm
+  `page.evaluate` p50 4 ms / p95 16 ms, connect-evaluate-close per call p95
+  24 ms, reopen after `reset_browser_tab` ~100 ms. A 12 KB `describe()` and a
+  3 KB intent cross intact; `evaluate` awaits a promise-returning `render`, a
+  `{ok:false}` result arrives as a dict and a JS throw surfaces as
+  `playwright.async_api.Error` with the message. `browser.close()` on a CDP
+  connection disconnects without closing pages the connection opened, so
+  connect-per-call is safe. One pydantic-ai turn through three in-process
+  tools (list, get_state, render; no Playwright MCP) rendered the requested
+  layer, bbox and date on the first try. Gotcha: `model_dump(mode="json")`
+  emits `start: null, end: null` beside `instant`; send intents with
+  `exclude_none=True` and compare states null-tolerantly.
 - **pydantic-ai is pinned `>=2.63,<3`** (since October 28, 2026). MCP servers
   are `MCPToolset`s over fastmcp transports (`worldview.plugin.transport_of`),
   `result.usage` is a property, `RunUsage.output_reasoning_tokens` is a
