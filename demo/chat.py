@@ -153,7 +153,7 @@ def _variant():
 
     The GeoUI protocol on an application with **no URL state**: the
     MapLibre + NASA GIBS demo (`demo/maplibre`) attaches its React state to
-    the protocol with the `@geoui/react` SDK and exposes `window.geoui`.
+    the protocol with the `@geoui/react-adapter` SDK and exposes `window.geoui`.
     The agent (`maplibre.agents.build_maplibre_agent`) is a bare
     pydantic-ai agent with only the three GeoUI tools
     (`geo_ui_list_intent_extensions_tool`, `geo_ui_get_state_tool`,

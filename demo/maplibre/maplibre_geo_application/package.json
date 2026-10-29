@@ -2,7 +2,7 @@
   "name": "geoui-maplibre-demo",
   "version": "0.1.0",
   "private": true,
-  "description": "MapLibre + NASA GIBS map app with the @geoui/react adapter attached: an agent reads and writes its state through window.geoui",
+  "description": "MapLibre + NASA GIBS map app with the @geoui/react-adapter adapter attached: an agent reads and writes its state through window.geoui",
   "type": "module",
   "scripts": {
     "dev": "vite --port 5173 --strictPort",
@@ -11,7 +11,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@geoui/react": "*",
+    "@geoui/react-adapter": "*",
     "maplibre-gl": "^5.6.0",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",

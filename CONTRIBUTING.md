@@ -5,7 +5,7 @@
 ```bash
 git submodule update --init  # demo/worldview/agents/artifact/worldview/geoui/akd-plugins (the worldview-assistant plugin)
 uv sync                      # library + both demos (Worldview, MapLibre) + benchmark utility + dev tools
-npm install                  # @geoui/react SDK + MapLibre demo (Node 20+)
+npm install                  # @geoui/react-adapter SDK + MapLibre demo (Node 20+)
 uv run pre-commit install    # optional
 ```
 
@@ -82,7 +82,7 @@ Markers: `integration` (spawns a subprocess or touches the network), `agents`
     never `worldview`: its tools know no application, the page's
     `window.geoui.describe()` says what is supported, and only the agent's
     prompt names MapLibre. The app (`demo/maplibre/maplibre_geo_application`)
-    imports only `@geoui/react` (through the Vite alias to its source). The three tool
+    imports only `@geoui/react-adapter` (through the Vite alias to its source). The three tool
     names are the same as the Worldview server's (rule 5); the bridge's
     contract golden is `demo/maplibre/tests/mcp/fixtures/bridge_contract.json`
     (`scripts/dump_mcp_contract.py local --module maplibre.mcp.server:mcp
@@ -94,7 +94,7 @@ Markers: `integration` (spawns a subprocess or touches the network), `agents`
 
 ## Adding an adapter
 
-Two paths exist. **A React app** attaches its state with `@geoui/react`
+Two paths exist. **A React app** attaches its state with `@geoui/react-adapter`
 (`GeoUIProvider` + the attach hooks, see `demo/maplibre/maplibre_geo_application/src/App.tsx`), publishes
 its layer catalogue through the provider's `layers` prop, and is driven by
 `maplibre-mcp` with no Python code of its own; benchmark it with a

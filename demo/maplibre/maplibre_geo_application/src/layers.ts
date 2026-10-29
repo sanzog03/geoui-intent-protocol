@@ -3,7 +3,7 @@
  * Ids are GIBS layer identifiers, so they coincide with NASA Worldview's; the matrix set and format
  * are what the epsg3857 "best" endpoint serves for each product.
  */
-import type { LayerCatalogueEntry } from "@geoui/react";
+import type { LayerCatalogueEntry } from "@geoui/react-adapter";
 
 export interface GibsLayer extends LayerCatalogueEntry {
   matrixSet: string;

@@ -2,7 +2,7 @@
   "name": "geoui-intent-protocol",
   "private": true,
   "type": "module",
-  "description": "npm workspaces for the GeoUI Intent Protocol: the @geoui/react SDK and the MapLibre demo app",
+  "description": "npm workspaces for the GeoUI Intent Protocol: the @geoui/react-adapter SDK and the MapLibre demo app",
   "workspaces": [
     "sdk/geoui-react-adapter",
     "demo/maplibre/maplibre_geo_application"
@@ -11,7 +11,7 @@
     "build": "npm run build --workspaces --if-present",
     "test": "npm run test --workspaces --if-present",
     "lint": "eslint .",
-    "gen:types": "npm run gen:types --workspace @geoui/react",
+    "gen:types": "npm run gen:types --workspace @geoui/react-adapter",
     "dev": "npm run dev --workspace geoui-maplibre-demo"
   },
   "devDependencies": {

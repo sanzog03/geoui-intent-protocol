@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { Map as MapLibreMap } from "maplibre-gl";
 import Map, { Layer, Source, type MapEvent, type ViewState, type ViewStateChangeEvent } from "react-map-gl/maplibre";
-import type { LayerRef } from "@geoui/react";
+import type { LayerRef } from "@geoui/react-adapter";
 import { maxZoom, tileTemplate } from "../gibs";
 import { LAYER_BY_ID } from "../layers";
 

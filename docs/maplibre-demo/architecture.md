@@ -2,7 +2,7 @@
 
 The Worldview demo works because Worldview's state is a permalink: the GeoUI tools compute a URL and
 the agent navigates to it. Most visualisation apps have no such URL. The MapLibre demo shows the
-protocol working without one: a React app owns its state, the **`@geoui/react` SDK** attaches that
+protocol working without one: a React app owns its state, the **`@geoui/react-adapter` SDK** attaches that
 state (read and write) to the protocol, and the **GeoUI MCP in `demo/maplibre/`** (Python package `maplibre`) reaches the running page
 over Chrome DevTools Protocol (CDP) to list extensions, read state and render intents. The agent keeps
 the same three tools it has for Worldview, so `geouibench` scores it the same way.
@@ -31,7 +31,7 @@ flowchart LR
     subgraph Chromium["Chromium (demo/chromium.sh, --remote-debugging-port 9222)"]
         subgraph Page["maplibre_geo_application page (Vite, React 19)"]
             W["window.geoui<br/>describe() · getState() · render()"]
-            R["@geoui/react Registry<br/>slots · compose · validate · apply · settle"]
+            R["@geoui/react-adapter Registry<br/>slots · compose · validate · apply · settle"]
             P["GeoUIProvider + attach hooks<br/>useGeoUIViewport / Time / Layers / Extension / LayerExtension"]
             ST["App React state<br/>viewState · time · layers · compare · styling"]
             M["react-map-gl / MapLibre<br/>MapView · CompareSwipe"]

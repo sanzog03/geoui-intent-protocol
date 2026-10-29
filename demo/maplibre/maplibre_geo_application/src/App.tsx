@@ -1,11 +1,11 @@
 /**
  * The app owns its state (view, date, layer stack, compare, styling) and attaches each piece to the
- * GeoUI protocol with the @geoui/react hooks. Nothing else knows about agents.
+ * GeoUI protocol with the @geoui/react-adapter hooks. Nothing else knows about agents.
  */
 import { useCallback, useState } from "react";
 import type { ViewState, ViewStateChangeEvent } from "react-map-gl/maplibre";
-import { extensions, useGeoUIExtension, useGeoUILayerExtension, useGeoUILayers, useGeoUITime, useGeoUIViewport } from "@geoui/react";
-import type { CompareFields, LayerRef, RasterStylingFields, TimeWindow, Viewport } from "@geoui/react";
+import { extensions, useGeoUIExtension, useGeoUILayerExtension, useGeoUILayers, useGeoUITime, useGeoUIViewport } from "@geoui/react-adapter";
+import type { CompareFields, LayerRef, RasterStylingFields, TimeWindow, Viewport } from "@geoui/react-adapter";
 import { CompareSwipe } from "./components/CompareSwipe";
 import { Controls } from "./components/Controls";
 import { MapView, type Bbox, type FitRequest } from "./components/MapView";

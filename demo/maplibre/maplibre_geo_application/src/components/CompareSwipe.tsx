@@ -1,5 +1,5 @@
 import type { ViewState, ViewStateChangeEvent } from "react-map-gl/maplibre";
-import type { CompareFields, LayerRef } from "@geoui/react";
+import type { CompareFields, LayerRef } from "@geoui/react-adapter";
 import { MapView, type Bbox, type FitRequest } from "./MapView";
 
 export interface CompareSwipeProps {

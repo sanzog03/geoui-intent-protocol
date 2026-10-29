@@ -1,5 +1,5 @@
 {
-  "name": "@geoui/react",
+  "name": "@geoui/react-adapter",
   "version": "0.1.0",
   "description": "GeoUI Intent Protocol adapter SDK for React: attach your app state to the protocol so agents can read and write it",
   "license": "Apache-2.0",

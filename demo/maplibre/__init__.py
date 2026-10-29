@@ -2,7 +2,7 @@
 
 The React app itself is ``maplibre_geo_application/`` beside this package (Vite,
 ``npm run dev``); this package drives any page that exposes ``window.geoui``
-(the ``@geoui/react`` SDK), the app included.
+(the ``@geoui/react-adapter`` SDK), the app included.
 
 The three protocol tools (``geo_ui_list_intent_extensions_tool``,
 ``geo_ui_get_state_tool``, ``geo_ui_render_intent_tool``) are served over

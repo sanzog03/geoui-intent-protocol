@@ -1,4 +1,4 @@
-import type { CompareFields, LayerRef, RasterStylingFields } from "@geoui/react";
+import type { CompareFields, LayerRef, RasterStylingFields } from "@geoui/react-adapter";
 import { LAYERS } from "../layers";
 
 export interface ControlsProps {
@@ -24,7 +24,7 @@ export function Controls({ date, setDate, layers, setLayers, compare, setCompare
     <div className="panel">
       <h1>GeoUI MapLibre demo</h1>
       <p className="muted">
-        A plain React map whose state is attached to the GeoUI protocol with <code>@geoui/react</code>. Change it here, or let an agent change it through <code>window.geoui</code>.
+        A plain React map whose state is attached to the GeoUI protocol with <code>@geoui/react-adapter</code>. Change it here, or let an agent change it through <code>window.geoui</code>.
       </p>
       <h2>Date</h2>
       <input id="date" type="date" value={date} onChange={(e) => e.target.value && setDate(e.target.value)} />

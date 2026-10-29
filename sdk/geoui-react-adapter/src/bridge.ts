@@ -8,7 +8,7 @@ import type { GeoIntent } from "./generated/geo-intent";
 import { PROTOCOL_VERSION, SDK_VERSION } from "./version";
 
 export interface GeoUIBridge {
-  /** @geoui/react version. */
+  /** @geoui/react-adapter version. */
   readonly version: string;
   /** GeoUI protocol version (`geoui_version`). */
   readonly protocol: string;

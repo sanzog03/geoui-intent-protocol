@@ -1,4 +1,4 @@
-# `@geoui/react` — the GeoUI adapter SDK for React apps
+# `@geoui/react-adapter` — the GeoUI adapter SDK for React apps
 
 Attach the state your app already has to the [GeoUI Intent Protocol](../../docs/spec.md), so an
 agent can read it and write it as one `GeoIntent`. The SDK owns no state: you keep your `useState`,
@@ -21,7 +21,7 @@ git URL; `react >= 18` is the only peer dependency.
 ### 1. Wrap the tree in `GeoUIProvider` and give it your layer catalogue
 
 ```tsx
-import { GeoUIProvider, type LayerCatalogueEntry } from "@geoui/react";
+import { GeoUIProvider, type LayerCatalogueEntry } from "@geoui/react-adapter";
 
 const LAYERS: LayerCatalogueEntry[] = [
   { id: "MODIS_Terra_CorrectedReflectance_TrueColor", title: "Terra true color (MODIS)", time: { start: "2000-02-24", period: "P1D" } },
@@ -48,8 +48,8 @@ Props: `layers` (catalogue), `validate` (an app-level check run last, return a m
 ### 2. Attach each protocol field where its state lives
 
 ```tsx
-import { extensions, useGeoUIExtension, useGeoUILayerExtension, useGeoUILayers, useGeoUITime, useGeoUIViewport } from "@geoui/react";
-import type { CompareFields, LayerRef, RasterStylingFields, TimeWindow, Viewport } from "@geoui/react";
+import { extensions, useGeoUIExtension, useGeoUILayerExtension, useGeoUILayers, useGeoUITime, useGeoUIViewport } from "@geoui/react-adapter";
+import type { CompareFields, LayerRef, RasterStylingFields, TimeWindow, Viewport } from "@geoui/react-adapter";
 
 function App() {
   const [viewport, setViewport] = useState<Viewport>({ bbox: null, crs: "EPSG:4326" });
@@ -149,7 +149,7 @@ Redux, a global store scanned at build time) is the planned next step on top of 
   `src/__tests__/schemas.test.ts` fails when they drift.
 
 ```bash
-npm test -w @geoui/react        # vitest + jsdom; the bridge is driven from outside React
-npm run typecheck -w @geoui/react
+npm test -w @geoui/react-adapter        # vitest + jsdom; the bridge is driven from outside React
+npm run typecheck -w @geoui/react-adapter
 npm run gen:types               # after a change to the pydantic models and scripts/export_schemas.py
 ```

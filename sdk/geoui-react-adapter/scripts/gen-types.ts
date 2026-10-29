@@ -1,7 +1,7 @@
 /**
  * Generate src/generated/* from the repo's committed JSON Schemas (schemas/, exported from pydantic).
  *
- *   npm run gen:types -w @geoui/react
+ *   npm run gen:types -w @geoui/react-adapter
  *
  * Two files, both committed and drift-checked by src/__tests__/schemas.test.ts:
  * - generated/geo-intent.ts   TypeScript types for GeoIntent, LayerRef, Viewport, TimeWindow and each extension's fields

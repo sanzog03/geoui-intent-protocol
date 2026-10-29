@@ -1,7 +1,7 @@
 """Export the protocol's JSON Schemas to ``schemas/`` from the pydantic models.
 
 pydantic is the single source of truth for the GeoUI document shape; the
-committed JSON is what non-Python consumers (the ``@geoui/react`` SDK, any
+committed JSON is what non-Python consumers (the ``@geoui/react-adapter`` SDK, any
 other adapter) read. ``schemas/geo_intent.json`` is ``GeoIntent``'s JSON
 Schema; ``schemas/extensions/<prefix>.json`` is each shipped extension's
 ``ExtensionSpec.describe()`` (name, uri, scope, summary, keys, required and

@@ -1,4 +1,4 @@
-import { useGeoUIBridge, useGeoUIState } from "@geoui/react";
+import { useGeoUIBridge, useGeoUIState } from "@geoui/react-adapter";
 
 /** What an agent reads right now: window.geoui.getState(), live. */
 export function StatePanel() {
