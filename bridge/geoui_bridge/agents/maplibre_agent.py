@@ -2,9 +2,16 @@
 
 No skill, no discovery MCPs, no browser tools: the page's catalogue (through
 ``geo_ui_list_intent_extensions_tool``) is all the agent needs to know about
-the application, and the bridge drives the browser. The same shape as the
-Worldview GeoUI agent (model, reasoning effort, structured-or-text output,
-``final_result_<ClassName>`` output tools) so benchmark runs compare.
+the application, and the bridge drives the browser. The same model and
+reasoning effort as the Worldview GeoUI agent so benchmark runs compare.
+
+Output is the structured ``MaplibreAgentOutput`` (the ``final_result``
+output tool, for turns that rendered) **or plain text**. Plain text matters:
+with only output tools allowed, every request goes out with a forced tool
+choice, and a reasoning model asked a question that changes nothing on screen
+sometimes keeps picking a read tool instead of the output tool until the
+request cap (seen live: fifty catalogue calls in a row). Letting it answer in
+text removes the forced choice.
 
 Smoke test (one LLM call; ``OPENAI_API_KEY`` from ``.env``, the app at
 ``GEOUI_APP_URL``, Chromium on ``PLAYWRIGHT_CDP_ENDPOINT``)::
@@ -38,10 +45,11 @@ DEFAULT_RETRIES = 1
 SYSTEM_PROMPT = inspect.cleandoc(
     """You are a map assistant. You control a geospatial visualisation application through three tools:
 
-    - geo_ui_list_intent_extensions_tool: what the application supports. Call it at the start of a
-      conversation. It returns the intent extensions the application attached (with their namespaced
-      fields) and the layer catalogue (ids, titles, temporal coverage). A GeoIntent may only use those
-      extensions and those layer ids; if the user names a product, pick the catalogue id that matches it.
+    - geo_ui_list_intent_extensions_tool: what the application supports. Call it once, at the start of a
+      conversation; the catalogue does not change afterwards, so never call it twice in a row. It
+      returns the intent extensions the application attached (with their namespaced fields) and the
+      layer catalogue (ids, titles, temporal coverage). A GeoIntent may only use those extensions and
+      those layer ids; if the user names a product, pick the catalogue id that matches it.
     - geo_ui_get_state_tool: what is on screen now, as a GeoIntent. Call it before changing an existing
       view, because the user may have changed it by hand.
     - geo_ui_render_intent_tool: show a GeoIntent. It REPLACES the whole state: fields you leave out
@@ -58,7 +66,9 @@ SYSTEM_PROMPT = inspect.cleandoc(
     Do exactly what the user asks, without dataset discovery or clarifying questions when the request
     names the layer, date and place. When you have rendered, answer with the structured result: one or
     two sentences describing what is now shown (layers, date, region, compare/styling if any). No URL:
-    the view is already on screen.
+    the view is already on screen. A question that changes nothing on screen (what is supported, what
+    is shown, how something works) is answered directly as text from what you already know or from
+    one tool result; do not render for it.
     """
 )
 
@@ -67,26 +77,19 @@ RESULT_DESCRIPTION = (
 )
 
 
-class TextOutput(BaseModel):
-    """Free-form text output. Used for conversational responses, clarifying
-    questions, summaries, or any unstructured content."""
-
-    content: str
-
-
 class MaplibreAgentOutput(BaseModel):
     """Structured response from the MapLibre agent.
 
-    Use this once the requested view has been rendered; use ``TextOutput``
-    for clarification questions.
+    Use this once the requested view has been rendered; answer questions and
+    clarifications as plain text.
     """
 
     result: str = Field(..., description=RESULT_DESCRIPTION)
 
 
 def validate_structured_output(output: Any) -> Any:
-    """Output validator: a structured answer must carry a result."""
-    if isinstance(output, TextOutput):
+    """Output validator: a structured answer must carry a result; plain text passes."""
+    if isinstance(output, str):
         return output
     if not str(getattr(output, "result", "")).strip():
         raise ModelRetry("Result is empty. Describe what is now shown.")
@@ -120,7 +123,7 @@ def build_maplibre_agent(
         MODEL_NAME,
         name=AGENT_NAME,
         system_prompt=(SYSTEM_PROMPT,),
-        output_type=[MaplibreAgentOutput, TextOutput],
+        output_type=[MaplibreAgentOutput, str],
         toolsets=[make_geoui_toolset(config, session_factory=session_factory)],
         capabilities=capabilities,
         retries=DEFAULT_RETRIES,
@@ -136,7 +139,6 @@ __all__ = [
     "REASONING_EFFORT",
     "SYSTEM_PROMPT",
     "MaplibreAgentOutput",
-    "TextOutput",
     "build_maplibre_agent",
     "maplibre_config",
     "validate_structured_output",

@@ -5,7 +5,6 @@ from geoui_bridge.agents.maplibre_agent import (
     MODEL_NAME,
     SYSTEM_PROMPT,
     MaplibreAgentOutput,
-    TextOutput,
     build_maplibre_agent,
     maplibre_config,
 )
@@ -15,7 +14,6 @@ __all__ = [
     "MODEL_NAME",
     "SYSTEM_PROMPT",
     "MaplibreAgentOutput",
-    "TextOutput",
     "build_maplibre_agent",
     "maplibre_config",
 ]

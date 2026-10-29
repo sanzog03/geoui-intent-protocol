@@ -64,10 +64,9 @@ def _variant():
     if AGENT not in ("geoui", "vlm", "maplibre"):
         raise ValueError(f"AGENT must be 'geoui', 'vlm' or 'maplibre' (got {AGENT!r})")
     if AGENT == "maplibre":
-        from geoui_bridge.agents import TextOutput as _maplibre_text_output
         from geoui_bridge.agents import build_maplibre_agent as _build_maplibre_agent
     else:
-        _maplibre_text_output = _build_maplibre_agent = None
+        _build_maplibre_agent = None
 
     geoui_intro = r"""
     # Worldview GeoUI Agent — Multi-turn Chat
@@ -212,7 +211,7 @@ def _variant():
         },
         "maplibre": {
             "build": _build_maplibre_agent,
-            "text_output": _maplibre_text_output,
+            "text_output": str,  # the MapLibre agent answers questions as plain text
             "uses_plugin": False,
             "intro_md": maplibre_intro,
             "example_prompts": [
@@ -768,7 +767,7 @@ def _chat(AGENT, TextOutput, VARIANT, agent, mo, session):
                 session["usage"] = (session.get("usage") or RunUsage()) + turn_usage
 
                 if isinstance(output, TextOutput):
-                    body = output.content
+                    body = output if isinstance(output, str) else output.content
                 else:
                     # Structured final output: render `result` markdown + clickable url.
                     # ``str(output)`` would give the Pydantic repr with escaped \n.

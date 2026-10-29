@@ -2,6 +2,7 @@
 
 import json
 from pathlib import Path
+from types import SimpleNamespace
 
 import pytest
 from pydantic_ai import ModelRetry
@@ -37,7 +38,7 @@ def test_render_schema_has_only_the_intent():
 async def test_round_trip_opens_a_session_per_call_and_retries_on_refusal():
     page = FakeSession()
     toolset = make_geoui_toolset(session_factory=page.factory())
-    listed = await toolset.tools[NAMES[2]].function()
+    listed = await toolset.tools[NAMES[2]].function(SimpleNamespace(messages=[]))  # the list tool reads ctx.messages
     assert [e["name"] for e in listed["extensions"]] == ["compare", "raster-styling"]
     rendered = await toolset.tools[NAMES[0]].function(intent=GeoIntent.model_validate({"layers": [{"id": "B"}]}))
     assert rendered["settled"] is True and rendered["intent"]["layers"][0]["id"] == "B"
