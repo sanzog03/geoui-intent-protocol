@@ -9,10 +9,9 @@ resolution-markers = [
 
 [manifest]
 members = [
-    "geobench",
     "geoui-protocol",
-    "geoui-worldview-benchmark",
     "geoui-worldview-demo",
+    "geouibench",
 ]
 
 [[package]]
@@ -1075,31 +1074,6 @@ wheels = [
 ]
 
 [[package]]
-name = "geobench"
-version = "0.1.0"
-source = { editable = "benchmarks/harness" }
-dependencies = [
-    { name = "deepeval" },
-    { name = "geoui-protocol" },
-    { name = "httpx" },
-    { name = "opentelemetry-exporter-otlp-proto-http" },
-    { name = "pydantic" },
-    { name = "pydantic-ai" },
-    { name = "python-dateutil" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "deepeval", specifier = ">=4.3,<5" },
-    { name = "geoui-protocol", editable = "." },
-    { name = "httpx", specifier = ">=0.27" },
-    { name = "opentelemetry-exporter-otlp-proto-http", specifier = ">=1.24,<2" },
-    { name = "pydantic", specifier = ">=2.11.7" },
-    { name = "pydantic-ai", specifier = ">=2.63,<3" },
-    { name = "python-dateutil", specifier = ">=2.8" },
-]
-
-[[package]]
 name = "geoui-protocol"
 version = "0.1.0"
 source = { editable = "." }
@@ -1109,9 +1083,8 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "geobench" },
-    { name = "geoui-worldview-benchmark" },
     { name = "geoui-worldview-demo" },
+    { name = "geouibench" },
     { name = "pre-commit" },
     { name = "pytest" },
     { name = "pytest-asyncio" },
@@ -1124,29 +1097,13 @@ requires-dist = [{ name = "pydantic", specifier = ">=2.7" }]
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "geobench", editable = "benchmarks/harness" },
-    { name = "geoui-worldview-benchmark", editable = "benchmarks/worldview" },
     { name = "geoui-worldview-demo", editable = "demo" },
+    { name = "geouibench", editable = "benchmarks" },
     { name = "pre-commit", specifier = ">=4.2" },
     { name = "pytest", specifier = ">=9.0" },
     { name = "pytest-asyncio", specifier = ">=1.3" },
     { name = "pytest-cov", specifier = ">=7.0" },
     { name = "ruff", specifier = ">=0.14" },
-]
-
-[[package]]
-name = "geoui-worldview-benchmark"
-version = "0.1.0"
-source = { editable = "benchmarks/worldview" }
-dependencies = [
-    { name = "geobench" },
-    { name = "geoui-worldview-demo" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "geobench", editable = "benchmarks/harness" },
-    { name = "geoui-worldview-demo", editable = "demo" },
 ]
 
 [[package]]
@@ -1169,6 +1126,33 @@ requires-dist = [
     { name = "geoui-protocol", editable = "." },
     { name = "httpx", specifier = ">=0.27" },
     { name = "marimo", specifier = ">=0.23.1,<0.24" },
+    { name = "pydantic-ai", specifier = ">=2.63,<3" },
+    { name = "python-dateutil", specifier = ">=2.8" },
+    { name = "python-dotenv", specifier = ">=1.0" },
+]
+
+[[package]]
+name = "geouibench"
+version = "0.1.0"
+source = { editable = "benchmarks" }
+dependencies = [
+    { name = "deepeval" },
+    { name = "geoui-protocol" },
+    { name = "httpx" },
+    { name = "opentelemetry-exporter-otlp-proto-http" },
+    { name = "pydantic" },
+    { name = "pydantic-ai" },
+    { name = "python-dateutil" },
+    { name = "python-dotenv" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "deepeval", specifier = ">=4.3,<5" },
+    { name = "geoui-protocol", editable = "." },
+    { name = "httpx", specifier = ">=0.27" },
+    { name = "opentelemetry-exporter-otlp-proto-http", specifier = ">=1.24,<2" },
+    { name = "pydantic", specifier = ">=2.11.7" },
     { name = "pydantic-ai", specifier = ">=2.63,<3" },
     { name = "python-dateutil", specifier = ">=2.8" },
     { name = "python-dotenv", specifier = ">=1.0" },

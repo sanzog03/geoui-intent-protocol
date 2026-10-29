@@ -21,23 +21,21 @@ dependencies = [
 Repository = "https://github.com/NASA-IMPACT/geoui-intent-protocol"
 
 [tool.uv.workspace]
-members = ["demo", "benchmarks/harness", "benchmarks/worldview"]
+members = ["demo", "benchmarks"]
 
 [tool.uv.sources]
 # The Worldview demo (adapter, tools, MCP server, agents) is a sibling project; the dev
 # group installs it editable so `uv run` sees `worldview` the same way it sees `geoui`.
 geoui-worldview-demo = { workspace = true }
-# The benchmark harness (deepeval, mechanism-neutral) and its Worldview bindings are
-# two more members; only the dev group pulls them in, so the library and demo stay
-# deepeval-free.
-geobench = { workspace = true }
-geoui-worldview-benchmark = { workspace = true }
+# The benchmark utility (deepeval) is the third member; only the dev group pulls it
+# in, so the library and the demo stay deepeval-free. App bindings under
+# benchmarks/<app>/ are plain directories the utility loads by path, not packages.
+geouibench = { workspace = true }
 
 [dependency-groups]
 dev = [
     "geoui-worldview-demo",
-    "geobench",
-    "geoui-worldview-benchmark",
+    "geouibench",
     "pytest>=9.0",
     "pytest-asyncio>=1.3",
     "pytest-cov>=7.0",
@@ -61,8 +59,8 @@ asyncio_mode = "auto"
 testpaths = [
     "tests",
     "demo/worldview/tests",
-    "benchmarks/harness/geobench/tests",
-    "benchmarks/worldview/worldview_benchmark/tests",
+    "benchmarks/geouibench/tests",
+    "benchmarks/worldview/tests",
 ]
 # deepeval registers a pytest plugin that would load into every run; `deepeval test run`
 # re-enables it explicitly, so the unit suite stays free of it.
@@ -83,8 +81,8 @@ line-ending = "lf"
 quote-style = "double"
 
 [tool.ruff.lint.isort]
-# the four workspace packages are first-party wherever they are imported from
-known-first-party = ["geoui", "worldview", "geobench", "worldview_benchmark"]
+# the three workspace packages are first-party wherever they are imported from
+known-first-party = ["geoui", "worldview", "geouibench"]
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**/*.py" = ["F841"]

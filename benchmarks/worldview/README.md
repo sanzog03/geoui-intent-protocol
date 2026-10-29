@@ -1,4 +1,4 @@
-# Worldview benchmark — GeoUI agent vs VLM baseline on geobench
+# Worldview benchmark — GeoUI agent vs VLM baseline on geouibench
 
 A re-runnable, verifiable comparison of the two Worldview agents in `demo/worldview/agents`:
 
@@ -78,9 +78,9 @@ metric reasons; `traces/` holds the per-turn evidence.
 ## Verifying a run without rerunning the agents
 
 ```bash
-uv run python -m geobench.score benchmarks/worldview/results/2026-10-28-gold                     # the deterministic four, no network
-uv run python -m geobench.score benchmarks/worldview/results/2026-10-28-gold --metrics all       # also re-judge with gpt-5.2
-uv run python -m geobench.summarize benchmarks/worldview/results/2026-10-28-gold
+uv run python -m geouibench.score benchmarks/worldview/results/2026-10-28-gold                     # the deterministic four, no network
+uv run python -m geouibench.score benchmarks/worldview/results/2026-10-28-gold --metrics all       # also re-judge with gpt-5.2
+uv run python -m geouibench.summarize benchmarks/worldview/results/2026-10-28-gold
 ```
 
 The scorer rebuilds every conversation from `conversations.jsonl` + `traces/`, runs
@@ -106,7 +106,7 @@ expected outcome and `--method docs` needs chromadb, so the set is produced with
 wraps the two steps around deepeval's own generator:
 
 ```bash
-WORK=/tmp/geobench-synthetic
+WORK=/tmp/geouibench-synthetic
 uv run python -m worldview_benchmark.synthetic contexts $WORK/contexts.json
 uv run --env-file .env deepeval generate --method contexts --variation multi-turn --include-expected \
   --contexts-file $WORK/contexts.json --max-goldens-per-context 2 --model gpt-5.2 \
