@@ -7,7 +7,7 @@ state (read and write) to the protocol, and the **GeoUI MCP in `demo/maplibre/`*
 over Chrome DevTools Protocol (CDP) to list extensions, read state and render intents. The agent keeps
 the same three tools it has for Worldview, so `geouibench` scores it the same way.
 
-Pieces: [`sdk/geoui-react`](../../sdk/geoui-react) · [`demo/maplibre`](../../demo/maplibre) (the `maplibre`
+Pieces: [`sdk/geoui-react-adapter`](../../sdk/geoui-react-adapter) · [`demo/maplibre`](../../demo/maplibre) (the `maplibre`
 package, with the app under `maplibre_geo_application/`) · [`benchmarks/maplibre`](../../benchmarks/maplibre) ·
 [`schemas/`](../../schemas) (exported from pydantic by `scripts/export_schemas.py`).
 

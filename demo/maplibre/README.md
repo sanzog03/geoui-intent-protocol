@@ -7,7 +7,7 @@ Unlike NASA Worldview, nothing here is in the URL.
 
 - `maplibre_geo_application/`: a plain React + TypeScript map (react-map-gl on MapLibre, NASA GIBS
   raster tiles) whose state is attached to the GeoUI Intent Protocol with the
-  [`@geoui/react`](../../sdk/geoui-react) SDK; it exposes `window.geoui`.
+  [`@geoui/react`](../../sdk/geoui-react-adapter) SDK; it exposes `window.geoui`.
 - `cdp.py`: `BridgeSession`, one Playwright `connect_over_cdp` connection that finds the app's tab
   by origin (`GEOUI_APP_URL`) and calls `window.geoui` through `page.evaluate`.
 - `catalogue.py`: checks the page's extension catalogue against the library and pre-declares the

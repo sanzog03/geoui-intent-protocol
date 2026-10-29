@@ -4,7 +4,7 @@
   "type": "module",
   "description": "npm workspaces for the GeoUI Intent Protocol: the @geoui/react SDK and the MapLibre demo app",
   "workspaces": [
-    "sdk/geoui-react",
+    "sdk/geoui-react-adapter",
     "demo/maplibre/maplibre_geo_application"
   ],
   "scripts": {

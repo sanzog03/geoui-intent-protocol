@@ -24,7 +24,7 @@ implementation and carries everything Worldview-specific; `maplibre` is the
 GeoUI MCP over CDP for any page that exposes `window.geoui`, plus its agent,
 with the React map app it drives beside it. `geouibench` (`benchmarks/`) is
 the benchmark utility. On the TypeScript side, `@geoui/react`
-(`sdk/geoui-react`) is the adapter SDK for React apps and
+(`sdk/geoui-react-adapter`) is the adapter SDK for React apps and
 `demo/maplibre/maplibre_geo_application` is the map app built with it.
 
 | Path | What it is | Depends on |
@@ -41,7 +41,7 @@ the benchmark utility. On the TypeScript side, `@geoui/react`
 | `demo/worldview/agents/artifact/worldview/vlm/mio-worldviewagent-v2/` | Vendored non-GeoUI skill (`SKILL.md` + `references/`) the baseline agent runs | — |
 | `demo/worldview/tests/` | Tests for the adapter, tools, MCP contract, plugin loader and agents | — |
 | `demo/chat.py`, `demo/start.sh`, `demo/chromium.sh` | One marimo chat notebook for all three agents (`AGENT=geoui\|vlm\|maplibre`), the launcher, and the Chromium-over-CDP helper it shares with the benchmarks | marimo |
-| `sdk/geoui-react/` | **`@geoui/react`**, the adapter SDK for React apps: `GeoUIProvider`, attach hooks (`useGeoUIViewport` / `Time` / `Layers` / `Extension` / `LayerExtension`), a registry that composes and applies a `GeoIntent`, and `window.geoui` (`describe` / `getState` / `render`). Types and extension specs are generated from `schemas/` | react (peer) |
+| `sdk/geoui-react-adapter/` | **`@geoui/react`**, the adapter SDK for React apps (its README is the integration guide): `GeoUIProvider`, attach hooks (`useGeoUIViewport` / `Time` / `Layers` / `Extension` / `LayerExtension`), a registry that composes and applies a `GeoIntent`, and `window.geoui` (`describe` / `getState` / `render`). Types and extension specs are generated from `schemas/` | react (peer) |
 | `demo/maplibre/maplibre_geo_application/` | A React + MapLibre + NASA GIBS map app with the SDK attached: nothing in the URL; an agent drives it through `window.geoui`. `npm run dev` | @geoui/react, react-map-gl |
 | `demo/maplibre/` | **The MapLibre demo's Python side** (import `maplibre`): the GeoUI MCP over CDP for any `window.geoui` page. `cdp.py` (Playwright `connect_over_cdp` session), `catalogue.py` (the page's catalogue checked against the library, consumer-side pre-declaration), `tools/` (the three tools; `pai.py` as a pydantic-ai toolset), `mcp/server.py` (`maplibre-mcp`), `agents/maplibre_agent.py` | geoui, playwright, fastmcp, pydantic-ai |
 | `tests/` | Library tests (`test_core.py`) and repo-level checks | — |

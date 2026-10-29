@@ -17,7 +17,7 @@ two demos share one member because uv refuses a member nested inside another
 member's directory. Benchmark app directories such as `benchmarks/worldview/`
 are not packages; the utility loads their `app.py` by path. One `uv.lock`
 covers all three; commit it. Run every `uv` command from the repo root. The
-TypeScript side is an npm workspace (`sdk/geoui-react`,
+TypeScript side is an npm workspace (`sdk/geoui-react-adapter`,
 `demo/maplibre/maplibre_geo_application`) with one `package-lock.json`; commit it.
 
 ## Checks
@@ -32,7 +32,7 @@ npm test && npm run lint && npm run build         # SDK (vitest, jsdom) and the 
 
 pytest never needs node and `npm test` never needs Python: the schema contract
 is checked on both sides from the committed `schemas/` files
-(`tests/test_schemas.py`, `sdk/geoui-react/src/__tests__/schemas.test.ts`).
+(`tests/test_schemas.py`, `sdk/geoui-react-adapter/src/__tests__/schemas.test.ts`).
 After changing a pydantic model: `uv run python scripts/export_schemas.py`,
 then `npm run gen:types`, and commit both outputs.
 
@@ -88,7 +88,7 @@ Markers: `integration` (spawns a subprocess or touches the network), `agents`
     (`scripts/dump_mcp_contract.py local --module maplibre.mcp.server:mcp
     --golden <that path> --update-golden`).
 11. Agent-facing wording is shared across the boundary on purpose: the SDK's
-    `validate()` messages (`sdk/geoui-react/src/errors.ts`) mirror
+    `validate()` messages (`sdk/geoui-react-adapter/src/errors.ts`) mirror
     `prepare_intent` in `maplibre.catalogue` and `worldview.tools`. Change
     them together.
 
