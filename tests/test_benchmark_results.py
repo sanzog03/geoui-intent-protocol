@@ -11,7 +11,7 @@ from pathlib import Path
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-RESULT_DIRS = ("benchmarks/worldview_legacy/results", "benchmarks/worldview/results")
+RESULT_DIRS = ("benchmarks/worldview_legacy/results", "benchmarks/worldview/results", "benchmarks/maplibre/results")
 MARKERS = ("/Users/", "/home/")
 
 

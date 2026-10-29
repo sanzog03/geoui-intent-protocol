@@ -1,0 +1,250 @@
+[
+  {
+    "name": "core-1-single-render",
+    "scenario": "You are an atmospheric scientist who has already identified the exact map layer you need (MODIS Aqua Aerosol Optical Depth 3 km, layer id MODIS_Aqua_Aerosol_Optical_Depth_3km) and the date (2025-09-15). You want it shown over the contiguous US. You will not ask for anything else: once the assistant shows the layer on that date and confirms the view is on screen, you are done.",
+    "expected_outcome": "The assistant renders MODIS_Aqua_Aerosol_Optical_Depth_3km on 2025-09-15 over the contiguous US without running dataset discovery or asking the user to confirm, and confirms what is now shown.",
+    "persona": {
+      "characteristics": "Terse, knows the layer catalogue well, states exactly what they want and expects it done without questions. Never invents extra requests."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/worldview/datasets/gold_dataset.json#core-1-single-render",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to visualize the layer `MODIS_Aqua_Aerosol_Optical_Depth_3km` on the map app for 2025-09-15, focused on the contiguous US. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm."
+      },
+      "max_user_simulations": 0,
+      "state_threshold": 1.0,
+      "expected_state": {
+        "layers": {
+          "MODIS_Aqua_Aerosol_Optical_Depth_3km": null
+        },
+        "time": "2025-09-15"
+      }
+    }
+  },
+  {
+    "name": "core-2-date-change",
+    "scenario": "You are a remote-sensing analyst looking at Florida. You have already identified the exact the map app layer (VIIRS SNPP Corrected Reflectance True Color, layer id VIIRS_SNPP_CorrectedReflectance_TrueColor) for 2024-09-26. Steps still to request, in order, one per message: 1. Move the date forward by one day, to 2024-09-27 (say exactly: \"Now move the date forward by one day, to 2024-09-27.\"). After the date is moved and the view is on screen, you are done.",
+    "expected_outcome": "The assistant first shows VIIRS_SNPP_CorrectedReflectance_TrueColor over Florida on 2024-09-26, then, on request, moves the same view to 2024-09-27 and confirms what is now shown.",
+    "persona": {
+      "characteristics": "Brief and precise. Follows the listed steps in order, one per message, never skips a step and never adds requests that are not listed."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/worldview/datasets/gold_dataset.json#core-2-date-change",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to visualize the layer `VIIRS_SNPP_CorrectedReflectance_TrueColor` on the map app for 2024-09-26, focused on Florida. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm."
+      },
+      "max_user_simulations": 1,
+      "state_threshold": 1.0,
+      "expected_state": {
+        "layers": {
+          "VIIRS_SNPP_CorrectedReflectance_TrueColor": null
+        },
+        "time": "2024-09-27"
+      },
+      "checkpoints": [
+        {
+          "layers": {
+            "VIIRS_SNPP_CorrectedReflectance_TrueColor": null
+          },
+          "time": "2024-09-26"
+        }
+      ]
+    }
+  },
+  {
+    "name": "core-3-pan",
+    "scenario": "You are an oceanographer. You have already identified the exact the map app layer (GHRSST L4 MUR Sea Surface Temperature Anomalies, layer id GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies) for 2022-08-19 on a global view. Steps still to request, in order, one per message: 1. Pan the map to the Gulf of Mexico (say exactly: \"Now pan the map to the Gulf of Mexico.\"). After the map is centred on the Gulf of Mexico and the view is on screen, you are done.",
+    "expected_outcome": "The assistant shows GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies on 2022-08-19 globally, then on request pans the view to the Gulf of Mexico keeping the same layer and date, and confirms what is now shown.",
+    "persona": {
+      "characteristics": "Brief and precise. Follows the listed steps in order, one per message, never skips a step and never adds requests that are not listed."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/worldview/datasets/gold_dataset.json#core-3-pan",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to visualize the layer `GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies` on the map app for 2022-08-19 on a global view. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm."
+      },
+      "max_user_simulations": 1,
+      "state_threshold": 1.0,
+      "expected_state": {
+        "layers": {
+          "GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies": null
+        },
+        "time": "2022-08-19"
+      },
+      "checkpoints": [
+        {
+          "layers": {
+            "GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies": null
+          },
+          "time": "2022-08-19"
+        }
+      ]
+    }
+  },
+  {
+    "name": "core-4-compare",
+    "scenario": "You are a climate scientist comparing day and night surface air temperature. You have already identified both exact layers: AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean (A side) and AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean (B side), for 2025-08-01, global view, swipe compare with the slider at 50%. You will not ask for anything else: once the comparison is set up and the view is on screen, you are done.",
+    "expected_outcome": "The assistant enables the map app's swipe comparison on 2025-08-01 with the AIRS day-mean layer on side A and the AIRS night-mean layer on side B, without discovery or confirmation, and confirms the comparison is on screen.",
+    "persona": {
+      "characteristics": "Terse, knows the layer catalogue well, states exactly what they want and expects it done without questions. Never invents extra requests."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/worldview/datasets/gold_dataset.json#core-4-compare",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to compare two layers side-by-side on the map app for 2025-08-01: `AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean` as the A-side and `AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean` as the B-side, on a global view, using swipe compare mode with the slider at 50%. I've already identified both exact layer IDs — please render this directly without further dataset discovery or asking me to confirm."
+      },
+      "max_user_simulations": 0,
+      "state_threshold": 1.0,
+      "expected_state": {
+        "layers": {
+          "AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean": null
+        },
+        "time": "2025-08-01",
+        "compare": {
+          "mode": "swipe",
+          "layers": [
+            "AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean"
+          ]
+        }
+      }
+    }
+  },
+  {
+    "name": "core-6-multilayer",
+    "scenario": "You are a cartographer stacking three the map app layers for 2024-07-04 on a global view, all already identified by exact id: MODIS_Aqua_CorrectedReflectance_TrueColor at full opacity as the base, Reference_Labels_15m at 60% opacity, and Reference_Features_15m at 80% opacity. You will not ask for anything else: once the three layers are stacked at those opacities and the view is on screen, you are done.",
+    "expected_outcome": "The assistant stacks MODIS Aqua true color (opacity 1.0), Reference Labels (opacity 0.6) and Reference Features (opacity 0.8) on 2024-07-04 globally, without discovery or confirmation, and confirms what is now shown.",
+    "persona": {
+      "characteristics": "Terse, knows the layer catalogue well, states exactly what they want and expects it done without questions. Never invents extra requests."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/worldview/datasets/gold_dataset.json#core-6-multilayer",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to visualize three layers stacked together on the map app for 2024-07-04 on a global view: `MODIS_Aqua_CorrectedReflectance_TrueColor` at full opacity as the base, `Reference_Labels_15m` at 60% opacity, and `Reference_Features_15m` at 80% opacity. I've already identified all three exact layer IDs — please render this directly without further dataset discovery or asking me to confirm."
+      },
+      "max_user_simulations": 0,
+      "state_threshold": 1.0,
+      "expected_state": {
+        "layers": {
+          "MODIS_Aqua_CorrectedReflectance_TrueColor": 1.0,
+          "Reference_Labels_15m": 0.6,
+          "Reference_Features_15m": 0.8
+        },
+        "time": "2024-07-04"
+      }
+    }
+  },
+  {
+    "name": "workflow-a-wildfire",
+    "scenario": "You are tracking California wildfire smoke in the map app. You have already identified the exact aerosol layer (MODIS Aqua Aerosol Optical Depth 3 km, layer id MODIS_Aqua_Aerosol_Optical_Depth_3km) for 2025-09-15 over California. Steps still to request, in order, one per message, after the first view is shown: 1. \"Compare it to the previous day.\" (a swipe comparison of the same layer against 2025-09-14). 2. \"Switch to the morning MODIS Terra sensor instead of Aqua.\" (the Terra equivalent is MODIS_Terra_Aerosol_Optical_Depth_3km; mention that exact id). 3. \"Adjust the colour scale to emphasise high AOD values, 0 to 2, squashing the palette to that range.\" After step 3 is applied and the view is on screen, you are done.",
+    "expected_outcome": "Over four turns the assistant shows the Aqua aerosol layer over California on 2025-09-15, enables a swipe comparison against 2025-09-14, switches the aerosol layer to MODIS_Terra_Aerosol_Optical_Depth_3km, and finally sets the aerosol layer's colour scale to min 0, max 2 with squash, replying with a confirmation after each step.",
+    "persona": {
+      "characteristics": "A focused analyst. Follows the listed steps in order, one per message, waits for each to be applied, never skips a step and never adds requests that are not listed. Quotes exact layer ids and dates when given."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/worldview/datasets/gold_dataset.json#workflow-a-wildfire",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to visualize the layer `MODIS_Aqua_Aerosol_Optical_Depth_3km` on the map app for 2025-09-15, focused on California. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm."
+      },
+      "max_user_simulations": 3,
+      "state_threshold": 0.8,
+      "expected_state": {
+        "layers": {
+          "MODIS_Terra_Aerosol_Optical_Depth_3km": null
+        },
+        "time": "2025-09-15",
+        "compare": {
+          "time": "2025-09-14",
+          "mode": "swipe"
+        },
+        "styling": {
+          "layer": "MODIS_Terra_Aerosol_Optical_Depth_3km",
+          "min": 0,
+          "max": 2,
+          "squash": true
+        }
+      },
+      "checkpoints": [
+        {
+          "layers": {
+            "MODIS_Aqua_Aerosol_Optical_Depth_3km": null
+          },
+          "time": "2025-09-15"
+        },
+        {
+          "compare": {
+            "time": "2025-09-14",
+            "mode": "swipe"
+          }
+        },
+        {
+          "layers": {
+            "MODIS_Terra_Aerosol_Optical_Depth_3km": null
+          }
+        },
+        {
+          "styling": {
+            "layer": "MODIS_Terra_Aerosol_Optical_Depth_3km",
+            "min": 0,
+            "max": 2,
+            "squash": true
+          }
+        }
+      ]
+    }
+  },
+  {
+    "name": "workflow-b-saharan-dust",
+    "scenario": "You are studying Saharan dust transport over the tropical Atlantic in the map app. You have already identified the exact aerosol layer (MODIS Aqua Aerosol Optical Depth 3 km, layer id MODIS_Aqua_Aerosol_Optical_Depth_3km) for 2023-06-15 over the tropical Atlantic. Steps still to request, in order, one per message, after the first view is shown: 1. \"Step forward three days.\" (to 2023-06-18). 2. \"Compare this date with the same date last week.\" (a swipe comparison against 2023-06-11). 3. \"Make the aerosol layer 60% opaque so the ocean shows through.\" (opacity 0.6 on the aerosol layer, keeping the comparison). After step 3 is applied and the view is on screen, you are done.",
+    "expected_outcome": "Over four turns the assistant shows the Aqua aerosol layer over the tropical Atlantic on 2023-06-15, steps the date to 2023-06-18, enables a swipe comparison against 2023-06-11, and sets the aerosol layer's opacity to 0.6 while keeping the comparison, replying with a confirmation after each step.",
+    "persona": {
+      "characteristics": "A focused analyst. Follows the listed steps in order, one per message, waits for each to be applied, never skips a step and never adds requests that are not listed. Quotes exact layer ids and dates when given."
+    },
+    "additional_metadata": {
+      "source": "benchmarks/worldview/datasets/gold_dataset.json#workflow-b-saharan-dust",
+      "fully_specified": true,
+      "openers": {
+        "geoui": "I want to visualize the layer `MODIS_Aqua_Aerosol_Optical_Depth_3km` on the map app for 2023-06-15, focused on the tropical Atlantic. I've already identified this exact layer ID — please render it directly without further dataset discovery or asking me to confirm."
+      },
+      "max_user_simulations": 3,
+      "state_threshold": 0.8,
+      "expected_state": {
+        "layers": {
+          "MODIS_Aqua_Aerosol_Optical_Depth_3km": 0.6
+        },
+        "time": "2023-06-18",
+        "compare": {
+          "time": "2023-06-11",
+          "mode": "swipe"
+        }
+      },
+      "checkpoints": [
+        {
+          "layers": {
+            "MODIS_Aqua_Aerosol_Optical_Depth_3km": null
+          },
+          "time": "2023-06-15"
+        },
+        {
+          "time": "2023-06-18"
+        },
+        {
+          "compare": {
+            "time": "2023-06-11",
+            "mode": "swipe"
+          }
+        },
+        {
+          "layers": {
+            "MODIS_Aqua_Aerosol_Optical_Depth_3km": 0.6
+          }
+        }
+      ]
+    }
+  }
+]

@@ -65,6 +65,7 @@ testpaths = [
     "demo/worldview/tests",
     "benchmarks/geouibench/tests",
     "benchmarks/worldview/tests",
+    "benchmarks/maplibre/tests",
     "bridge/geoui_bridge/tests",
 ]
 # deepeval registers a pytest plugin that would load into every run; `deepeval test run`
