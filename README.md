@@ -36,8 +36,8 @@ carries everything application-specific.
 | `demo/worldview/tests/` | Tests for the adapter, tools, MCP contract, plugin loader and agents | — |
 | `demo/chat.py`, `demo/start.sh`, `demo/chromium.sh` | One marimo chat notebook for both agents (`AGENT=geoui\|vlm`), the launcher, and the Chromium-over-CDP helper it shares with the benchmark | marimo |
 | `tests/` | Library tests (`test_core.py`) and repo-level checks | — |
-| `benchmarks/harness/` | `geobench`: mechanism-neutral deepeval benchmark harness (simulated multi-turn user, per-turn traces, six metrics, offline re-scoring) | deepeval, pydantic-ai |
-| `benchmarks/worldview/` | The Worldview benchmark on `geobench`: app binding, gold + synthetic datasets, the eval suite, `run.sh`, committed results per run | geobench, demo |
+| `benchmarks/geouibench/` | `geouibench`: the benchmark utility (simulated multi-turn user, per-turn traces, six metrics, synthetic goldens, offline re-scoring, cross-agent summary, `python -m geouibench` CLI); names no application | deepeval, pydantic-ai |
+| `benchmarks/worldview/` | The Worldview app directory for `geouibench`: `app.py` (both agents, state read-back, prepare hook), gold + synthetic datasets, committed results per run | geouibench, demo |
 | `benchmarks/manual/` | The earlier notebook-driven procedure: prompt suite, workflow scripts, frozen poster run logs | — |
 | `docs/spec.md` | GeoUI Protocol v1.0.0 specification | — |
 | `docs/poster/` | Poster narrative, abstract, interaction diagrams, results chart | — |
@@ -140,9 +140,9 @@ suite and the frozen poster logs live under `benchmarks/manual/`.
 
 ## Benchmark
 
-The re-runnable comparison lives in `benchmarks/`: `geobench`
-(`benchmarks/harness/`) is a mechanism-neutral deepeval harness, and
-`benchmarks/worldview/` binds both agents to it. deepeval's
+The re-runnable comparison lives in `benchmarks/`: `geouibench`
+(`benchmarks/geouibench/`) is a mechanism-neutral deepeval benchmark utility, and
+`benchmarks/worldview/` is the app directory that binds both agents to it. deepeval's
 `ConversationSimulator` plays the user (the first turn verbatim per agent, the
 follow-ups improvised from the scenario), every turn is traced, and six
 metrics score each conversation: success (final UI state vs the expected
@@ -150,20 +150,22 @@ state), completion, tool / time / token efficiency, and turn relevancy. The
 summary lays the two agents side by side with VLM ÷ GeoUI ratios.
 
 ```bash
-BENCHMARK_SMOKE=1 ./benchmarks/worldview/run.sh gold smoke   # one scenario, both agents
-./benchmarks/worldview/run.sh gold 2026-10-28-gold           # the full gold set
-uv run python -m geobench.score benchmarks/worldview/results/2026-10-28-gold   # re-score from committed traces, no agent
+uv run python -m geouibench run benchmarks/worldview gold --smoke --run-id smoke   # one scenario, both agents
+uv run python -m geouibench run benchmarks/worldview gold --run-id 2026-10-28-gold # the full gold set
+uv run python -m geouibench score benchmarks/worldview/results/2026-10-28-gold     # re-score from committed traces, no agent
 ```
 
-See `benchmarks/worldview/README.md` (running, reading and verifying a run)
-and `benchmarks/harness/README.md` (the app contract, dataset format, metrics
-and how traces are captured). `HANDOVER.md` has the operational detail,
-including the Playwright-over-CDP design and known gotchas.
+Benchmarking another demo is an `app.py` plus a gold dataset in a new directory
+under `benchmarks/`; see `benchmarks/README.md` (the utility, the app contract,
+dataset format, metrics, how traces are captured) and
+`benchmarks/worldview/README.md` (running, reading and verifying a Worldview run).
+`HANDOVER.md` has the operational detail, including the Playwright-over-CDP design
+and known gotchas.
 
 ## Tests
 
 ```bash
-uv run pytest                      # library + demo + benchmark harness/bindings, offline
+uv run pytest                      # library + demo + benchmark utility + Worldview app tests, offline
 uv run pytest -m "not integration" # skip the stdio subprocess smoke
 uv run pytest -m agents            # plugin loader, toolset parity and the model-visible surface golden
 ```

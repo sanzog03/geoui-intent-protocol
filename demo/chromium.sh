@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Chromium-on-CDP helpers shared by demo/start.sh (the chat notebook) and
-# benchmarks/worldview/run.sh (the deepeval benchmark). Source this file,
+# the benchmark's WorldviewApp.prepare() (benchmarks/worldview/app.py). Source this file,
 # then call `ensure_chromium`; it launches (or reattaches to) a long-lived
 # Chromium with remote debugging on $CDP_PORT and exports
 # PLAYWRIGHT_CDP_ENDPOINT for the Playwright MCP to attach to.

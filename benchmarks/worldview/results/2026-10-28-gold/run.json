@@ -1,6 +1,6 @@
 {
   "run_name": "2026-10-28-gold",
-  "app": "worldview_benchmark.app:WorldviewApp",
+  "app": "benchmarks/worldview",
   "reference_agent": "geoui",
   "agent_kinds": [
     "geoui",

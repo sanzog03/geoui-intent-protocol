@@ -4,15 +4,15 @@
 
 ```bash
 git submodule update --init  # demo/worldview/agents/artifact/worldview/geoui/akd-plugins (the worldview-assistant plugin)
-uv sync                      # library + Worldview demo + benchmark harness/bindings + dev tools
+uv sync                      # library + Worldview demo + benchmark utility + dev tools
 uv run pre-commit install    # optional
 ```
 
-Python 3.12+. The repo is a uv workspace with four projects: `geoui-protocol`
-(root, import `geoui`), `geoui-worldview-demo` (`demo/`, import `worldview`),
-`geobench` (`benchmarks/harness/`, the deepeval benchmark harness) and
-`geoui-worldview-benchmark` (`benchmarks/worldview/`, import
-`worldview_benchmark`). One `uv.lock` covers all four; commit it. Run every
+Python 3.12+. The repo is a uv workspace with three projects: `geoui-protocol`
+(root, import `geoui`), `geoui-worldview-demo` (`demo/`, import `worldview`) and
+`geouibench` (`benchmarks/`, the deepeval benchmark utility). Benchmark app
+directories such as `benchmarks/worldview/` are not packages; the utility loads
+their `app.py` by path. One `uv.lock` covers all three; commit it. Run every
 `uv` command from the repo root.
 
 ## Checks
@@ -58,12 +58,13 @@ Markers: `integration` (spawns a subprocess or touches the network), `agents`
 8. `demo/chat.py` stays at `demo/`, not inside `demo/worldview/`. marimo puts
    the notebook's directory at the front of `sys.path`; from inside the
    package that would shadow the installed `mcp` SDK and `agents` packages.
-9. Dependency direction of the benchmark: `geoui` ← `geobench` ←
-   `worldview_benchmark` → `worldview`. `geobench` knows pydantic-ai, deepeval
-   and the `GeoIntent` vocabulary and nothing about Worldview or about how an
-   agent acts; `demo/` never imports `geobench` or deepeval (the README import
-   check covers it). deepeval's pytest plugin stays blocked in the unit suite
-   (`-p no:deepeval`); only `deepeval test run` enables it.
+9. Dependency direction of the benchmark: `geoui` ← `geouibench` ←
+   `benchmarks/<app>/app.py` → the app's demo package. `geouibench` knows
+   pydantic-ai, deepeval and the `GeoIntent` vocabulary and nothing about any
+   application or about how an agent acts: no application name appears in it,
+   its docs or its tests. `demo/` never imports `geouibench` or deepeval (the
+   README import check covers it). deepeval's pytest plugin stays blocked in the
+   unit suite (`-p no:deepeval`); only `deepeval test run` enables it.
 
 ## Adding an adapter
 
@@ -91,20 +92,21 @@ Once two adapters exist, lift the shared interface into `geoui`.
   (layer-id wording for `geoui`, searchable-name wording for `vlm`), the
   ordered follow-up steps in `scenario`, an `expected_state` (and
   `checkpoints` for multi-turn workflows), `max_user_simulations` and
-  `state_threshold`. `uv run pytest benchmarks/worldview` validates it.
-- **Regenerate the synthetic set:** the `deepeval generate` command is in
-  `benchmarks/worldview/README.md`; review the output before committing it.
-- **Never point plain pytest at `benchmarks/worldview/`:** it would collect
-  `evals/test_worldview.py` and spend real agent turns. The file skips itself
-  unless `BENCHMARK_RUN` is set; `run.sh` sets it. Target
-  `benchmarks/worldview/worldview_benchmark/tests` for the unit tests.
-- **Commit results deliberately:** `run.sh` writes
-  `benchmarks/worldview/results/<run-id>/`; commit the folder with its
+  `state_threshold`. `uv run pytest benchmarks/worldview/tests` validates it.
+- **Regenerate the synthetic set:** `uv run python -m geouibench synthetic
+  benchmarks/worldview` (the wording lives in `SYNTHETIC_STYLE` in `app.py`);
+  review the output before committing it.
+- **The live eval file is `benchmarks/geouibench/evals/test_benchmark.py`**
+  and is not in `testpaths`; it skips itself unless `BENCHMARK_APP` and
+  `BENCHMARK_RUN` are set, which `python -m geouibench run` sets. Never add it
+  to `testpaths`.
+- **Commit results deliberately:** `run` writes
+  `benchmarks/<app>/results/<run-id>/`; commit the folder with its
   `summary.md`. The artifact test fails on absolute paths.
-- **Bind another application:** implement `geobench.app.BenchmarkApp`
-  (`build_agent`, `output_url`, `observe`, `auto_layers`, `discovery_tools`)
-  in its own workspace member and copy `benchmarks/worldview/evals/` and
-  `run.sh`. See `benchmarks/harness/README.md`.
+- **Bind another application:** a new directory `benchmarks/<name>/` with an
+  `app.py` (`APP` satisfying `geouibench.BenchmarkApp`, optionally `prepare()`
+  and `SYNTHETIC_STYLE`) and a gold dataset. No package, no eval file, no
+  script. See `benchmarks/README.md`.
 
 ## Adding an extension
 
