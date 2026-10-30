@@ -1,0 +1,13 @@
+{
+  "trace_id": "b62f340a-06a3-4b20-b1e2-f626f8beb636",
+  "thread_id": "1e38dddf-e288-42cb-9dbd-71bcdb0297c7",
+  "source": "simulated",
+  "started_at": "2026-10-30T05:31:39.997047+00:00",
+  "duration_s": 30.031017292058095,
+  "llm_calls": [],
+  "tool_calls": [],
+  "other_spans": [],
+  "error": "McpError: Timed out while waiting for response.",
+  "usage": null,
+  "usage_source": "pydantic_ai"
+}

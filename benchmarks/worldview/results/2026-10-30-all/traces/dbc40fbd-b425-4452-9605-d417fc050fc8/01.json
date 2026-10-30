@@ -1,0 +1,131 @@
+{
+  "trace_id": "c538d1a2-045f-4a92-a97e-4f279853b962",
+  "thread_id": "dbc40fbd-b425-4452-9605-d417fc050fc8",
+  "source": "simulated",
+  "started_at": "2026-10-30T06:04:15.371465+00:00",
+  "duration_s": 23.660558459116146,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10118,
+      "output_tokens": 165,
+      "duration_s": 3.0113899998832494,
+      "offset_s": 4.243868125136942,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12361,
+      "output_tokens": 294,
+      "duration_s": 4.310192999895662,
+      "offset_s": 10.289737125160173,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12550,
+      "output_tokens": 79,
+      "duration_s": 1.7759010000154376,
+      "offset_s": 15.135704125044867,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12722,
+      "output_tokens": 91,
+      "duration_s": 1.6750260000117123,
+      "offset_s": 16.919425125001,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 13036,
+      "output_tokens": 216,
+      "duration_s": 3.990096000023186,
+      "offset_s": 19.65536312502809,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "search_worldview_layers",
+      "args": {
+        "query": "GHRSST L4 MUR Sea Surface Temperature Anomalies",
+        "limit": 10
+      },
+      "output": "{\"matched_layers\":[{\"layer_id\":\"GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies\",\"measurement_id\":\"sea-surface-temperature-anomalies\",\"display_name\":\"GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies\",\"description\":\"The Sea Surface Temperature Anomalies (L4, MUR) layer is created from the GHRSST Sea Surface Temperature Level 4, MUR sea surface temperature analysis product, which uses wavelets as basis functions in an optimal interpolation approach on a global 0.011 degree grid. The version 4 Multiscale Ultrahigh Resolution (MUR) L4 analysis is based upon nighttime GHRSST L2P skin and subskin SST observations \",\"date_range_start\":\"2019-07-23\",\"date_range_end\":null,\"instrument\":\"multi-mission\",\"platform\":\"\",\"tags\":[\"sst\",\"ghrsst\",\"podaac\",\"PO.DAAC\"],\"relevance_score\":1.0,\"vector_score\":1.0,\"bm25_score\":1.0,\"search_mode\":\"hybrid\"},{\"layer_id\":\"GHRSST_L4_MUR25_Sea_Surface_Temperature_Anomalies\",\"measurement_id\":\"sea-surface-temperature-anomalies\",\"display_name\":\"GHRSST_L4_MUR25_Sea_Surface_Temperature_Anomalies\",\"description\":\"The Sea Surface Temperature (L4, MUR25) layer is a Group for High Resolution Sea Surface Temperature (GHRSST) Level 4 sea surface temperature analysis. It is produced as a retrospective dataset (four day latency) and near-real-time dataset (one day latency) at the JPL Physical Oceanography DAAC using wavelets as basis functions in an optimal interpolation approach on a global 0.25 degree grid. The\",\"date_range_start\":\"2002-09-01\",\"date_range_end\":null,\"instrument\":\"multi-mission\",\"platform\":\"\",\"tags\":[\"sst\",\"ghrsst\",\"podaac\",\"PO.DAAC\"],\"relevance_score\":0.9112,\"vector_score\":0.9846,\"bm25_score\":0.7398,\"search_mode\":\"hybrid\"},{\"layer_id\":\"GHRSST_L4_MUR_Sea_Surface_Temperature\",\"measurement_id\":\"sea-surface-temperature\",\"display_name\":\"GHRSST_L4_MUR_Sea_Surface_Temperature\",\"description\":\"The Sea Surface Temperature (L4, MUR) layer is created from the GHRSST Sea Surface Temperature Level 4, MUR sea surface temperature analysis product, which uses wave…",
+      "duration_s": 3.0277720000594854,
+      "offset_s": 7.257284125080332,
+      "error": null
+    },
+    {
+      "name": "validate_temporal_coverage",
+      "args": {
+        "layer_id": "GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies",
+        "acquisition_start_date": "2022-08-19",
+        "acquisition_end_date": "2022-08-19"
+      },
+      "output": "{\"layer_id\":\"GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies\",\"layer_start\":\"2019-07-23\",\"layer_end\":null,\"is_currently_active\":true,\"requested_window\":{\"start\":\"2022-08-19\",\"end\":\"2022-08-19\"},\"overlap_type\":\"COMPLETE_OVERLAP\",\"overlap_window\":{\"start\":\"2022-08-19\",\"end\":\"2022-08-19\"},\"not_covered_windows\":[],\"overall_valid\":true,\"source\":\"json\"}",
+      "duration_s": 0.5243110000155866,
+      "offset_s": 14.604636125033721,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "viewport": {
+            "bbox": null,
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2022-08-19"
+          },
+          "layers": [
+            {
+              "id": "GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies",
+              "visible": true,
+              "opacity": 1
+            }
+          ]
+        }
+      },
+      "output": "{\"url\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies(opacity=1),Coastlines_15m,Reference_Features_15m&t=2022-08-19&p=geographic\"}",
+      "duration_s": 0.0005270000547170639,
+      "offset_s": 16.91478612506762,
+      "error": null
+    },
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies(opacity=1),Coastlines_15m,Reference_Features_15m&t=2022-08-19&p=geographic"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies(opacity=1),Coastlines_15m,Reference_Features_15m&t=2022-08-19&p=geographic');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies(opacity=1),Coastlines_15m,Reference_Features_15m&t=2022-08-19&p=geographic\n- Page Title: NASA Worldview\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T06-04-35-022Z.yml)",
+      "duration_s": 1.0540270002093166,
+      "offset_s": 18.598815124947578,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 60787,
+    "output_tokens": 845,
+    "total_tokens": 61632,
+    "requests": 5,
+    "cache_read_tokens": 52096,
+    "reasoning_tokens": 351,
+    "tool_calls": 4,
+    "cost_usd": 0.03615605
+  },
+  "usage_source": "pydantic_ai"
+}

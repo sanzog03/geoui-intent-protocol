@@ -1,0 +1,97 @@
+{
+  "trace_id": "1083edb3-0f4e-4b0a-b585-f46528ccd66f",
+  "thread_id": "e74358c4-2be6-468c-80e7-7ef1979d18e9",
+  "source": "simulated",
+  "started_at": "2026-10-30T06:53:20.046175+00:00",
+  "duration_s": 62.40374754113145,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 35902,
+      "output_tokens": 132,
+      "duration_s": 3.0199680000077933,
+      "offset_s": 42.23976566595957,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 37846,
+      "output_tokens": 117,
+      "duration_s": 2.615688000107184,
+      "offset_s": 45.32214466598816,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 38167,
+      "output_tokens": 22,
+      "duration_s": 1.5244040000252426,
+      "offset_s": 54.2224446660839,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 38422,
+      "output_tokens": 519,
+      "duration_s": 6.122791999951005,
+      "offset_s": 56.27219166606665,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 9,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?v=-91.14563125,23.617757812499995,-72.23156875,33.514242187499995&l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,VIIRS_SNPP_CorrectedReflectance_TrueColor,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor(hidden)&lg=false&s=-56.2085,-34.0943%2B-81.6886,28.566&t=2024-09-26-T06%3A07%3A16Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e1]:\n  - generic [ref=e2]:\n    - generic [ref=e5]:\n      - button [ref=e6] [cursor=pointer]\n      - searchbox [ref=e8]:\n        - combobox \"Search for places or enter coordinates\" [ref=e10]: Florida, USA\n        - button [ref=e1843] [cursor=pointer]\n        - button [ref=e1846] [cursor=pointer]\n      - button [ref=e12] [cursor=pointer]\n    - toolbar [ref=e15]:\n      - button \"Share this map\" [ref=e16] [cursor=pointer]\n      - button \"Switch projection\" [ref=e19] [cursor=pointer]\n      - button \"Take a snapshot\" [ref=e23] [cursor=pointer]\n      - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n    - generic [ref=e31]:\n      - generic:\n        - generic [ref=e1910]:\n          - generic [ref=e1911]: Florida\n          - generic [ref=e1912]: 28.5660°, -81.6886°\n          - button [ref=e1919] [cursor=pointer]\n        - generic [ref=e1870]:\n          - generic [ref=e1871]: Florida, Florida\n          - generic [ref=e1872]: \"-34.0943°, -56.2085°\"\n          - button [ref=e1879] [cursor=pointer]\n      - generic:\n        - generic: 50 mi\n        - generic: 100 km\n    - generic [ref=e41]:\n      - button \"Zoom in view\" [ref=e42] [cursor=pointer]\n      - button \"Zoom out view\" [ref=e45] [cursor=pointer]\n    - generic:\n      - link \"Worldview\" [ref=e49] [cursor=pointer]:\n        - /url: /\n      - generic [ref…",
+      "duration_s": 0.054176999954506755,
+      "offset_s": 45.26543066604063,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Increment date by one day",
+        "target": "e219"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Increment date' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?v=-91.14563125,23.617757812499995,-72.23156875,33.514242187499995&l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,VIIRS_SNPP_CorrectedReflectance_TrueColor,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor(hidden)&lg=false&s=-56.2085,-34.0943%2B-81.6886,28.566&t=2024-09-27-T06%3A07%3A16Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T06-54-14-262Z.yml)",
+      "duration_s": 6.277028999989852,
+      "offset_s": 47.94303066609427,
+      "error": null
+    },
+    {
+      "name": "browser_evaluate",
+      "args": {
+        "function": "() => window.location.href"
+      },
+      "output": "### Result\n\"https://worldview.earthdata.nasa.gov/?v=-91.14563125,23.617757812499995,-72.23156875,33.514242187499995&l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,VIIRS_SNPP_CorrectedReflectance_TrueColor,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor(hidden)&lg=false&s=-56.2085,-34.0943%2B-81.6886,28.566&t=2024-09-27-T06%3A07%3A16Z\"\n### Ran Playwright code\n```js\nawait page.evaluate('() => window.location.href');\n```",
+      "duration_s": 0.5139840000774711,
+      "offset_s": 55.753757666097954,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 150337,
+    "output_tokens": 790,
+    "total_tokens": 151127,
+    "requests": 4,
+    "cache_read_tokens": 142848,
+    "reasoning_tokens": 190,
+    "tool_calls": 3,
+    "cost_usd": 0.04916415
+  },
+  "usage_source": "pydantic_ai"
+}

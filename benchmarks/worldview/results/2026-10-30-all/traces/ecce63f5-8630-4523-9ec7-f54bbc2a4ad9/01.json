@@ -1,0 +1,98 @@
+{
+  "trace_id": "2a3dfd88-d521-4fb3-904a-9175e2236c1e",
+  "thread_id": "ecce63f5-8630-4523-9ec7-f54bbc2a4ad9",
+  "source": "simulated",
+  "started_at": "2026-10-30T06:07:17.892273+00:00",
+  "duration_s": 15.728105083107948,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10104,
+      "output_tokens": 386,
+      "duration_s": 6.043367000063881,
+      "offset_s": 4.147248791065067,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10295,
+      "output_tokens": 90,
+      "duration_s": 1.710812000092119,
+      "offset_s": 10.20102479099296,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10606,
+      "output_tokens": 208,
+      "duration_s": 3.3008300000801682,
+      "offset_s": 12.41635579103604,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "geoui_version": "1.0.0",
+          "viewport": {
+            "bbox": [
+              -87.8,
+              24.3,
+              -79.8,
+              31.2
+            ],
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2024-09-26"
+          },
+          "layers": [
+            {
+              "id": "VIIRS_SNPP_CorrectedReflectance_TrueColor",
+              "visible": true,
+              "opacity": 1
+            }
+          ]
+        }
+      },
+      "output": "{\"url\":\"https://worldview.earthdata.nasa.gov/?l=VIIRS_SNPP_CorrectedReflectance_TrueColor(opacity=1),Coastlines_15m,Reference_Features_15m&t=2024-09-26&v=-87.8,24.3,-79.8,31.2&p=geographic\"}",
+      "duration_s": 0.0008900000248104334,
+      "offset_s": 10.195116790942848,
+      "error": null
+    },
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=VIIRS_SNPP_CorrectedReflectance_TrueColor(opacity=1),Coastlines_15m,Reference_Features_15m&t=2024-09-26&v=-87.8,24.3,-79.8,31.2&p=geographic"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/?l=VIIRS_SNPP_CorrectedReflectance_TrueColor(opacity=1),Coastlines_15m,Reference_Features_15m&t=2024-09-26&v=-87.8,24.3,-79.8,31.2&p=geographic');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=VIIRS_SNPP_CorrectedReflectance_TrueColor(opacity=1),Coastlines_15m,Reference_Features_15m&t=2024-09-26&v=-87.8,24.3,-79.8,31.2&p=geographic\n- Page Title: NASA Worldview\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T06-07-30-305Z.yml)",
+      "duration_s": 0.4977929999586195,
+      "offset_s": 11.91599579108879,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 31005,
+    "output_tokens": 684,
+    "total_tokens": 31689,
+    "requests": 3,
+    "cache_read_tokens": 26752,
+    "reasoning_tokens": 281,
+    "tool_calls": 2,
+    "cost_usd": 0.02170035
+  },
+  "usage_source": "pydantic_ai"
+}

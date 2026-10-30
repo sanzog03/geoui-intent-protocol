@@ -1,0 +1,8 @@
+measure,geoui_mean,vlm_mean,vlm_over_geoui,geoui_n,vlm_n
+input_tokens,135298.75,2967479.0,21.9328,8,8
+output_tokens,3281.5,43914.75,13.3825,8,8
+total_tokens,138580.25,3011393.75,21.7303,8,8
+llm_requests,9.5,60.875,6.4079,8,8
+tool_calls,7.5,70.125,9.35,8,8
+reasoning_tokens,1613.875,13024.625,8.0704,8,8
+cache_read_tokens,122128.0,756208.0,6.1919,8,8

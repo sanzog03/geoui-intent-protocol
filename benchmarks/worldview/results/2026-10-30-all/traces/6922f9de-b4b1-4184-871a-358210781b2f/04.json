@@ -1,0 +1,924 @@
+{
+  "trace_id": "7dfd05b6-321c-4a7f-95c7-1452e07b8e0b",
+  "thread_id": "6922f9de-b4b1-4184-871a-358210781b2f",
+  "source": "simulated",
+  "started_at": "2026-10-30T05:58:02.401984+00:00",
+  "duration_s": 209.03862308291718,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10219,
+      "output_tokens": 287,
+      "duration_s": 5.339476999826729,
+      "offset_s": 12.45116883306764,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10719,
+      "output_tokens": 290,
+      "duration_s": 4.191802999936044,
+      "offset_s": 18.165601833024994,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 11028,
+      "output_tokens": 229,
+      "duration_s": 3.257759999949485,
+      "offset_s": 22.937737833010033,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 11337,
+      "output_tokens": 204,
+      "duration_s": 3.1363000001292676,
+      "offset_s": 26.864831832936034,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 11646,
+      "output_tokens": 205,
+      "duration_s": 2.7071529999375343,
+      "offset_s": 30.726959832943976,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 11955,
+      "output_tokens": 192,
+      "duration_s": 2.4187440001405776,
+      "offset_s": 33.91794183291495,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12264,
+      "output_tokens": 191,
+      "duration_s": 2.546820000046864,
+      "offset_s": 36.88941283291206,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12573,
+      "output_tokens": 208,
+      "duration_s": 2.774868000065908,
+      "offset_s": 39.96912783291191,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12882,
+      "output_tokens": 252,
+      "duration_s": 3.54065899993293,
+      "offset_s": 43.23980383295566,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 13191,
+      "output_tokens": 213,
+      "duration_s": 2.697622000006959,
+      "offset_s": 47.38683783286251,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 13500,
+      "output_tokens": 255,
+      "duration_s": 3.461559999966994,
+      "offset_s": 50.65834483294748,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 13809,
+      "output_tokens": 219,
+      "duration_s": 2.923066000221297,
+      "offset_s": 54.69132783287205,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 14118,
+      "output_tokens": 210,
+      "duration_s": 2.9999329999554902,
+      "offset_s": 58.13107083295472,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 14427,
+      "output_tokens": 211,
+      "duration_s": 3.0640209999401122,
+      "offset_s": 61.57806683308445,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 14736,
+      "output_tokens": 273,
+      "duration_s": 3.4309020000509918,
+      "offset_s": 65.14039883296937,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 15045,
+      "output_tokens": 287,
+      "duration_s": 3.7750059999525547,
+      "offset_s": 69.33417383302003,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 15354,
+      "output_tokens": 193,
+      "duration_s": 2.773445000173524,
+      "offset_s": 73.59391383291222,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 15663,
+      "output_tokens": 216,
+      "duration_s": 2.947205999866128,
+      "offset_s": 76.90452983300202,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 15972,
+      "output_tokens": 299,
+      "duration_s": 3.806396999862045,
+      "offset_s": 80.33668883307837,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 16281,
+      "output_tokens": 258,
+      "duration_s": 3.6429089999292046,
+      "offset_s": 84.64232383295894,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 16590,
+      "output_tokens": 260,
+      "duration_s": 3.278754999861121,
+      "offset_s": 88.73324483307078,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 16899,
+      "output_tokens": 236,
+      "duration_s": 3.7693339998368174,
+      "offset_s": 92.4427898330614,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 17208,
+      "output_tokens": 236,
+      "duration_s": 3.21307500009425,
+      "offset_s": 96.72540283296257,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 17517,
+      "output_tokens": 234,
+      "duration_s": 3.4899639999493957,
+      "offset_s": 100.96113183302805,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 17826,
+      "output_tokens": 183,
+      "duration_s": 2.3805410000495613,
+      "offset_s": 105.10656783287413,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 18135,
+      "output_tokens": 220,
+      "duration_s": 3.035139000043273,
+      "offset_s": 108.0006948329974,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 18444,
+      "output_tokens": 212,
+      "duration_s": 2.982031999854371,
+      "offset_s": 111.68970183306374,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 18753,
+      "output_tokens": 258,
+      "duration_s": 3.5131659999024123,
+      "offset_s": 115.25745983305387,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 19062,
+      "output_tokens": 229,
+      "duration_s": 3.4080440001562238,
+      "offset_s": 119.39782483293675,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 19371,
+      "output_tokens": 250,
+      "duration_s": 4.714257000014186,
+      "offset_s": 123.33232583291829,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 19680,
+      "output_tokens": 235,
+      "duration_s": 3.6559230000711977,
+      "offset_s": 128.578228832921,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 19989,
+      "output_tokens": 183,
+      "duration_s": 2.6128569999709725,
+      "offset_s": 132.7712848330848,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 20298,
+      "output_tokens": 250,
+      "duration_s": 3.848346999846399,
+      "offset_s": 135.91618983307853,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 20607,
+      "output_tokens": 216,
+      "duration_s": 3.7087260000407696,
+      "offset_s": 140.26292183296755,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 20916,
+      "output_tokens": 260,
+      "duration_s": 3.7193389998283237,
+      "offset_s": 144.46288083307445,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 21225,
+      "output_tokens": 185,
+      "duration_s": 2.6470500000286847,
+      "offset_s": 148.66895483294502,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 21534,
+      "output_tokens": 225,
+      "duration_s": 3.328783999895677,
+      "offset_s": 151.7709088330157,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 21843,
+      "output_tokens": 266,
+      "duration_s": 4.015820000087842,
+      "offset_s": 155.63341483287513,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 22152,
+      "output_tokens": 242,
+      "duration_s": 3.451994000002742,
+      "offset_s": 160.25070583308116,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 22461,
+      "output_tokens": 194,
+      "duration_s": 2.778898000018671,
+      "offset_s": 164.2322528329678,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 22770,
+      "output_tokens": 189,
+      "duration_s": 2.7026349999941885,
+      "offset_s": 167.52382283308543,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 23079,
+      "output_tokens": 287,
+      "duration_s": 4.114788000006229,
+      "offset_s": 170.795983833028,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 23388,
+      "output_tokens": 291,
+      "duration_s": 4.3429610000457615,
+      "offset_s": 175.36278683296405,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 23697,
+      "output_tokens": 238,
+      "duration_s": 3.7498780000023544,
+      "offset_s": 180.56053883302957,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 24006,
+      "output_tokens": 260,
+      "duration_s": 3.7659899999853224,
+      "offset_s": 184.8182428330183,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 24315,
+      "output_tokens": 276,
+      "duration_s": 4.202745999908075,
+      "offset_s": 189.03537083300762,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 24624,
+      "output_tokens": 212,
+      "duration_s": 3.3533840000163764,
+      "offset_s": 193.8007798329927,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 24933,
+      "output_tokens": 197,
+      "duration_s": 3.0771800000220537,
+      "offset_s": 197.89010183303617,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 25242,
+      "output_tokens": 241,
+      "duration_s": 3.5352089998777956,
+      "offset_s": 201.44758383301087,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 25551,
+      "output_tokens": 187,
+      "duration_s": 2.957919000182301,
+      "offset_s": 205.5339478328824,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\n- Page Title: NASA Worldview\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T05-58-20-563Z.yml)",
+      "duration_s": 0.36217199987731874,
+      "offset_s": 17.801032833056524,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5704699999187142,
+      "offset_s": 22.36080883303657,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.6573479999788105,
+      "offset_s": 26.199487833073363,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.7156730000860989,
+      "offset_s": 30.004171832930297,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.4752129998523742,
+      "offset_s": 33.43612783309072,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5397759999614209,
+      "offset_s": 36.341394833056256,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5274540001992136,
+      "offset_s": 39.43756983289495,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.4830469998996705,
+      "offset_s": 42.74720983300358,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5976899999659508,
+      "offset_s": 46.784882833017036,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5615870000328869,
+      "offset_s": 50.089082832913846,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5598160000517964,
+      "offset_s": 54.123353832867,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5096769998781383,
+      "offset_s": 57.61640883306973,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.4386799999047071,
+      "offset_s": 61.13520083297044,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.48643699986860156,
+      "offset_s": 64.64591883309186,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.7482859999872744,
+      "offset_s": 68.57786583295092,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.4722780000884086,
+      "offset_s": 73.11309283296578,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5287039999384433,
+      "offset_s": 76.36963183293119,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.47711000009439886,
+      "offset_s": 79.85435083298944,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.49148899991996586,
+      "offset_s": 84.14725283300504,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.4368569999933243,
+      "offset_s": 88.28792683291249,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.424030999885872,
+      "offset_s": 92.01419083308429,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5006969999521971,
+      "offset_s": 96.21694283303805,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 1.01417600014247,
+      "offset_s": 99.94335083290935,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.64437699993141,
+      "offset_s": 104.45434183301404,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5036299999337643,
+      "offset_s": 107.4917478330899,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.6417620000429451,
+      "offset_s": 111.03944283304736,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5762850001920015,
+      "offset_s": 114.6779668328818,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.6065839999355376,
+      "offset_s": 118.78222083300352,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5147710000164807,
+      "offset_s": 122.81176783307455,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5197719999123365,
+      "offset_s": 128.05041183298454,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5264390001539141,
+      "offset_s": 132.23646283289418,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5194969999138266,
+      "offset_s": 135.38895983295515,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.48638300015591085,
+      "offset_s": 139.7685068328865,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.4796319999732077,
+      "offset_s": 143.97634483291768,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.47364400001242757,
+      "offset_s": 148.18967683287337,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.4415720000397414,
+      "offset_s": 151.32194683304988,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5197910000570118,
+      "offset_s": 155.10556183289737,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5964039999525994,
+      "offset_s": 159.65119683300145,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5177140000741929,
+      "offset_s": 163.70738983293995,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5050220000557601,
+      "offset_s": 167.0146828328725,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5581670000683516,
+      "offset_s": 170.22919783298858,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.4385639999527484,
+      "offset_s": 174.91688683303073,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.8441089999396354,
+      "offset_s": 179.70817383308895,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.494783999864012,
+      "offset_s": 184.31568183307536,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.436790999956429,
+      "offset_s": 188.59022183297202,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5512870000675321,
+      "offset_s": 193.2409938329365,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.7222829998936504,
+      "offset_s": 197.1586868329905,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.47464500018395483,
+      "offset_s": 200.96930883289315,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5372429999988526,
+      "offset_s": 204.98814883292653,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "{\"query\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean,Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean,Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\",\"_response\":\"\"}",
+      "duration_s": 0.5255319999996573,
+      "offset_s": 208.49531083297916,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": "UsageLimitExceeded: The next request would exceed the request_limit of 50. Consider raising the limit, or see the docs on usage limits for budget-aware patterns: https://pydantic.dev/docs/ai/core-concepts/agent/#usage-limits",
+  "usage": null,
+  "usage_source": "pydantic_ai"
+}

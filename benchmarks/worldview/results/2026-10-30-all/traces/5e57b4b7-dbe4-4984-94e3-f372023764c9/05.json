@@ -1,0 +1,1011 @@
+{
+  "trace_id": "31c1c067-84a9-4185-a062-4aa7d77ea7de",
+  "thread_id": "5e57b4b7-dbe4-4984-94e3-f372023764c9",
+  "source": "simulated",
+  "started_at": "2026-10-30T08:00:32.343553+00:00",
+  "duration_s": 796.1199749999214,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 60483,
+      "output_tokens": 497,
+      "duration_s": 9.691978000104427,
+      "offset_s": 41.058060832787305,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 63374,
+      "output_tokens": 932,
+      "duration_s": 15.07918699993752,
+      "offset_s": 50.805842832894996,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 63734,
+      "output_tokens": 527,
+      "duration_s": 9.777820999966934,
+      "offset_s": 66.52246683300473,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 66516,
+      "output_tokens": 889,
+      "duration_s": 14.170666999882087,
+      "offset_s": 76.3383898329921,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 66885,
+      "output_tokens": 1090,
+      "duration_s": 16.213666000170633,
+      "offset_s": 91.11157383280806,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 69782,
+      "output_tokens": 835,
+      "duration_s": 12.991000999929383,
+      "offset_s": 107.37031183298677,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 70144,
+      "output_tokens": 815,
+      "duration_s": 12.629684000043198,
+      "offset_s": 120.95749483280815,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 70487,
+      "output_tokens": 751,
+      "duration_s": 11.762844000011683,
+      "offset_s": 134.14797883294523,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 73272,
+      "output_tokens": 1042,
+      "duration_s": 15.807735999813303,
+      "offset_s": 145.9574288330041,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 73640,
+      "output_tokens": 912,
+      "duration_s": 14.202222999883816,
+      "offset_s": 162.36159283295274,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 73996,
+      "output_tokens": 704,
+      "duration_s": 10.228922999929637,
+      "offset_s": 177.1599688329734,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 74050,
+      "output_tokens": 380,
+      "duration_s": 7.334750999929383,
+      "offset_s": 187.3999558328651,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 74412,
+      "output_tokens": 829,
+      "duration_s": 13.356704000150785,
+      "offset_s": 195.31692883279175,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 74768,
+      "output_tokens": 1061,
+      "duration_s": 15.317788999993354,
+      "offset_s": 209.3072578329593,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 74822,
+      "output_tokens": 691,
+      "duration_s": 10.701257000211626,
+      "offset_s": 224.63545283279382,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 75185,
+      "output_tokens": 556,
+      "duration_s": 9.650518000125885,
+      "offset_s": 235.9301618328318,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 75528,
+      "output_tokens": 993,
+      "duration_s": 15.64346699998714,
+      "offset_s": 246.13691483298317,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 75884,
+      "output_tokens": 673,
+      "duration_s": 11.02350899996236,
+      "offset_s": 262.39065883285366,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 75938,
+      "output_tokens": 779,
+      "duration_s": 12.78294500010088,
+      "offset_s": 273.42931383289397,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 76300,
+      "output_tokens": 531,
+      "duration_s": 8.579597000032663,
+      "offset_s": 286.7885958328843,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 76656,
+      "output_tokens": 661,
+      "duration_s": 9.862275999970734,
+      "offset_s": 295.969445833005,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 76710,
+      "output_tokens": 585,
+      "duration_s": 9.400483999866992,
+      "offset_s": 305.8558768329676,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 77073,
+      "output_tokens": 1451,
+      "duration_s": 23.178116000024602,
+      "offset_s": 315.84504883293994,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 77416,
+      "output_tokens": 1628,
+      "duration_s": 27.158956999890506,
+      "offset_s": 339.63419283297844,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 77835,
+      "output_tokens": 526,
+      "duration_s": 8.823081999784335,
+      "offset_s": 367.39578683301806,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 80729,
+      "output_tokens": 1242,
+      "duration_s": 20.782309000147507,
+      "offset_s": 376.264186832821,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 83623,
+      "output_tokens": 950,
+      "duration_s": 15.270572999957949,
+      "offset_s": 397.09441183297895,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 86517,
+      "output_tokens": 1012,
+      "duration_s": 15.266047000186518,
+      "offset_s": 412.41453283280134,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 89411,
+      "output_tokens": 1317,
+      "duration_s": 20.708583999890834,
+      "offset_s": 427.720632832963,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 92193,
+      "output_tokens": 1349,
+      "duration_s": 21.334047000156716,
+      "offset_s": 448.4669128328096,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 92615,
+      "output_tokens": 826,
+      "duration_s": 14.572625000029802,
+      "offset_s": 470.4148718328215,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 92977,
+      "output_tokens": 688,
+      "duration_s": 11.230540999909863,
+      "offset_s": 485.57471783296205,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 93394,
+      "output_tokens": 776,
+      "duration_s": 12.532800999935716,
+      "offset_s": 497.4115558329504,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 93757,
+      "output_tokens": 1281,
+      "duration_s": 21.12175799999386,
+      "offset_s": 510.5248988328967,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 94174,
+      "output_tokens": 574,
+      "duration_s": 9.325667999917641,
+      "offset_s": 532.249461832922,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 94536,
+      "output_tokens": 1315,
+      "duration_s": 20.64629300008528,
+      "offset_s": 542.1636928329244,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 94892,
+      "output_tokens": 717,
+      "duration_s": 12.625641999999061,
+      "offset_s": 563.4179218329955,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 94946,
+      "output_tokens": 602,
+      "duration_s": 10.396658000070602,
+      "offset_s": 576.0627738328185,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 95309,
+      "output_tokens": 751,
+      "duration_s": 12.683949999976903,
+      "offset_s": 587.0589288328774,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 96021,
+      "output_tokens": 878,
+      "duration_s": 14.906228999840096,
+      "offset_s": 601.8165898330044,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 98915,
+      "output_tokens": 800,
+      "duration_s": 13.660481000086293,
+      "offset_s": 616.7716578328982,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 101809,
+      "output_tokens": 1383,
+      "duration_s": 21.486352000152692,
+      "offset_s": 630.4769188328646,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 102173,
+      "output_tokens": 717,
+      "duration_s": 11.706117999972776,
+      "offset_s": 652.5670058329124,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 105164,
+      "output_tokens": 902,
+      "duration_s": 16.530722999945283,
+      "offset_s": 664.3161938330159,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 108043,
+      "output_tokens": 1011,
+      "duration_s": 16.556485999841243,
+      "offset_s": 680.9029658329673,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 110922,
+      "output_tokens": 2339,
+      "duration_s": 35.60376299987547,
+      "offset_s": 697.505614832975,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 111278,
+      "output_tokens": 509,
+      "duration_s": 8.88690200005658,
+      "offset_s": 733.7209578328766,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 111332,
+      "output_tokens": 1020,
+      "duration_s": 16.771480000112206,
+      "offset_s": 742.6250068328809,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 111383,
+      "output_tokens": 951,
+      "duration_s": 17.2950440000277,
+      "offset_s": 759.4213818327989,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 111455,
+      "output_tokens": 1057,
+      "duration_s": 19.308807000052184,
+      "offset_s": 776.7353678329382,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]: California\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"You must exit charting mode to use the natural events feature\" [ref=e3440]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"You must exit charting mode to download data\" [ref=e3441]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - img \"Hide si…",
+      "duration_s": 0.050642999820411205,
+      "offset_s": 50.7529558329843,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3508",
+        "element": "Date Range button in Charting Mode"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Date Range' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-01-38-864Z.yml)",
+      "duration_s": 0.6295580000150949,
+      "offset_s": 65.88950583292171,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]: California\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"You must exit charting mode to use the natural events feature\" [ref=e3440]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"You must exit charting mode to download data\" [ref=e3441]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - img \"Hide si…",
+      "duration_s": 0.032300000078976154,
+      "offset_s": 76.3036278327927,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3502",
+        "element": "Select Entire Screen checkbox (use current map view over California for chart area)"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('checkbox', { name: 'Select Entire Screen' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=5.124195159857905,-46.546875,180,53.015625&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-02-03-454Z.yml)",
+      "duration_s": 0.5940930000506341,
+      "offset_s": 90.514141832944,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=5.124195159857905,-46.546875,180,53.015625&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]: California\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"You must exit charting mode to use the natural events feature\" [ref=e3440]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"You must exit charting mode to download data\" [ref=e3441]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - im…",
+      "duration_s": 0.038545000134035945,
+      "offset_s": 107.32904483284801,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e10",
+        "element": "Place search box (California)"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('combobox', { name: 'Search for places or enter' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=5.124195159857905,-46.546875,180,53.015625&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-02-33-301Z.yml)",
+      "duration_s": 0.5891940000001341,
+      "offset_s": 120.36557683278807,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=5.124195159857905,-46.546875,180,53.015625&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-02-46-489Z.yml)",
+      "duration_s": 0.5543980000074953,
+      "offset_s": 133.59046783298254,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=5.124195159857905,-46.546875,180,53.015625&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [active] [ref=e10]: California\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"You must exit charting mode to use the natural events feature\" [ref=e3440]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"You must exit charting mode to download data\" [ref=e3441]: Data\n        - button [ref=e61] [cursor=pointer]:\n     …",
+      "duration_s": 0.040169999934732914,
+      "offset_s": 145.91462183301337,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3502",
+        "element": "Select Entire Screen checkbox (turn off to use a California bounding box)"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('checkbox', { name: 'Select Entire Screen' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-03-14-705Z.yml)",
+      "duration_s": 0.5894379999954253,
+      "offset_s": 161.76929883286357,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3651",
+        "element": "Top Right Latitude textbox in Charting Mode"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-3').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-03-29-502Z.yml)",
+      "duration_s": 0.5895299999974668,
+      "offset_s": 176.56787883280776,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.005606000078842044,
+      "offset_s": 187.39176183287054,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "e3651",
+        "text": "42.1",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-3').pressSequentially('42.1');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-03-47-659Z.yml)",
+      "duration_s": 0.5742810000665486,
+      "offset_s": 194.73990883282386,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3654",
+        "element": "Top Right Longitude textbox in Charting Mode"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-2').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-04-01-647Z.yml)",
+      "duration_s": 0.6247860000003129,
+      "offset_s": 208.67808183282614,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.005458000116050243,
+      "offset_s": 224.6276248327922,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "e3654",
+        "text": "-114.1",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-2').pressSequentially('-114.1');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-04-28-273Z.yml)",
+      "duration_s": 0.5838290001265705,
+      "offset_s": 235.34359583281912,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-04-38-479Z.yml)",
+      "duration_s": 0.5485650000628084,
+      "offset_s": 245.58548983279616,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3662",
+        "element": "Bottom Left Latitude textbox in Charting Mode"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-1').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-04-54-732Z.yml)",
+      "duration_s": 0.6030350001528859,
+      "offset_s": 261.7847948328126,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.00697400001809001,
+      "offset_s": 273.4191488327924,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "e3662",
+        "text": "32.5",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-1').pressSequentially('32.5');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-05-19-131Z.yml)",
+      "duration_s": 0.5690830000676215,
+      "offset_s": 286.21680383291095,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3665",
+        "element": "Bottom Left Longitude textbox in Charting Mode"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-0').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-05-28-312Z.yml)",
+      "duration_s": 0.5941860000602901,
+      "offset_s": 295.3725598328747,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.012215999886393547,
+      "offset_s": 305.8401958330069,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "e3665",
+        "text": "-124.4",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-0').pressSequentially('-124.4');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-05-48-188Z.yml)",
+      "duration_s": 0.581050000153482,
+      "offset_s": 315.26115983282216,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 1 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-06-11-974Z.yml)",
+      "duration_s": 0.6022690001409501,
+      "offset_s": 339.02773883286864,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3511",
+        "element": "Date range selector button (currently shows 2025 Sep 15 - 2025 Sep 25)"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Sep 15 - 2025 Sep 25' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-06-39-737Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-30T07-41-07-291Z.log#L31-L38",
+      "duration_s": 0.5950360000133514,
+      "offset_s": 366.7979808328673,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]: California\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"You must exit charting mode to use the natural events feature\" [ref=e3440]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"You must exit charting mode to download data\" [ref=e3441]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - img \"Hide si…",
+      "duration_s": 0.03678199998103082,
+      "offset_s": 376.22470383299515,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]: California\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"You must exit charting mode to use the natural events feature\" [ref=e3440]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"You must exit charting mode to download data\" [ref=e3441]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - img \"Hide si…",
+      "duration_s": 0.04027600004337728,
+      "offset_s": 397.0510328328237,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]: California\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"You must exit charting mode to use the natural events feature\" [ref=e3440]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"You must exit charting mode to download data\" [ref=e3441]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - img \"Hide si…",
+      "duration_s": 0.04181499988771975,
+      "offset_s": 412.3699668329209,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]: California\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"You must exit charting mode to use the natural events feature\" [ref=e3440]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"You must exit charting mode to download data\" [ref=e3441]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - img \"Hide si…",
+      "duration_s": 0.034217000007629395,
+      "offset_s": 427.6841048328206,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]: California\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"You must exit charting mode to use the natural events feature\" [ref=e3440]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"You must exit charting mode to download data\" [ref=e3441]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - img \"Hide si…",
+      "duration_s": 0.03078299993649125,
+      "offset_s": 448.433687832905,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.01231400016695261,
+      "offset_s": 469.80647883284837,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3651",
+        "element": "Top Right Latitude textbox in the chart area coordinates"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-3').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-08-22-756Z.yml)",
+      "duration_s": 0.6059230000246316,
+      "offset_s": 469.8061758328695,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "e3651",
+        "text": "42.1",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-3').pressSequentially('42.1');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-08-37-915Z.yml)",
+      "duration_s": 0.5789540000259876,
+      "offset_s": 484.9918738328852,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.007952000014483929,
+      "offset_s": 496.81098983297125,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3654",
+        "element": "Top Right Longitude textbox"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-2').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-08-49-754Z.yml)",
+      "duration_s": 0.5981629998423159,
+      "offset_s": 496.8107178329956,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "e3654",
+        "text": "-114.1",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-2').pressSequentially('-114.1');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-09-02-868Z.yml)",
+      "duration_s": 0.5732140000909567,
+      "offset_s": 509.94899383280426,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.008696999866515398,
+      "offset_s": 531.6520148329437,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3662",
+        "element": "Bottom Left Latitude textbox"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-1').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-09-24-592Z.yml)",
+      "duration_s": 0.5947950000409037,
+      "offset_s": 531.6517508327961,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "e3662",
+        "text": "32.5",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-1').pressSequentially('32.5');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-09-34-505Z.yml)",
+      "duration_s": 0.5804670001380146,
+      "offset_s": 541.5801468328573,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3665",
+        "element": "Bottom Left Longitude textbox (chart area)"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-0').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-09-55-761Z.yml)",
+      "duration_s": 0.5991909999866039,
+      "offset_s": 562.8157578329556,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.010676000034436584,
+      "offset_s": 576.0487298329826,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "e3665",
+        "text": "-124.4",
+        "slowly": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-0').pressSequentially('-124.4');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-10-19-400Z.yml)",
+      "duration_s": 0.5894160000607371,
+      "offset_s": 586.4662188328803,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Enter"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Enter\nawait page.keyboard.press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-10-32-641Z.yml)",
+      "duration_s": 0.5476139998063445,
+      "offset_s": 599.747758832993,
+      "error": null
+    },
+    {
+      "name": "browser_wait_for",
+      "args": {
+        "time": 2
+      },
+      "output": "### Result\nWaited for 2 seconds\n### Ran Playwright code\n```js\nawait new Promise(f => setTimeout(f, 2 * 1000));\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-10-34-156Z.yml)",
+      "duration_s": 2.0634689999278635,
+      "offset_s": 599.7480308329687,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]: California\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"You must exit charting mode to use the natural events feature\" [ref=e3440]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"You must exit charting mode to download data\" [ref=e3441]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - img \"Hide si…",
+      "duration_s": 0.03988999989815056,
+      "offset_s": 616.7288898329716,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]: California\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"You must exit charting mode to use the natural events feature\" [ref=e3440]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"You must exit charting mode to download data\" [ref=e3441]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - img \"Hide si…",
+      "duration_s": 0.03696599998511374,
+      "offset_s": 630.437095833011,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e10",
+        "element": "Place search box (currently shows California)"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('combobox', { name: 'Search for places or enter' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-11-24-908Z.yml)",
+      "duration_s": 0.5962310000322759,
+      "offset_s": 651.9680238328874,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - generic [ref=e9]:\n        - combobox \"Search for places or enter coordinates\" [expanded] [active] [ref=e10]: California\n        - generic [ref=e3835]:\n          - generic [ref=e3836]: California, USA\n          - generic [ref=e3837]: California Range, CA, USA\n          - generic [ref=e3838]: California City, CA, USA\n          - generic [ref=e3839]: California, MD, USA\n          - generic [ref=e3840]: Califórnia, Paraná, BRA\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Laye…",
+      "duration_s": 0.03516099997796118,
+      "offset_s": 664.2782518328167,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - generic [ref=e9]:\n        - combobox \"Search for places or enter coordinates\" [expanded] [active] [ref=e10]: California\n        - generic [ref=e3835]:\n          - generic [ref=e3836]: California, USA\n          - generic [ref=e3837]: California Range, CA, USA\n          - generic [ref=e3838]: California City, CA, USA\n          - generic [ref=e3839]: California, MD, USA\n          - generic [ref=e3840]: Califórnia, Paraná, BRA\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Laye…",
+      "duration_s": 0.04283299995586276,
+      "offset_s": 680.8539638328366,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - generic [ref=e9]:\n        - combobox \"Search for places or enter coordinates\" [expanded] [active] [ref=e10]: California\n        - generic [ref=e3835]:\n          - generic [ref=e3836]: California, USA\n          - generic [ref=e3837]: California Range, CA, USA\n          - generic [ref=e3838]: California City, CA, USA\n          - generic [ref=e3839]: California, MD, USA\n          - generic [ref=e3840]: Califórnia, Paraná, BRA\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Laye…",
+      "duration_s": 0.03866700013168156,
+      "offset_s": 697.4642818327993,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3651",
+        "element": "Top Right Latitude textbox in Charting Mode"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('#latlong-input-3').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T08-12-46-060Z.yml)",
+      "duration_s": 0.6042879999149591,
+      "offset_s": 733.1131588330027,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Control+A"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Control+A\nawait page.keyboard.press('Control+A');\n```",
+      "duration_s": 0.00786000001244247,
+      "offset_s": 742.613389832899,
+      "error": null
+    },
+    {
+      "name": "browser_press_key",
+      "args": {
+        "key": "Escape"
+      },
+      "output": "### Ran Playwright code\n```js\n// Press Escape\nawait page.keyboard.press('Escape');\n```",
+      "duration_s": 0.01587100001052022,
+      "offset_s": 759.4016078328714,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e3836",
+        "element": "Select the 'California, USA' suggestion in the place search dropdown"
+      },
+      "output": "### Error\nError: Ref e3836 not found in the current page snapshot. Try capturing new snapshot.",
+      "duration_s": 0.009692999999970198,
+      "offset_s": 776.7223458329681,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Terra_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&cha=true&chl=MODIS_Terra_Aerosol_Optical_Depth_3km&chc=91.4235,-5.6078,109.1078,12.0765&cht=2025-09-15-T07%3A01%3A08Z&cht2=2025-09-25-T07%3A01%3A08Z&t=2025-09-14-T07%3A01%3A08Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [ref=e10]: California\n      - button [ref=e3702] [cursor=pointer]\n      - button [ref=e1860] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"You must exit charting mode to switch projection\" [disabled] [ref=e3438]\n    - button \"You must exit charting mode to use the snapshot feature\" [disabled] [ref=e3439]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"You must exit charting mode to use the natural events feature\" [ref=e3440]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"You must exit charting mode to download data\" [ref=e3441]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - img \"Hide si…",
+      "duration_s": 0.04370100004598498,
+      "offset_s": 796.0514588328078,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": "UsageLimitExceeded: The next request would exceed the request_limit of 50. Consider raising the limit, or see the docs on usage limits for budget-aware patterns: https://pydantic.dev/docs/ai/core-concepts/agent/#usage-limits",
+  "usage": null,
+  "usage_source": "pydantic_ai"
+}

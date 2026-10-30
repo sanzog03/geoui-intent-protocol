@@ -1,0 +1,167 @@
+{
+  "trace_id": "48f28f18-5dd3-4e39-8fd0-a70ee500e0f5",
+  "thread_id": "53ee6500-6511-4faf-93e7-29c3c1d95cdd",
+  "source": "simulated",
+  "started_at": "2026-10-30T06:03:44.931584+00:00",
+  "duration_s": 23.03610270912759,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 15019,
+      "output_tokens": 74,
+      "duration_s": 2.0973739998880774,
+      "offset_s": 4.666869375156239,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 15362,
+      "output_tokens": 230,
+      "duration_s": 3.3425610000267625,
+      "offset_s": 7.294677375117317,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 15667,
+      "output_tokens": 288,
+      "duration_s": 4.389924000017345,
+      "offset_s": 10.642336375080049,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 15937,
+      "output_tokens": 114,
+      "duration_s": 2.0555630000308156,
+      "offset_s": 15.043313374975696,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 16320,
+      "output_tokens": 30,
+      "duration_s": 1.3206799998879433,
+      "offset_s": 17.507284375140443,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 16382,
+      "output_tokens": 267,
+      "duration_s": 3.550723999971524,
+      "offset_s": 19.467620375100523,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "browser_evaluate",
+      "args": {
+        "function": "() => window.location.href"
+      },
+      "output": "### Result\n\"https://worldview.earthdata.nasa.gov/?v=-84.84458259325045,23,-78.15541740674955,26.5&l=Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2022-08-19-T00%3A00%3A00Z\"\n### Ran Playwright code\n```js\nawait page.evaluate('() => window.location.href');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?v=-84.84458259325045,23,-78.15541740674955,26.5&l=Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2022-08-19-T00%3A00%3A00Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 21 warnings\n### Events\n- New console entries: .playwright-mcp/console-2026-10-30T06-03-33-919Z.log#L1-L22",
+      "duration_s": 0.5202540000900626,
+      "offset_s": 6.767843374982476,
+      "error": null
+    },
+    {
+      "name": "geo_ui_get_state_tool",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?v=-84.84458259325045,23,-78.15541740674955,26.5&l=Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2022-08-19-T00%3A00%3A00Z"
+      },
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[],\"viewport\":{\"bbox\":[-84.84458259325045,23.0,-78.15541740674955,26.5],\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2022-08-19-T00:00:00Z\"},\"layers\":[{\"id\":\"Admin_Boundaries\",\"visible\":true},{\"id\":\"DoS_International_Boundaries\",\"visible\":true},{\"id\":\"Coastlines_15m\",\"visible\":true},{\"id\":\"GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies\",\"visible\":true},{\"id\":\"MODIS_Terra_CorrectedReflectance_TrueColor\",\"visible\":true}]}}",
+      "duration_s": 0.0002810000441968441,
+      "offset_s": 10.639005375094712,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "geoui_version": "1.0.0",
+          "viewport": {
+            "bbox": [
+              -79.5,
+              23,
+              -73,
+              27.5
+            ],
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2022-08-19"
+          },
+          "layers": [
+            {
+              "id": "Admin_Boundaries",
+              "visible": true
+            },
+            {
+              "id": "DoS_International_Boundaries",
+              "visible": true
+            },
+            {
+              "id": "Coastlines_15m",
+              "visible": true
+            },
+            {
+              "id": "GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies",
+              "visible": true
+            },
+            {
+              "id": "MODIS_Terra_CorrectedReflectance_TrueColor",
+              "visible": true
+            }
+          ]
+        }
+      },
+      "output": "{\"url\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,Reference_Features_15m&t=2022-08-19&v=-79.5,23,-73,27.5&p=geographic\"}",
+      "duration_s": 0.0006180000491440296,
+      "offset_s": 15.038515374995768,
+      "error": null
+    },
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,Reference_Features_15m&t=2022-08-19&v=-79.5,23,-73,27.5&p=geographic"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,Reference_Features_15m&t=2022-08-19&v=-79.5,23,-73,27.5&p=geographic');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies,Reference_Features_15m&t=2022-08-19&v=-79.5,23,-73,27.5&p=geographic\n- Page Title: NASA Worldview\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T06-04-02-435Z.yml)",
+      "duration_s": 0.4017849999945611,
+      "offset_s": 17.102964374935254,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "Finalize and return Bahamas margin bbox permalink URL; layer/date unchanged."
+      },
+      "output": "{\"query\":\"Finalize and return Bahamas margin bbox permalink URL; layer/date unchanged.\",\"_response\":\"\"}",
+      "duration_s": 0.6328349998220801,
+      "offset_s": 18.8313143751584,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 94687,
+    "output_tokens": 1003,
+    "total_tokens": 95690,
+    "requests": 6,
+    "cache_read_tokens": 89344,
+    "reasoning_tokens": 269,
+    "tool_calls": 5,
+    "cost_usd": 0.03902745
+  },
+  "usage_source": "pydantic_ai"
+}

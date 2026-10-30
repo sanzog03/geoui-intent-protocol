@@ -1,0 +1,13 @@
+{
+  "trace_id": "313e2403-7c29-49c6-ab7e-552ecc8f2ad0",
+  "thread_id": "e9d14de9-07d0-49cf-8629-fdf33be29f83",
+  "source": "simulated",
+  "started_at": "2026-10-30T14:13:53.900657+00:00",
+  "duration_s": 22.024264167062938,
+  "llm_calls": [],
+  "tool_calls": [],
+  "other_spans": [],
+  "error": "RuntimeError: Client failed to connect: [Errno 8] nodename nor servname provided, or not known",
+  "usage": null,
+  "usage_source": "pydantic_ai"
+}

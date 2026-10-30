@@ -1,0 +1,98 @@
+{
+  "trace_id": "50d2b880-dfab-4f81-9ca5-73decb6f3b8e",
+  "thread_id": "40a2711f-3477-4504-b1d6-d1ece8d6c2ba",
+  "source": "simulated",
+  "started_at": "2026-10-30T05:35:57.589562+00:00",
+  "duration_s": 21.852822208078578,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10126,
+      "output_tokens": 179,
+      "duration_s": 3.249993999954313,
+      "offset_s": 4.777362040942535,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10331,
+      "output_tokens": 101,
+      "duration_s": 1.8033880000002682,
+      "offset_s": 8.036407040897757,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10675,
+      "output_tokens": 856,
+      "duration_s": 11.302051000064239,
+      "offset_s": 10.54395404085517,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "geoui_version": "1.0.0",
+          "viewport": {
+            "bbox": [
+              -125.0,
+              32.0,
+              -114.0,
+              42.5
+            ],
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2025-09-15"
+          },
+          "layers": [
+            {
+              "id": "MODIS_Aqua_Aerosol_Optical_Depth_3km",
+              "visible": true,
+              "opacity": 1
+            }
+          ]
+        }
+      },
+      "output": "{\"url\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MODIS_Aqua_Aerosol_Optical_Depth_3km(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-09-15&v=-125,32,-114,42.5&p=geographic\"}",
+      "duration_s": 0.002498999936506152,
+      "offset_s": 8.02988304104656,
+      "error": null
+    },
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MODIS_Aqua_Aerosol_Optical_Depth_3km(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-09-15&v=-125,32,-114,42.5&p=geographic"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MODIS_Aqua_Aerosol_Optical_Depth_3km(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-09-15&v=-125,32,-114,42.5&p=geographic');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MODIS_Aqua_Aerosol_Optical_Depth_3km(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-09-15&v=-125,32,-114,42.5&p=geographic\n- Page Title: NASA Worldview\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T05-36-08-128Z.yml)",
+      "duration_s": 0.6981019999366254,
+      "offset_s": 9.843666041037068,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 31132,
+    "output_tokens": 1136,
+    "total_tokens": 32268,
+    "requests": 3,
+    "cache_read_tokens": 27776,
+    "reasoning_tokens": 71,
+    "tool_calls": 2,
+    "cost_usd": 0.0266378
+  },
+  "usage_source": "pydantic_ai"
+}

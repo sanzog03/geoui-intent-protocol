@@ -1,0 +1,947 @@
+{
+  "trace_id": "d52bb14b-9282-4b5c-bd23-6381d77a0da4",
+  "thread_id": "cd1eb80d-c6d8-45d3-b147-bc2edc193b9c",
+  "source": "simulated",
+  "started_at": "2026-10-30T10:56:01.501390+00:00",
+  "duration_s": 1488.5582402499858,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 8493,
+      "output_tokens": 628,
+      "duration_s": 11.46901600016281,
+      "offset_s": 20.90182820800692,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 8616,
+      "output_tokens": 294,
+      "duration_s": 6.327228000154719,
+      "offset_s": 33.40901220799424,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10016,
+      "output_tokens": 281,
+      "duration_s": 4.7915400001220405,
+      "offset_s": 39.823765208013356,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10165,
+      "output_tokens": 678,
+      "duration_s": 11.220992000075057,
+      "offset_s": 45.22646620799787,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10483,
+      "output_tokens": 652,
+      "duration_s": 11.104202999966219,
+      "offset_s": 62.68483420810662,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12328,
+      "output_tokens": 1811,
+      "duration_s": 28.451943999854848,
+      "offset_s": 73.82298720814288,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12619,
+      "output_tokens": 209,
+      "duration_s": 4.0913069997914135,
+      "offset_s": 108.42977120820433,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 15094,
+      "output_tokens": 1270,
+      "duration_s": 20.120671999873593,
+      "offset_s": 112.55868120817468,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 15374,
+      "output_tokens": 883,
+      "duration_s": 14.049308999907225,
+      "offset_s": 133.31724020815454,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 15666,
+      "output_tokens": 824,
+      "duration_s": 12.72878300002776,
+      "offset_s": 147.99917520815507,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 15953,
+      "output_tokens": 947,
+      "duration_s": 14.962263999972492,
+      "offset_s": 161.95836020819843,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 22334,
+      "output_tokens": 1823,
+      "duration_s": 27.37193699995987,
+      "offset_s": 176.97205320815556,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 22667,
+      "output_tokens": 247,
+      "duration_s": 4.87385299988091,
+      "offset_s": 205.4687812081538,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 28292,
+      "output_tokens": 1216,
+      "duration_s": 18.622220000019297,
+      "offset_s": 210.38907620799728,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 28637,
+      "output_tokens": 2246,
+      "duration_s": 42.001476999837905,
+      "offset_s": 235.36735720816068,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 28934,
+      "output_tokens": 399,
+      "duration_s": 7.862347000045702,
+      "offset_s": 277.9556822080631,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 31539,
+      "output_tokens": 1909,
+      "duration_s": 32.928819000022486,
+      "offset_s": 285.8576782080345,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 31666,
+      "output_tokens": 3238,
+      "duration_s": 50.67963099991903,
+      "offset_s": 319.1837432081811,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 31972,
+      "output_tokens": 2174,
+      "duration_s": 33.41495699994266,
+      "offset_s": 370.52353720809333,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 34538,
+      "output_tokens": 3399,
+      "duration_s": 52.24513599998318,
+      "offset_s": 403.9818842080422,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 34833,
+      "output_tokens": 4698,
+      "duration_s": 70.6377260000445,
+      "offset_s": 456.85820820811205,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 35186,
+      "output_tokens": 2194,
+      "duration_s": 33.50777200004086,
+      "offset_s": 529.0220552079845,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 35520,
+      "output_tokens": 2541,
+      "duration_s": 38.6079299999401,
+      "offset_s": 563.1206292081624,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 38145,
+      "output_tokens": 1299,
+      "duration_s": 20.139301999937743,
+      "offset_s": 601.7782102080528,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 38480,
+      "output_tokens": 2347,
+      "duration_s": 34.481239000102505,
+      "offset_s": 623.7626202080864,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 38830,
+      "output_tokens": 1790,
+      "duration_s": 27.956864000065252,
+      "offset_s": 658.8740732080769,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 39128,
+      "output_tokens": 21,
+      "duration_s": 1.3088220001664013,
+      "offset_s": 688.0203112079762,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 44830,
+      "output_tokens": 1191,
+      "duration_s": 17.993722999934107,
+      "offset_s": 689.3771712081507,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 45177,
+      "output_tokens": 2060,
+      "duration_s": 32.569796999916434,
+      "offset_s": 707.9597612081561,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 50131,
+      "output_tokens": 2388,
+      "duration_s": 36.88738299999386,
+      "offset_s": 740.5756482081488,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 50444,
+      "output_tokens": 21,
+      "duration_s": 1.7965920001734048,
+      "offset_s": 778.5784742080141,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 56143,
+      "output_tokens": 3506,
+      "duration_s": 51.69772799988277,
+      "offset_s": 780.4183272081427,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 56507,
+      "output_tokens": 2313,
+      "duration_s": 37.75936599983834,
+      "offset_s": 838.5580062081572,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 56818,
+      "output_tokens": 3148,
+      "duration_s": 51.87744900002144,
+      "offset_s": 876.9254382080398,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 59433,
+      "output_tokens": 3543,
+      "duration_s": 52.52477299980819,
+      "offset_s": 928.8607862081844,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 59753,
+      "output_tokens": 992,
+      "duration_s": 16.02522400021553,
+      "offset_s": 982.0453842079733,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 62740,
+      "output_tokens": 3706,
+      "duration_s": 57.823265000013635,
+      "offset_s": 998.1035952081438,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 63060,
+      "output_tokens": 2396,
+      "duration_s": 36.800487000029534,
+      "offset_s": 1056.5924532080535,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 63380,
+      "output_tokens": 1898,
+      "duration_s": 30.281016000080854,
+      "offset_s": 1094.027167208027,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 65910,
+      "output_tokens": 5956,
+      "duration_s": 91.24387899995781,
+      "offset_s": 1124.3450902081095,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 66235,
+      "output_tokens": 2585,
+      "duration_s": 41.15153399994597,
+      "offset_s": 1216.3268552080262,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 66555,
+      "output_tokens": 2614,
+      "duration_s": 40.5758940000087,
+      "offset_s": 1258.1114332079887,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 69567,
+      "output_tokens": 2329,
+      "duration_s": 34.913095000199974,
+      "offset_s": 1298.7201352079865,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 69887,
+      "output_tokens": 2551,
+      "duration_s": 41.7036139999982,
+      "offset_s": 1334.3541222081985,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 72524,
+      "output_tokens": 916,
+      "duration_s": 15.240753999911249,
+      "offset_s": 1376.0976982081775,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 72720,
+      "output_tokens": 556,
+      "duration_s": 12.93618299998343,
+      "offset_s": 1397.6482002080884,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 74414,
+      "output_tokens": 2228,
+      "duration_s": 36.29920000000857,
+      "offset_s": 1410.6182712081354,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 74572,
+      "output_tokens": 1192,
+      "duration_s": 18.499379999935627,
+      "offset_s": 1447.5370542081073,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": null,
+      "output_tokens": null,
+      "duration_s": 16.353899999987334,
+      "offset_s": 1472.1553682081867,
+      "error": "ModelTimeoutError: Request timed out."
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/\n- Page Title: NASA Worldview\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T10-56-34-931Z.yml)",
+      "duration_s": 1.0316139999777079,
+      "offset_s": 32.37469420814887,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 6,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-30-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e1]:\n  - generic [ref=f3e2]:\n    - toolbar [ref=f3e3]:\n      - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n      - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n      - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n      - button \"Take a snapshot\" [ref=f3e15] [cursor=pointer]\n      - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n    - generic [ref=f3e23]:\n      - generic:\n        - generic: 500 mi\n        - generic: 1000 km\n    - generic [ref=f3e33]:\n      - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n      - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n    - generic:\n      - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n        - /url: /\n      - generic [ref=f3e42]:\n        - list [ref=f3e43]:\n          - listitem [ref=f3e44] [cursor=pointer]:\n            - generic \"Map Layers\" [ref=f3e45]: Layers\n          - listitem [ref=f3e47] [cursor=pointer]:\n            - generic \"Natural Events\" [ref=f3e48]: Events\n          - listitem [ref=f3e50] [cursor=pointer]:\n            - generic \"Data Download\" [ref=f3e51]: Data\n          - button \"Hide sidebar\" [ref=f3e53] [cursor=pointer]:\n            - img \"Hide sidebar\" [ref=f3e54]\n        - generic [ref=f3e56]:\n          - generic [ref=f3e57]:\n            - generic [ref=f3e59]\n            - generic [ref=f3e160]\n            - separator [ref=f3e169]\n          - generic [ref=f3e171]:\n            - button \"Start Charting\" [ref=f3e172]\n            - button \"Start Comparison\" [ref=f3e174] [cursor=pointer]\n    - generic [ref=f3e176]:\n      - generic [ref=f3e177]:\n        - generic [ref=f3e179]:\n          - generic [ref=f3e180]:\n            - button \"Increment year\" [ref=f3e181] [cursor=pointer]\n            - textbox \"year-timeline input\" [ref=f3e184]: \"2026\"\n            - button \"Decre…",
+      "duration_s": 0.08082000003196299,
+      "offset_s": 39.73990120808594,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Close welcome dialog",
+        "target": "f3e623"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.locator('.tour-close-btn').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-30-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T10-56-46-750Z.yml)",
+      "duration_s": 0.6046210001222789,
+      "offset_s": 44.61919920798391,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Start Comparison",
+        "target": "f3e174"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Start Comparison' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T10-57-04-202Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-30T10-56-33-905Z.log#L23-L24",
+      "duration_s": 6.227644999977201,
+      "offset_s": 56.451837208122015,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 8,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e2]:\n  - toolbar [ref=f3e3]:\n    - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n    - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n    - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n    - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n    - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n  - generic [ref=f3e22]:\n    - generic [ref=f3e23]:\n      - generic:\n        - generic: 500 mi\n        - generic: 1000 km\n    - generic [ref=f3e815]:\n      - generic [ref=f3e816]: \"A: 2026 OCT 30\"\n      - generic [ref=f3e817]: \"B: 2026 OCT 23\"\n  - generic [ref=f3e33]:\n    - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n    - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n      - /url: /\n    - generic [ref=f3e42]:\n      - list [ref=f3e43]:\n        - listitem [ref=f3e44] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=f3e45]: Layers\n        - listitem [ref=f3e47] [cursor=pointer]:\n          - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n        - listitem [ref=f3e50] [cursor=pointer]:\n          - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n        - button [ref=f3e53] [cursor=pointer]:\n          - img \"Hide sidebar\" [ref=f3e54]\n      - generic [ref=f3e56]:\n        - gene…",
+      "duration_s": 0.029239000054076314,
+      "offset_s": 73.7911242081318,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Select A side in comparison",
+        "target": "f3e828"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('listitem').filter({ hasText: 'A: 2026 OCT' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T10-57-49-952Z.yml)",
+      "duration_s": 6.147769000148401,
+      "offset_s": 102.27936420799233,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e2]:\n  - toolbar [ref=f3e3]:\n    - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n    - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n    - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n    - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n    - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n  - generic [ref=f3e22]:\n    - generic [ref=f3e23]:\n      - generic:\n        - generic: 500 mi\n        - generic: 1000 km\n    - generic [ref=f3e815]:\n      - generic [ref=f3e816]: \"A: 2026 OCT 30\"\n      - generic [ref=f3e817]: \"B: 2026 OCT 23\"\n  - generic [ref=f3e33]:\n    - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n    - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n      - /url: /\n    - generic [ref=f3e42]:\n      - list [ref=f3e43]:\n        - listitem [ref=f3e44] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=f3e45]: Layers\n        - listitem [ref=f3e47] [cursor=pointer]:\n          - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n        - listitem [ref=f3e50] [cursor=pointer]:\n          - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n        - button [ref=f3e53] [cursor=pointer]:\n          - img \"Hide sidebar\" [ref=f3e54]\n      - generic [ref=f3e56]:\n        - gen…",
+      "duration_s": 0.03155800001695752,
+      "offset_s": 112.52446420816705,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Select A timeline side",
+        "target": "f3e961"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByText('A', { exact: true }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T10-58-14-839Z.yml)",
+      "duration_s": 0.6298899999819696,
+      "offset_s": 132.68443620810285,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Click A date in comparison list",
+        "target": "f3e828"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('listitem').filter({ hasText: 'A: 2026 OCT' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T10-58-29-522Z.yml)",
+      "duration_s": 0.6247660000808537,
+      "offset_s": 147.37129220808856,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Add Layers (for currently selected side)",
+        "target": "f3e161"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Add Layers' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T10-58-43-482Z.yml)",
+      "duration_s": 1.225633000023663,
+      "offset_s": 160.72989420802332,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e1]:\n  - generic [ref=f3e2]:\n    - toolbar [ref=f3e3]:\n      - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n      - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n      - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n      - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n      - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n    - generic [ref=f3e22]:\n      - generic [ref=f3e23]:\n        - generic:\n          - generic: 500 mi\n          - generic: 1000 km\n      - generic [ref=f3e815]:\n        - generic [ref=f3e816]: \"A: 2026 OCT 30\"\n        - generic [ref=f3e817]: \"B: 2026 OCT 23\"\n    - generic [ref=f3e33]:\n      - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n      - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n    - generic:\n      - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n        - /url: /\n      - generic [ref=f3e42]:\n        - list [ref=f3e43]:\n          - listitem [ref=f3e44] [cursor=pointer]:\n            - generic \"Map Layers\" [ref=f3e45]: Layers\n          - listitem [ref=f3e47] [cursor=pointer]:\n            - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n          - listitem [ref=f3e50] [cursor=pointer]:\n            - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n          - button [ref=f3e53] [cursor=pointer]:\n   …",
+      "duration_s": 0.044947999995201826,
+      "offset_s": 176.92441420815885,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "f3e1416",
+        "text": "AIRS_L3_Surface_Air_Temperature_Daily_Day",
+        "submit": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('searchbox', { name: 'Search' }).fill('AIRS_L3_Surface_Air_Temperature_Daily_Day');\nawait page.getByRole('searchbox', { name: 'Search' }).press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T10-59-26-992Z.yml)",
+      "duration_s": 1.116995999822393,
+      "offset_s": 204.34895220817998,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 2 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e1]:\n  - generic [ref=f3e2]:\n    - toolbar [ref=f3e3]:\n      - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n      - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n      - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n      - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n      - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n    - generic [ref=f3e22]:\n      - generic [ref=f3e23]:\n        - generic:\n          - generic: 500 mi\n          - generic: 1000 km\n      - generic [ref=f3e815]:\n        - generic [ref=f3e816]: \"A: 2026 OCT 30\"\n        - generic [ref=f3e817]: \"B: 2026 OCT 23\"\n    - generic [ref=f3e33]:\n      - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n      - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n    - generic:\n      - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n        - /url: /\n      - generic [ref=f3e42]:\n        - list [ref=f3e43]:\n          - listitem [ref=f3e44] [cursor=pointer]:\n            - generic \"Map Layers\" [ref=f3e45]: Layers\n          - listitem [ref=f3e47] [cursor=pointer]:\n            - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n          - listitem [ref=f3e50] [cursor=pointer]:\n            - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n          - button [ref=f3e53] [cursor=pointer]:\n   …",
+      "duration_s": 0.03872999991290271,
+      "offset_s": 210.347502208082,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Add AIRS Surface Air Temperature Day layer to side A",
+        "target": "f3e1852"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Add Layer', exact: true }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 128 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T10-59-56-890Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-30T10-56-33-905Z.log#L25-L150",
+      "duration_s": 6.349948999937624,
+      "offset_s": 229.0148782080505,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Close Add Layers dialog",
+        "target": "f3e1417"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '×' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 128 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-00-39-479Z.yml)",
+      "duration_s": 0.5822429999243468,
+      "offset_s": 277.3706222081091,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 128 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e2]:\n  - toolbar [ref=f3e3]:\n    - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n    - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n    - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n    - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n    - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n  - generic [ref=f3e22]:\n    - generic [ref=f3e23]:\n      - generic:\n        - generic: 500 mi\n        - generic: 1000 km\n    - generic [ref=f3e815]:\n      - generic [ref=f3e816]: \"A: 2026 OCT 30\"\n      - generic [ref=f3e817]: \"B: 2026 OCT 23\"\n  - generic [ref=f3e33]:\n    - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n    - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n      - /url: /\n    - generic [ref=f3e42]:\n      - list [ref=f3e43]:\n        - listitem [ref=f3e44] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=f3e45]: Layers\n        - listitem [ref=f3e47] [cursor=pointer]:\n          - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n        - listitem [ref=f3e50] [cursor=pointer]:\n          - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n        - button [ref=f3e53] [cursor=pointer]:\n          - img \"Hide sidebar\" [ref=f3e54…",
+      "duration_s": 0.031989999813959,
+      "offset_s": 285.8229282081593,
+      "error": null
+    },
+    {
+      "name": "browser_take_screenshot",
+      "args": {
+        "filename": "worldview-compare-layers.png",
+        "fullPage": false,
+        "scale": "css"
+      },
+      "output": "### Result\n- [Screenshot of viewport](./worldview-compare-layers.png)\n### Ran Playwright code\n```js\n// Screenshot viewport and save it as ./worldview-compare-layers.png\nawait page.screenshot({\n  fullPage: false,\n  path: './worldview-compare-layers.png',\n  scale: 'css',\n  type: 'png'\n});\n```",
+      "duration_s": 0.3870969999115914,
+      "offset_s": 318.7914332081564,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Select B side (layers)",
+        "target": "f3e831"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('listitem').filter({ hasText: 'B: 2026 OCT' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 128 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-02-12-045Z.yml)",
+      "duration_s": 0.6524229999631643,
+      "offset_s": 369.8681682080496,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 128 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e2]:\n  - toolbar [ref=f3e3]:\n    - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n    - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n    - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n    - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n    - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n  - generic [ref=f3e22]:\n    - generic [ref=f3e23]:\n      - generic:\n        - generic: 500 mi\n        - generic: 1000 km\n    - generic [ref=f3e815]:\n      - generic [ref=f3e816]: \"A: 2026 OCT 30\"\n      - generic [ref=f3e817]: \"B: 2026 OCT 23\"\n  - generic [ref=f3e33]:\n    - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n    - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n      - /url: /\n    - generic [ref=f3e42]:\n      - list [ref=f3e43]:\n        - listitem [ref=f3e44] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=f3e45]: Layers\n        - listitem [ref=f3e47] [cursor=pointer]:\n          - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n        - listitem [ref=f3e50] [cursor=pointer]:\n          - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n        - button [ref=f3e53] [cursor=pointer]:\n          - img \"Hide sidebar\" [ref=f3e54]…",
+      "duration_s": 0.03582100011408329,
+      "offset_s": 403.94307820801623,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Select A side in timeline",
+        "target": "f3e962"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByText('A', { exact: true }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 128 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-03-38-381Z.yml)",
+      "duration_s": 0.6237010001204908,
+      "offset_s": 456.23176320805214,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Switch compare type to Opacity (then back to Swipe to ensure cm=swipe is encoded)",
+        "target": "f3e946"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Opacity' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&cm=opacity&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 130 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-04-50-544Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-30T10-56-33-905Z.log#L151-L152",
+      "duration_s": 1.5208660000935197,
+      "offset_s": 527.4984002080746,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Switch comparison type back to Swipe",
+        "target": "f3e945"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByText('SwipeOpacitySpy').click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&cm=opacity&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 170 errors, 21 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-05-24-643Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-30T10-56-33-905Z.log#L153-L192",
+      "duration_s": 0.5806189998984337,
+      "offset_s": 562.5370822080877,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&cm=opacity&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 170 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e2]:\n  - toolbar [ref=f3e3]:\n    - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n    - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n    - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n    - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n    - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n  - generic [ref=f3e21]:\n    - generic [ref=f3e23]:\n      - generic:\n        - generic: 500 mi\n        - generic: 1000 km\n    - generic [ref=f3e2068]:\n      - 'heading \"A: 2026 OCT 30\" [level=4] [ref=f3e2069]'\n      - generic [ref=f3e2070]:\n        - generic [ref=f3e2071]: 50 %\n        - slider [ref=f3e2072]: \"50\"\n      - 'heading \"B: 2026 OCT 23\" [level=4] [ref=f3e2073]'\n  - generic [ref=f3e33]:\n    - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n    - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n      - /url: /\n    - generic [ref=f3e42]:\n      - list [ref=f3e43]:\n        - listitem [ref=f3e44] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=f3e45]: Layers\n        - listitem [ref=f3e47] [cursor=pointer]:\n          - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n        - listitem [ref=f3e50] [cursor=pointer]:\n          - generic \"You must exit …",
+      "duration_s": 0.04193600011058152,
+      "offset_s": 601.7337782080285,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Set comparison type to Swipe",
+        "target": "f3e2076"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Swipe' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 190 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-06-25-282Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-30T10-56-33-905Z.log#L193-L250",
+      "duration_s": 1.8371500000357628,
+      "offset_s": 621.921740208054,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Ensure layers panel is on B side (click B date entry)",
+        "target": "f3e831"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('listitem').filter({ hasText: 'B: 2026 OCT' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 196 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-07-00-396Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-30T10-56-33-905Z.log#L251-L276",
+      "duration_s": 0.6222310001030564,
+      "offset_s": 658.2491952080745,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Add Layers for B side",
+        "target": "f3e161"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Add Layers' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 196 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-07-29-543Z.yml)",
+      "duration_s": 1.1838299999944866,
+      "offset_s": 686.8339152080007,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 196 errors, 0 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e1]:\n  - generic [ref=f3e2]:\n    - toolbar [ref=f3e3]:\n      - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n      - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n      - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n      - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n      - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n    - generic [ref=f3e22]:\n      - generic [ref=f3e23]:\n        - generic:\n          - generic: 500 mi\n          - generic: 1000 km\n      - generic [ref=f3e2097]:\n        - generic [ref=f3e2098]: \"A: 2026 OCT 30\"\n        - generic [ref=f3e2099]: \"B: 2026 OCT 23\"\n    - generic [ref=f3e33]:\n      - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n      - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n    - generic:\n      - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n        - /url: /\n      - generic [ref=f3e42]:\n        - list [ref=f3e43]:\n          - listitem [ref=f3e44] [cursor=pointer]:\n            - generic \"Map Layers\" [ref=f3e45]: Layers\n          - listitem [ref=f3e47] [cursor=pointer]:\n            - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n          - listitem [ref=f3e50] [cursor=pointer]:\n            - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n      …",
+      "duration_s": 0.039238000055775046,
+      "offset_s": 689.3348372080363,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "f3e2281",
+        "text": "AIRS_L3_Surface_Air_Temperature_Daily_Night",
+        "submit": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('searchbox', { name: 'Search' }).fill('AIRS_L3_Surface_Air_Temperature_Daily_Night');\nawait page.getByRole('searchbox', { name: 'Search' }).press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 196 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-07-49-482Z.yml)",
+      "duration_s": 0.5799559999722987,
+      "offset_s": 707.3768822080456,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 196 errors, 0 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e1]:\n  - generic [ref=f3e2]:\n    - toolbar [ref=f3e3]:\n      - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n      - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n      - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n      - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n      - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n    - generic [ref=f3e22]:\n      - generic [ref=f3e23]:\n        - generic:\n          - generic: 500 mi\n          - generic: 1000 km\n      - generic [ref=f3e2097]:\n        - generic [ref=f3e2098]: \"A: 2026 OCT 30\"\n        - generic [ref=f3e2099]: \"B: 2026 OCT 23\"\n    - generic [ref=f3e33]:\n      - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n      - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n    - generic:\n      - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n        - /url: /\n      - generic [ref=f3e42]:\n        - list [ref=f3e43]:\n          - listitem [ref=f3e44] [cursor=pointer]:\n            - generic \"Map Layers\" [ref=f3e45]: Layers\n          - listitem [ref=f3e47] [cursor=pointer]:\n            - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n          - listitem [ref=f3e50] [cursor=pointer]:\n            - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n      …",
+      "duration_s": 0.03752300003543496,
+      "offset_s": 740.535502208164,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Select night AIRS layer result",
+        "target": "f3e2494"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Surface Air Temperature (L3, Night, Daily) Aqua / AIRS' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 196 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-09-00-102Z.yml)",
+      "duration_s": 1.1082419999875128,
+      "offset_s": 777.4679552081507,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 196 errors, 0 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e1]:\n  - generic [ref=f3e2]:\n    - toolbar [ref=f3e3]:\n      - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n      - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n      - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n      - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n      - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n    - generic [ref=f3e22]:\n      - generic [ref=f3e23]:\n        - generic:\n          - generic: 500 mi\n          - generic: 1000 km\n      - generic [ref=f3e2097]:\n        - generic [ref=f3e2098]: \"A: 2026 OCT 30\"\n        - generic [ref=f3e2099]: \"B: 2026 OCT 23\"\n    - generic [ref=f3e33]:\n      - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n      - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n    - generic:\n      - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n        - /url: /\n      - generic [ref=f3e42]:\n        - list [ref=f3e43]:\n          - listitem [ref=f3e44] [cursor=pointer]:\n            - generic \"Map Layers\" [ref=f3e45]: Layers\n          - listitem [ref=f3e47] [cursor=pointer]:\n            - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n          - listitem [ref=f3e50] [cursor=pointer]:\n            - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n      …",
+      "duration_s": 0.03580599999986589,
+      "offset_s": 780.3797242080327,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Add AIRS Surface Air Temperature Night layer (for the currently selected compare side)",
+        "target": "f3e2522"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Add Layer', exact: true }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Night,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 184 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-10-00-079Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-30T10-56-33-905Z.log#L277-L484",
+      "duration_s": 6.434556999942288,
+      "offset_s": 832.1205872080754,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Close Add Layers dialog",
+        "target": "f3e2284"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: '×' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Night,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 184 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-10-38-448Z.yml)",
+      "duration_s": 0.600897999946028,
+      "offset_s": 876.3218512081075,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Night,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 184 errors, 0 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e2]:\n  - toolbar [ref=f3e3]:\n    - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n    - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n    - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n    - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n    - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n  - generic [ref=f3e22]:\n    - generic [ref=f3e23]:\n      - generic:\n        - generic: 500 mi\n        - generic: 1000 km\n    - generic [ref=f3e2097]:\n      - generic [ref=f3e2098]: \"A: 2026 OCT 30\"\n      - generic [ref=f3e2099]: \"B: 2026 OCT 23\"\n  - generic [ref=f3e33]:\n    - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n    - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n      - /url: /\n    - generic [ref=f3e42]:\n      - list [ref=f3e43]:\n        - listitem [ref=f3e44] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=f3e45]: Layers\n        - listitem [ref=f3e47] [cursor=pointer]:\n          - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n        - listitem [ref=f3e50] [cursor=pointer]:\n          - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n        - button [ref=f3e53] [cursor=point…",
+      "duration_s": 0.047931000124663115,
+      "offset_s": 928.8102752079722,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Select A side (layers)",
+        "target": "f3e828"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('listitem').filter({ hasText: 'A: 2026 OCT' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Night,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 184 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-12-23-567Z.yml)",
+      "duration_s": 0.6523750000633299,
+      "offset_s": 981.3903422080912,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Night,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 184 errors, 0 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e2]:\n  - toolbar [ref=f3e3]:\n    - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n    - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n    - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n    - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n    - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n  - generic [ref=f3e22]:\n    - generic [ref=f3e23]:\n      - generic:\n        - generic: 500 mi\n        - generic: 1000 km\n    - generic [ref=f3e2097]:\n      - generic [ref=f3e2098]: \"A: 2026 OCT 30\"\n      - generic [ref=f3e2099]: \"B: 2026 OCT 23\"\n  - generic [ref=f3e33]:\n    - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n    - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n      - /url: /\n    - generic [ref=f3e42]:\n      - list [ref=f3e43]:\n        - listitem [ref=f3e44] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=f3e45]: Layers\n        - listitem [ref=f3e47] [cursor=pointer]:\n          - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n        - listitem [ref=f3e50] [cursor=pointer]:\n          - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n        - button [ref=f3e53] [cursor=pointe…",
+      "duration_s": 0.027166999876499176,
+      "offset_s": 998.0739092081785,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Select A side (date)",
+        "target": "f3e828"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('listitem').filter({ hasText: 'A: 2026 OCT' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Night,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 184 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-13-38-113Z.yml)",
+      "duration_s": 0.6551639998797327,
+      "offset_s": 1055.9339552081656,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "f3e831",
+        "element": "Select B side (layers)"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('listitem').filter({ hasText: 'B: 2026 OCT' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Night,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 184 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-14-15-549Z.yml)",
+      "duration_s": 0.6261360000353307,
+      "offset_s": 1093.398238208145,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Night,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 184 errors, 0 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e2]:\n  - toolbar [ref=f3e3]:\n    - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n    - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n    - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n    - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n    - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n  - generic [ref=f3e22]:\n    - generic [ref=f3e23]:\n      - generic:\n        - generic: 500 mi\n        - generic: 1000 km\n    - generic [ref=f3e2097]:\n      - generic [ref=f3e2098]: \"A: 2026 OCT 30\"\n      - generic [ref=f3e2099]: \"B: 2026 OCT 23\"\n  - generic [ref=f3e33]:\n    - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n    - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n      - /url: /\n    - generic [ref=f3e42]:\n      - list [ref=f3e43]:\n        - listitem [ref=f3e44] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=f3e45]: Layers\n        - listitem [ref=f3e47] [cursor=pointer]:\n          - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n        - listitem [ref=f3e50] [cursor=pointer]:\n          - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n        - button [ref=f3e53] [cursor=pointe…",
+      "duration_s": 0.029321999987587333,
+      "offset_s": 1124.312899208162,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Select A side in compare (to view A layers)",
+        "target": "f3e828"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('listitem').filter({ hasText: 'A: 2026 OCT' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Night,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 184 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-16-17-848Z.yml)",
+      "duration_s": 0.7268819999881089,
+      "offset_s": 1215.596720208181,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Select A side (layers)",
+        "target": "f3e828"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('listitem').filter({ hasText: 'A: 2026 OCT' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Night,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 184 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-16-59-634Z.yml)",
+      "duration_s": 0.6246280001942068,
+      "offset_s": 1257.4842022079974,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 12,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Night,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=true&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 184 errors, 0 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e2]:\n  - toolbar [ref=f3e3]:\n    - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n    - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n    - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n    - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n    - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n  - generic [ref=f3e22]:\n    - generic [ref=f3e23]:\n      - generic:\n        - generic: 500 mi\n        - generic: 1000 km\n    - generic [ref=f3e2097]:\n      - generic [ref=f3e2098]: \"A: 2026 OCT 30\"\n      - generic [ref=f3e2099]: \"B: 2026 OCT 23\"\n  - generic [ref=f3e33]:\n    - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n    - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n      - /url: /\n    - generic [ref=f3e42]:\n      - list [ref=f3e43]:\n        - listitem [ref=f3e44] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=f3e45]: Layers\n        - listitem [ref=f3e47] [cursor=pointer]:\n          - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n        - listitem [ref=f3e50] [cursor=pointer]:\n          - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n        - button [ref=f3e53] [cursor=pointe…",
+      "duration_s": 0.0271550000179559,
+      "offset_s": 1298.690481208032,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Select B side (layers)",
+        "target": "f3e831"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('listitem').filter({ hasText: 'B: 2026 OCT' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Night,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 184 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-18-15-875Z.yml)",
+      "duration_s": 0.710890999995172,
+      "offset_s": 1333.6401732082013,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 10,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&l1=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,AIRS_L3_Surface_Air_Temperature_Daily_Night,AIRS_L3_Surface_Air_Temperature_Daily_Day,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg1=false&ca=false&t=2026-10-30-T10%3A16%3A34Z&t1=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 184 errors, 0 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e2]:\n  - toolbar [ref=f3e3]:\n    - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n    - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n    - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n    - button \"You must exit comparison mode to use the snapshot feature\" [disabled] [ref=f3e810]\n    - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n  - generic [ref=f3e22]:\n    - generic [ref=f3e23]:\n      - generic:\n        - generic: 500 mi\n        - generic: 1000 km\n    - generic [ref=f3e2097]:\n      - generic [ref=f3e2098]: \"A: 2026 OCT 30\"\n      - generic [ref=f3e2099]: \"B: 2026 OCT 23\"\n  - generic [ref=f3e33]:\n    - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n    - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n      - /url: /\n    - generic [ref=f3e42]:\n      - list [ref=f3e43]:\n        - listitem [ref=f3e44] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=f3e45]: Layers\n        - listitem [ref=f3e47] [cursor=pointer]:\n          - generic \"You must exit comparison mode to use the natural events feature\" [ref=f3e822]: Events\n        - listitem [ref=f3e50] [cursor=pointer]:\n          - generic \"You must exit comparison mode to download data\" [ref=f3e823]: Data\n        - button [ref=f3e53] [cursor=point…",
+      "duration_s": 0.03139099990949035,
+      "offset_s": 1376.0635082081426,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Exit Comparison mode",
+        "target": "f3e948"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('button', { name: 'Exit Comparison', exact: true }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 188 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-19-19-170Z.yml)\n### Events\n- New console entries: .playwright-mcp/console-2026-10-30T10-56-33-905Z.log#L485-L568",
+      "duration_s": 6.30145199992694,
+      "offset_s": 1391.3438792082015,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 8,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 188 errors, 0 warnings\n### Snapshot\n```yaml\n- generic [ref=f3e2]:\n  - toolbar [ref=f3e3]:\n    - button \"Search places by location\" [ref=f3e5] [cursor=pointer]\n    - button \"Share this map\" [ref=f3e8] [cursor=pointer]\n    - button \"Switch projection\" [ref=f3e11] [cursor=pointer]\n    - button \"Take a snapshot\" [ref=f3e3446] [cursor=pointer]\n    - button \"Information\" [ref=f3e18] [cursor=pointer]: \"3\"\n  - generic [ref=f3e23]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic [ref=f3e33]:\n    - button \"Zoom in view\" [ref=f3e34] [cursor=pointer]\n    - button \"Zoom out view\" [ref=f3e37] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=f3e41] [cursor=pointer]:\n      - /url: /\n    - generic [ref=f3e42]:\n      - list [ref=f3e43]:\n        - listitem [ref=f3e44] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=f3e45]: Layers\n        - listitem [ref=f3e47] [cursor=pointer]:\n          - generic \"Natural Events\" [ref=f3e3455]: Events\n        - listitem [ref=f3e50] [cursor=pointer]:\n          - generic \"Data Download\" [ref=f3e3456]: Data\n        - button [ref=f3e53] [cursor=pointer]:\n          - img \"Hide sidebar\" [ref=f3e54]\n      - generic [ref=f3e56]:\n        - generic [ref=f3e57]:\n          - generic [ref=f3e3458]:\n            - generic [ref=f3e3459]:\n              - generic [ref=f3e3460]:\n                - heading \"Overlays\" [level=3] [ref=f3e3461]\n                - img [aria-hidden] [ref=f3e3463] [cursor=pointer]\n              - list [ref=f3e3465]:\n                - listitem [ref=f3e3466]\n                - listitem [ref=f3e3475]\n                - listitem [ref=f3e3484]\n                - listitem [ref=f3e3493]\n                - listitem [ref=f3e3502]\n                - listitem [ref=f3e3520]\n              - status [ref=f3e3538]\n            - generic [ref=f3e3540]:\n              - generic [ref=f3e3541]:…",
+      "duration_s": 0.027113999938592315,
+      "offset_s": 1410.58848820813,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "element": "Click year input",
+        "target": "f3e184"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('textbox', { name: 'year-timeline input' }).click();\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2026-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 188 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-20-09-058Z.yml)",
+      "duration_s": 0.6119699999690056,
+      "offset_s": 1446.9218912080396,
+      "error": null
+    },
+    {
+      "name": "browser_type",
+      "args": {
+        "target": "f3e184",
+        "text": "2025",
+        "submit": true
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.getByRole('textbox', { name: 'year-timeline input' }).fill('2025');\nawait page.getByRole('textbox', { name: 'year-timeline input' }).press('Enter');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?lg=false&t=2025-10-23-T10%3A16%3A34Z\n- Page Title: NASA Worldview\n- Console: 188 errors, 0 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T11-20-33-676Z.yml)",
+      "duration_s": 6.111936999950558,
+      "offset_s": 1466.0402732081711,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": "ModelTimeoutError: Request timed out.",
+  "usage": null,
+  "usage_source": "pydantic_ai"
+}

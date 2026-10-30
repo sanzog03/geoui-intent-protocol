@@ -1,0 +1,13 @@
+{
+  "trace_id": "e30af969-97fa-4b89-9981-6f8fc8e1bda4",
+  "thread_id": "5379421f-ae71-47e4-bf34-80c5c21ba8a7",
+  "source": "simulated",
+  "started_at": "2026-10-30T08:21:25.954950+00:00",
+  "duration_s": 32.0797854589764,
+  "llm_calls": [],
+  "tool_calls": [],
+  "other_spans": [],
+  "error": "RuntimeError: Client failed to connect: Failed to initialize server session",
+  "usage": null,
+  "usage_source": "pydantic_ai"
+}

@@ -1,0 +1,171 @@
+{
+  "trace_id": "6bbb5589-4f37-40e3-9913-fd29f1565c56",
+  "thread_id": "ae362649-c91f-4e2e-be3a-fd67068db71c",
+  "source": "simulated",
+  "started_at": "2026-10-30T08:50:58.583123+00:00",
+  "duration_s": 143.57136804098263,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12467,
+      "output_tokens": 1479,
+      "duration_s": 23.410982999950647,
+      "offset_s": 10.271691041067243,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 20669,
+      "output_tokens": 952,
+      "duration_s": 16.000219999812543,
+      "offset_s": 37.05699004116468,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 22450,
+      "output_tokens": 760,
+      "duration_s": 11.482432999880984,
+      "offset_s": 53.10781104117632,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 22613,
+      "output_tokens": 988,
+      "duration_s": 15.714720000047237,
+      "offset_s": 71.29199604107998,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 22662,
+      "output_tokens": 1626,
+      "duration_s": 26.48705600015819,
+      "offset_s": 117.04060404095799,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "search_collections",
+      "args": {
+        "keyword": "MYD04_3K aerosol optical depth 3km Aqua",
+        "page_size": 10,
+        "page_num": 1
+      },
+      "output": "{\"total_hits\":2,\"query_time_ms\":32,\"page_size\":10,\"page_number\":1,\"collections\":[{\"concept_id\":\"C1443528505-LAADS\",\"short_name\":\"MYD04_3K\",\"version\":\"6.1\",\"entry_title\":\"MODIS/Aqua Aerosol 5-Min L2 Swath 3km\",\"provider\":\"LAADS\",\"summary\":\"The new Collection 6.1 (C61) MODIS/Aqua Aerosol 5 Min L2 Swath 3km (MYD04_3K) product is an improved version based on algorithm changes in Dark Target (DT) Aerosol retrieval over urban areas and uncertainty estimates for Deep Blue (DB) Aerosol retrievals.\\n\\nThe MODIS level-2 atmospheric aerosol product provides retrieved ambient aerosol optical properties, quality assurance, and other parameters, globally over ocean and land. In Collection 5, and earlier collections, there was only one aerosol product (MYD04_L2) at 10km (at nadir) spatial resolution. Starting from C6, the Dark Target (DT) Aerosol algorithm team provided a new 3 km spatial resolution product (MYD04_3k) intended for the air quality community.\\n\\nThe MYD04_3K product is based on the same algorithm and Look up Tables as the standard Dark Target aerosol product. Because of finer resolution, subtle differences are made in selecting pixels for retrieval and in determining QA. The only differences between the existing 10km algorithm and the new 3km algorithm are: 1) the size of the pixel-arrays defining each retrieval box ( 6x6 retrieval boxes of 36 pixels at 0.5km resolution for 3km algorithm as oppose to 20x20 retrieval boxes of 400 pixels at 0.5km resolution for 10km product); 2) the minimum percentage of \\\"good\\\" pixels required for a retrieval (a minimum of 5 pixels over ocean and 6 pixels over land instead of a minimum of 10 pixels over ocean or 12 pixels over land for 10km product retrieval); 3) the 10km algorithm attempts a \\\"poor quality\\\" retrieval while 3km algorithm does not. Everything else is the same between two products.\\n\\nFor more information on C6.1 changes and updates, visit the [MODIS Atmosphere website](https://modis-atmosphere.gsfc.nasa.gov/document…",
+      "duration_s": 0.7479399999137968,
+      "offset_s": 33.68594904104248,
+      "error": null
+    },
+    {
+      "name": "search_worldview_layers",
+      "args": {
+        "query": "MODIS_Aqua_Aerosol_Optical_Depth_3km",
+        "limit": 5
+      },
+      "output": "{\"matched_layers\":[{\"layer_id\":\"MODIS_Aqua_Aerosol_Optical_Depth_3km\",\"measurement_id\":\"aerosol-optical-depth\",\"display_name\":\"MODIS_Aqua_Aerosol_Optical_Depth_3km\",\"description\":\"The 3 km Aerosol Optical Depth layer was designed to provide a higher-resolution view to meet some users’ needs. Caution should be exercised in urban regions, as there are known issues over urban landscapes. This layer is created from two “Dark Target” (DT) algorithms for retrieving (1) over ocean (dark in visible and longer wavelengths) and (2) over vegetated/dark-soiled land (dark in the visible\",\"date_range_start\":\"2002-07-03\",\"date_range_end\":null,\"instrument\":\"modis\",\"platform\":\"\",\"tags\":[\"aod\"],\"relevance_score\":1.0,\"vector_score\":1.0,\"bm25_score\":1.0,\"search_mode\":\"hybrid\"},{\"layer_id\":\"MODIS_Terra_Aerosol_Optical_Depth_3km\",\"measurement_id\":\"aerosol-optical-depth\",\"display_name\":\"MODIS_Terra_Aerosol_Optical_Depth_3km\",\"description\":\"The 3 km Aerosol Optical Depth layer was designed to provide a higher-resolution view to meet some users’ needs. Caution should be exercised in urban regions, as there are known issues over urban landscapes. This layer is created from two “Dark Target” (DT) algorithms for retrieving (1) over ocean (dark in visible and longer wavelengths) and (2) over vegetated/dark-soiled land (dark in the visible\",\"date_range_start\":\"2000-02-24\",\"date_range_end\":null,\"instrument\":\"modis\",\"platform\":\"\",\"tags\":[\"aod\"],\"relevance_score\":0.6709,\"vector_score\":0.9585,\"bm25_score\":0.0,\"search_mode\":\"hybrid\"},{\"layer_id\":\"MODIS_Aqua_Aerosol\",\"measurement_id\":\"aerosol-optical-depth\",\"display_name\":\"MODIS_Aqua_Aerosol\",\"description\":\"The Aerosol Optical Depth layer is useful for studying aerosol optical depth over the ocean as well as vegetation/dark-soiled land, which are both dark in the visible wavelengths. It is produced using two “Dark Target” (DT) algorithms for retrieving (1) over ocean (dark in visible and longer wavelengths) and (2) over vegetated/dark-soiled land (dar…",
+      "duration_s": 1.6124770001042634,
+      "offset_s": 33.68545304099098,
+      "error": null
+    },
+    {
+      "name": "search_collections",
+      "args": {
+        "keyword": "MODIS Aqua Aerosol Optical Depth 3 km Level 2",
+        "page_size": 10,
+        "page_num": 1
+      },
+      "output": "{\"total_hits\":31,\"query_time_ms\":130,\"page_size\":10,\"page_number\":1,\"collections\":[{\"concept_id\":\"C2324689816-LPCLOUD\",\"short_name\":\"MCD19A2\",\"version\":\"061\",\"entry_title\":\"MODIS/Terra+Aqua Land Aerosol Optical Depth Daily L2G Global 1km SIN Grid V061\",\"provider\":\"LPCLOUD\",\"summary\":\"The MCD19A2 Version 6.1 data product is a Moderate Resolution Imaging Spectroradiometer (MODIS) Terra and Aqua combined Multi-angle Implementation of Atmospheric Correction (MAIAC) Land Aerosol Optical Depth (AOD) gridded Level 2 product produced daily at 1 kilometer (km) pixel resolution. The MCD19A2 product provides the atmospheric properties and view geometry used to calculate the MAIAC Land Surface Bidirectional Reflectance Factor (BRF) or surface reflectance, MCD19A1 product.\\n\\nThe MCD19A2 AOD data product contains the following Science Dataset (SDS) layers: blue band AOD at 0.47 µm, green band AOD at 0.55 µm, AOD uncertainty, fine mode fraction over water, column water vapor over land and clouds (in cm), smoke injection height (m above ground), AOD QA, AOD model at 1km, cosine of solar zenith angle, cosine of view zenith angle, relative azimuth angle, scattering angle, and glint angle at 5km. A low-resolution browse image is also included showing AOD of the blue band at 0.47 µm created using a composite of all available orbits.\\n\\nEach SDS layer within each MCD19A2 Hierarchical Data Format 4 (HDF4) file contains a third dimension that represents the number of orbit overpasses. This factor could affect the total number of bands for each SDS layer.\\n\\nKnown Issues\\n\\n* Known issues are described in Section 6 of the User Guide.\\n* For complete information about known issues please refer to the [MODIS/VIIRS Land Quality Assessment website](https://landweb.modaps.eosdis.nasa.gov/knownissue?sensor=MODIS&sat=TerraAqua&as=61).\\n* Users should be aware that they may see a dip in AOD values for the first 5 months of 2022. A fix is planned to be implemented in Collection 7.\",\"time_start\":\"2…",
+      "duration_s": 3.3638160000555217,
+      "offset_s": 33.686170041095465,
+      "error": null
+    },
+    {
+      "name": "browser_snapshot",
+      "args": {
+        "depth": 8,
+        "boxes": false
+      },
+      "output": "### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(hidden),DoS_International_Boundaries(hidden),Admin_Boundaries(hidden),Coastlines_15m,MODIS_Aqua_Aerosol_Optical_Depth_3km,OCI_PACE_True_Color(hidden),VIIRS_NOAA21_CorrectedReflectance_TrueColor(hidden),VIIRS_NOAA20_CorrectedReflectance_TrueColor(hidden),MODIS_Aqua_CorrectedReflectance_TrueColor(hidden),MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2025-09-15-T07%3A57%3A19Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 21 warnings\n### Snapshot\n```yaml\n- generic [ref=e2]:\n  - generic [ref=e5]:\n    - button [ref=e6] [cursor=pointer]\n    - searchbox [ref=e8]:\n      - combobox \"Search for places or enter coordinates\" [active] [ref=e10]: Continental United States\n      - button [ref=e2331] [cursor=pointer]\n      - button [ref=e2334] [cursor=pointer]\n    - button [ref=e12] [cursor=pointer]\n  - toolbar [ref=e15]:\n    - button \"Share this map\" [ref=e16] [cursor=pointer]\n    - button \"Switch projection\" [ref=e19] [cursor=pointer]\n    - button \"Take a snapshot\" [ref=e23] [cursor=pointer]\n    - button \"Information\" [ref=e26] [cursor=pointer]: \"3\"\n  - generic [ref=e31]:\n    - generic:\n      - generic: 500 mi\n      - generic: 1000 km\n  - generic [ref=e41]:\n    - button \"Zoom in view\" [ref=e42] [cursor=pointer]\n    - button \"Zoom out view\" [ref=e45] [cursor=pointer]\n  - generic:\n    - link \"Worldview\" [ref=e49] [cursor=pointer]:\n      - /url: /\n    - generic [ref=e50]:\n      - list [ref=e51]:\n        - listitem [ref=e52] [cursor=pointer]:\n          - generic \"Map Layers\" [ref=e53]: Layers\n        - listitem [ref=e55] [cursor=pointer]:\n          - generic \"Natural Events\" [ref=e56]: Events\n        - listitem [ref=e58] [cursor=pointer]:\n          - generic \"Data Download\" [ref=e59]: Data\n        - button [ref=e61] [cursor=pointer]:\n          - img \"Hide sidebar\" [ref=e62]\n      - generic [ref=e64]:\n        - generic [ref=e65]:\n          - generic [ref=e67]:\n            - generic [ref=e68]:\n…",
+      "duration_s": 0.0441189999692142,
+      "offset_s": 53.061074041062966,
+      "error": null
+    },
+    {
+      "name": "umm_vis_lookup_tool",
+      "args": {
+        "collection_concept_id": "C1426717545-LANCEMODIS"
+      },
+      "output": "{\"collection_concept_id\":\"C1426717545-LANCEMODIS\",\"layers\":[],\"match_path\":\"source_datasets_fallback\",\"_response\":\"\"}",
+      "duration_s": 1.4769480000250041,
+      "offset_s": 64.59579804097302,
+      "error": null
+    },
+    {
+      "name": "umm_vis_lookup_tool",
+      "args": {
+        "collection_concept_id": "C1443528505-LAADS"
+      },
+      "output": "{\"collection_concept_id\":\"C1443528505-LAADS\",\"layers\":[],\"match_path\":\"source_datasets_fallback\",\"_response\":\"\"}",
+      "duration_s": 6.694125999929383,
+      "offset_s": 64.59511204110458,
+      "error": null
+    },
+    {
+      "name": "get_collection_metadata",
+      "args": {
+        "concept_id": "C1443528505-LAADS"
+      },
+      "output": "Timed out while waiting for response.",
+      "duration_s": 30.025261000031605,
+      "offset_s": 87.01137404097244,
+      "error": null
+    },
+    {
+      "name": "get_collection_metadata",
+      "args": {
+        "concept_id": "C1443528505-LAADS"
+      },
+      "output": null,
+      "duration_s": 0.004909000126644969,
+      "offset_s": 143.53351504099555,
+      "error": null
+    },
+    {
+      "name": "get_collection_metadata",
+      "args": {
+        "concept_id": "C1426717545-LANCEMODIS"
+      },
+      "output": null,
+      "duration_s": 0.005967000033706427,
+      "offset_s": 143.533977041021,
+      "error": null
+    },
+    {
+      "name": "browser_click",
+      "args": {
+        "target": "e16",
+        "element": "Share this map button"
+      },
+      "output": null,
+      "duration_s": 0.009954999899491668,
+      "offset_s": 143.5342300410848,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": "McpError: Timed out while waiting for response.",
+  "usage": null,
+  "usage_source": "pydantic_ai"
+}

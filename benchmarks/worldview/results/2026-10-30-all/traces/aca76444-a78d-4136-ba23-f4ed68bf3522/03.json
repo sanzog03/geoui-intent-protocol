@@ -1,0 +1,151 @@
+{
+  "trace_id": "b7463453-598d-4a8d-9af4-3b5c06748c1f",
+  "thread_id": "aca76444-a78d-4136-ba23-f4ed68bf3522",
+  "source": "simulated",
+  "started_at": "2026-10-30T06:10:04.621134+00:00",
+  "duration_s": 28.205456624971703,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12225,
+      "output_tokens": 202,
+      "duration_s": 3.6616229999344796,
+      "offset_s": 4.57300483295694,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12508,
+      "output_tokens": 527,
+      "duration_s": 8.044843999901786,
+      "offset_s": 8.764944833004847,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12750,
+      "output_tokens": 389,
+      "duration_s": 5.235318999970332,
+      "offset_s": 16.818754832958803,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 13018,
+      "output_tokens": 105,
+      "duration_s": 1.9185909999068826,
+      "offset_s": 22.06230383296497,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 13374,
+      "output_tokens": 258,
+      "duration_s": 3.6011449999641627,
+      "offset_s": 24.591893832897767,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "browser_evaluate",
+      "args": {
+        "function": "() => window.location.href"
+      },
+      "output": "### Result\n\"https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(opacity=0.6),Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,MODIS_Aqua_CorrectedReflectance_TrueColor&lg=false&t=2024-07-04-T00%3A00%3A00Z\"\n### Ran Playwright code\n```js\nawait page.evaluate('() => window.location.href');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(opacity=0.6),Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,MODIS_Aqua_CorrectedReflectance_TrueColor&lg=false&t=2024-07-04-T00%3A00%3A00Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 21 warnings\n### Events\n- New console entries: .playwright-mcp/console-2026-10-30T06-09-42-480Z.log#L1-L22",
+      "duration_s": 0.5213519998360425,
+      "offset_s": 8.238617833005264,
+      "error": null
+    },
+    {
+      "name": "geo_ui_get_state_tool",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=Reference_Labels_15m(opacity=0.6),Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,MODIS_Aqua_CorrectedReflectance_TrueColor&lg=false&t=2024-07-04-T00%3A00%3A00Z"
+      },
+      "output": "{\"intent\":{\"geoui_version\":\"1.0.0\",\"geoui_extensions\":[],\"viewport\":{\"crs\":\"EPSG:4326\"},\"time\":{\"instant\":\"2024-07-04-T00:00:00Z\"},\"layers\":[{\"id\":\"Reference_Labels_15m\",\"visible\":true,\"opacity\":0.6},{\"id\":\"Admin_Boundaries\",\"visible\":true},{\"id\":\"DoS_International_Boundaries\",\"visible\":true},{\"id\":\"Coastlines_15m\",\"visible\":true},{\"id\":\"MODIS_Aqua_CorrectedReflectance_TrueColor\",\"visible\":true}]}}",
+      "duration_s": 0.0005640001036226749,
+      "offset_s": 16.812757832929492,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "geoui_version": "1.0.0",
+          "geoui_extensions": [],
+          "viewport": {
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2024-07-04"
+          },
+          "layers": [
+            {
+              "id": "MODIS_Aqua_CorrectedReflectance_TrueColor",
+              "visible": true,
+              "opacity": 1
+            },
+            {
+              "id": "Admin_Boundaries",
+              "visible": true
+            },
+            {
+              "id": "DoS_International_Boundaries",
+              "visible": true
+            },
+            {
+              "id": "Coastlines_15m",
+              "visible": true
+            },
+            {
+              "id": "Reference_Labels_15m",
+              "visible": true,
+              "opacity": 0.6
+            },
+            {
+              "id": "Reference_Features_15m",
+              "visible": true,
+              "opacity": 0.8
+            }
+          ]
+        }
+      },
+      "output": "{\"url\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Aqua_CorrectedReflectance_TrueColor(opacity=1),Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,Reference_Labels_15m(opacity=0.6),Reference_Features_15m(opacity=0.8)&t=2024-07-04&p=geographic\"}",
+      "duration_s": 0.000662999926134944,
+      "offset_s": 22.05758783291094,
+      "error": null
+    },
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Aqua_CorrectedReflectance_TrueColor(opacity=1),Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,Reference_Labels_15m(opacity=0.6),Reference_Features_15m(opacity=0.8)&t=2024-07-04&p=geographic"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/?l=MODIS_Aqua_CorrectedReflectance_TrueColor(opacity=1),Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,Reference_Labels_15m(opacity=0.6),Reference_Features_15m(opacity=0.8)&t=2024-07-04&p=geographic');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=MODIS_Aqua_CorrectedReflectance_TrueColor(opacity=1),Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,Reference_Labels_15m(opacity=0.6),Reference_Features_15m(opacity=0.8)&t=2024-07-04&p=geographic\n- Page Title: NASA Worldview\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T06-10-29-210Z.yml)",
+      "duration_s": 0.6061490001156926,
+      "offset_s": 23.98339583282359,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 63875,
+    "output_tokens": 1481,
+    "total_tokens": 65356,
+    "requests": 5,
+    "cache_read_tokens": 58240,
+    "reasoning_tokens": 818,
+    "tool_calls": 4,
+    "cost_usd": 0.04078725
+  },
+  "usage_source": "pydantic_ai"
+}

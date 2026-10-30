@@ -1,0 +1,151 @@
+{
+  "trace_id": "73e7cee5-bcf9-4dd1-a619-636e7f51553f",
+  "thread_id": "70237426-94a2-4a09-8adc-0c824c8f144e",
+  "source": "simulated",
+  "started_at": "2026-10-30T06:24:47.639109+00:00",
+  "duration_s": 39.07288333307952,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10114,
+      "output_tokens": 244,
+      "duration_s": 3.95702000008896,
+      "offset_s": 4.450630665989593,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10187,
+      "output_tokens": 245,
+      "duration_s": 3.8979960000142455,
+      "offset_s": 8.934800666058436,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10362,
+      "output_tokens": 94,
+      "duration_s": 1.7560680001042783,
+      "offset_s": 12.843466666061431,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10697,
+      "output_tokens": 248,
+      "duration_s": 4.751238000113517,
+      "offset_s": 16.47265466605313,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10797,
+      "output_tokens": 352,
+      "duration_s": 6.01105900015682,
+      "offset_s": 21.796702665975317,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10912,
+      "output_tokens": 705,
+      "duration_s": 10.77361200004816,
+      "offset_s": 28.278550666058436,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "browser_evaluate",
+      "args": {
+        "function": "() => window.location.href"
+      },
+      "output": "### Result\n\"about:blank\"\n### Ran Playwright code\n```js\nawait page.evaluate('() => window.location.href');\n```\n### Page\n- Page URL: about:blank",
+      "duration_s": 0.520619000075385,
+      "offset_s": 8.409942666068673,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "viewport": {
+            "bbox": [
+              -125,
+              31,
+              -102,
+              49
+            ],
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2024-07-15"
+          },
+          "layers": [
+            {
+              "id": "MOD13Q1_NDVI_16Day",
+              "visible": true,
+              "opacity": 1
+            }
+          ]
+        }
+      },
+      "output": "{\"url\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MOD13Q1_NDVI_16Day(opacity=1),Coastlines_15m,Reference_Features_15m&t=2024-07-15&v=-125,31,-102,49&p=geographic\"}",
+      "duration_s": 0.0010229998733848333,
+      "offset_s": 12.836873666150495,
+      "error": null
+    },
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MOD13Q1_NDVI_16Day(opacity=1),Coastlines_15m,Reference_Features_15m&t=2024-07-15&v=-125,31,-102,49&p=geographic"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,MOD13Q1_NDVI_16Day(opacity=1),Coastlines_15m,Reference_Features_15m&t=2024-07-15&v=-125,31,-102,49&p=geographic');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?v=-125,31,-102,49&l=Admin_Boundaries,DoS_International_Boundaries,Coastlines_15m,MODIS_Terra_CorrectedReflectance_TrueColor&lg=false&t=2024-07-15-T00%3A00%3A00Z\n- Page Title: NASA Worldview\n- Console: 0 errors, 22 warnings\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T06-25-04-110Z.yml)",
+      "duration_s": 1.866278000175953,
+      "offset_s": 14.603732666000724,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "Prepare final response with updated Worldview URL for MOD13Q1_NDVI_16Day on 2024-07-15 over western United States."
+      },
+      "output": "{\"query\":\"Prepare final response with updated Worldview URL for MOD13Q1_NDVI_16Day on 2024-07-15 over western United States.\",\"_response\":\"\"}",
+      "duration_s": 0.5607399998698384,
+      "offset_s": 21.228225666098297,
+      "error": null
+    },
+    {
+      "name": "dummy_tool",
+      "args": {
+        "query": "Return updated Worldview URL with MOD13Q1_NDVI_16Day on 2024-07-15 over western U.S. bbox [-125,31,-102,49]."
+      },
+      "output": "{\"query\":\"Return updated Worldview URL with MOD13Q1_NDVI_16Day on 2024-07-15 over western U.S. bbox [-125,31,-102,49].\",\"_response\":\"\"}",
+      "duration_s": 0.4586199999321252,
+      "offset_s": 27.812004666076973,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 63069,
+    "output_tokens": 1888,
+    "total_tokens": 64957,
+    "requests": 6,
+    "cache_read_tokens": 57600,
+    "reasoning_tokens": 1318,
+    "tool_calls": 5,
+    "cost_usd": 0.04608275
+  },
+  "usage_source": "pydantic_ai"
+}

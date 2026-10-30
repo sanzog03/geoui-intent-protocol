@@ -1,0 +1,123 @@
+{
+  "trace_id": "357ceceb-f756-4452-a9bd-b6455d69de55",
+  "thread_id": "429a897a-09e9-4cbb-9c7e-52e99b7a686a",
+  "source": "simulated",
+  "started_at": "2026-10-30T05:34:21.783859+00:00",
+  "duration_s": 28.145829000044614,
+  "llm_calls": [
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 10170,
+      "output_tokens": 308,
+      "duration_s": 4.992980000097305,
+      "offset_s": 4.3333562079351395,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 11636,
+      "output_tokens": 393,
+      "duration_s": 4.841622000094503,
+      "offset_s": 9.341868208022788,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 11958,
+      "output_tokens": 161,
+      "duration_s": 2.0832090000621974,
+      "offset_s": 14.194484208012,
+      "error": null
+    },
+    {
+      "model": "gpt-5.2",
+      "input_tokens": 12482,
+      "output_tokens": 956,
+      "duration_s": 11.461266999831423,
+      "offset_s": 16.671866208082065,
+      "error": null
+    }
+  ],
+  "tool_calls": [
+    {
+      "name": "geo_ui_list_intent_extensions_tool",
+      "args": {},
+      "output": "{\"extensions\":[{\"name\":\"compare\",\"uri\":\"https://geoui.org/ext/compare/v1.0.0\",\"scope\":\"intent\",\"summary\":\"Compare two layer stacks or two dates side by side (swipe, spy or opacity blend).\",\"keys\":[\"compare:layers\",\"compare:active_side\",\"compare:time\",\"compare:mode\",\"compare:value\"],\"required\":[\"compare:layers\"],\"fields_schema\":{\"$defs\":{\"LayerRef\":{\"additionalProperties\":true,\"description\":\"A reference to a renderable layer.\\n\\n`id` is application-defined — the conforming app must be able to\\nresolve it to a layer in its own catalogue. Per-layer rendering hints\\nbeyond the universal set (`visible`, `opacity`) belong in extensions\\nand are expressed as namespaced extra keys\\n(e.g. `\\\"raster-styling:palettes\\\": [...]`).\",\"properties\":{\"id\":{\"title\":\"Id\",\"type\":\"string\"},\"visible\":{\"default\":true,\"title\":\"Visible\",\"type\":\"boolean\"},\"opacity\":{\"anyOf\":[{\"maximum\":1.0,\"minimum\":0.0,\"type\":\"number\"},{\"type\":\"null\"}],\"default\":null,\"title\":\"Opacity\"}},\"required\":[\"id\"],\"title\":\"LayerRef\",\"type\":\"object\"},\"TimeWindow\":{\"description\":\"Time selection.\\n\\nEither a single `instant` OR a closed range `{start, end}` — the two\\nare mutually exclusive. All fields `None` is allowed and means\\n\\\"app default time.\\\"\",\"properties\":{\"instant\":{\"anyOf\":[{\"type\":\"string\"},{\"format\":\"date\",\"type\":\"string\"},{\"format\":\"date-time\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null,\"title\":\"Instant\"},\"start\":{\"anyOf\":[{\"type\":\"string\"},{\"format\":\"date\",\"type\":\"string\"},{\"format\":\"date-time\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null,\"title\":\"Start\"},\"end\":{\"anyOf\":[{\"type\":\"string\"},{\"format\":\"date\",\"type\":\"string\"},{\"format\":\"date-time\",\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null,\"title\":\"End\"}},\"title\":\"TimeWindow\",\"type\":\"object\"}},\"description\":\"Typed view of the ``compare:*`` fields on a GeoIntent.\",\"properties\":{\"layers\":{\"description\":\"The B-side layer stack (the A side is the root layers).\",\"items\":{\"$ref\":\"#/$defs/LayerRef\"},\"minItems\":1,\"title\":\"Layers\",\"type\":\"array\"},\"acti…",
+      "duration_s": 0.007162000052630901,
+      "offset_s": 9.330852207960561,
+      "error": null
+    },
+    {
+      "name": "geo_ui_render_intent_tool",
+      "args": {
+        "intent": {
+          "geoui_version": "1.0.0",
+          "viewport": {
+            "bbox": null,
+            "crs": "EPSG:4326"
+          },
+          "time": {
+            "instant": "2025-08-01"
+          },
+          "layers": [
+            {
+              "id": "AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean",
+              "visible": true,
+              "opacity": 1
+            }
+          ],
+          "compare:layers": [
+            {
+              "id": "AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean",
+              "visible": true,
+              "opacity": 1
+            }
+          ],
+          "compare:active_side": "A",
+          "compare:time": {
+            "instant": "2025-08-01"
+          },
+          "compare:mode": "swipe",
+          "compare:value": 50
+        },
+        "embed_mode": false
+      },
+      "output": "{\"url\":\"https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\"}",
+      "duration_s": 0.0009599998593330383,
+      "offset_s": 14.188352208118886,
+      "error": null
+    },
+    {
+      "name": "browser_navigate",
+      "args": {
+        "url": "https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50"
+      },
+      "output": "### Ran Playwright code\n```js\nawait page.goto('https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50');\n```\n### Page\n- Page URL: https://worldview.earthdata.nasa.gov/?l=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Day_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&l1=MODIS_Terra_CorrectedReflectance_TrueColor,AIRS_L3_Surface_Air_Temperature_Daily_Night_Mean(opacity=1),Coastlines_15m,Reference_Features_15m&t=2025-08-01&t1=2025-08-01&p=geographic&ca=true&cm=swipe&cv=50\n- Page Title: NASA Worldview\n### Snapshot\n- [Snapshot](.playwright-mcp/page-2026-10-30T05-34-38-447Z.yml)",
+      "duration_s": 0.3874830000568181,
+      "offset_s": 16.281141208019108,
+      "error": null
+    }
+  ],
+  "other_spans": [
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list",
+    "tools/list"
+  ],
+  "error": null,
+  "usage": {
+    "input_tokens": 46246,
+    "output_tokens": 1818,
+    "total_tokens": 48064,
+    "requests": 4,
+    "cache_read_tokens": 41472,
+    "reasoning_tokens": 512,
+    "tool_calls": 3,
+    "cost_usd": 0.0410641
+  },
+  "usage_source": "pydantic_ai"
+}

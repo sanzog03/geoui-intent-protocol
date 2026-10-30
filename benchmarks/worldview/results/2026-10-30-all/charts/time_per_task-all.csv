@@ -1,0 +1,6 @@
+section,set_or_agent,geoui,vlm,vlm_over_geoui,n_geoui,n_vlm
+mean_seconds,gold,69.0699,834.8872,12.0876,8,8
+mean_seconds,synthetic,173.5219,2033.8699,11.7211,9,9
+mean_seconds,all,124.368,1469.6428,11.8169,17,17
+split_llm_tool_other_total,geoui,87.8671,7.7471,28.7538,124.368,
+split_llm_tool_other_total,vlm,1288.7999,139.9182,40.9247,1469.6428,
