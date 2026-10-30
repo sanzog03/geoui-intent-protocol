@@ -34,7 +34,8 @@ benchmarks/worldview/
     ├── traces/<conv>/<n>.json  TurnTrace per turn: LLM calls with tokens, tool calls with args/outputs, durations
     ├── conversations.jsonl     transcripts with tool calls and the metric scores
     ├── deepeval/test_run_*.json  deepeval's own result file
-    └── summary.json / summary.md
+    ├── summary.json / summary.md
+    └── csv/                    conversations.csv, turns.csv, tool_calls.csv: the flat tables for charts
 ```
 
 ## Running
@@ -64,6 +65,13 @@ uv run deepeval test run benchmarks/geouibench/evals/test_benchmark.py -k core-4
 ```
 
 ## Reading a run
+
+`csv/conversations.csv` is the chart-ready form: one row per scenario × agent with every
+score and pass flag, a single `correct` column (Success on gold goldens, Completion on
+synthetic ones, so efficiency can be conditioned on correct outcomes), tool calls with the
+waste breakdown, agent seconds and wall-clock elapsed, tokens and cost; `turns.csv` and
+`tool_calls.csv` go one level down. Rows name their run, so several runs concatenate
+(`python -m geouibench export <run>... --out DIR`).
 
 `summary.md` has one row per scenario × agent with the six scores (✓/✗ at threshold),
 turns, tool calls, seconds and cache-adjusted tokens, a **vlm/geoui** ratio row per

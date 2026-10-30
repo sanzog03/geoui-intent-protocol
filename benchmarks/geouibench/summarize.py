@@ -1,6 +1,7 @@
-"""``python -m geouibench summarize <run dir>``: write ``summary.json`` and ``summary.md`` for a run.
+"""``python -m geouibench summarize <run dir>``: write ``summary.json``, ``summary.md`` and ``csv/`` for a run.
 
-Also scrubs machine-specific absolute paths out of every text artifact in
+The CSV tables (:mod:`geouibench.export`) are the flat form of the same
+records, for charting. Also scrubs machine-specific absolute paths out of every text artifact in
 the run directory, so the folder can be committed as is.
 """
 
@@ -31,6 +32,9 @@ def summarize_run(run_dir: Path, *, reference_agent: str | None = None) -> Summa
     )
     (run_dir / SUMMARY_JSON).write_text(summary.model_dump_json(indent=2), encoding="utf-8")
     (run_dir / SUMMARY_MD).write_text(render_markdown(summary), encoding="utf-8")
+    from geouibench.export import export_run  # here, not at the top: export → score → summarize → export
+
+    export_run(run_dir)
     scrub_run_dir(run_dir)
     return summary
 

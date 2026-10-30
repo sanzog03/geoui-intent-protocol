@@ -5,6 +5,7 @@
     python -m geouibench run       <app dir> <dataset>... [--run-id ID] [--agent KIND ...] [--smoke]
     python -m geouibench score     <run dir> [--metrics all|success,tool,...] [--model NAME]
     python -m geouibench summarize <run dir> [--reference KIND]
+    python -m geouibench export    <run dir>... [--out DIR]
     python -m geouibench synthetic <app dir> [--gold NAME] [--out NAME] [--model NAME]
     python -m geouibench datasets  <app dir>
 
@@ -31,6 +32,7 @@ from dotenv import load_dotenv
 
 from geouibench.app import prepare_app
 from geouibench.appdir import AppDir, load_app_dir
+from geouibench.export import CSV_DIR, export_run, export_runs
 from geouibench.metrics import JUDGE_MODEL_NAME
 from geouibench.run_dir import DEEPEVAL_DIR
 from geouibench.runner import ensure_run_info
@@ -134,7 +136,7 @@ def run_benchmark(
     print(file=out)
     print(render_markdown(summary), file=out)
     print(
-        f"Done. Review and commit {run_dir} (summary.md, conversations.jsonl, turns.jsonl, traces/, deepeval/).",
+        f"Done. Review and commit {run_dir} (summary.md, csv/, conversations.jsonl, turns.jsonl, traces/, deepeval/).",
         file=out,
     )
     return status
@@ -178,6 +180,10 @@ def build_parser() -> argparse.ArgumentParser:
     summ.add_argument("run_dir", type=Path)
     summ.add_argument("--reference", help="agent kind the ratios are relative to (default: run.json)")
 
+    exp = sub.add_parser("export", help="write the CSV tables (conversations, turns, tool calls) of one or more runs")
+    exp.add_argument("run_dirs", nargs="+", type=Path, help="results/<run-id> directories")
+    exp.add_argument("--out", type=Path, help="one combined set of tables here instead of <run>/csv/ per run")
+
     syn = sub.add_parser("synthetic", help="generate a synthetic dataset from a gold one with deepeval")
     syn.add_argument("app_dir", type=Path)
     syn.add_argument("--gold", default="gold", help="gold dataset name (default: gold)")
@@ -213,6 +219,15 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == "summarize":
         summary = summarize_run(args.run_dir, reference_agent=args.reference)
         print(render_markdown(summary))
+        return 0
+    if args.command == "export":
+        if args.out:
+            paths = export_runs(args.run_dirs, args.out)
+            print("wrote " + ", ".join(str(p) for p in paths.values()))
+        else:
+            for run_dir in args.run_dirs:
+                export_run(run_dir)
+                print(f"wrote {run_dir / CSV_DIR}/")
         return 0
     if args.command == "synthetic":
         run_synthetic(

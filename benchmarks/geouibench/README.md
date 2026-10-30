@@ -19,6 +19,7 @@ Everything a benchmark author needs is on `python -m geouibench`:
 uv run python -m geouibench run       benchmarks/<app> gold [synthetic ...|all] [--run-id ID] [--agent KIND ...] [--smoke]
 uv run python -m geouibench score     benchmarks/<app>/results/<run-id> [--metrics all|success,tool,time,token,completion,relevancy] [--model NAME]
 uv run python -m geouibench summarize benchmarks/<app>/results/<run-id> [--reference KIND]
+uv run python -m geouibench export    benchmarks/<app>/results/<run-id> [...more runs] [--out DIR]
 uv run python -m geouibench synthetic benchmarks/<app> [--gold NAME] [--out NAME] [--model NAME] [--work-dir DIR]
 uv run python -m geouibench datasets  benchmarks/<app>
 ```
@@ -27,7 +28,8 @@ uv run python -m geouibench datasets  benchmarks/<app>
 |---|---|
 | `run` | loads the app, calls its optional `prepare()` (returned variables join the environment), writes `run.json`, runs `deepeval test run` on `evals/test_benchmark.py` once per agent kind in order (never in parallel: kinds may share a browser), then writes `summary.json` / `summary.md`. Exit status 1 when deepeval reported threshold failures for any kind. `--smoke` keeps the first golden of each dataset and allows one extra user turn. |
 | `score` | rebuilds every conversation from `conversations.jsonl` and `traces/`, runs the chosen metrics through `deepeval.evaluate`, replaces the same-named scores and rewrites the summary. The default four are deterministic and need no network; `completion` and `relevancy` call the judge. |
-| `summarize` | recomputes the rows, ratios and totals and scrubs absolute paths out of every text artifact. |
+| `summarize` | recomputes the rows, ratios and totals, rewrites the `csv/` tables and scrubs absolute paths out of every text artifact. |
+| `export` | writes the three flat CSV tables of a run to `<run>/csv/` (`conversations.csv`: one row per golden × agent with every score, a `correct` flag, tool waste, time, tokens, cost; `turns.csv`: one row per assistant turn; `tool_calls.csv`: one row per tool call). Several runs with `--out DIR` land in one combined set; every row names its run. `run`, `score` and `summarize` refresh the tables too. |
 | `synthetic` | gold dataset → one context per golden → `deepeval generate --method contexts --variation multi-turn` with the app's `SYNTHETIC_STYLE` → prepared dataset in `datasets/<out>.json` (default `synthetic_queries`). Review before committing. |
 | `datasets` | lists `datasets/*.json` by name. |
 
@@ -195,15 +197,18 @@ generate(style, gold_path=app_dir.dataset("gold"), out_path=app_dir.datasets_dir
 Put the `SyntheticStyle` in the app's `app.py` as `SYNTHETIC_STYLE` and the CLI's
 `synthetic` command does this.
 
-### `score.py`, `summary.py`, `summarize.py`, `run_dir.py` — after a run
+### `score.py`, `summary.py`, `summarize.py`, `export.py`, `run_dir.py` — after a run
 
 ```python
 from geouibench.score import score_run
 from geouibench.summarize import summarize_run
+from geouibench.export import export_run, run_tables
 from geouibench.run_dir import read_run_info, load_conversations, load_turns, load_errors
 
 score_run(run_dir)                                   # deterministic four from the committed traces; keys=("success","tool",...) or model_name for the LLM ones
-summary = summarize_run(run_dir)                     # Summary(rows, ratios, totals); also writes summary.json / summary.md
+summary = summarize_run(run_dir)                     # Summary(rows, ratios, totals); also writes summary.json / summary.md and csv/
+tables = run_tables(run_dir)                         # RunTables(conversations, turns, tool_calls): lists of dicts
+export_run(run_dir)                                  # the same three as csv/*.csv; export_runs([a, b], out_dir) concatenates runs
 load_conversations(run_dir); load_turns(run_dir); load_errors(run_dir)   # typed rows for your own analysis
 ```
 

@@ -48,7 +48,8 @@ runs, and a few tests of its own.
 |---|---|
 | `run <app dir> <dataset>... [--run-id ID] [--agent KIND ...] [--smoke]` | calls the app's `prepare()`, writes `run.json`, runs `deepeval test run` on the generic eval file once per agent kind (sequentially: agents of one app may share a browser), writes the summary |
 | `score <run dir> [--metrics all\|success,tool,...] [--model]` | recomputes metrics from the committed traces and transcripts; the deterministic four need no network |
-| `summarize <run dir> [--reference KIND]` | rewrites `summary.json` / `summary.md` and scrubs absolute paths |
+| `summarize <run dir> [--reference KIND]` | rewrites `summary.json` / `summary.md` and `csv/`, and scrubs absolute paths |
+| `export <run dir>... [--out DIR]` | writes the flat CSV tables of a run (`csv/conversations.csv`, `turns.csv`, `tool_calls.csv`); with `--out`, one combined set for several runs |
 | `synthetic <app dir> [--gold NAME] [--out NAME] [--model]` | gold → contexts → `deepeval generate --method contexts` with the app's `SYNTHETIC_STYLE` → prepared dataset |
 | `datasets <app dir>` | lists the datasets the directory holds |
 
@@ -74,7 +75,8 @@ with the name (`gold` → `gold_dataset.json`, `synthetic` → `synthetic_querie
 
 Everything a turn produced is written under `<app dir>/results/<run-id>/`
 (`run.json`, `turns.jsonl`, `errors.jsonl`, `traces/<conversation>/<turn>.json`,
-`conversations.jsonl`, deepeval's own result file, `summary.json` / `summary.md`),
+`conversations.jsonl`, deepeval's own result file, `summary.json` / `summary.md`, and the
+flat `csv/` tables for charting),
 so `score` can recompute the deterministic metrics later without an agent or a
 browser, and the folder can be committed as the evidence behind a number.
 
