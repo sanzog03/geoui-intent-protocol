@@ -21,6 +21,26 @@ Unlike NASA Worldview, nothing here is in the URL.
 Nothing here but the agent's prompt is MapLibre-specific: the tools drive any page that exposes
 `window.geoui`.
 
+## Architecture
+
+### Block diagram
+
+The agent's GeoUI tools drive the page through a CDP bridge: Playwright calls
+`window.geoui.render()`, and the `@geoui/react-adapter` registry in the page validates the intent and
+applies it through the app's slot setters. The red arrows are actions; the green arrows read the
+composed state back after each React commit.
+
+![MapLibre demo block diagram](diagrams/block-diagram.png)
+
+### Render sequence
+
+One render goes through these steps. The tools `describe()` the page and check its catalogue
+against the library, then pre-declare and validate the intent. Next, `page.evaluate(render)` hands
+the intent to the SDK registry, which applies each changed slot and waits for the map to settle.
+If the result has `ok: false`, the agent gets a retry message.
+
+![MapLibre demo render sequence](diagrams/render-sequence.png)
+
 ## Run
 
 ```bash

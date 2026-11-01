@@ -15,6 +15,34 @@ recoverable from pixels). See [`docs/poster/`](docs/poster/) for the poster
 presented at the 2nd ESA-NASA International Workshop on AI Foundation Models
 for Earth Observation (NASA MSFC, May 2026).
 
+## Architecture
+
+### Block diagram
+
+The agent emits a `GeoIntent` to the GeoUI tools (MCP server or in-process), which hand it to an
+app adapter that applies it to the unmodified geo application. The red arrows are the action flow
+and the green arrows the observation flow, which reads the app's state back as a `GeoIntent`.
+
+![GeoUI block diagram](docs/uml/general/block-diagram.png)
+
+### Use cases
+
+An Earth scientist asks to show, refine, compare, chart, restyle or inspect a map, and each request
+maps onto one protocol operation (`render_intent`, `get_state`, `list_intent_extensions`). An app
+developer exposes their map to agents by writing an adapter. The geo application is the secondary
+actor that every operation reaches.
+
+![GeoUI use cases](docs/uml/general/use-cases.png)
+
+### Interaction sequence
+
+The agent lists the supported extensions once. Then, in an observe → plan → act loop, it reads the
+current state back as a `GeoIntent` when continuing an analysis, plans the next intent and renders
+it. The tools pre-declare extension URIs and refuse unsupported namespaces before the adapter
+touches the app.
+
+![GeoUI generic interaction sequence](docs/uml/general/generic-interaction.png)
+
 ## Layout
 
 Three projects in one uv workspace, plus an npm workspace. `geoui-protocol`
